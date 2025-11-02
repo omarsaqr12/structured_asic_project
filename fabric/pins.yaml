@@ -1,0 +1,885 @@
+pin_placement:
+  version: '2.1'
+  units:
+    coords: microns
+    dbu_per_micron: 1000
+  layers:
+    south: met2
+    north: met2
+    west: met3
+    east: met3
+  tracks:
+    met2:
+      start_um: 0.23
+      step_um: 0.46
+    met3:
+      start_um: 0.34
+      step_um: 0.68
+  die:
+    width_um: 1003.6
+    height_um: 989.2
+    core_margin_um: 5.0
+    corner_keepout_um: 5.0
+  core:
+    width_um: 993.6
+    height_um: 979.2
+  groups_per_side: 10
+  pin_spacing_tracks: 1
+  pin_spacing_um:
+    met2: 0.46
+    met3: 0.68
+  pins:
+  - name: in_0
+    side: south
+    layer: met2
+    x_um: 4.83
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_0
+    side: south
+    layer: met2
+    x_um: 5.29
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_0
+    side: south
+    layer: met2
+    x_um: 5.75
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_1
+    side: south
+    layer: met2
+    x_um: 114.77
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_1
+    side: south
+    layer: met2
+    x_um: 115.23
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_1
+    side: south
+    layer: met2
+    x_um: 115.69
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_2
+    side: south
+    layer: met2
+    x_um: 225.17
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_2
+    side: south
+    layer: met2
+    x_um: 225.63
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_2
+    side: south
+    layer: met2
+    x_um: 226.09
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_3
+    side: south
+    layer: met2
+    x_um: 335.57
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_3
+    side: south
+    layer: met2
+    x_um: 336.03
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_3
+    side: south
+    layer: met2
+    x_um: 336.49
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_4
+    side: south
+    layer: met2
+    x_um: 445.97
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_4
+    side: south
+    layer: met2
+    x_um: 446.43
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_4
+    side: south
+    layer: met2
+    x_um: 446.89
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_5
+    side: south
+    layer: met2
+    x_um: 556.37
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_5
+    side: south
+    layer: met2
+    x_um: 556.83
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_5
+    side: south
+    layer: met2
+    x_um: 557.29
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_6
+    side: south
+    layer: met2
+    x_um: 666.77
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_6
+    side: south
+    layer: met2
+    x_um: 667.23
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_6
+    side: south
+    layer: met2
+    x_um: 667.69
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_7
+    side: south
+    layer: met2
+    x_um: 777.17
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_7
+    side: south
+    layer: met2
+    x_um: 777.63
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_7
+    side: south
+    layer: met2
+    x_um: 778.09
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_8
+    side: south
+    layer: met2
+    x_um: 887.57
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_8
+    side: south
+    layer: met2
+    x_um: 888.03
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_8
+    side: south
+    layer: met2
+    x_um: 888.49
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_9
+    side: south
+    layer: met2
+    x_um: 997.97
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: out_9
+    side: south
+    layer: met2
+    x_um: 998.43
+    y_um: 0.0
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_9
+    side: south
+    layer: met2
+    x_um: 998.89
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: in_10
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 4.42
+    direction: INPUT
+    status: FIXED
+  - name: out_10
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 5.1
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_10
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 5.78
+    direction: INPUT
+    status: FIXED
+  - name: in_11
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 113.22
+    direction: INPUT
+    status: FIXED
+  - name: out_11
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 113.9
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_11
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 114.58
+    direction: INPUT
+    status: FIXED
+  - name: in_12
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 222.02
+    direction: INPUT
+    status: FIXED
+  - name: out_12
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 222.7
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_12
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 223.38
+    direction: INPUT
+    status: FIXED
+  - name: in_13
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 330.82
+    direction: INPUT
+    status: FIXED
+  - name: out_13
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 331.5
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_13
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 332.18
+    direction: INPUT
+    status: FIXED
+  - name: in_14
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 439.62
+    direction: INPUT
+    status: FIXED
+  - name: out_14
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 440.3
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_14
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 440.98
+    direction: INPUT
+    status: FIXED
+  - name: in_15
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 548.42
+    direction: INPUT
+    status: FIXED
+  - name: out_15
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 549.1
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_15
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 549.78
+    direction: INPUT
+    status: FIXED
+  - name: in_16
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 657.22
+    direction: INPUT
+    status: FIXED
+  - name: out_16
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 657.9
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_16
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 658.58
+    direction: INPUT
+    status: FIXED
+  - name: in_17
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 766.02
+    direction: INPUT
+    status: FIXED
+  - name: out_17
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 766.7
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_17
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 767.38
+    direction: INPUT
+    status: FIXED
+  - name: in_18
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 874.82
+    direction: INPUT
+    status: FIXED
+  - name: out_18
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 875.5
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_18
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 876.18
+    direction: INPUT
+    status: FIXED
+  - name: in_19
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 982.94
+    direction: INPUT
+    status: FIXED
+  - name: out_19
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 983.62
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_19
+    side: east
+    layer: met3
+    x_um: 1003.6
+    y_um: 984.3
+    direction: INPUT
+    status: FIXED
+  - name: in_20
+    side: north
+    layer: met2
+    x_um: 4.83
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_20
+    side: north
+    layer: met2
+    x_um: 5.29
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_20
+    side: north
+    layer: met2
+    x_um: 5.75
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_21
+    side: north
+    layer: met2
+    x_um: 114.77
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_21
+    side: north
+    layer: met2
+    x_um: 115.23
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_21
+    side: north
+    layer: met2
+    x_um: 115.69
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_22
+    side: north
+    layer: met2
+    x_um: 225.17
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_22
+    side: north
+    layer: met2
+    x_um: 225.63
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_22
+    side: north
+    layer: met2
+    x_um: 226.09
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_23
+    side: north
+    layer: met2
+    x_um: 335.57
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_23
+    side: north
+    layer: met2
+    x_um: 336.03
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_23
+    side: north
+    layer: met2
+    x_um: 336.49
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_24
+    side: north
+    layer: met2
+    x_um: 445.97
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_24
+    side: north
+    layer: met2
+    x_um: 446.43
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_24
+    side: north
+    layer: met2
+    x_um: 446.89
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_25
+    side: north
+    layer: met2
+    x_um: 556.37
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_25
+    side: north
+    layer: met2
+    x_um: 556.83
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_25
+    side: north
+    layer: met2
+    x_um: 557.29
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_26
+    side: north
+    layer: met2
+    x_um: 666.77
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_26
+    side: north
+    layer: met2
+    x_um: 667.23
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_26
+    side: north
+    layer: met2
+    x_um: 667.69
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_27
+    side: north
+    layer: met2
+    x_um: 777.17
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_27
+    side: north
+    layer: met2
+    x_um: 777.63
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_27
+    side: north
+    layer: met2
+    x_um: 778.09
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_28
+    side: north
+    layer: met2
+    x_um: 887.57
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_28
+    side: north
+    layer: met2
+    x_um: 888.03
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_28
+    side: north
+    layer: met2
+    x_um: 888.49
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_29
+    side: north
+    layer: met2
+    x_um: 997.97
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: out_29
+    side: north
+    layer: met2
+    x_um: 998.43
+    y_um: 989.2
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_29
+    side: north
+    layer: met2
+    x_um: 998.89
+    y_um: 989.2
+    direction: INPUT
+    status: FIXED
+  - name: in_30
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 4.42
+    direction: INPUT
+    status: FIXED
+  - name: out_30
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 5.1
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_30
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 5.78
+    direction: INPUT
+    status: FIXED
+  - name: in_31
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 113.22
+    direction: INPUT
+    status: FIXED
+  - name: out_31
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 113.9
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_31
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 114.58
+    direction: INPUT
+    status: FIXED
+  - name: in_32
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 222.02
+    direction: INPUT
+    status: FIXED
+  - name: out_32
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 222.7
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_32
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 223.38
+    direction: INPUT
+    status: FIXED
+  - name: in_33
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 330.82
+    direction: INPUT
+    status: FIXED
+  - name: out_33
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 331.5
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_33
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 332.18
+    direction: INPUT
+    status: FIXED
+  - name: in_34
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 439.62
+    direction: INPUT
+    status: FIXED
+  - name: out_34
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 440.3
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_34
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 440.98
+    direction: INPUT
+    status: FIXED
+  - name: in_35
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 548.42
+    direction: INPUT
+    status: FIXED
+  - name: out_35
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 549.1
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_35
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 549.78
+    direction: INPUT
+    status: FIXED
+  - name: in_36
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 657.22
+    direction: INPUT
+    status: FIXED
+  - name: out_36
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 657.9
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_36
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 658.58
+    direction: INPUT
+    status: FIXED
+  - name: in_37
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 766.02
+    direction: INPUT
+    status: FIXED
+  - name: out_37
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 766.7
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_37
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 767.38
+    direction: INPUT
+    status: FIXED
+  - name: in_38
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 874.82
+    direction: INPUT
+    status: FIXED
+  - name: out_38
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 875.5
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_38
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 876.18
+    direction: INPUT
+    status: FIXED
+  - name: in_39
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 982.94
+    direction: INPUT
+    status: FIXED
+  - name: out_39
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 983.62
+    direction: OUTPUT
+    status: FIXED
+  - name: oeb_39
+    side: west
+    layer: met3
+    x_um: 0.0
+    y_um: 984.3
+    direction: INPUT
+    status: FIXED
+  - name: clk
+    side: south
+    layer: met2
+    x_um: 501.63
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED
+  - name: rst_n
+    side: south
+    layer: met2
+    x_um: 502.09
+    y_um: 0.0
+    direction: INPUT
+    status: FIXED

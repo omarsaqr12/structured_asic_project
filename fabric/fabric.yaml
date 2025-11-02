@@ -1,0 +1,103 @@
+# ==============================================================================
+# Fabric Definition for Sky130 Structured ASIC
+# Version: 7.2 (Physically Corrected)
+#
+# Generated based on the tile design provided on October 13, 2025.
+#
+# CORRECTIONS APPLIED:
+# 1. Re-integrated essential `sky130_fd_sc_hd__conb_1` cells for
+#    tie-high/tie-low logic, which were missing from the visual diagram.
+# 2. Replaced the final decap cell in rows 0 and 2 with a `conb_1`
+#    and a `fill_1` to accommodate this change while preserving row width.
+# ==============================================================================
+
+fabric_info:
+  technology: "sky130"
+  site_dimensions_um: { width: 0.46, height: 2.72 }
+  units:
+    database_units_per_micron: 1000
+
+fabric_layout:
+  tiles_x: 36
+  tiles_y: 90
+
+# ------------------------------------------------------------------------------
+# Cell Definitions
+# ------------------------------------------------------------------------------
+cell_definitions:
+  sky130_fd_sc_hd__nand2_2:      { width_sites: 5 }
+  sky130_fd_sc_hd__or2_2:        { width_sites: 5 }
+  sky130_fd_sc_hd__and2_2:       { width_sites: 6 }
+  sky130_fd_sc_hd__clkinv_2:     { width_sites: 4 }
+  sky130_fd_sc_hd__clkbuf_4:     { width_sites: 6 }
+  sky130_fd_sc_hd__dfbbp_1:      { width_sites: 26 }
+  sky130_fd_sc_hd__tapvpwrvgnd_1:{ width_sites: 1 }
+  sky130_fd_sc_hd__decap_4:      { width_sites: 4 }
+  sky130_fd_sc_hd__decap_3:      { width_sites: 3 }
+  sky130_fd_sc_hd__conb_1:       { width_sites: 3 } 
+  sky130_fd_sc_hd__fill_1:       { width_sites: 1 } 
+
+# ------------------------------------------------------------------------------
+# Tile Definition
+# ------------------------------------------------------------------------------
+tile_definition:
+  dimensions_sites: { width: 60, height: 4 }
+  
+  cells:
+    # --- Row 0 (Physical Y = 0.00 um, DEF Orientation: N) ---
+    - { template_name: "R0_TAP_0",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 0, y: 0 } }
+    - { template_name: "R0_NAND_0", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 1, y: 0 } }
+    - { template_name: "R0_NAND_1", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 6, y: 0 } }
+    - { template_name: "R0_NAND_2", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 11, y: 0 } }
+    - { template_name: "R0_INV_0",  cell_type: "sky130_fd_sc_hd__clkinv_2", origin_sites: { x: 16, y: 0 } }
+    - { template_name: "R0_BUF_0",  cell_type: "sky130_fd_sc_hd__clkbuf_4", origin_sites: { x: 20, y: 0 } }
+    - { template_name: "R0_DECAP_0",cell_type: "sky130_fd_sc_hd__decap_4", origin_sites: { x: 26, y: 0 } }
+    - { template_name: "R0_TAP_1",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 30, y: 0 } }
+    - { template_name: "R0_NAND_3",  cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 31, y: 0 } }
+    - { template_name: "R0_NAND_4",  cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 36, y: 0 } }
+    - { template_name: "R0_OR_0",  cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 41, y: 0 } }
+    - { template_name: "R0_OR_1",  cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 46, y: 0 } }
+    - { template_name: "R0_OR_2",  cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 51, y: 0 } }
+    - { template_name: "R0_DECAP_1",cell_type: "sky130_fd_sc_hd__decap_4", origin_sites: { x: 56, y: 0 } }
+    
+    # --- Row 1 (Physical Y = 2.72 um, DEF Orientation: MX) ---
+    - { template_name: "R1_TAP_0",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 0, y: 1 } }
+    - { template_name: "R1_NAND_0", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 1, y: 1 } }
+    - { template_name: "R1_NAND_1", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 6, y: 1 } }
+    - { template_name: "R1_INV_0",  cell_type: "sky130_fd_sc_hd__clkinv_2", origin_sites: { x: 11, y: 1 } }
+    - { template_name: "R1_BUF_0",  cell_type: "sky130_fd_sc_hd__clkbuf_4", origin_sites: { x: 15, y: 1 } }
+    - { template_name: "R1_NAND_2", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 21, y: 1 } }
+    - { template_name: "R1_DECAP_0",cell_type: "sky130_fd_sc_hd__decap_4", origin_sites: { x: 26, y: 1 } }
+    - { template_name: "R1_TAP_1",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 30, y: 1 } }
+    - { template_name: "R1_CONB_0", cell_type: "sky130_fd_sc_hd__conb_1", origin_sites: { x: 31, y: 1 } } 
+    - { template_name: "R1_DFBBP_0",cell_type: "sky130_fd_sc_hd__dfbbp_1", origin_sites: { x: 34, y: 1 } }
+
+    # --- Row 2 (Physical Y = 5.44 um, DEF Orientation: N) ---
+    - { template_name: "R2_TAP_0",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 0, y: 2 } }
+    - { template_name: "R2_INV_0",  cell_type: "sky130_fd_sc_hd__clkinv_2", origin_sites: { x: 1, y: 2 } }
+    - { template_name: "R2_INV_1",  cell_type: "sky130_fd_sc_hd__clkinv_2", origin_sites: { x: 5, y: 2 } }
+    - { template_name: "R2_NAND_0", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 9, y: 2 } }
+    - { template_name: "R2_NAND_1", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 14, y: 2 } }
+    - { template_name: "R2_NAND_2", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 19, y: 2 } }
+    - { template_name: "R2_CONB_0", cell_type: "sky130_fd_sc_hd__conb_1", origin_sites: { x: 24, y: 2 } } 
+    - { template_name: "R2_DECAP_0",cell_type: "sky130_fd_sc_hd__decap_3", origin_sites: { x: 27, y: 2 } }
+    - { template_name: "R2_TAP_1",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 30, y: 2 } }
+    - { template_name: "R2_OR_0", cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 31, y: 2 } }
+    - { template_name: "R2_OR_1", cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 36, y: 2 } }
+    - { template_name: "R2_OR_2", cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 41, y: 2 } }
+    - { template_name: "R2_OR_3",   cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 46, y: 2 } }
+    - { template_name: "R2_OR_4",   cell_type: "sky130_fd_sc_hd__or2_2", origin_sites: { x: 51, y: 2 } }
+    - { template_name: "R2_DECAP_1",cell_type: "sky130_fd_sc_hd__decap_4", origin_sites: { x: 56, y: 2 } }
+    
+
+    # --- Row 3 (Physical Y = 8.16 um, DEF Orientation: MX) ---
+    - { template_name: "R3_TAP_0",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 0, y: 3 } }
+    - { template_name: "R3_NAND_0", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 1, y: 3 } }
+    - { template_name: "R3_NAND_1", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 6, y: 3 } }
+    - { template_name: "R3_NAND_2", cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 11, y: 3 } }
+    - { template_name: "R3_NAND_3",  cell_type: "sky130_fd_sc_hd__nand2_2", origin_sites: { x: 16, y: 3 } }
+    - { template_name: "R3_BUF_0",  cell_type: "sky130_fd_sc_hd__clkbuf_4", origin_sites: { x: 21, y: 3 } }
+    - { template_name: "R3_DECAP_0",cell_type: "sky130_fd_sc_hd__decap_3", origin_sites: { x: 27, y: 3 } }
+    - { template_name: "R3_TAP_1",  cell_type: "sky130_fd_sc_hd__tapvpwrvgnd_1", origin_sites: { x: 30, y: 3 } }
+    - { template_name: "R3_CONB_0", cell_type: "sky130_fd_sc_hd__conb_1", origin_sites: { x: 31, y: 3 } }
+    - { template_name: "R3_DFBBP_0",cell_type: "sky130_fd_sc_hd__dfbbp_1", origin_sites: { x: 34, y: 3 } }
