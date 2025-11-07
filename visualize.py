@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Visualization script for Phase 1.
-Generates fabric layout plots showing die, core, pins, and fabric slots.
+Generates fabric layout plos showing die, core, pins, and fabric slots.
 """
 
 import argparse
