@@ -5,7 +5,7 @@ Creates a logical_db and netlist_graph..
 """
 
 import json
-from collections import defaultdict
+from collections import defaultdict 
 from typing import Dict, List, Set, Any, Tuple
 
 
