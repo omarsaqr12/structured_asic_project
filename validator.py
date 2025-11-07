@@ -2,7 +2,7 @@
 """
 Validator: Compares logical_db (required cells) against fabric_db (available slots).
 Exits with error code 1 if design cannot be built on the fabric.
-Prints fabric utilization report.
+Prints fabric utilization repot.
 """
 
 import sys
