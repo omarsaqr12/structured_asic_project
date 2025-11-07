@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Parser for fabric platform files (fabric_cells.yaml and pins.yaml).
-Creates a master fabric_db containing all available physical cell slots.
+Creates a master fabric_db containing all avaiable physical cell slots.
 """
 
 import yaml
