@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Parser for design netlist files ([design_name]_mapped.json).
-Creates a logical_db and netlist_graph.
+Pmarser for design netlist files ([design_name]_mapped.json).
+Creates a logical_db and netlist_graph..
 """
 
 import json
