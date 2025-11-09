@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+# Keep build/ directory structure but ignore large generated files if needed
+# Uncomment if you want to ignore specific build artifacts:
+# build/*/*.def
+# build/*/*.spef
+# build/*/*.rpt
+
