@@ -98,9 +98,9 @@ def plot_fabric_layout(fabric_cells_path: str, pins_path: str, output_path: str)
             y = slot['y']
             
             # Draw semi-transparent rectangle for each slot
-            # Center the rectangle at the slot coordinates
+            # Coordinates are already the lower-left corner (DEF PLACED origin)
             slot_rect = patches.Rectangle(
-                (x - width_um/2, y - height_um/2),
+                (x, y),
                 width_um, height_um,
                 linewidth=0.1, edgecolor='black', facecolor=color, alpha=0.5
             )
