@@ -25,13 +25,12 @@ from tqdm import tqdm
 
 try:
     from scipy.spatial import KDTree
+    import numpy as np
     HAS_SCIPY = True
 except ImportError:
     HAS_SCIPY = False
+    np = None
     print("Warning: scipy not available. Falling back to linear search for slots.")
-    
-    
-HAS_SCIPY = False
 
 
 # ============================================================================
@@ -308,9 +307,18 @@ def find_nearest_slot_kdtree(target_x: float,
     k = min(max_candidates, len(slots))
     distances, indices = kdtree.query([target_x, target_y], k=k)
     
-    # Handle single result
-    if not isinstance(indices, (list, tuple)):
-        indices = [indices]
+    # Convert to list of Python integers (handle numpy arrays/scalars)
+    if np is not None and isinstance(indices, np.ndarray):
+        if indices.ndim == 0:
+            # Single scalar result
+            indices = [int(indices)]
+        else:
+            # Array result
+            indices = [int(idx) for idx in indices]
+    elif not isinstance(indices, (list, tuple)):
+        indices = [int(indices)]
+    else:
+        indices = [int(idx) for idx in indices]
     
     # Find first available slot
     for idx in indices:
@@ -1041,7 +1049,7 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
     print("SA Optimization Complete")
     print(f"{'='*60}")
     print(f"Initial HPWL: {calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets):.2f} um")
-    print(f"Final HPWL: {best_hpwl:.2f} um")
+    print(f"Final Total HPWL: {best_hpwl:.2f} um")
     improvement = calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets) - best_hpwl
     improvement_pct = (improvement / calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets)) * 100
     print(f"Improvement: {improvement:.2f} um ({improvement_pct:.2f}%)")
@@ -1463,8 +1471,15 @@ def main():
                         help='SA moves per temperature step (default: 100)')
     parser.add_argument('--sa-T-final', type=float, default=0.1,
                         help='SA final temperature (default: 0.1)')
+    parser.add_argument('--seed', type=int, default=None,
+                        help='Random seed for reproducibility (default: None, uses system time)')
     
     args = parser.parse_args()
+    
+    # Set random seed if provided
+    if args.seed is not None:
+        random.seed(args.seed)
+        print(f"Random seed set to: {args.seed}")
     
     # Extract design name and set output paths
     design_name = extract_design_name(args.design)
@@ -1477,25 +1492,68 @@ def main():
         map_output_path = f'{output_dir}/{design_name}.map'
         json_output_path = f'{output_dir}/{design_name}_placement.json'
     
-    # Run placement
-    placement = place_design_with_sa(
-        args.fabric_cells, 
-        args.design, 
-        args.pins,
-        enable_sa=not args.no_sa,
-        sa_alpha=args.sa_alpha,
-        sa_moves_per_temp=args.sa_moves,
-        sa_T_final=args.sa_T_final
-    )
-    
-    if placement is None:
-        sys.exit(1)
-    
-    # Load fabric_db and netlist_graph for validation
+    # Load fabric_db and netlist_graph for HPWL calculation
+    print("\n" + "="*60)
+    print("Loading Design Data")
+    print("="*60)
     fabric_db = parse_fabric_cells(args.fabric_cells)
     _, netlist_graph = parse_design(args.design)
+    pins_db = parse_pins(args.pins)
+    
+    # Extract nets and port mappings for HPWL calculation
+    nets_dict = extract_nets(netlist_graph)
+    port_to_nets = get_port_to_net_mapping(args.design)
+    
+    # Run greedy placement first
+    print("\n" + "="*60)
+    print("Greedy Initial Placement")
+    print("="*60)
+    greedy_placement = place_design(args.fabric_cells, args.design, args.pins)
+    
+    if greedy_placement is None:
+        print("ERROR: Greedy placement failed")
+        sys.exit(1)
+    
+    # Calculate and report Greedy Initial HPWL
+    greedy_hpwl = calculate_total_hpwl(greedy_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    print(f"\nGreedy Initial HPWL: {greedy_hpwl:.2f} um")
+    print(f"Cells placed: {len(greedy_placement)}")
+    
+    # Run SA if enabled
+    if not args.no_sa:
+        print("\n" + "="*60)
+        print("Simulated Annealing Optimization")
+        print("="*60)
+        placement = place_design_with_sa(
+            args.fabric_cells, 
+            args.design, 
+            args.pins,
+            enable_sa=True,
+            sa_alpha=args.sa_alpha,
+            sa_moves_per_temp=args.sa_moves,
+            sa_T_final=args.sa_T_final
+        )
+        
+        if placement is None:
+            print("ERROR: SA optimization failed, using greedy placement")
+            placement = greedy_placement
+            final_hpwl = greedy_hpwl
+        else:
+            # Calculate and report SA Optimized HPWL
+            final_hpwl = calculate_total_hpwl(placement, nets_dict, fabric_db, pins_db, port_to_nets)
+            improvement = greedy_hpwl - final_hpwl
+            improvement_pct = (improvement / greedy_hpwl * 100) if greedy_hpwl > 0 else 0.0
+            print(f"\nSA Optimized HPWL: {final_hpwl:.2f} um")
+            print(f"Improvement: {improvement:.2f} um ({improvement_pct:.2f}%)")
+    else:
+        placement = greedy_placement
+        final_hpwl = greedy_hpwl
+        print("\nSimulated Annealing disabled (--no-sa flag)")
     
     # Write .map file (required format)
+    print("\n" + "="*60)
+    print("Writing Output Files")
+    print("="*60)
     success = write_placement_map(placement, map_output_path, fabric_db, netlist_graph)
     
     if not success:
@@ -1505,6 +1563,16 @@ def main():
     # Also save JSON file for debugging/analysis
     save_placement(placement, json_output_path)
     
+    # Final summary (as required by spec)
+    print("\n" + "="*60)
+    print("Placement Summary")
+    print("="*60)
+    if not args.no_sa:
+        print(f"Greedy Initial HPWL: {greedy_hpwl:.2f} um")
+        print(f"SA Optimized HPWL: {final_hpwl:.2f} um")
+    print(f"Final Total HPWL: {final_hpwl:.2f} um")
+    print(f"Total Instances: {len(placement)}")
+    print("="*60)
     print("\nPlacement completed successfully!")
     print(f"Map file: {map_output_path}")
     print(f"JSON file: {json_output_path}")
