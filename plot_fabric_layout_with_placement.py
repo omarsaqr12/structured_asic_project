@@ -489,12 +489,12 @@ def main():
         )
     elif args.command == 'detailed':
         plot_placement_detailed(
-            args.fabric_cells, args.pins, args.placement, output_path='placement_detailed.png',
+            args.fabric_cells, args.pins, args.placement, output_path=args.output,
             design_path=args.design
         )
     elif args.command == 'comparison':
         plot_layered_comparison(
-            args.fabric_cells, args.pins, args.placement, output_path='comparison_detailed.png'
+            args.fabric_cells, args.pins, args.placement, output_path=args.output
         )
 
 
