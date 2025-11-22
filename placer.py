@@ -15,6 +15,7 @@ import argparse
 import json
 import math
 import random
+import os
 from typing import Dict, List, Tuple, Any, Optional, Set
 from collections import defaultdict
 from validator import validate_design
@@ -1305,11 +1306,136 @@ def generate_move(current_placement: Dict[str, Dict[str, Any]],
 # ============================================================================
 
 
+# ============================================================================
+# Placement Output File Generation (Issue #6)
+# ============================================================================
+
+def write_placement_map(placement: Dict[str, Dict[str, Any]],
+                       output_path: str,
+                       fabric_db: Optional[Dict[str, List[Dict[str, Any]]]] = None,
+                       netlist_graph: Optional[Dict[str, Dict[str, Any]]] = None) -> bool:
+    """
+    Write placement mapping to .map file in the required format.
+    
+    Format: One line per logical instance
+    Format: logical_instance_name physical_slot_name
+    Example: cpu.U_alu.1 T0Y0__R0_NAND_42
+    
+    Args:
+        placement: Dict mapping logical_instance_name -> {fabric_slot_name, x, y, orient}
+        output_path: Path to output .map file
+        fabric_db: Optional fabric database for validation
+        netlist_graph: Optional netlist graph for validation
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        # Create output directory if it doesn't exist
+        output_dir = os.path.dirname(output_path)
+        if output_dir and not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+        
+        # Validation: Check that all logical instances are in placement
+        if netlist_graph:
+            missing_cells = set(netlist_graph.keys()) - set(placement.keys())
+            if missing_cells:
+                print(f"WARNING: {len(missing_cells)} cells not in placement: {list(missing_cells)[:5]}...")
+        
+        # Validation: Check that all slot names exist in fabric_db
+        if fabric_db:
+            # Build set of all valid slot names
+            valid_slots = set()
+            for slots in fabric_db.values():
+                for slot in slots:
+                    valid_slots.add(slot['name'])
+            
+            invalid_slots = []
+            for cell_name, cell_placement in placement.items():
+                slot_name = cell_placement.get('fabric_slot_name')
+                if slot_name and slot_name not in valid_slots:
+                    invalid_slots.append((cell_name, slot_name))
+            
+            if invalid_slots:
+                print(f"ERROR: {len(invalid_slots)} invalid slot names found:")
+                for cell_name, slot_name in invalid_slots[:5]:
+                    print(f"  {cell_name} -> {slot_name}")
+                if len(invalid_slots) > 5:
+                    print(f"  ... and {len(invalid_slots) - 5} more")
+                return False
+        
+        # Validation: Check for duplicate slot assignments
+        slot_usage = {}
+        duplicates = []
+        for cell_name, cell_placement in placement.items():
+            slot_name = cell_placement.get('fabric_slot_name')
+            if slot_name:
+                if slot_name in slot_usage:
+                    duplicates.append((cell_name, slot_usage[slot_name], slot_name))
+                else:
+                    slot_usage[slot_name] = cell_name
+        
+        if duplicates:
+            print(f"ERROR: {len(duplicates)} duplicate slot assignments found:")
+            for cell1, cell2, slot in duplicates[:5]:
+                print(f"  Slot {slot} assigned to both {cell1} and {cell2}")
+            if len(duplicates) > 5:
+                print(f"  ... and {len(duplicates) - 5} more")
+            return False
+        
+        # Write map file: sorted by logical instance name for reproducibility
+        with open(output_path, 'w') as f:
+            for logical_name in sorted(placement.keys()):
+                slot_name = placement[logical_name].get('fabric_slot_name', '')
+                if slot_name:
+                    f.write(f"{logical_name} {slot_name}\n")
+        
+        print(f"\nPlacement map written to: {output_path}")
+        print(f"Total instances: {len(placement)}")
+        return True
+        
+    except IOError as e:
+        print(f"ERROR: Failed to write placement map file: {e}")
+        return False
+    except Exception as e:
+        print(f"ERROR: Unexpected error writing placement map: {e}")
+        return False
+
+
 def save_placement(placement: Dict[str, Dict[str, Any]], output_path: str):
-    """Save placement results to JSON file."""
+    """Save placement results to JSON file (legacy format)."""
     with open(output_path, 'w') as f:
         json.dump(placement, f, indent=2)
     print(f"\nPlacement saved to {output_path}")
+
+
+# ============================================================================
+# End of Placement Output File Generation
+# ============================================================================
+
+
+def extract_design_name(design_path: str) -> str:
+    """
+    Extract design name from design file path.
+    
+    Examples:
+        designs/6502_mapped.json -> 6502
+        designs/aes_128_mapped.json -> aes_128
+    
+    Args:
+        design_path: Path to design mapped JSON file
+    
+    Returns:
+        Design name (without _mapped.json suffix)
+    """
+    basename = os.path.basename(design_path)
+    # Remove _mapped.json or .json suffix
+    if basename.endswith('_mapped.json'):
+        return basename[:-12]  # Remove '_mapped.json'
+    elif basename.endswith('.json'):
+        return basename[:-5]  # Remove '.json'
+    else:
+        return basename
 
 
 def main():
@@ -1322,8 +1448,8 @@ def main():
                         help='Path to design mapped JSON file')
     parser.add_argument('--pins', default='fabric/pins.yaml',
                         help='Path to pins.yaml')
-    parser.add_argument('--output', default='placement.json',
-                        help='Output file for placement results')
+    parser.add_argument('--output', default=None,
+                        help='Output directory (default: build/[design_name]/)')
     parser.add_argument('--no-sa', action='store_true',
                         help='Disable simulated annealing (greedy only)')
     parser.add_argument('--sa-alpha', type=float, default=0.95,
@@ -1335,6 +1461,18 @@ def main():
     
     args = parser.parse_args()
     
+    # Extract design name and set output paths
+    design_name = extract_design_name(args.design)
+    if args.output is None:
+        output_dir = f'build/{design_name}'
+        map_output_path = f'{output_dir}/{design_name}.map'
+        json_output_path = f'{output_dir}/{design_name}_placement.json'  # Keep JSON for debugging
+    else:
+        output_dir = args.output
+        map_output_path = f'{output_dir}/{design_name}.map'
+        json_output_path = f'{output_dir}/{design_name}_placement.json'
+    
+    # Run placement
     placement = place_design_with_sa(
         args.fabric_cells, 
         args.design, 
@@ -1348,8 +1486,23 @@ def main():
     if placement is None:
         sys.exit(1)
     
-    save_placement(placement, args.output)
+    # Load fabric_db and netlist_graph for validation
+    fabric_db = parse_fabric_cells(args.fabric_cells)
+    _, netlist_graph = parse_design(args.design)
+    
+    # Write .map file (required format)
+    success = write_placement_map(placement, map_output_path, fabric_db, netlist_graph)
+    
+    if not success:
+        print("ERROR: Failed to write placement map file")
+        sys.exit(1)
+    
+    # Also save JSON file for debugging/analysis
+    save_placement(placement, json_output_path)
+    
     print("\nPlacement completed successfully!")
+    print(f"Map file: {map_output_path}")
+    print(f"JSON file: {json_output_path}")
 
 
 if __name__ == '__main__':
