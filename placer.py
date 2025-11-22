@@ -807,7 +807,11 @@ def place_design_with_sa(fabric_cells_path: str,
         alpha=sa_alpha,
         T_final=sa_T_final,
         moves_per_temp=sa_moves_per_temp,
-        generate_move_func=generate_move_func
+        generate_move_func=generate_move_func,
+        W_initial=None,  # Auto-calculate (50% of die width)
+        beta=0.98,  # Window cooling rate
+        P_refine=0.7,  # Probability of refine move
+        P_explore=0.3  # Probability of explore move
     )
     
     return sa_placement
@@ -880,7 +884,11 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
                        alpha: float = 0.95,
                        T_final: float = 0.1,
                        moves_per_temp: int = 100,
-                       generate_move_func=None) -> Dict[str, Dict[str, Any]]:
+                       generate_move_func=None,
+                       W_initial: Optional[float] = None,
+                       beta: float = 0.98,
+                       P_refine: float = 0.7,
+                       P_explore: float = 0.3) -> Dict[str, Dict[str, Any]]:
     """
     Simulated Annealing optimization algorithm.
     
@@ -897,8 +905,11 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
         alpha: Cooling rate (default: 0.95)
         T_final: Final temperature (default: 0.1)
         moves_per_temp: Number of moves attempted per temperature step (default: 100)
-        generate_move_func: Function to generate moves (placeholder for Issue #5)
-                          Signature: (placement, ...) -> (new_placement, delta_cost, move_type)
+        generate_move_func: Optional function to generate moves (uses default if None)
+        W_initial: Initial window size for explore moves (auto-calculated if None, 50% of die width)
+        beta: Window cooling rate (default: 0.98)
+        P_refine: Probability of refine move (default: 0.7)
+        P_explore: Probability of explore move (default: 0.3)
     
     Returns:
         Best placement found
@@ -914,8 +925,29 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
     if T_initial is None:
         T_initial = calculate_initial_temperature(current_hpwl)
     
+    # Calculate initial window size if not provided
+    if W_initial is None and pins_db:
+        die_width = pins_db.get('die', {}).get('width_um', 1000.0)
+        W_initial = die_width * 0.5  # 50% of die width
+    elif W_initial is None:
+        W_initial = 500.0  # Default fallback
+    
+    # Calculate minimum window size (10% of die width)
+    if pins_db:
+        die_width = pins_db.get('die', {}).get('width_um', 1000.0)
+        min_window = die_width * 0.1
+    else:
+        min_window = 100.0  # Default fallback
+    
     T = T_initial
+    W = W_initial
     iteration = 0
+    
+    # Statistics tracking
+    refine_acceptances = 0
+    refine_attempts = 0
+    explore_acceptances = 0
+    explore_attempts = 0
     
     print(f"\n{'='*60}")
     print("Simulated Annealing Optimization")
@@ -925,6 +957,9 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
     print(f"Cooling Rate (alpha): {alpha}")
     print(f"Moves per Temperature: {moves_per_temp}")
     print(f"Final Temperature: {T_final}")
+    print(f"Initial Window Size: {W:.2f} um")
+    print(f"Window Cooling Rate (beta): {beta}")
+    print(f"Move Probabilities: Refine={P_refine:.1%}, Explore={P_explore:.1%}")
     print(f"{'='*60}\n")
     
     # Main SA loop
@@ -934,67 +969,39 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
         
         # Attempt N moves at this temperature
         for move_idx in range(moves_per_temp):
-            # Generate move (placeholder - will be implemented in Issue #5)
+            # Generate move using hybrid move set
             if generate_move_func is None:
-                # Dummy move: swap two random cells of the same type (for testing)
-                cell_names = list(current_placement.keys())
-                if len(cell_names) < 2:
-                    break
-                
-                cell1 = random.choice(cell_names)
-                cell2 = random.choice(cell_names)
-                
-                if cell1 == cell2:
-                    continue
-                
-                # Get cell types
-                cell1_type = netlist_graph[cell1]['type']
-                cell2_type = netlist_graph[cell2]['type']
-                
-                # Only swap if same type
-                if cell1_type != cell2_type:
-                    continue
-                
-                # Create new placement with swap
-                new_placement = {k: v.copy() for k, v in current_placement.items()}
-                slot1 = new_placement[cell1]['fabric_slot_name']
-                slot2 = new_placement[cell2]['fabric_slot_name']
-                
-                # Swap slots
-                new_placement[cell1]['fabric_slot_name'] = slot2
-                new_placement[cell2]['fabric_slot_name'] = slot1
-                
-                # Update coordinates
-                slot_lookup = {}
-                for slots in fabric_db.values():
-                    for slot in slots:
-                        slot_lookup[slot['name']] = slot
-                
-                if slot2 in slot_lookup:
-                    new_placement[cell1]['x'] = slot_lookup[slot2]['x']
-                    new_placement[cell1]['y'] = slot_lookup[slot2]['y']
-                
-                if slot1 in slot_lookup:
-                    new_placement[cell2]['x'] = slot_lookup[slot1]['x']
-                    new_placement[cell2]['y'] = slot_lookup[slot1]['y']
-                
-                # Calculate new HPWL
-                new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
-                delta_cost = new_hpwl - current_hpwl
-                move_type = 'dummy_swap'
+                # Use default generate_move function
+                new_placement, delta_cost, move_type = generate_move(
+                    current_placement, T, W, fabric_db, netlist_graph, nets_dict,
+                    pins_db, port_to_nets, P_refine, P_explore
+                )
             else:
                 # Use provided move generation function
                 new_placement, delta_cost, move_type = generate_move_func(
-                    current_placement, T, fabric_db, netlist_graph, nets_dict, 
-                    pins_db, port_to_nets
+                    current_placement, T, W, fabric_db, netlist_graph, nets_dict, 
+                    pins_db, port_to_nets, P_refine, P_explore
                 )
-                new_hpwl = current_hpwl + delta_cost
+            
+            new_hpwl = current_hpwl + delta_cost
+            
+            # Track move statistics
+            if move_type == 'refine':
+                refine_attempts += 1
+            elif move_type == 'explore':
+                explore_attempts += 1
             
             # Accept or reject move
             if should_accept_move(delta_cost, T):
                 current_placement = new_placement
                 current_hpwl = new_hpwl
                 acceptance_count += 1
+                
+                # Track move-specific acceptances
+                if move_type == 'refine':
+                    refine_acceptances += 1
+                elif move_type == 'explore':
+                    explore_acceptances += 1
                 
                 if delta_cost < 0:
                     improvement_count += 1
@@ -1009,13 +1016,18 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
         
         # Print progress
         if iteration % 10 == 0 or T <= T_final * 2:  # Print more frequently near end
-            print(f"T={T:.2f} | Current HPWL={current_hpwl:.2f} um | "
+            refine_rate = (refine_acceptances / refine_attempts * 100) if refine_attempts > 0 else 0.0
+            explore_rate = (explore_acceptances / explore_attempts * 100) if explore_attempts > 0 else 0.0
+            
+            print(f"T={T:.2f} | W={W:.1f}um | Current HPWL={current_hpwl:.2f} um | "
                   f"Best HPWL={best_hpwl:.2f} um | "
                   f"Accept Rate={acceptance_rate:.1%} | "
-                  f"Improvements={improvement_count}")
+                  f"Refine: {refine_acceptances}/{refine_attempts} ({refine_rate:.1f}%) | "
+                  f"Explore: {explore_acceptances}/{explore_attempts} ({explore_rate:.1f}%)")
         
-        # Cool temperature
+        # Cool temperature and window
         T = cool_temperature(T, alpha)
+        W = update_window_size(W, beta, min_window)
         iteration += 1
     
     # Final statistics
@@ -1034,7 +1046,262 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
 
 
 # ============================================================================
-# End of Simulated Annealing Core
+# Hybrid Move Set for Simulated Annealing (Issue #5)
+# ============================================================================
+
+def refine_move(current_placement: Dict[str, Dict[str, Any]],
+                fabric_db: Dict[str, List[Dict[str, Any]]],
+                netlist_graph: Dict[str, Dict[str, Any]],
+                nets_dict: Dict[int, List[str]],
+                pins_db: Optional[Dict[str, Any]] = None,
+                port_to_nets: Optional[Dict[str, List[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
+    """
+    Refine move: Swap two cells of the same type.
+    
+    This is a local optimization move that swaps two randomly selected cells
+    of the same type to explore local improvements.
+    
+    Args:
+        current_placement: Current placement dict
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+        nets_dict: Dict mapping net_id -> list of cell instances
+        pins_db: Optional pins database
+        port_to_nets: Optional port-to-net mapping
+    
+    Returns:
+        (new_placement, delta_cost, 'refine')
+    """
+    cell_names = list(current_placement.keys())
+    
+    if len(cell_names) < 2:
+        # Can't swap if less than 2 cells
+        return current_placement, 0.0, 'refine'
+    
+    # Randomly select two cells
+    cell1 = random.choice(cell_names)
+    cell2 = random.choice(cell_names)
+    
+    # Ensure they're different
+    attempts = 0
+    while cell1 == cell2 and attempts < 10:
+        cell2 = random.choice(cell_names)
+        attempts += 1
+    
+    if cell1 == cell2:
+        return current_placement, 0.0, 'refine'
+    
+    # Get cell types
+    cell1_type = netlist_graph[cell1]['type']
+    cell2_type = netlist_graph[cell2]['type']
+    
+    # Only swap if same type
+    if cell1_type != cell2_type:
+        return current_placement, 0.0, 'refine'
+    
+    # Create new placement with swap
+    new_placement = {k: v.copy() for k, v in current_placement.items()}
+    
+    # Get current slot names
+    slot1_name = current_placement[cell1]['fabric_slot_name']
+    slot2_name = current_placement[cell2]['fabric_slot_name']
+    
+    # Build slot lookup
+    slot_lookup = {}
+    for slots in fabric_db.values():
+        for slot in slots:
+            slot_lookup[slot['name']] = slot
+    
+    # Swap slots
+    new_placement[cell1]['fabric_slot_name'] = slot2_name
+    new_placement[cell2]['fabric_slot_name'] = slot1_name
+    
+    # Update coordinates
+    if slot2_name in slot_lookup:
+        slot2 = slot_lookup[slot2_name]
+        new_placement[cell1]['x'] = slot2['x']
+        new_placement[cell1]['y'] = slot2['y']
+        new_placement[cell1]['orient'] = slot2.get('orient', 'N')
+    
+    if slot1_name in slot_lookup:
+        slot1 = slot_lookup[slot1_name]
+        new_placement[cell2]['x'] = slot1['x']
+        new_placement[cell2]['y'] = slot1['y']
+        new_placement[cell2]['orient'] = slot1.get('orient', 'N')
+    
+    # Calculate delta_cost (only affected nets)
+    old_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    delta_cost = new_hpwl - old_hpwl
+    
+    return new_placement, delta_cost, 'refine'
+
+
+def explore_move(current_placement: Dict[str, Dict[str, Any]],
+                 fabric_db: Dict[str, List[Dict[str, Any]]],
+                 netlist_graph: Dict[str, Dict[str, Any]],
+                 nets_dict: Dict[int, List[str]],
+                 window_size: float,
+                 pins_db: Optional[Dict[str, Any]] = None,
+                 port_to_nets: Optional[Dict[str, List[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
+    """
+    Explore move: Move a cell to a random slot within a window.
+    
+    This is a global exploration move that allows the algorithm to escape
+    local minima by exploring different regions of the chip.
+    
+    Args:
+        current_placement: Current placement dict
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+        nets_dict: Dict mapping net_id -> list of cell instances
+        window_size: Size of search window in microns
+        pins_db: Optional pins database
+        port_to_nets: Optional port-to-net mapping
+    
+    Returns:
+        (new_placement, delta_cost, 'explore') or fallback to refine_move
+    """
+    cell_names = list(current_placement.keys())
+    
+    if len(cell_names) == 0:
+        return current_placement, 0.0, 'explore'
+    
+    # Randomly select a cell to move
+    cell_to_move = random.choice(cell_names)
+    cell_type = netlist_graph[cell_to_move]['type']
+    
+    # Get cell's current position
+    current_pos = current_placement[cell_to_move]
+    center_x = current_pos['x']
+    center_y = current_pos['y']
+    
+    # Define search window
+    window_x_min = center_x - window_size / 2
+    window_x_max = center_x + window_size / 2
+    window_y_min = center_y - window_size / 2
+    window_y_max = center_y + window_size / 2
+    
+    # Get all slots of matching type
+    available_slots = []
+    used_slot_names = {cell['fabric_slot_name'] for cell in current_placement.values()}
+    
+    for slot in fabric_db.get(cell_type, []):
+        # Check if slot is within window and not used
+        if (window_x_min <= slot['x'] <= window_x_max and
+            window_y_min <= slot['y'] <= window_y_max and
+            slot['name'] not in used_slot_names):
+            available_slots.append(slot)
+    
+    # If no slots in window, fallback to refine move
+    if not available_slots:
+        return refine_move(current_placement, fabric_db, netlist_graph, nets_dict, pins_db, port_to_nets)
+    
+    # Randomly select a slot from available ones
+    new_slot = random.choice(available_slots)
+    
+    # Create new placement with move
+    new_placement = {k: v.copy() for k, v in current_placement.items()}
+    
+    # Update cell's slot
+    new_placement[cell_to_move]['fabric_slot_name'] = new_slot['name']
+    new_placement[cell_to_move]['x'] = new_slot['x']
+    new_placement[cell_to_move]['y'] = new_slot['y']
+    new_placement[cell_to_move]['orient'] = new_slot.get('orient', 'N')
+    
+    # Calculate delta_cost
+    old_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    delta_cost = new_hpwl - old_hpwl
+    
+    return new_placement, delta_cost, 'explore'
+
+
+def update_window_size(current_window: float, beta: float, min_window: float) -> float:
+    """
+    Update window size according to cooling schedule.
+    
+    Args:
+        current_window: Current window size in microns
+        beta: Window cooling rate (typically 0.95-0.99)
+        min_window: Minimum window size in microns
+    
+    Returns:
+        New window size (will not go below min_window)
+    """
+    new_window = current_window * beta
+    return max(new_window, min_window)
+
+
+def select_move_type(P_refine: float = 0.7, P_explore: float = 0.3) -> str:
+    """
+    Select move type based on probability distribution.
+    
+    Args:
+        P_refine: Probability of refine move (default: 0.7)
+        P_explore: Probability of explore move (default: 0.3)
+    
+    Returns:
+        'refine' or 'explore'
+    """
+    # Normalize probabilities
+    total = P_refine + P_explore
+    if total > 0:
+        P_refine = P_refine / total
+        P_explore = P_explore / total
+    else:
+        P_refine = 0.5
+        P_explore = 0.5
+    
+    rand = random.random()
+    if rand < P_refine:
+        return 'refine'
+    else:
+        return 'explore'
+
+
+def generate_move(current_placement: Dict[str, Dict[str, Any]],
+                  temperature: float,
+                  window_size: float,
+                  fabric_db: Dict[str, List[Dict[str, Any]]],
+                  netlist_graph: Dict[str, Dict[str, Any]],
+                  nets_dict: Dict[int, List[str]],
+                  pins_db: Optional[Dict[str, Any]] = None,
+                  port_to_nets: Optional[Dict[str, List[int]]] = None,
+                  P_refine: float = 0.7,
+                  P_explore: float = 0.3) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
+    """
+    Generate a move for simulated annealing.
+    
+    Selects between refine (swap) and explore (windowed) moves based on
+    probability distribution.
+    
+    Args:
+        current_placement: Current placement dict
+        temperature: Current temperature (not used but kept for consistency)
+        window_size: Current window size for explore moves
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+        nets_dict: Dict mapping net_id -> list of cell instances
+        pins_db: Optional pins database
+        port_to_nets: Optional port-to-net mapping
+        P_refine: Probability of refine move (default: 0.7)
+        P_explore: Probability of explore move (default: 0.3)
+    
+    Returns:
+        (new_placement, delta_cost, move_type)
+    """
+    move_type = select_move_type(P_refine, P_explore)
+    
+    if move_type == 'refine':
+        return refine_move(current_placement, fabric_db, netlist_graph, nets_dict, pins_db, port_to_nets)
+    else:  # explore
+        return explore_move(current_placement, fabric_db, netlist_graph, nets_dict, 
+                           window_size, pins_db, port_to_nets)
+
+
+# ============================================================================
+# End of Hybrid Move Set
 # ============================================================================
 
 
