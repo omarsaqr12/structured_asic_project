@@ -1011,6 +1011,9 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
                 if current_hpwl < best_hpwl:
                     best_placement = {k: v.copy() for k, v in current_placement.items()}
                     best_hpwl = current_hpwl
+                    # Debug: Print when we find an improvement
+                    if iteration % 10 == 0:  # Only print occasionally to avoid spam
+                        print(f"  → Found improvement! New best HPWL: {best_hpwl:.2f} um (improvement: {delta_cost:.2f} um)")
         
         # Calculate acceptance rate
         acceptance_rate = acceptance_count / moves_per_temp if moves_per_temp > 0 else 0.0
@@ -1019,10 +1022,12 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
         if iteration % 10 == 0 or T <= T_final * 2:  # Print more frequently near end
             refine_rate = (refine_acceptances / refine_attempts * 100) if refine_attempts > 0 else 0.0
             explore_rate = (explore_acceptances / explore_attempts * 100) if explore_attempts > 0 else 0.0
+            improvement_pct = (improvement_count / moves_per_temp * 100) if moves_per_temp > 0 else 0.0
             
             print(f"T={T:.2f} | W={W:.1f}um | Current HPWL={current_hpwl:.2f} um | "
                   f"Best HPWL={best_hpwl:.2f} um | "
                   f"Accept Rate={acceptance_rate:.1%} | "
+                  f"Improvements: {improvement_count}/{moves_per_temp} ({improvement_pct:.1f}%) | "
                   f"Refine: {refine_acceptances}/{refine_attempts} ({refine_rate:.1f}%) | "
                   f"Explore: {explore_acceptances}/{explore_attempts} ({explore_rate:.1f}%)")
         
