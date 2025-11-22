@@ -14,6 +14,7 @@ import sys
 import argparse
 import json
 import math
+import random
 from typing import Dict, List, Tuple, Any, Optional, Set
 from collections import defaultdict
 from validator import validate_design
@@ -30,6 +31,130 @@ except ImportError:
     
     
 HAS_SCIPY = False
+
+
+# ============================================================================
+# HPWL Calculation Utilities (Issue #1)
+# ============================================================================
+
+def extract_nets(netlist_graph: Dict[str, Dict[str, Any]]) -> Dict[int, List[str]]:
+    """
+    Extract all unique nets from netlist_graph.
+    
+    A net is identified by a net ID (integer) that connects multiple cells.
+    In Yosys JSON format, connections are stored as lists of net IDs.
+    
+    Args:
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+    
+    Returns:
+        nets_dict: Dict mapping net_id -> list of cell instances connected to this net
+    """
+    nets_dict = defaultdict(list)
+    
+    for cell_name, cell_data in netlist_graph.items():
+        connections = cell_data.get('connections', {})
+        for port_name, net_ids in connections.items():
+            # net_ids is a list of integers (net IDs)
+            for net_id in net_ids:
+                if cell_name not in nets_dict[net_id]:
+                    nets_dict[net_id].append(cell_name)
+    
+    return dict(nets_dict)
+
+
+def calculate_hpwl(positions: List[Tuple[float, float]]) -> float:
+    """
+    Calculate Half-Perimeter Wirelength (HPWL) for a single net.
+    
+    Formula: HPWL = (max_x - min_x) + (max_y - min_y)
+    
+    Args:
+        positions: List of (x, y) coordinates in microns
+    
+    Returns:
+        HPWL in microns (float)
+    """
+    if len(positions) == 0 or len(positions) == 1:
+        return 0.0
+    
+    if len(positions) == 2:
+        x1, y1 = positions[0]
+        x2, y2 = positions[1]
+        return abs(x2 - x1) + abs(y2 - y1)
+    
+    # For 3+ cells, find bounding box
+    x_coords = [x for x, y in positions]
+    y_coords = [y for x, y in positions]
+    
+    min_x = min(x_coords)
+    max_x = max(x_coords)
+    min_y = min(y_coords)
+    max_y = max(y_coords)
+    
+    return (max_x - min_x) + (max_y - min_y)
+
+
+def calculate_total_hpwl(placement: Dict[str, Dict[str, Any]],
+                         nets_dict: Dict[int, List[str]],
+                         fabric_db: Dict[str, List[Dict[str, Any]]],
+                         pins_db: Optional[Dict[str, Any]] = None,
+                         port_to_nets: Optional[Dict[str, List[int]]] = None) -> float:
+    """
+    Calculate total HPWL for all nets in the design.
+    
+    Args:
+        placement: Dict mapping logical_instance_name -> {fabric_slot_name, x, y, orient}
+        nets_dict: Dict mapping net_id -> list of cell instances (from extract_nets)
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        pins_db: Optional pins database for I/O pin positions
+        port_to_nets: Optional port-to-net mapping for I/O nets
+    
+    Returns:
+        Total HPWL in microns (float)
+    """
+    total_hpwl = 0.0
+    
+    # Build a reverse lookup: slot_name -> slot_dict for fast access
+    slot_lookup = {}
+    for slots in fabric_db.values():
+        for slot in slots:
+            slot_lookup[slot['name']] = slot
+    
+    # Process each net
+    for net_id, cell_list in nets_dict.items():
+        positions = []
+        
+        # Get positions of all cells on this net
+        for cell_name in cell_list:
+            if cell_name in placement:
+                cell_placement = placement[cell_name]
+                slot_name = cell_placement.get('fabric_slot_name')
+                
+                if slot_name and slot_name in slot_lookup:
+                    slot = slot_lookup[slot_name]
+                    positions.append((slot['x'], slot['y']))
+        
+        # Add I/O pin positions if this net is connected to pins
+        if pins_db and port_to_nets:
+            for pin in pins_db.get('pins', []):
+                if pin.get('status') == 'FIXED':
+                    pin_name = pin['name']
+                    if pin_name in port_to_nets:
+                        pin_nets = port_to_nets[pin_name]
+                        if net_id in pin_nets:
+                            positions.append((pin['x_um'], pin['y_um']))
+        
+        # Calculate HPWL for this net
+        net_hpwl = calculate_hpwl(positions)
+        total_hpwl += net_hpwl
+    
+    return total_hpwl
+
+
+# ============================================================================
+# End of HPWL Utilities
+# ============================================================================
 
 
 def get_port_to_net_mapping(design_path: str) -> Dict[str, List[int]]:
@@ -629,6 +754,290 @@ def place_design(fabric_cells_path: str,
     return placement
 
 
+def place_design_with_sa(fabric_cells_path: str, 
+                         design_path: str, 
+                         pins_path: str = 'fabric/pins.yaml',
+                         enable_sa: bool = True,
+                         sa_alpha: float = 0.95,
+                         sa_moves_per_temp: int = 100,
+                         sa_T_final: float = 0.1,
+                         generate_move_func=None) -> Optional[Dict[str, Dict[str, Any]]]:
+    """
+    Place logical cells onto physical fabric slots using greedy + SA algorithm.
+    
+    Args:
+        fabric_cells_path: Path to fabric_cells.yaml
+        design_path: Path to design mapped JSON file
+        pins_path: Path to pins.yaml
+        enable_sa: Whether to run simulated annealing after greedy placement
+        sa_alpha: SA cooling rate (default: 0.95)
+        sa_moves_per_temp: SA moves per temperature step (default: 100)
+        sa_T_final: SA final temperature (default: 0.1)
+        generate_move_func: Optional move generation function (for Issue #5)
+    
+    Returns:
+        placement: Dict mapping logical_instance_name -> {fabric_slot_name, x, y, orient}
+                  Returns None if validation fails
+    """
+    # Run greedy placement first
+    greedy_placement = place_design(fabric_cells_path, design_path, pins_path)
+    
+    if greedy_placement is None:
+        return None
+    
+    if not enable_sa:
+        return greedy_placement
+    
+    # Prepare data for SA
+    fabric_db = parse_fabric_cells(fabric_cells_path)
+    _, netlist_graph = parse_design(design_path)
+    pins_db = parse_pins(pins_path)
+    port_to_nets = get_port_to_net_mapping(design_path)
+    nets_dict = extract_nets(netlist_graph)
+    
+    # Run simulated annealing
+    sa_placement = simulated_annealing(
+        greedy_placement,
+        fabric_db,
+        netlist_graph,
+        nets_dict,
+        pins_db,
+        port_to_nets,
+        T_initial=None,  # Auto-calculate
+        alpha=sa_alpha,
+        T_final=sa_T_final,
+        moves_per_temp=sa_moves_per_temp,
+        generate_move_func=generate_move_func
+    )
+    
+    return sa_placement
+
+
+# ============================================================================
+# Simulated Annealing Core Algorithm (Issue #4)
+# ============================================================================
+
+def calculate_initial_temperature(initial_hpwl: float, multiplier: float = 10000.0) -> float:
+    """
+    Calculate initial temperature for simulated annealing.
+    
+    Args:
+        initial_hpwl: Initial HPWL value
+        multiplier: Multiplier for temperature scaling (default: 10000.0)
+    
+    Returns:
+        Initial temperature
+    """
+    return multiplier * initial_hpwl
+
+
+def cool_temperature(temperature: float, alpha: float) -> float:
+    """
+    Cool temperature according to annealing schedule.
+    
+    Args:
+        temperature: Current temperature
+        alpha: Cooling rate (typically 0.85-0.99)
+    
+    Returns:
+        New temperature
+    """
+    return temperature * alpha
+
+
+def should_accept_move(delta_cost: float, temperature: float) -> bool:
+    """
+    Determine if a move should be accepted using Metropolis criterion.
+    
+    If delta_cost < 0 (improvement): always accept
+    If delta_cost >= 0 (worse): accept with probability exp(-delta_cost / T)
+    
+    Args:
+        delta_cost: Change in cost (new_cost - old_cost)
+        temperature: Current temperature
+    
+    Returns:
+        True if move should be accepted, False otherwise
+    """
+    if delta_cost < 0:
+        return True  # Always accept improvements
+    
+    if temperature <= 0:
+        return False  # At zero temperature, reject all non-improving moves
+    
+    # Metropolis criterion: P(accept) = exp(-delta_cost / T)
+    probability = math.exp(-delta_cost / temperature)
+    return random.random() < probability
+
+
+def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
+                       fabric_db: Dict[str, List[Dict[str, Any]]],
+                       netlist_graph: Dict[str, Dict[str, Any]],
+                       nets_dict: Dict[int, List[str]],
+                       pins_db: Optional[Dict[str, Any]] = None,
+                       port_to_nets: Optional[Dict[str, List[int]]] = None,
+                       T_initial: Optional[float] = None,
+                       alpha: float = 0.95,
+                       T_final: float = 0.1,
+                       moves_per_temp: int = 100,
+                       generate_move_func=None) -> Dict[str, Dict[str, Any]]:
+    """
+    Simulated Annealing optimization algorithm.
+    
+    Takes the greedy placement as initial state and optimizes it to reduce HPWL.
+    
+    Args:
+        initial_placement: Initial placement from greedy algorithm
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+        nets_dict: Dict mapping net_id -> list of cell instances (from extract_nets)
+        pins_db: Optional pins database
+        port_to_nets: Optional port-to-net mapping
+        T_initial: Initial temperature (auto-calculated if None)
+        alpha: Cooling rate (default: 0.95)
+        T_final: Final temperature (default: 0.1)
+        moves_per_temp: Number of moves attempted per temperature step (default: 100)
+        generate_move_func: Function to generate moves (placeholder for Issue #5)
+                          Signature: (placement, ...) -> (new_placement, delta_cost, move_type)
+    
+    Returns:
+        Best placement found
+    """
+    # Initialize state
+    current_placement = {k: v.copy() for k, v in initial_placement.items()}
+    current_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    
+    best_placement = {k: v.copy() for k, v in current_placement.items()}
+    best_hpwl = current_hpwl
+    
+    # Calculate initial temperature if not provided
+    if T_initial is None:
+        T_initial = calculate_initial_temperature(current_hpwl)
+    
+    T = T_initial
+    iteration = 0
+    
+    print(f"\n{'='*60}")
+    print("Simulated Annealing Optimization")
+    print(f"{'='*60}")
+    print(f"Initial HPWL: {current_hpwl:.2f} um")
+    print(f"Initial Temperature: {T:.2f}")
+    print(f"Cooling Rate (alpha): {alpha}")
+    print(f"Moves per Temperature: {moves_per_temp}")
+    print(f"Final Temperature: {T_final}")
+    print(f"{'='*60}\n")
+    
+    # Main SA loop
+    while T > T_final:
+        acceptance_count = 0
+        improvement_count = 0
+        
+        # Attempt N moves at this temperature
+        for move_idx in range(moves_per_temp):
+            # Generate move (placeholder - will be implemented in Issue #5)
+            if generate_move_func is None:
+                # Dummy move: swap two random cells of the same type (for testing)
+                cell_names = list(current_placement.keys())
+                if len(cell_names) < 2:
+                    break
+                
+                cell1 = random.choice(cell_names)
+                cell2 = random.choice(cell_names)
+                
+                if cell1 == cell2:
+                    continue
+                
+                # Get cell types
+                cell1_type = netlist_graph[cell1]['type']
+                cell2_type = netlist_graph[cell2]['type']
+                
+                # Only swap if same type
+                if cell1_type != cell2_type:
+                    continue
+                
+                # Create new placement with swap
+                new_placement = {k: v.copy() for k, v in current_placement.items()}
+                slot1 = new_placement[cell1]['fabric_slot_name']
+                slot2 = new_placement[cell2]['fabric_slot_name']
+                
+                # Swap slots
+                new_placement[cell1]['fabric_slot_name'] = slot2
+                new_placement[cell2]['fabric_slot_name'] = slot1
+                
+                # Update coordinates
+                slot_lookup = {}
+                for slots in fabric_db.values():
+                    for slot in slots:
+                        slot_lookup[slot['name']] = slot
+                
+                if slot2 in slot_lookup:
+                    new_placement[cell1]['x'] = slot_lookup[slot2]['x']
+                    new_placement[cell1]['y'] = slot_lookup[slot2]['y']
+                
+                if slot1 in slot_lookup:
+                    new_placement[cell2]['x'] = slot_lookup[slot1]['x']
+                    new_placement[cell2]['y'] = slot_lookup[slot1]['y']
+                
+                # Calculate new HPWL
+                new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+                delta_cost = new_hpwl - current_hpwl
+                move_type = 'dummy_swap'
+            else:
+                # Use provided move generation function
+                new_placement, delta_cost, move_type = generate_move_func(
+                    current_placement, T, fabric_db, netlist_graph, nets_dict, 
+                    pins_db, port_to_nets
+                )
+                new_hpwl = current_hpwl + delta_cost
+            
+            # Accept or reject move
+            if should_accept_move(delta_cost, T):
+                current_placement = new_placement
+                current_hpwl = new_hpwl
+                acceptance_count += 1
+                
+                if delta_cost < 0:
+                    improvement_count += 1
+                
+                # Update best if needed
+                if current_hpwl < best_hpwl:
+                    best_placement = {k: v.copy() for k, v in current_placement.items()}
+                    best_hpwl = current_hpwl
+        
+        # Calculate acceptance rate
+        acceptance_rate = acceptance_count / moves_per_temp if moves_per_temp > 0 else 0.0
+        
+        # Print progress
+        if iteration % 10 == 0 or T <= T_final * 2:  # Print more frequently near end
+            print(f"T={T:.2f} | Current HPWL={current_hpwl:.2f} um | "
+                  f"Best HPWL={best_hpwl:.2f} um | "
+                  f"Accept Rate={acceptance_rate:.1%} | "
+                  f"Improvements={improvement_count}")
+        
+        # Cool temperature
+        T = cool_temperature(T, alpha)
+        iteration += 1
+    
+    # Final statistics
+    print(f"\n{'='*60}")
+    print("SA Optimization Complete")
+    print(f"{'='*60}")
+    print(f"Initial HPWL: {calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets):.2f} um")
+    print(f"Final HPWL: {best_hpwl:.2f} um")
+    improvement = calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets) - best_hpwl
+    improvement_pct = (improvement / calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets)) * 100
+    print(f"Improvement: {improvement:.2f} um ({improvement_pct:.2f}%)")
+    print(f"Total Iterations: {iteration}")
+    print(f"{'='*60}\n")
+    
+    return best_placement
+
+
+# ============================================================================
+# End of Simulated Annealing Core
+# ============================================================================
+
+
 def save_placement(placement: Dict[str, Dict[str, Any]], output_path: str):
     """Save placement results to JSON file."""
     with open(output_path, 'w') as f:
@@ -648,10 +1057,26 @@ def main():
                         help='Path to pins.yaml')
     parser.add_argument('--output', default='placement.json',
                         help='Output file for placement results')
+    parser.add_argument('--no-sa', action='store_true',
+                        help='Disable simulated annealing (greedy only)')
+    parser.add_argument('--sa-alpha', type=float, default=0.95,
+                        help='SA cooling rate (default: 0.95)')
+    parser.add_argument('--sa-moves', type=int, default=100,
+                        help='SA moves per temperature step (default: 100)')
+    parser.add_argument('--sa-T-final', type=float, default=0.1,
+                        help='SA final temperature (default: 0.1)')
     
     args = parser.parse_args()
     
-    placement = place_design(args.fabric_cells, args.design, args.pins)
+    placement = place_design_with_sa(
+        args.fabric_cells, 
+        args.design, 
+        args.pins,
+        enable_sa=not args.no_sa,
+        sa_alpha=args.sa_alpha,
+        sa_moves_per_temp=args.sa_moves,
+        sa_T_final=args.sa_T_final
+    )
     
     if placement is None:
         sys.exit(1)
