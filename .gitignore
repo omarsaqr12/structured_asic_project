@@ -10,6 +10,7 @@ ENV/
 build/
 dist/
 *.egg-info/
+project_dd2
 
 # IDE
 .vscode/
