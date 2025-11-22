@@ -12,6 +12,7 @@ from typing import Dict, List, Tuple, Any, Optional, Set
 from validator import validate_design
 from parse_fabric import parse_fabric_cells, parse_pins
 from parse_design import parse_design
+from tqdm import tqdm
 
 
 def get_port_to_net_mapping(design_path: str) -> Dict[str, List[int]]:
@@ -153,8 +154,10 @@ def place_io_connected_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
         # Use the first pin location (or could average multiple pins)
         pin_x, pin_y = pin_locations[0]
         
+        
+        all_io_cells = [c for cells in io_net_to_cells.values() for c in cells]
         # Place each cell connected to this I/O net
-        for cell_name in cell_names:
+        for cell_name in tqdm(all_io_cells, desc="Placing I/O cells"):
             if cell_name in placement:
                 continue  # Already placed
             
@@ -189,6 +192,261 @@ def place_io_connected_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
                 }
                 used_slots.add(nearest_slot['name'])
                 cells_placed += 1
+    
+    return cells_placed
+
+
+def find_placed_neighbors(cell_name: str,
+                          netlist_graph: Dict[str, Dict[str, Any]],
+                          placement: Dict[str, Dict[str, Any]],
+                          include_io_pins: bool = False,
+                          pins_db: Optional[Dict[str, Any]] = None,
+                          port_to_nets: Optional[Dict[str, List[int]]] = None) -> List[Tuple[str, Dict[str, Any]]]:
+    """
+    Find all already-placed cells (and optionally I/O pins) that share nets with this cell.
+    
+    Args:
+        cell_name: Name of the cell to find neighbors for
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+        placement: Current placement dict
+        include_io_pins: If True, include I/O pin positions as neighbors
+        pins_db: Optional pins database for I/O pin positions
+        port_to_nets: Optional port-to-net mapping for I/O pins
+    
+    Returns:
+        List of (neighbor_name, position_dict) tuples where position_dict has 'x' and 'y'
+    """
+    neighbors = []
+    cell_data = netlist_graph.get(cell_name)
+    if not cell_data:
+        return neighbors
+    
+    cell_connections = cell_data.get('connections', {})
+    
+    # Collect all nets this cell is connected to
+    cell_nets = set()
+    for port_nets in cell_connections.values():
+        cell_nets.update(port_nets)
+    
+    # Find other placed cells on these nets
+    for other_cell, other_data in netlist_graph.items():
+        if other_cell == cell_name or other_cell not in placement:
+            continue
+        
+        other_connections = other_data.get('connections', {})
+        other_nets = set()
+        for port_nets in other_connections.values():
+            other_nets.update(port_nets)
+        
+        # If they share any net, they're neighbors
+        if cell_nets & other_nets:  # Set intersection
+            neighbors.append((other_cell, placement[other_cell]))
+    
+    # Optionally include I/O pins as neighbors
+    if include_io_pins and pins_db and port_to_nets:
+        for pin in pins_db.get('pins', []):
+            if pin.get('status') == 'FIXED':
+                pin_name = pin['name']
+                if pin_name in port_to_nets:
+                    pin_nets = set(port_to_nets[pin_name])
+                    # If cell shares any net with this pin
+                    if cell_nets & pin_nets:
+                        neighbors.append((
+                            f"pin_{pin_name}",
+                            {'x': pin['x_um'], 'y': pin['y_um']}
+                        ))
+    
+    return neighbors
+
+
+def calculate_barycenter(neighbors: List[Tuple[str, Dict[str, Any]]]) -> Optional[Tuple[float, float]]:
+    """
+    Calculate barycenter (center of gravity) of neighbors.
+    
+    Args:
+        neighbors: List of (name, position_dict) tuples where position_dict has 'x' and 'y'
+    
+    Returns:
+        (barycenter_x, barycenter_y) in microns, or None if no neighbors
+    """
+    if not neighbors:
+        return None
+    
+    total_x = sum(pos['x'] for _, pos in neighbors)
+    total_y = sum(pos['y'] for _, pos in neighbors)
+    count = len(neighbors)
+    
+    return (total_x / count, total_y / count)
+
+
+def get_fallback_position(pins_db: Optional[Dict[str, Any]] = None,
+                          fabric_db: Optional[Dict[str, List[Dict[str, Any]]]] = None) -> Tuple[float, float]:
+    """
+    Get a fallback position when a cell has no placed neighbors.
+    Uses center of fabric or nearest I/O pin.
+    
+    Args:
+        pins_db: Optional pins database
+        fabric_db: Optional fabric database
+    
+    Returns:
+        (x, y) position in microns
+    """
+    # Try to use center of fabric if available
+    if fabric_db:
+        all_x = []
+        all_y = []
+        for slots in fabric_db.values():
+            for slot in slots:
+                all_x.append(slot['x'])
+                all_y.append(slot['y'])
+        
+        if all_x and all_y:
+            center_x = (min(all_x) + max(all_x)) / 2
+            center_y = (min(all_y) + max(all_y)) / 2
+            return (center_x, center_y)
+    
+    # Fallback to center of die if pins_db available
+    if pins_db:
+        die_width = pins_db.get('die', {}).get('width_um', 0)
+        die_height = pins_db.get('die', {}).get('height_um', 0)
+        if die_width > 0 and die_height > 0:
+            return (die_width / 2, die_height / 2)
+    
+    # Last resort: return origin
+    return (0.0, 0.0)
+
+
+def find_nearest_slot_to_point(target_x: float,
+                                target_y: float,
+                                available_slots: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """
+    Find the nearest available slot to a target point.
+    
+    Args:
+        target_x: Target X coordinate in microns
+        target_y: Target Y coordinate in microns
+        available_slots: List of available slot dicts with 'x', 'y', 'name', 'orient'
+    
+    Returns:
+        Best slot dict or None if no slots available
+    """
+    if not available_slots:
+        return None
+    
+    nearest_slot = None
+    min_distance = float('inf')
+    
+    for slot in available_slots:
+        distance = calculate_distance(target_x, target_y, slot['x'], slot['y'])
+        if distance < min_distance:
+            min_distance = distance
+            nearest_slot = slot
+    
+    return nearest_slot
+
+
+def place_greedy_barycenter(fabric_db: Dict[str, List[Dict[str, Any]]],
+                             netlist_graph: Dict[str, Dict[str, Any]],
+                             placement: Dict[str, Dict[str, Any]],
+                             used_slots: Set[str],
+                             pins_db: Optional[Dict[str, Any]] = None,
+                             port_to_nets: Optional[Dict[str, List[int]]] = None) -> int:
+    """
+    Iteratively place most-connected unplaced cell at barycenter of its already-placed neighbors.
+    
+    Args:
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        netlist_graph: Dict mapping instance_name -> {type, connections}
+        placement: Current placement dict (will be updated)
+        used_slots: Set of already used fabric slot names (will be updated)
+        pins_db: Optional pins database for I/O pin positions
+        port_to_nets: Optional port-to-net mapping for I/O pins
+    
+    Returns:
+        Number of cells placed
+    """
+    # Get all unplaced cells
+    unplaced_cells = [cell for cell in netlist_graph.keys() 
+                      if cell not in placement]
+    
+    if not unplaced_cells:
+        return 0
+    
+    cells_placed = 0
+    
+    for _ in tqdm(range(len(unplaced_cells)), desc="Placing remaining cells"):
+        
+        if not unplaced_cells:
+            break
+
+        # Step 1: Score each unplaced cell by number of placed neighbors
+        cell_scores = []
+        for cell_name in unplaced_cells:
+            neighbors = find_placed_neighbors(
+                cell_name, netlist_graph, placement,
+                include_io_pins=True, pins_db=pins_db, port_to_nets=port_to_nets
+            )
+            # Also count total connections as tie-breaker
+            cell_data = netlist_graph[cell_name]
+            connections = cell_data.get('connections', {})
+            total_connections = sum(len(nets) for nets in connections.values())
+            
+            cell_scores.append((
+                cell_name,
+                len(neighbors),  # Primary: number of placed neighbors
+                total_connections  # Secondary: total connection count
+            ))
+        
+        # Step 2: Sort by neighbor count (most neighbors first), then by total connections
+        cell_scores.sort(key=lambda x: (x[1], x[2]), reverse=True)
+        
+        # Step 3: Place the top cell
+        cell_to_place, neighbor_count, _ = cell_scores[0]
+        cell_type = netlist_graph[cell_to_place]['type']
+        
+        # Get placed neighbors
+        neighbors = find_placed_neighbors(
+            cell_to_place, netlist_graph, placement,
+            include_io_pins=True, pins_db=pins_db, port_to_nets=port_to_nets
+        )
+        
+        # Calculate barycenter
+        if neighbors:
+            barycenter_x, barycenter_y = calculate_barycenter(neighbors)
+        else:
+            # Fallback: use center of fabric or nearest I/O pin
+            barycenter_x, barycenter_y = get_fallback_position(pins_db, fabric_db)
+        
+        # Find available slots
+        available_slots = [slot for slot in fabric_db.get(cell_type, [])
+                           if slot['name'] not in used_slots]
+        
+        if not available_slots:
+            print(f"WARNING: No slots available for cell {cell_to_place} (type {cell_type})")
+            unplaced_cells.remove(cell_to_place)
+            continue
+        
+        # Find nearest slot to barycenter
+        best_slot = find_nearest_slot_to_point(
+            barycenter_x, barycenter_y, available_slots
+        )
+        
+        if best_slot:
+            # Place the cell
+            placement[cell_to_place] = {
+                'fabric_slot_name': best_slot['name'],
+                'x': best_slot['x'],
+                'y': best_slot['y'],
+                'orient': best_slot['orient']
+            }
+            used_slots.add(best_slot['name'])
+            unplaced_cells.remove(cell_to_place)
+            cells_placed += 1
+        else:
+            # Should not happen, but handle gracefully
+            print(f"ERROR: Could not find slot for {cell_to_place}")
+            unplaced_cells.remove(cell_to_place)
     
     return cells_placed
 
@@ -234,10 +492,12 @@ def place_design(fabric_cells_path: str, design_path: str, pins_path: str = 'fab
     )
     print(f"Placed {io_cells_placed} cells connected to I/O pins.\n")
     
-    # TODO: Implement greedy placement algorithm for remaining cells
-    # - Map logical cells to physical fabric slots
-    # - Optimize for minimal total HPWL
-    # - Use greedy approach (e.g., place cells with most connections first)
+    # Step 3: Place remaining cells using greedy barycenter algorithm
+    print("Placing remaining cells using greedy barycenter algorithm...")
+    remaining_cells_placed = place_greedy_barycenter(
+        fabric_db, netlist_graph, placement, used_slots, pins_db, port_to_nets
+    )
+    print(f"Placed {remaining_cells_placed} remaining cells.\n")
     
     return placement
 
@@ -271,7 +531,7 @@ def main():
     )
     parser.add_argument('--fabric-cells', default='fabric/fabric_cells.yaml',
                         help='Path to fabric_cells.yaml')
-    parser.add_argument('--design', required=True,
+    parser.add_argument('--design', default='designs/6502_mapped.json',
                         help='Path to design mapped JSON file')
     parser.add_argument('--pins', default='fabric/pins.yaml',
                         help='Path to pins.yaml (default: fabric/pins.yaml)')
