@@ -29,9 +29,6 @@ try:
 except ImportError:
     HAS_SCIPY = False
     print("Warning: scipy not available. Falling back to linear search for slots.")
-    
-    
-HAS_SCIPY = False
 
 
 # ============================================================================
@@ -1041,7 +1038,7 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
     print("SA Optimization Complete")
     print(f"{'='*60}")
     print(f"Initial HPWL: {calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets):.2f} um")
-    print(f"Final HPWL: {best_hpwl:.2f} um")
+    print(f"Final Total HPWL: {best_hpwl:.2f} um")
     improvement = calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets) - best_hpwl
     improvement_pct = (improvement / calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets)) * 100
     print(f"Improvement: {improvement:.2f} um ({improvement_pct:.2f}%)")
@@ -1491,9 +1488,14 @@ def main():
     if placement is None:
         sys.exit(1)
     
-    # Load fabric_db and netlist_graph for validation
+    # Load fabric_db and netlist_graph for validation and HPWL calculation
     fabric_db = parse_fabric_cells(args.fabric_cells)
     _, netlist_graph = parse_design(args.design)
+    pins_db = parse_pins(args.pins)
+    
+    # Extract nets and port mappings for HPWL calculation
+    nets_dict = extract_nets(netlist_graph)
+    port_to_nets = get_port_to_net_mapping(args.design)
     
     # Write .map file (required format)
     success = write_placement_map(placement, map_output_path, fabric_db, netlist_graph)
@@ -1505,6 +1507,15 @@ def main():
     # Also save JSON file for debugging/analysis
     save_placement(placement, json_output_path)
     
+    # Calculate and report Final Total HPWL (as required by spec)
+    final_hpwl = calculate_total_hpwl(placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    
+    print("\n" + "="*60)
+    print("Placement Summary")
+    print("="*60)
+    print(f"Final Total HPWL: {final_hpwl:.2f} um")
+    print(f"Total Instances: {len(placement)}")
+    print("="*60)
     print("\nPlacement completed successfully!")
     print(f"Map file: {map_output_path}")
     print(f"JSON file: {json_output_path}")
