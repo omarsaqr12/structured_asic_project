@@ -128,7 +128,8 @@ def run_all_experiments(design_name: str,
                        p_refine_values: List[float],
                        T_final: float = 0.1,
                        seed: int = None,
-                       output_csv: str = None) -> List[Dict[str, Any]]:
+                       output_csv: str = None,
+                       interactive: bool = False) -> List[Dict[str, Any]]:
     """
     Run all combinations of knob settings.
     
@@ -143,6 +144,7 @@ def run_all_experiments(design_name: str,
         T_final: Final temperature (default: 0.1)
         seed: Random seed for reproducibility (optional)
         output_csv: Path to save results CSV (optional)
+        interactive: If True, pause after each experiment and wait for user input (default: False)
     
     Returns:
         results: List of result dicts
@@ -159,18 +161,25 @@ def run_all_experiments(design_name: str,
             'T_final': T_final
         })
     
-    print(f"Running {len(all_configs)} experiments...")
-    print(f"Design: {design_name}")
+    print(f"\n{'='*60}")
+    print(f"SA Knob Exploration: {design_name}")
+    print(f"{'='*60}")
+    print(f"Total experiments: {len(all_configs)} ({len(alpha_values)} alpha × {len(moves_per_temp_values)} moves × {len(p_refine_values)} p_refine)")
     print(f"Alpha values: {alpha_values}")
     print(f"Moves per temp: {moves_per_temp_values}")
     print(f"P_refine values: {p_refine_values}")
-    print()
+    if interactive:
+        print(f"\n⚠️  INTERACTIVE MODE: Will pause after each experiment.")
+        print(f"   Press Enter to continue, or 'q' to quit early.")
+    print(f"{'='*60}\n")
     
     results = []
     
     for i, config in enumerate(all_configs, 1):
+        print(f"\n{'='*60}")
         print(f"Experiment {i}/{len(all_configs)}: alpha={config['alpha']:.2f}, "
               f"moves={config['moves_per_temp']}, p_refine={config['p_refine']:.2f}")
+        print(f"{'='*60}\n")
         
         result = run_experiment(
             design_name, fabric_cells_path, design_path, pins_path, config, seed
@@ -178,12 +187,28 @@ def run_all_experiments(design_name: str,
         results.append(result)
         
         if result['success']:
-            print(f"  → HPWL: {result['hpwl']:.2f} um, Runtime: {result['runtime']:.2f} s")
+            print(f"\n  ✅ SUCCESS: HPWL: {result['hpwl']:.2f} um, Runtime: {result['runtime']:.2f} s")
         else:
-            print(f"  → FAILED")
-        print()
+            print(f"\n  ❌ FAILED: {result.get('error', 'Unknown error')}")
+        
+        # Save incrementally after each experiment (so progress isn't lost)
+        if output_csv:
+            save_results_csv(results, output_csv)
+            print(f"  💾 Progress saved to: {output_csv} ({i}/{len(all_configs)} experiments complete)")
+        
+        # Interactive mode: pause and wait for user input
+        if interactive and i < len(all_configs):
+            print(f"\n{'='*60}")
+            print(f"Experiment {i} complete. {len(all_configs) - i} remaining.")
+            print(f"{'='*60}")
+            user_input = input("\nPress Enter to continue to next experiment, or 'q' to quit: ").strip().lower()
+            if user_input == 'q':
+                print(f"\n⚠️  Stopped by user. Completed {i}/{len(all_configs)} experiments.")
+                print(f"Results saved to: {output_csv}")
+                break
+            print()
     
-    # Save to CSV if requested
+    # Final save (in case interactive mode was used and user quit early)
     if output_csv:
         save_results_csv(results, output_csv)
     
@@ -583,6 +608,8 @@ def main():
                         help='Moves per temperature values to test (default: 50 100 200 500)')
     parser.add_argument('--p-refine-values', type=float, nargs='+', default=DEFAULT_P_REFINE_VALUES,
                         help='P_refine values to test (default: 0.5 0.7 0.9)')
+    parser.add_argument('--interactive', action='store_true',
+                        help='Pause after each experiment and wait for user input (press Enter to continue)')
     
     args = parser.parse_args()
     
@@ -619,7 +646,8 @@ def main():
             moves_values,
             p_refine_values,
             seed=args.seed,
-            output_csv=args.csv
+            output_csv=args.csv,
+            interactive=args.interactive
         )
     
     # Generate plot
