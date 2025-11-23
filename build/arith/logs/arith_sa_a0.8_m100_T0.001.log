@@ -1,0 +1,161 @@
+# Log file for: designs/arith_mapped.json
+# Configuration: {'alpha': 0.8, 'moves': 100, 't_final': 0.001}
+# Start time: 2025-11-23T05:43:21.529664
+# Command: /home/mohab/Downloads/work/venv/bin/python placer.py --design designs/arith_mapped.json --fabric-cells fabric/fabric_cells.yaml --pins fabric/pins.yaml --output build/arith/sa_alpha0.8_moves100_Tfinal0.001 --sa-alpha 0.8 --sa-moves 100 --sa-T-final 0.001 --seed 829687530
+================================================================================
+
+Random seed set to: 829687530
+Validating design against fabric...
+============================================================
+Fabric Utilization Report
+============================================================
+sky130_fd_sc_hd__clkbuf_4: 67/9720 used (0.7%)
+sky130_fd_sc_hd__clkinv_2: 68/12960 used (0.5%)
+sky130_fd_sc_hd__conb_1: 3/9720 used (0.0%)
+sky130_fd_sc_hd__decap_3: 0/9720 used (0.0%)
+sky130_fd_sc_hd__decap_4: 0/9720 used (0.0%)
+sky130_fd_sc_hd__dfbbp_1: 11/6480 used (0.2%)
+sky130_fd_sc_hd__nand2_2: 187/48600 used (0.4%)
+sky130_fd_sc_hd__or2_2: 127/25920 used (0.5%)
+sky130_fd_sc_hd__tapvpwrvgnd_1: 0/25920 used (0.0%)
+============================================================
+
+VALIDATION PASSED: Design can be built on this fabric.
+
+Validation passed. Proceeding with placement...
+
+Loading fabric and design data...
+Building optimization indices...
+Using linear search for slot finding
+
+Placing cells connected to I/O pins...
+
+Placing I/O cells:   0%|          | 0/188 [00:00<?, ?it/s]
+Placing I/O cells:   5%|▌         | 10/188 [00:00<00:01, 94.85it/s]
+Placing I/O cells:  11%|█         | 20/188 [00:00<00:01, 90.17it/s]
+Placing I/O cells:  18%|█▊        | 33/188 [00:00<00:01, 103.96it/s]
+Placing I/O cells:  23%|██▎       | 44/188 [00:00<00:01, 96.88it/s] 
+Placing I/O cells:  30%|██▉       | 56/188 [00:00<00:01, 101.57it/s]
+Placing I/O cells:  36%|███▌      | 67/188 [00:00<00:01, 101.60it/s]
+Placing I/O cells:  41%|████▏     | 78/188 [00:00<00:01, 99.69it/s] 
+Placing I/O cells:  47%|████▋     | 89/188 [00:00<00:01, 98.86it/s]
+Placing I/O cells:  54%|█████▎    | 101/188 [00:01<00:00, 103.40it/s]
+Placing I/O cells:  60%|██████    | 113/188 [00:01<00:00, 103.90it/s]
+Placing I/O cells:  68%|██████▊   | 127/188 [00:01<00:00, 109.86it/s]
+Placing I/O cells:  75%|███████▌  | 141/188 [00:01<00:00, 117.29it/s]
+Placing I/O cells:  81%|████████▏ | 153/188 [00:01<00:00, 117.97it/s]
+Placing I/O cells:  88%|████████▊ | 165/188 [00:01<00:00, 110.33it/s]
+Placing I/O cells:  95%|█████████▍| 178/188 [00:01<00:00, 115.12it/s]
+Placing I/O cells: 100%|██████████| 188/188 [00:01<00:00, 105.40it/s]
+Placed 188 cells connected to I/O pins.
+
+Placing remaining cells using optimized greedy barycenter algorithm...
+Computing initial cell scores...
+
+Initial scoring:   0%|          | 0/275 [00:00<?, ?it/s]
+Initial scoring: 100%|██████████| 275/275 [00:00<00:00, 41854.76it/s]
+Placing cells with incremental updates...
+
+Placing remaining cells:   0%|          | 0/275 [00:00<?, ?it/s]
+Placing remaining cells:   4%|▎         | 10/275 [00:00<00:02, 98.24it/s]
+Placing remaining cells:   7%|▋         | 20/275 [00:00<00:03, 79.37it/s]
+Placing remaining cells:  11%|█         | 29/275 [00:00<00:04, 56.37it/s]
+Placing remaining cells:  13%|█▎        | 36/275 [00:00<00:05, 43.11it/s]
+Placing remaining cells:  15%|█▍        | 41/275 [00:00<00:05, 40.86it/s]
+Placing remaining cells:  17%|█▋        | 46/275 [00:00<00:05, 42.09it/s]
+Placing remaining cells:  19%|█▊        | 51/275 [00:01<00:06, 36.66it/s]
+Placing remaining cells:  20%|██        | 55/275 [00:01<00:05, 36.77it/s]
+Placing remaining cells:  22%|██▏       | 60/275 [00:01<00:05, 37.95it/s]
+Placing remaining cells:  23%|██▎       | 64/275 [00:01<00:06, 34.98it/s]
+Placing remaining cells:  25%|██▌       | 69/275 [00:01<00:05, 37.92it/s]
+Placing remaining cells:  27%|██▋       | 73/275 [00:01<00:05, 35.69it/s]
+Placing remaining cells:  28%|██▊       | 77/275 [00:01<00:05, 35.39it/s]
+Placing remaining cells:  31%|███       | 84/275 [00:01<00:04, 44.17it/s]
+Placing remaining cells:  33%|███▎      | 92/275 [00:02<00:03, 52.64it/s]
+Placing remaining cells:  36%|███▌      | 99/275 [00:02<00:03, 55.66it/s]
+Placing remaining cells:  39%|███▊      | 106/275 [00:02<00:02, 58.13it/s]
+Placing remaining cells:  41%|████      | 113/275 [00:02<00:02, 60.61it/s]
+Placing remaining cells:  44%|████▎     | 120/275 [00:02<00:02, 61.72it/s]
+Placing remaining cells:  47%|████▋     | 129/275 [00:02<00:02, 67.49it/s]
+Placing remaining cells:  50%|█████     | 138/275 [00:02<00:01, 72.41it/s]
+Placing remaining cells:  53%|█████▎    | 147/275 [00:02<00:01, 74.44it/s]
+Placing remaining cells:  56%|█████▋    | 155/275 [00:02<00:01, 71.78it/s]
+Placing remaining cells:  59%|█████▉    | 163/275 [00:03<00:01, 72.51it/s]
+Placing remaining cells:  62%|██████▏   | 171/275 [00:03<00:01, 69.57it/s]
+Placing remaining cells:  65%|██████▌   | 179/275 [00:03<00:01, 71.04it/s]
+Placing remaining cells:  68%|██████▊   | 187/275 [00:03<00:01, 69.55it/s]
+Placing remaining cells:  71%|███████   | 194/275 [00:03<00:01, 69.47it/s]
+Placing remaining cells:  73%|███████▎  | 202/275 [00:03<00:01, 69.61it/s]
+Placing remaining cells:  76%|███████▋  | 210/275 [00:03<00:00, 72.32it/s]
+Placing remaining cells:  79%|███████▉  | 218/275 [00:03<00:00, 72.65it/s]
+Placing remaining cells:  83%|████████▎ | 228/275 [00:03<00:00, 79.55it/s]
+Placing remaining cells:  87%|████████▋ | 240/275 [00:04<00:00, 91.06it/s]
+Placing remaining cells:  91%|█████████▏| 251/275 [00:04<00:00, 95.12it/s]
+Placing remaining cells:  95%|█████████▍| 261/275 [00:04<00:00, 93.74it/s]
+Placing remaining cells:  99%|█████████▉| 272/275 [00:04<00:00, 97.37it/s]
+Placing remaining cells: 100%|██████████| 275/275 [00:04<00:00, 62.57it/s]
+
+Placed 275 remaining cells.
+
+Placement Summary: 463/463 cells placed (100.0%)
+
+============================================================
+Simulated Annealing Optimization
+============================================================
+Initial HPWL: 166353.32 um
+Initial Temperature: 1663533200.00
+Cooling Rate (alpha): 0.8
+Moves per Temperature: 100
+Final Temperature: 0.001
+Initial Window Size: 501.80 um
+Window Cooling Rate (beta): 0.98
+Move Probabilities: Refine=70.0%, Explore=30.0%
+============================================================
+
+  → Found improvement! New best HPWL: 166236.56 um (improvement: -116.76 um)
+T=1663533200.00 | W=501.8um | Current HPWL=202434.74 um | Best HPWL=166236.56 um | Accept Rate=100.0% | Improvements: 10/100 (10.0%) | Refine: 70/70 (100.0%) | Explore: 30/30 (100.0%)
+T=178620517.25 | W=410.0um | Current HPWL=333908.27 um | Best HPWL=166236.56 um | Accept Rate=100.0% | Improvements: 18/100 (18.0%) | Refine: 781/781 (100.0%) | Explore: 319/319 (100.0%)
+T=19179232.00 | W=335.0um | Current HPWL=369857.08 um | Best HPWL=166236.56 um | Accept Rate=100.0% | Improvements: 23/100 (23.0%) | Refine: 1485/1485 (100.0%) | Explore: 615/615 (100.0%)
+T=2059354.35 | W=273.7um | Current HPWL=372802.21 um | Best HPWL=166236.56 um | Accept Rate=100.0% | Improvements: 29/100 (29.0%) | Refine: 2170/2170 (100.0%) | Explore: 930/930 (100.0%)
+T=221121.49 | W=223.7um | Current HPWL=375362.74 um | Best HPWL=166236.56 um | Accept Rate=100.0% | Improvements: 23/100 (23.0%) | Refine: 2893/2893 (100.0%) | Explore: 1207/1207 (100.0%)
+T=23742.74 | W=182.7um | Current HPWL=372352.89 um | Best HPWL=166236.56 um | Accept Rate=100.0% | Improvements: 28/100 (28.0%) | Refine: 3594/3595 (100.0%) | Explore: 1505/1505 (100.0%)
+T=2549.36 | W=149.3um | Current HPWL=376778.72 um | Best HPWL=166236.56 um | Accept Rate=98.0% | Improvements: 18/100 (18.0%) | Refine: 4283/4293 (99.8%) | Explore: 1804/1807 (99.8%)
+T=273.74 | W=122.0um | Current HPWL=351045.16 um | Best HPWL=166236.56 um | Accept Rate=87.0% | Improvements: 24/100 (24.0%) | Refine: 4942/5000 (98.8%) | Explore: 2083/2100 (99.2%)
+T=29.39 | W=100.4um | Current HPWL=326212.99 um | Best HPWL=166236.56 um | Accept Rate=72.0% | Improvements: 16/100 (16.0%) | Refine: 5519/5695 (96.9%) | Explore: 2317/2405 (96.3%)
+T=3.16 | W=100.4um | Current HPWL=298745.03 um | Best HPWL=166236.56 um | Accept Rate=71.0% | Improvements: 20/100 (20.0%) | Refine: 6067/6385 (95.0%) | Explore: 2478/2715 (91.3%)
+T=0.34 | W=100.4um | Current HPWL=282899.49 um | Best HPWL=166236.56 um | Accept Rate=71.0% | Improvements: 22/100 (22.0%) | Refine: 6588/7076 (93.1%) | Explore: 2637/3024 (87.2%)
+T=0.04 | W=100.4um | Current HPWL=272818.45 um | Best HPWL=166236.56 um | Accept Rate=79.0% | Improvements: 17/100 (17.0%) | Refine: 7141/7768 (91.9%) | Explore: 2783/3332 (83.5%)
+T=0.00 | W=100.4um | Current HPWL=262336.39 um | Best HPWL=166236.56 um | Accept Rate=72.0% | Improvements: 14/100 (14.0%) | Refine: 7682/8473 (90.7%) | Explore: 2926/3627 (80.7%)
+T=0.00 | W=100.4um | Current HPWL=257100.05 um | Best HPWL=166236.56 um | Accept Rate=70.0% | Improvements: 19/100 (19.0%) | Refine: 7895/8757 (90.2%) | Explore: 2987/3743 (79.8%)
+T=0.00 | W=100.4um | Current HPWL=256583.11 um | Best HPWL=166236.56 um | Accept Rate=61.0% | Improvements: 9/100 (9.0%) | Refine: 7949/8829 (90.0%) | Explore: 2994/3771 (79.4%)
+T=0.00 | W=100.4um | Current HPWL=255651.85 um | Best HPWL=166236.56 um | Accept Rate=68.0% | Improvements: 14/100 (14.0%) | Refine: 8006/8903 (89.9%) | Explore: 3005/3797 (79.1%)
+
+============================================================
+SA Optimization Complete
+============================================================
+Initial HPWL: 166353.32 um
+Final Total HPWL: 166236.56 um
+Improvement: 116.76 um (0.07%)
+Total Iterations: 127
+============================================================
+
+
+Placement map written to: build/arith/sa_alpha0.8_moves100_Tfinal0.001/arith.map
+Total instances: 463
+
+Placement saved to build/arith/sa_alpha0.8_moves100_Tfinal0.001/arith_placement.json
+
+============================================================
+Placement Summary
+============================================================
+Final Total HPWL: 166236.56 um
+Total Instances: 463
+============================================================
+
+Placement completed successfully!
+Map file: build/arith/sa_alpha0.8_moves100_Tfinal0.001/arith.map
+JSON file: build/arith/sa_alpha0.8_moves100_Tfinal0.001/arith_placement.json
+
+================================================================================
+# End time: 2025-11-23T05:43:21.529744
+# Return code: 0
