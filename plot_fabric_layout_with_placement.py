@@ -6,6 +6,7 @@ Generates heatmaps showing placement density and quality metrics overlaid on fab
 
 import argparse
 import json
+import os
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.colors import LinearSegmentedColormap
@@ -456,10 +457,85 @@ def plot_layered_comparison(fabric_cells_path: str,
     plt.close()
 
 
+def batch_plot_heatmaps(base_dir: str,
+                          fabric_cells_path: str,
+                          pins_path: str,
+                          placement_filename: str = 'arith_placement.json',
+                          output_dir: str = None,
+                          show_slots: bool = True,
+                          show_pins: bool = True,
+                          heatmap_alpha: float = 0.6):
+    """
+    Batch process multiple placement files in subdirectories.
+    
+    Args:
+        base_dir: Base directory containing subdirectories with placement files
+        fabric_cells_path: Path to fabric_cells.yaml
+        pins_path: Path to pins.yaml
+        placement_filename: Name of placement JSON file to look for (default: arith_placement.json)
+        output_dir: Directory to save output images (default: same as base_dir)
+        show_slots: Whether to show fabric slots
+        show_pins: Whether to show I/O pins
+        heatmap_alpha: Transparency of heatmap
+    """
+    if output_dir is None:
+        output_dir = base_dir
+    
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Find all subdirectories
+    if not os.path.exists(base_dir):
+        print(f"ERROR: Base directory does not exist: {base_dir}")
+        return
+    
+    subdirs = [d for d in os.listdir(base_dir) 
+               if os.path.isdir(os.path.join(base_dir, d))]
+    
+    if not subdirs:
+        print(f"WARNING: No subdirectories found in {base_dir}")
+        return
+    
+    print(f"Found {len(subdirs)} subdirectories to process")
+    
+    processed = 0
+    skipped = 0
+    
+    for subdir in sorted(subdirs):
+        placement_path = os.path.join(base_dir, subdir, placement_filename)
+        
+        if not os.path.exists(placement_path):
+            print(f"  Skipping {subdir}: {placement_filename} not found")
+            skipped += 1
+            continue
+        
+        # Generate output filename based on subdirectory name
+        output_filename = f"{subdir}_heatmap.png"
+        output_path = os.path.join(output_dir, output_filename)
+        
+        print(f"  Processing {subdir}...")
+        try:
+            plot_placement_heatmap(
+                fabric_cells_path, pins_path, placement_path, output_path,
+                show_slots=show_slots,
+                show_pins=show_pins,
+                heatmap_alpha=heatmap_alpha
+            )
+            processed += 1
+        except Exception as e:
+            print(f"  ERROR processing {subdir}: {e}")
+            skipped += 1
+    
+    print(f"\nBatch processing complete:")
+    print(f"  Processed: {processed}")
+    print(f"  Skipped: {skipped}")
+    print(f"  Output directory: {output_dir}")
+
+
 def main():
     parser = argparse.ArgumentParser(description='Visualize placement results')
     parser.add_argument('command', default='heatmap',
-                       choices=['heatmap', 'detailed', 'comparison'],
+                       choices=['heatmap', 'detailed', 'comparison', 'batch'],
                        help='Visualization type')
     parser.add_argument('--fabric-cells', default='fabric/fabric_cells.yaml',
                         help='Path to fabric_cells.yaml')
@@ -471,6 +547,12 @@ def main():
                         help='Path to design JSON (for detailed view)')
     parser.add_argument('--output', default='placement_heatmap.png',
                         help='Output PNG file path')
+    parser.add_argument('--base-dir', default='arith20vari/build/arith',
+                        help='Base directory for batch processing (contains subdirectories)')
+    parser.add_argument('--placement-filename', default='arith_placement.json',
+                        help='Name of placement JSON file to look for in batch mode')
+    parser.add_argument('--output-dir', default=None,
+                        help='Output directory for batch processing (default: same as base-dir)')
     parser.add_argument('--no-slots', default=False, action='store_true',
                         help='Hide fabric slots in heatmap view')
     parser.add_argument('--no-pins', default=False, action='store_true',
@@ -495,6 +577,15 @@ def main():
     elif args.command == 'comparison':
         plot_layered_comparison(
             args.fabric_cells, args.pins, args.placement, output_path=args.output
+        )
+    elif args.command == 'batch':
+        batch_plot_heatmaps(
+            args.base_dir, args.fabric_cells, args.pins,
+            placement_filename=args.placement_filename,
+            output_dir=args.output_dir,
+            show_slots=not args.no_slots,
+            show_pins=not args.no_pins,
+            heatmap_alpha=args.alpha
         )
 
 
