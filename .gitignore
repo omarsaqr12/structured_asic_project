@@ -7,7 +7,7 @@ __pycache__/
 env/
 venv/
 ENV/
-build/
+# build/
 dist/
 *.egg-info/
 project_dd2

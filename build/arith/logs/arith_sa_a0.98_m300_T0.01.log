@@ -1,0 +1,760 @@
+# Log file for: designs/arith_mapped.json
+# Configuration: {'alpha': 0.98, 'moves': 300, 't_final': 0.01}
+# Start time: 2025-11-23T05:48:48.848727
+# Command: /home/mohab/Downloads/work/venv/bin/python placer.py --design designs/arith_mapped.json --fabric-cells fabric/fabric_cells.yaml --pins fabric/pins.yaml --output build/arith/sa_alpha0.98_moves300_Tfinal0.01 --sa-alpha 0.98 --sa-moves 300 --sa-T-final 0.01 --seed 2012436765
+================================================================================
+
+Random seed set to: 2012436765
+Validating design against fabric...
+============================================================
+Fabric Utilization Report
+============================================================
+sky130_fd_sc_hd__clkbuf_4: 67/9720 used (0.7%)
+sky130_fd_sc_hd__clkinv_2: 68/12960 used (0.5%)
+sky130_fd_sc_hd__conb_1: 3/9720 used (0.0%)
+sky130_fd_sc_hd__decap_3: 0/9720 used (0.0%)
+sky130_fd_sc_hd__decap_4: 0/9720 used (0.0%)
+sky130_fd_sc_hd__dfbbp_1: 11/6480 used (0.2%)
+sky130_fd_sc_hd__nand2_2: 187/48600 used (0.4%)
+sky130_fd_sc_hd__or2_2: 127/25920 used (0.5%)
+sky130_fd_sc_hd__tapvpwrvgnd_1: 0/25920 used (0.0%)
+============================================================
+
+VALIDATION PASSED: Design can be built on this fabric.
+
+Validation passed. Proceeding with placement...
+
+Loading fabric and design data...
+Building optimization indices...
+Using linear search for slot finding
+
+Placing cells connected to I/O pins...
+
+Placing I/O cells:   0%|          | 0/188 [00:00<?, ?it/s]
+Placing I/O cells:   4%|▎         | 7/188 [00:00<00:03, 48.44it/s]
+Placing I/O cells:   6%|▋         | 12/188 [00:00<00:04, 41.49it/s]
+Placing I/O cells:  10%|█         | 19/188 [00:00<00:03, 46.24it/s]
+Placing I/O cells:  13%|█▎        | 24/188 [00:00<00:03, 43.65it/s]
+Placing I/O cells:  15%|█▌        | 29/188 [00:00<00:03, 43.67it/s]
+Placing I/O cells:  18%|█▊        | 34/188 [00:00<00:03, 43.36it/s]
+Placing I/O cells:  21%|██        | 39/188 [00:00<00:04, 36.44it/s]
+Placing I/O cells:  23%|██▎       | 43/188 [00:01<00:04, 32.43it/s]
+Placing I/O cells:  26%|██▌       | 49/188 [00:01<00:03, 36.50it/s]
+Placing I/O cells:  29%|██▊       | 54/188 [00:01<00:03, 39.33it/s]
+Placing I/O cells:  31%|███▏      | 59/188 [00:01<00:03, 40.26it/s]
+Placing I/O cells:  34%|███▍      | 64/188 [00:01<00:03, 37.09it/s]
+Placing I/O cells:  37%|███▋      | 69/188 [00:01<00:03, 38.36it/s]
+Placing I/O cells:  40%|████      | 76/188 [00:01<00:02, 43.65it/s]
+Placing I/O cells:  44%|████▎     | 82/188 [00:01<00:02, 45.52it/s]
+Placing I/O cells:  46%|████▋     | 87/188 [00:02<00:02, 46.10it/s]
+Placing I/O cells:  51%|█████     | 96/188 [00:02<00:01, 54.97it/s]
+Placing I/O cells:  54%|█████▍    | 102/188 [00:02<00:01, 49.88it/s]
+Placing I/O cells:  57%|█████▋    | 108/188 [00:02<00:01, 45.44it/s]
+Placing I/O cells:  61%|██████    | 115/188 [00:02<00:01, 50.56it/s]
+Placing I/O cells:  64%|██████▍   | 121/188 [00:02<00:01, 50.39it/s]
+Placing I/O cells:  68%|██████▊   | 127/188 [00:02<00:01, 40.07it/s]
+Placing I/O cells:  70%|███████   | 132/188 [00:03<00:01, 37.72it/s]
+Placing I/O cells:  73%|███████▎  | 137/188 [00:03<00:01, 39.01it/s]
+Placing I/O cells:  77%|███████▋  | 145/188 [00:03<00:00, 47.89it/s]
+Placing I/O cells:  80%|████████  | 151/188 [00:03<00:00, 46.42it/s]
+Placing I/O cells:  84%|████████▎ | 157/188 [00:03<00:00, 48.78it/s]
+Placing I/O cells:  87%|████████▋ | 164/188 [00:03<00:00, 52.28it/s]
+Placing I/O cells:  90%|█████████ | 170/188 [00:03<00:00, 46.80it/s]
+Placing I/O cells:  94%|█████████▍| 177/188 [00:03<00:00, 51.25it/s]
+Placing I/O cells:  97%|█████████▋| 183/188 [00:04<00:00, 44.50it/s]
+Placing I/O cells: 100%|██████████| 188/188 [00:04<00:00, 43.42it/s]
+Placing I/O cells: 100%|██████████| 188/188 [00:04<00:00, 43.83it/s]
+Placed 188 cells connected to I/O pins.
+
+Placing remaining cells using optimized greedy barycenter algorithm...
+Computing initial cell scores...
+
+Initial scoring:   0%|          | 0/275 [00:00<?, ?it/s]
+Initial scoring: 100%|██████████| 275/275 [00:00<00:00, 24038.88it/s]
+Placing cells with incremental updates...
+
+Placing remaining cells:   0%|          | 0/275 [00:00<?, ?it/s]
+Placing remaining cells:   2%|▏         | 5/275 [00:00<00:06, 41.30it/s]
+Placing remaining cells:   4%|▎         | 10/275 [00:00<00:07, 33.37it/s]
+Placing remaining cells:   5%|▌         | 14/275 [00:00<00:08, 29.25it/s]
+Placing remaining cells:   6%|▌         | 17/275 [00:00<00:09, 28.04it/s]
+Placing remaining cells:   8%|▊         | 22/275 [00:00<00:08, 30.32it/s]
+Placing remaining cells:   9%|▉         | 26/275 [00:00<00:07, 32.22it/s]
+Placing remaining cells:  11%|█         | 30/275 [00:00<00:08, 29.22it/s]
+Placing remaining cells:  12%|█▏        | 33/275 [00:01<00:08, 26.90it/s]
+Placing remaining cells:  13%|█▎        | 37/275 [00:01<00:08, 29.24it/s]
+Placing remaining cells:  15%|█▍        | 41/275 [00:01<00:07, 30.45it/s]
+Placing remaining cells:  17%|█▋        | 46/275 [00:01<00:06, 33.82it/s]
+Placing remaining cells:  19%|█▊        | 51/275 [00:01<00:06, 36.25it/s]
+Placing remaining cells:  20%|██        | 55/275 [00:01<00:06, 32.42it/s]
+Placing remaining cells:  21%|██▏       | 59/275 [00:01<00:07, 28.19it/s]
+Placing remaining cells:  23%|██▎       | 62/275 [00:02<00:07, 27.41it/s]
+Placing remaining cells:  24%|██▎       | 65/275 [00:02<00:08, 25.65it/s]
+Placing remaining cells:  25%|██▍       | 68/275 [00:02<00:08, 24.32it/s]
+Placing remaining cells:  26%|██▌       | 71/275 [00:02<00:08, 23.52it/s]
+Placing remaining cells:  27%|██▋       | 74/275 [00:02<00:08, 24.57it/s]
+Placing remaining cells:  29%|██▊       | 79/275 [00:02<00:06, 29.38it/s]
+Placing remaining cells:  31%|███       | 85/275 [00:02<00:05, 36.39it/s]
+Placing remaining cells:  32%|███▏      | 89/275 [00:02<00:05, 32.43it/s]
+Placing remaining cells:  34%|███▍      | 93/275 [00:03<00:06, 30.07it/s]
+Placing remaining cells:  35%|███▌      | 97/275 [00:03<00:06, 26.69it/s]
+Placing remaining cells:  36%|███▋      | 100/275 [00:03<00:06, 26.40it/s]
+Placing remaining cells:  37%|███▋      | 103/275 [00:03<00:06, 26.13it/s]
+Placing remaining cells:  39%|███▊      | 106/275 [00:03<00:06, 24.58it/s]
+Placing remaining cells:  40%|███▉      | 109/275 [00:03<00:06, 24.61it/s]
+Placing remaining cells:  41%|████      | 112/275 [00:03<00:06, 25.32it/s]
+Placing remaining cells:  42%|████▏     | 115/275 [00:04<00:06, 25.12it/s]
+Placing remaining cells:  43%|████▎     | 119/275 [00:04<00:05, 26.43it/s]
+Placing remaining cells:  44%|████▍     | 122/275 [00:04<00:05, 26.05it/s]
+Placing remaining cells:  45%|████▌     | 125/275 [00:04<00:05, 26.93it/s]
+Placing remaining cells:  48%|████▊     | 133/275 [00:04<00:03, 40.53it/s]
+Placing remaining cells:  51%|█████     | 139/275 [00:04<00:02, 45.37it/s]
+Placing remaining cells:  53%|█████▎    | 145/275 [00:04<00:02, 48.85it/s]
+Placing remaining cells:  55%|█████▍    | 151/275 [00:04<00:02, 51.95it/s]
+Placing remaining cells:  57%|█████▋    | 158/275 [00:04<00:02, 55.85it/s]
+Placing remaining cells:  60%|█████▉    | 164/275 [00:05<00:01, 56.18it/s]
+Placing remaining cells:  62%|██████▏   | 171/275 [00:05<00:01, 59.41it/s]
+Placing remaining cells:  65%|██████▍   | 178/275 [00:05<00:01, 61.74it/s]
+Placing remaining cells:  67%|██████▋   | 185/275 [00:05<00:01, 60.03it/s]
+Placing remaining cells:  70%|██████▉   | 192/275 [00:05<00:01, 58.57it/s]
+Placing remaining cells:  72%|███████▏  | 198/275 [00:05<00:01, 56.12it/s]
+Placing remaining cells:  74%|███████▍  | 204/275 [00:05<00:01, 57.03it/s]
+Placing remaining cells:  76%|███████▋  | 210/275 [00:05<00:01, 56.83it/s]
+Placing remaining cells:  79%|███████▊  | 216/275 [00:06<00:01, 46.11it/s]
+Placing remaining cells:  80%|████████  | 221/275 [00:06<00:01, 44.25it/s]
+Placing remaining cells:  83%|████████▎ | 228/275 [00:06<00:00, 48.01it/s]
+Placing remaining cells:  85%|████████▍ | 233/275 [00:06<00:00, 47.88it/s]
+Placing remaining cells:  87%|████████▋ | 238/275 [00:06<00:00, 45.49it/s]
+Placing remaining cells:  88%|████████▊ | 243/275 [00:06<00:00, 44.89it/s]
+Placing remaining cells:  90%|█████████ | 248/275 [00:06<00:00, 44.63it/s]
+Placing remaining cells:  92%|█████████▏| 253/275 [00:06<00:00, 43.20it/s]
+Placing remaining cells:  95%|█████████▍| 261/275 [00:06<00:00, 52.49it/s]
+Placing remaining cells:  98%|█████████▊| 270/275 [00:07<00:00, 61.71it/s]
+Placing remaining cells: 100%|██████████| 275/275 [00:07<00:00, 38.76it/s]
+
+Placed 275 remaining cells.
+
+Placement Summary: 463/463 cells placed (100.0%)
+
+============================================================
+Simulated Annealing Optimization
+============================================================
+Initial HPWL: 165310.70 um
+Initial Temperature: 1653107000.00
+Cooling Rate (alpha): 0.98
+Moves per Temperature: 300
+Final Temperature: 0.01
+Initial Window Size: 501.80 um
+Window Cooling Rate (beta): 0.98
+Move Probabilities: Refine=70.0%, Explore=30.0%
+============================================================
+
+T=1653107000.00 | W=501.8um | Current HPWL=265250.81 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 34/300 (11.3%) | Refine: 201/201 (100.0%) | Explore: 99/99 (100.0%)
+T=1350708776.58 | W=410.0um | Current HPWL=369605.45 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 78/300 (26.0%) | Refine: 2309/2309 (100.0%) | Explore: 991/991 (100.0%)
+T=1103627411.36 | W=335.0um | Current HPWL=363971.10 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 67/300 (22.3%) | Refine: 4352/4352 (100.0%) | Explore: 1948/1948 (100.0%)
+T=901743946.76 | W=273.7um | Current HPWL=387114.68 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 71/300 (23.7%) | Refine: 6463/6463 (100.0%) | Explore: 2837/2837 (100.0%)
+T=736790457.67 | W=223.7um | Current HPWL=385958.69 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 59/300 (19.7%) | Refine: 8551/8551 (100.0%) | Explore: 3749/3749 (100.0%)
+T=602011447.34 | W=182.7um | Current HPWL=378792.11 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 79/300 (26.3%) | Refine: 10616/10616 (100.0%) | Explore: 4684/4684 (100.0%)
+T=491887183.06 | W=149.3um | Current HPWL=378264.59 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 66/300 (22.0%) | Refine: 12679/12679 (100.0%) | Explore: 5621/5621 (100.0%)
+T=401907641.33 | W=122.0um | Current HPWL=387256.71 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 68/300 (22.7%) | Refine: 14769/14769 (100.0%) | Explore: 6531/6531 (100.0%)
+T=328387804.61 | W=100.4um | Current HPWL=391684.90 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 72/300 (24.0%) | Refine: 16827/16827 (100.0%) | Explore: 7473/7473 (100.0%)
+T=268316745.26 | W=100.4um | Current HPWL=381153.93 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 84/300 (28.0%) | Refine: 18919/18919 (100.0%) | Explore: 8381/8381 (100.0%)
+T=219234316.19 | W=100.4um | Current HPWL=383569.10 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 71/300 (23.7%) | Refine: 21037/21037 (100.0%) | Explore: 9263/9263 (100.0%)
+T=179130398.09 | W=100.4um | Current HPWL=394657.49 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 58/300 (19.3%) | Refine: 23167/23167 (100.0%) | Explore: 10133/10133 (100.0%)
+T=146362577.17 | W=100.4um | Current HPWL=389391.01 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 71/300 (23.7%) | Refine: 25241/25241 (100.0%) | Explore: 11059/11059 (100.0%)
+T=119588881.75 | W=100.4um | Current HPWL=382246.25 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 71/300 (23.7%) | Refine: 27349/27349 (100.0%) | Explore: 11951/11951 (100.0%)
+T=97712823.28 | W=100.4um | Current HPWL=398490.88 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 73/300 (24.3%) | Refine: 29433/29433 (100.0%) | Explore: 12867/12867 (100.0%)
+T=79838490.79 | W=100.4um | Current HPWL=405678.86 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 63/300 (21.0%) | Refine: 31511/31511 (100.0%) | Explore: 13789/13789 (100.0%)
+T=65233859.77 | W=100.4um | Current HPWL=388050.22 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 70/300 (23.3%) | Refine: 33621/33621 (100.0%) | Explore: 14679/14679 (100.0%)
+T=53300812.90 | W=100.4um | Current HPWL=383998.71 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 78/300 (26.0%) | Refine: 35720/35720 (100.0%) | Explore: 15580/15580 (100.0%)
+T=43550644.81 | W=100.4um | Current HPWL=391712.89 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 75/300 (25.0%) | Refine: 37801/37801 (100.0%) | Explore: 16499/16499 (100.0%)
+T=35584047.60 | W=100.4um | Current HPWL=398187.18 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 63/300 (21.0%) | Refine: 39903/39903 (100.0%) | Explore: 17397/17397 (100.0%)
+T=29074757.65 | W=100.4um | Current HPWL=398988.30 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 73/300 (24.3%) | Refine: 41980/41980 (100.0%) | Explore: 18320/18320 (100.0%)
+T=23756193.84 | W=100.4um | Current HPWL=393216.92 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 66/300 (22.0%) | Refine: 44075/44075 (100.0%) | Explore: 19225/19225 (100.0%)
+T=19410539.98 | W=100.4um | Current HPWL=392479.19 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 72/300 (24.0%) | Refine: 46137/46137 (100.0%) | Explore: 20163/20163 (100.0%)
+T=15859824.39 | W=100.4um | Current HPWL=393943.72 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 68/300 (22.7%) | Refine: 48246/48246 (100.0%) | Explore: 21054/21054 (100.0%)
+T=12958631.23 | W=100.4um | Current HPWL=400764.91 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 50/300 (16.7%) | Refine: 50336/50336 (100.0%) | Explore: 21964/21964 (100.0%)
+T=10588145.19 | W=100.4um | Current HPWL=391724.90 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 68/300 (22.7%) | Refine: 52392/52392 (100.0%) | Explore: 22908/22908 (100.0%)
+T=8651285.51 | W=100.4um | Current HPWL=392705.33 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 79/300 (26.3%) | Refine: 54495/54495 (100.0%) | Explore: 23805/23805 (100.0%)
+T=7068730.14 | W=100.4um | Current HPWL=398019.64 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 74/300 (24.7%) | Refine: 56600/56600 (100.0%) | Explore: 24700/24700 (100.0%)
+T=5775667.17 | W=100.4um | Current HPWL=389039.20 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 74/300 (24.7%) | Refine: 58692/58692 (100.0%) | Explore: 25608/25608 (100.0%)
+T=4719140.59 | W=100.4um | Current HPWL=409727.87 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 70/300 (23.3%) | Refine: 60807/60807 (100.0%) | Explore: 26493/26493 (100.0%)
+T=3855881.45 | W=100.4um | Current HPWL=395070.99 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 79/300 (26.3%) | Refine: 62894/62894 (100.0%) | Explore: 27406/27406 (100.0%)
+T=3150535.88 | W=100.4um | Current HPWL=394548.64 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 69/300 (23.0%) | Refine: 65000/65000 (100.0%) | Explore: 28300/28300 (100.0%)
+T=2574217.19 | W=100.4um | Current HPWL=384729.92 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 68/300 (22.7%) | Refine: 67075/67075 (100.0%) | Explore: 29225/29225 (100.0%)
+T=2103322.87 | W=100.4um | Current HPWL=395383.33 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 66/300 (22.0%) | Refine: 69191/69191 (100.0%) | Explore: 30109/30109 (100.0%)
+T=1718567.92 | W=100.4um | Current HPWL=392602.19 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 75/300 (25.0%) | Refine: 71309/71309 (100.0%) | Explore: 30991/30991 (100.0%)
+T=1404195.11 | W=100.4um | Current HPWL=394343.07 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 68/300 (22.7%) | Refine: 73494/73494 (100.0%) | Explore: 31806/31806 (100.0%)
+T=1147329.64 | W=100.4um | Current HPWL=398389.25 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 62/300 (20.7%) | Refine: 75590/75590 (100.0%) | Explore: 32710/32710 (100.0%)
+T=937451.85 | W=100.4um | Current HPWL=399453.93 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 72/300 (24.0%) | Refine: 77738/77738 (100.0%) | Explore: 33562/33562 (100.0%)
+T=765966.42 | W=100.4um | Current HPWL=398200.18 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 67/300 (22.3%) | Refine: 79793/79793 (100.0%) | Explore: 34507/34507 (100.0%)
+T=625850.33 | W=100.4um | Current HPWL=408718.66 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 67/300 (22.3%) | Refine: 81920/81920 (100.0%) | Explore: 35380/35380 (100.0%)
+T=511365.29 | W=100.4um | Current HPWL=393969.80 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 71/300 (23.7%) | Refine: 83979/83979 (100.0%) | Explore: 36321/36321 (100.0%)
+T=417822.67 | W=100.4um | Current HPWL=403074.96 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 82/300 (27.3%) | Refine: 86033/86035 (100.0%) | Explore: 37265/37265 (100.0%)
+T=341391.54 | W=100.4um | Current HPWL=404265.94 um | Best HPWL=165310.70 um | Accept Rate=99.7% | Improvements: 78/300 (26.0%) | Refine: 88149/88153 (100.0%) | Explore: 38147/38147 (100.0%)
+T=278941.74 | W=100.4um | Current HPWL=410731.25 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 75/300 (25.0%) | Refine: 90268/90273 (100.0%) | Explore: 39027/39027 (100.0%)
+T=227915.71 | W=100.4um | Current HPWL=406870.37 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 71/300 (23.7%) | Refine: 92396/92401 (100.0%) | Explore: 39899/39899 (100.0%)
+T=186223.73 | W=100.4um | Current HPWL=411912.89 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 53/300 (17.7%) | Refine: 94547/94553 (100.0%) | Explore: 40747/40747 (100.0%)
+T=152158.35 | W=100.4um | Current HPWL=394576.51 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 75/300 (25.0%) | Refine: 96682/96689 (100.0%) | Explore: 41611/41611 (100.0%)
+T=124324.45 | W=100.4um | Current HPWL=403414.92 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 86/300 (28.7%) | Refine: 98738/98745 (100.0%) | Explore: 42555/42555 (100.0%)
+T=101582.13 | W=100.4um | Current HPWL=395378.77 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 73/300 (24.3%) | Refine: 100882/100891 (100.0%) | Explore: 43409/43409 (100.0%)
+T=82999.99 | W=100.4um | Current HPWL=391355.30 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 73/300 (24.3%) | Refine: 102994/103004 (100.0%) | Explore: 44295/44296 (100.0%)
+T=67817.04 | W=100.4um | Current HPWL=398123.62 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 70/300 (23.3%) | Refine: 105076/105090 (100.0%) | Explore: 45207/45210 (100.0%)
+T=55411.46 | W=100.4um | Current HPWL=401086.09 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 67/300 (22.3%) | Refine: 107167/107184 (100.0%) | Explore: 46113/46116 (100.0%)
+T=45275.19 | W=100.4um | Current HPWL=394616.45 um | Best HPWL=165310.70 um | Accept Rate=99.3% | Improvements: 73/300 (24.3%) | Refine: 109318/109339 (100.0%) | Explore: 46958/46961 (100.0%)
+T=36993.13 | W=100.4um | Current HPWL=391935.93 um | Best HPWL=165310.70 um | Accept Rate=99.7% | Improvements: 72/300 (24.0%) | Refine: 111398/111427 (100.0%) | Explore: 47869/47873 (100.0%)
+T=30226.08 | W=100.4um | Current HPWL=391894.84 um | Best HPWL=165310.70 um | Accept Rate=99.7% | Improvements: 66/300 (22.0%) | Refine: 113501/113537 (100.0%) | Explore: 48759/48763 (100.0%)
+T=24696.91 | W=100.4um | Current HPWL=402493.39 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 64/300 (21.3%) | Refine: 115648/115693 (100.0%) | Explore: 49603/49607 (100.0%)
+T=20179.17 | W=100.4um | Current HPWL=400481.45 um | Best HPWL=165310.70 um | Accept Rate=99.7% | Improvements: 77/300 (25.7%) | Refine: 117774/117831 (100.0%) | Explore: 50464/50469 (100.0%)
+T=16487.85 | W=100.4um | Current HPWL=410171.65 um | Best HPWL=165310.70 um | Accept Rate=100.0% | Improvements: 68/300 (22.7%) | Refine: 119903/119972 (99.9%) | Explore: 51322/51328 (100.0%)
+T=13471.78 | W=100.4um | Current HPWL=410794.85 um | Best HPWL=165310.70 um | Accept Rate=99.7% | Improvements: 64/300 (21.3%) | Refine: 121977/122062 (99.9%) | Explore: 52229/52238 (100.0%)
+T=11007.42 | W=100.4um | Current HPWL=418370.50 um | Best HPWL=165310.70 um | Accept Rate=99.3% | Improvements: 62/300 (20.7%) | Refine: 124085/124188 (99.9%) | Explore: 53101/53112 (100.0%)
+T=8993.87 | W=100.4um | Current HPWL=403547.39 um | Best HPWL=165310.70 um | Accept Rate=99.3% | Improvements: 72/300 (24.0%) | Refine: 126171/126285 (99.9%) | Explore: 54002/54015 (100.0%)
+T=7348.64 | W=100.4um | Current HPWL=403211.18 um | Best HPWL=165310.70 um | Accept Rate=99.3% | Improvements: 64/300 (21.3%) | Refine: 128279/128415 (99.9%) | Explore: 54867/54885 (100.0%)
+T=6004.38 | W=100.4um | Current HPWL=397918.97 um | Best HPWL=165310.70 um | Accept Rate=98.7% | Improvements: 83/300 (27.7%) | Refine: 130367/130528 (99.9%) | Explore: 55753/55772 (100.0%)
+T=4906.01 | W=100.4um | Current HPWL=397208.84 um | Best HPWL=165310.70 um | Accept Rate=98.0% | Improvements: 63/300 (21.0%) | Refine: 132477/132668 (99.9%) | Explore: 56611/56632 (100.0%)
+T=4008.57 | W=100.4um | Current HPWL=395264.95 um | Best HPWL=165310.70 um | Accept Rate=98.3% | Improvements: 70/300 (23.3%) | Refine: 134558/134782 (99.8%) | Explore: 57489/57518 (99.9%)
+T=3275.29 | W=100.4um | Current HPWL=389665.27 um | Best HPWL=165310.70 um | Accept Rate=97.3% | Improvements: 68/300 (22.7%) | Refine: 136604/136889 (99.8%) | Explore: 58373/58411 (99.9%)
+T=2676.15 | W=100.4um | Current HPWL=393514.29 um | Best HPWL=165310.70 um | Accept Rate=98.3% | Improvements: 74/300 (24.7%) | Refine: 138662/139005 (99.8%) | Explore: 59253/59295 (99.9%)
+T=2186.61 | W=100.4um | Current HPWL=386886.65 um | Best HPWL=165310.70 um | Accept Rate=97.3% | Improvements: 77/300 (25.7%) | Refine: 140673/141082 (99.7%) | Explore: 60172/60218 (99.9%)
+T=1786.62 | W=100.4um | Current HPWL=379193.71 um | Best HPWL=165310.70 um | Accept Rate=96.3% | Improvements: 59/300 (19.7%) | Refine: 142656/143161 (99.6%) | Explore: 61079/61139 (99.9%)
+T=1459.80 | W=100.4um | Current HPWL=370620.93 um | Best HPWL=165310.70 um | Accept Rate=95.0% | Improvements: 80/300 (26.7%) | Refine: 144628/145210 (99.6%) | Explore: 62016/62090 (99.9%)
+T=1192.76 | W=100.4um | Current HPWL=373328.19 um | Best HPWL=165310.70 um | Accept Rate=96.3% | Improvements: 60/300 (20.0%) | Refine: 146632/147337 (99.5%) | Explore: 62868/62963 (99.8%)
+T=974.57 | W=100.4um | Current HPWL=376857.21 um | Best HPWL=165310.70 um | Accept Rate=90.7% | Improvements: 59/300 (19.7%) | Refine: 148542/149415 (99.4%) | Explore: 63767/63885 (99.8%)
+T=796.30 | W=100.4um | Current HPWL=355506.85 um | Best HPWL=165310.70 um | Accept Rate=91.0% | Improvements: 64/300 (21.3%) | Refine: 150455/151510 (99.3%) | Explore: 64644/64790 (99.8%)
+T=650.63 | W=100.4um | Current HPWL=341410.34 um | Best HPWL=165310.70 um | Accept Rate=90.3% | Improvements: 59/300 (19.7%) | Refine: 152314/153595 (99.2%) | Explore: 65526/65705 (99.7%)
+T=531.61 | W=100.4um | Current HPWL=341543.68 um | Best HPWL=165310.70 um | Accept Rate=87.3% | Improvements: 47/300 (15.7%) | Refine: 154139/155688 (99.0%) | Explore: 66393/66612 (99.7%)
+T=434.37 | W=100.4um | Current HPWL=326222.91 um | Best HPWL=165310.70 um | Accept Rate=87.3% | Improvements: 43/300 (14.3%) | Refine: 155987/157811 (98.8%) | Explore: 67227/67489 (99.6%)
+T=354.91 | W=100.4um | Current HPWL=317795.36 um | Best HPWL=165310.70 um | Accept Rate=84.7% | Improvements: 70/300 (23.3%) | Refine: 157768/159915 (98.7%) | Explore: 68075/68385 (99.5%)
+T=289.99 | W=100.4um | Current HPWL=302895.19 um | Best HPWL=165310.70 um | Accept Rate=85.3% | Improvements: 56/300 (18.7%) | Refine: 159514/162012 (98.5%) | Explore: 68916/69288 (99.5%)
+T=236.94 | W=100.4um | Current HPWL=294850.11 um | Best HPWL=165310.70 um | Accept Rate=82.7% | Improvements: 58/300 (19.3%) | Refine: 161214/164073 (98.3%) | Explore: 69787/70227 (99.4%)
+T=193.60 | W=100.4um | Current HPWL=274116.41 um | Best HPWL=165310.70 um | Accept Rate=85.3% | Improvements: 56/300 (18.7%) | Refine: 162882/166150 (98.0%) | Explore: 70623/71150 (99.3%)
+T=158.18 | W=100.4um | Current HPWL=257547.02 um | Best HPWL=165310.70 um | Accept Rate=80.7% | Improvements: 35/300 (11.7%) | Refine: 164529/168276 (97.8%) | Explore: 71424/72024 (99.2%)
+T=129.25 | W=100.4um | Current HPWL=239050.89 um | Best HPWL=165310.70 um | Accept Rate=81.7% | Improvements: 40/300 (13.3%) | Refine: 166149/170406 (97.5%) | Explore: 72180/72894 (99.0%)
+T=105.60 | W=100.4um | Current HPWL=223737.87 um | Best HPWL=165310.70 um | Accept Rate=83.0% | Improvements: 51/300 (17.0%) | Refine: 167777/172536 (97.2%) | Explore: 72913/73764 (98.8%)
+T=86.29 | W=100.4um | Current HPWL=213173.29 um | Best HPWL=165310.70 um | Accept Rate=80.7% | Improvements: 55/300 (18.3%) | Refine: 169348/174621 (97.0%) | Explore: 73667/74679 (98.6%)
+T=70.50 | W=100.4um | Current HPWL=204374.64 um | Best HPWL=165310.70 um | Accept Rate=71.7% | Improvements: 41/300 (13.7%) | Refine: 170863/176715 (96.7%) | Explore: 74370/75585 (98.4%)
+T=57.61 | W=100.4um | Current HPWL=198733.36 um | Best HPWL=165310.70 um | Accept Rate=74.7% | Improvements: 34/300 (11.3%) | Refine: 172435/178824 (96.4%) | Explore: 75039/76476 (98.1%)
+T=47.07 | W=100.4um | Current HPWL=188751.45 um | Best HPWL=165310.70 um | Accept Rate=70.3% | Improvements: 43/300 (14.3%) | Refine: 173958/180893 (96.2%) | Explore: 75729/77407 (97.8%)
+T=38.46 | W=100.4um | Current HPWL=180875.17 um | Best HPWL=165310.70 um | Accept Rate=68.0% | Improvements: 29/300 (9.7%) | Refine: 175491/183006 (95.9%) | Explore: 76320/78294 (97.5%)
+T=31.42 | W=100.4um | Current HPWL=174716.58 um | Best HPWL=165310.70 um | Accept Rate=72.0% | Improvements: 33/300 (11.0%) | Refine: 177063/185142 (95.6%) | Explore: 76861/79158 (97.1%)
+  → Found improvement! New best HPWL: 165163.20 um (improvement: -102.40 um)
+  → Found improvement! New best HPWL: 165089.64 um (improvement: -94.96 um)
+  → Found improvement! New best HPWL: 165058.24 um (improvement: -31.40 um)
+  → Found improvement! New best HPWL: 164992.96 um (improvement: -65.28 um)
+  → Found improvement! New best HPWL: 164982.08 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 164911.36 um (improvement: -70.72 um)
+  → Found improvement! New best HPWL: 164824.32 um (improvement: -87.04 um)
+  → Found improvement! New best HPWL: 164792.08 um (improvement: -32.24 um)
+  → Found improvement! New best HPWL: 164742.72 um (improvement: -49.36 um)
+  → Found improvement! New best HPWL: 164651.94 um (improvement: -98.72 um)
+  → Found improvement! New best HPWL: 164625.50 um (improvement: -26.44 um)
+  → Found improvement! New best HPWL: 164603.74 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 164587.42 um (improvement: -16.32 um)
+  → Found improvement! New best HPWL: 164587.26 um (improvement: -29.96 um)
+  → Found improvement! New best HPWL: 164557.48 um (improvement: -29.78 um)
+  → Found improvement! New best HPWL: 164546.14 um (improvement: -65.28 um)
+  → Found improvement! New best HPWL: 164543.26 um (improvement: -81.30 um)
+  → Found improvement! New best HPWL: 164506.94 um (improvement: -70.72 um)
+  → Found improvement! New best HPWL: 164484.76 um (improvement: -22.18 um)
+  → Found improvement! New best HPWL: 164471.16 um (improvement: -13.60 um)
+  → Found improvement! New best HPWL: 164412.28 um (improvement: -58.88 um)
+  → Found improvement! New best HPWL: 164401.40 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 164399.50 um (improvement: -1.90 um)
+  → Found improvement! New best HPWL: 164336.94 um (improvement: -62.56 um)
+  → Found improvement! New best HPWL: 164314.94 um (improvement: -39.88 um)
+  → Found improvement! New best HPWL: 164244.22 um (improvement: -70.72 um)
+  → Found improvement! New best HPWL: 164228.30 um (improvement: -15.92 um)
+  → Found improvement! New best HPWL: 164220.60 um (improvement: -7.70 um)
+  → Found improvement! New best HPWL: 164161.12 um (improvement: -59.48 um)
+T=25.67 | W=100.4um | Current HPWL=164219.10 um | Best HPWL=164161.12 um | Accept Rate=66.7% | Improvements: 38/300 (12.7%) | Refine: 178576/187208 (95.4%) | Explore: 77430/80092 (96.7%)
+  → Found improvement! New best HPWL: 156638.02 um (improvement: -62.30 um)
+  → Found improvement! New best HPWL: 156631.82 um (improvement: -16.32 um)
+  → Found improvement! New best HPWL: 156631.40 um (improvement: -0.42 um)
+  → Found improvement! New best HPWL: 156604.20 um (improvement: -27.20 um)
+  → Found improvement! New best HPWL: 156571.98 um (improvement: -32.22 um)
+  → Found improvement! New best HPWL: 156549.20 um (improvement: -60.72 um)
+  → Found improvement! New best HPWL: 156519.30 um (improvement: -29.90 um)
+  → Found improvement! New best HPWL: 156512.40 um (improvement: -6.90 um)
+  → Found improvement! New best HPWL: 156403.04 um (improvement: -109.36 um)
+T=20.98 | W=100.4um | Current HPWL=156403.04 um | Best HPWL=156403.04 um | Accept Rate=63.0% | Improvements: 23/300 (7.7%) | Refine: 180137/189331 (95.1%) | Explore: 77926/80969 (96.2%)
+  → Found improvement! New best HPWL: 150301.69 um (improvement: -60.26 um)
+  → Found improvement! New best HPWL: 150156.15 um (improvement: -175.64 um)
+  → Found improvement! New best HPWL: 150154.67 um (improvement: -1.48 um)
+  → Found improvement! New best HPWL: 150151.95 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 150121.93 um (improvement: -30.02 um)
+  → Found improvement! New best HPWL: 150100.57 um (improvement: -21.36 um)
+  → Found improvement! New best HPWL: 149971.33 um (improvement: -136.96 um)
+  → Found improvement! New best HPWL: 149955.01 um (improvement: -16.32 um)
+  → Found improvement! New best HPWL: 149933.27 um (improvement: -21.74 um)
+  → Found improvement! New best HPWL: 149924.75 um (improvement: -8.52 um)
+  → Found improvement! New best HPWL: 149913.03 um (improvement: -11.72 um)
+  → Found improvement! New best HPWL: 149869.51 um (improvement: -43.52 um)
+  → Found improvement! New best HPWL: 149853.99 um (improvement: -15.52 um)
+  → Found improvement! New best HPWL: 149800.43 um (improvement: -53.56 um)
+  → Found improvement! New best HPWL: 149797.11 um (improvement: -30.36 um)
+  → Found improvement! New best HPWL: 149705.11 um (improvement: -92.00 um)
+T=17.14 | W=100.4um | Current HPWL=149705.11 um | Best HPWL=149705.11 um | Accept Rate=67.3% | Improvements: 26/300 (8.7%) | Refine: 181643/191419 (94.9%) | Explore: 78363/81881 (95.7%)
+  → Found improvement! New best HPWL: 143380.51 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 143334.31 um (improvement: -46.20 um)
+  → Found improvement! New best HPWL: 143239.67 um (improvement: -97.42 um)
+  → Found improvement! New best HPWL: 143222.33 um (improvement: -41.20 um)
+  → Found improvement! New best HPWL: 143202.87 um (improvement: -35.36 um)
+  → Found improvement! New best HPWL: 143129.47 um (improvement: -73.40 um)
+  → Found improvement! New best HPWL: 143078.45 um (improvement: -77.40 um)
+  → Found improvement! New best HPWL: 143046.83 um (improvement: -35.58 um)
+  → Found improvement! New best HPWL: 142984.43 um (improvement: -62.40 um)
+  → Found improvement! New best HPWL: 142905.13 um (improvement: -79.30 um)
+  → Found improvement! New best HPWL: 142806.23 um (improvement: -98.90 um)
+  → Found improvement! New best HPWL: 142792.89 um (improvement: -13.34 um)
+  → Found improvement! New best HPWL: 142787.05 um (improvement: -5.84 um)
+  → Found improvement! New best HPWL: 142787.05 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 142686.01 um (improvement: -101.04 um)
+  → Found improvement! New best HPWL: 142682.95 um (improvement: -4.52 um)
+  → Found improvement! New best HPWL: 142664.75 um (improvement: -18.20 um)
+T=14.01 | W=100.4um | Current HPWL=142705.23 um | Best HPWL=142664.75 um | Accept Rate=69.0% | Improvements: 23/300 (7.7%) | Refine: 183208/193537 (94.7%) | Explore: 78781/82763 (95.2%)
+  → Found improvement! New best HPWL: 135637.75 um (improvement: -39.84 um)
+  → Found improvement! New best HPWL: 135618.71 um (improvement: -19.04 um)
+  → Found improvement! New best HPWL: 135614.16 um (improvement: -17.77 um)
+  → Found improvement! New best HPWL: 135578.82 um (improvement: -35.34 um)
+  → Found improvement! New best HPWL: 135555.74 um (improvement: -36.18 um)
+  → Found improvement! New best HPWL: 135553.14 um (improvement: -2.60 um)
+  → Found improvement! New best HPWL: 135507.74 um (improvement: -45.40 um)
+  → Found improvement! New best HPWL: 135491.82 um (improvement: -15.92 um)
+  → Found improvement! New best HPWL: 135427.58 um (improvement: -64.24 um)
+  → Found improvement! New best HPWL: 135424.46 um (improvement: -3.12 um)
+  → Found improvement! New best HPWL: 135424.46 um (improvement: -0.00 um)
+  → Found improvement! New best HPWL: 135402.84 um (improvement: -21.62 um)
+  → Found improvement! New best HPWL: 135367.08 um (improvement: -35.76 um)
+  → Found improvement! New best HPWL: 135353.02 um (improvement: -32.20 um)
+  → Found improvement! New best HPWL: 135341.92 um (improvement: -16.12 um)
+  → Found improvement! New best HPWL: 135340.24 um (improvement: -1.68 um)
+  → Found improvement! New best HPWL: 135332.14 um (improvement: -8.10 um)
+  → Found improvement! New best HPWL: 135278.60 um (improvement: -53.54 um)
+  → Found improvement! New best HPWL: 135244.94 um (improvement: -40.84 um)
+  → Found improvement! New best HPWL: 135242.28 um (improvement: -23.00 um)
+T=11.44 | W=100.4um | Current HPWL=135242.28 um | Best HPWL=135242.28 um | Accept Rate=59.0% | Improvements: 22/300 (7.3%) | Refine: 184713/195611 (94.4%) | Explore: 79191/83689 (94.6%)
+  → Found improvement! New best HPWL: 128817.54 um (improvement: -41.22 um)
+  → Found improvement! New best HPWL: 128797.66 um (improvement: -19.88 um)
+  → Found improvement! New best HPWL: 128765.02 um (improvement: -32.64 um)
+  → Found improvement! New best HPWL: 128736.26 um (improvement: -38.48 um)
+  → Found improvement! New best HPWL: 128673.30 um (improvement: -62.96 um)
+  → Found improvement! New best HPWL: 128661.56 um (improvement: -11.74 um)
+  → Found improvement! New best HPWL: 128656.12 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 128648.38 um (improvement: -7.74 um)
+  → Found improvement! New best HPWL: 128637.58 um (improvement: -16.32 um)
+  → Found improvement! New best HPWL: 128604.96 um (improvement: -32.62 um)
+  → Found improvement! New best HPWL: 128570.29 um (improvement: -34.67 um)
+  → Found improvement! New best HPWL: 128561.77 um (improvement: -8.52 um)
+  → Found improvement! New best HPWL: 128557.85 um (improvement: -3.92 um)
+  → Found improvement! New best HPWL: 128514.33 um (improvement: -43.52 um)
+  → Found improvement! New best HPWL: 128488.79 um (improvement: -25.54 um)
+  → Found improvement! New best HPWL: 128481.05 um (improvement: -7.74 um)
+  → Found improvement! New best HPWL: 128433.95 um (improvement: -52.54 um)
+  → Found improvement! New best HPWL: 128425.43 um (improvement: -8.52 um)
+T=9.35 | W=100.4um | Current HPWL=128425.43 um | Best HPWL=128425.43 um | Accept Rate=65.7% | Improvements: 23/300 (7.7%) | Refine: 186220/197684 (94.2%) | Explore: 79562/84616 (94.0%)
+  → Found improvement! New best HPWL: 123327.83 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 123294.15 um (improvement: -33.68 um)
+  → Found improvement! New best HPWL: 123287.87 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 123265.55 um (improvement: -22.58 um)
+  → Found improvement! New best HPWL: 123246.51 um (improvement: -19.04 um)
+  → Found improvement! New best HPWL: 123221.21 um (improvement: -25.30 um)
+  → Found improvement! New best HPWL: 123210.65 um (improvement: -11.02 um)
+  → Found improvement! New best HPWL: 123206.61 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 123201.57 um (improvement: -5.04 um)
+  → Found improvement! New best HPWL: 123171.61 um (improvement: -29.96 um)
+  → Found improvement! New best HPWL: 123113.73 um (improvement: -57.88 um)
+  → Found improvement! New best HPWL: 123075.65 um (improvement: -38.08 um)
+  → Found improvement! New best HPWL: 123054.49 um (improvement: -22.16 um)
+  → Found improvement! New best HPWL: 123026.35 um (improvement: -28.14 um)
+  → Found improvement! New best HPWL: 123024.99 um (improvement: -1.36 um)
+  → Found improvement! New best HPWL: 122992.37 um (improvement: -32.62 um)
+  → Found improvement! New best HPWL: 122943.41 um (improvement: -48.96 um)
+  → Found improvement! New best HPWL: 122929.85 um (improvement: -13.56 um)
+  → Found improvement! New best HPWL: 122917.51 um (improvement: -13.80 um)
+T=7.64 | W=100.4um | Current HPWL=122917.51 um | Best HPWL=122917.51 um | Accept Rate=64.7% | Improvements: 22/300 (7.3%) | Refine: 187709/199746 (94.0%) | Explore: 79941/85554 (93.4%)
+  → Found improvement! New best HPWL: 118855.16 um (improvement: -14.76 um)
+  → Found improvement! New best HPWL: 118844.28 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 118833.82 um (improvement: -10.46 um)
+  → Found improvement! New best HPWL: 118824.96 um (improvement: -8.86 um)
+  → Found improvement! New best HPWL: 118820.36 um (improvement: -13.80 um)
+  → Found improvement! New best HPWL: 118775.10 um (improvement: -45.26 um)
+  → Found improvement! New best HPWL: 118758.00 um (improvement: -17.10 um)
+  → Found improvement! New best HPWL: 118755.90 um (improvement: -2.10 um)
+  → Found improvement! New best HPWL: 118743.48 um (improvement: -12.42 um)
+  → Found improvement! New best HPWL: 118722.95 um (improvement: -20.53 um)
+  → Found improvement! New best HPWL: 118692.03 um (improvement: -30.92 um)
+  → Found improvement! New best HPWL: 118653.11 um (improvement: -38.92 um)
+  → Found improvement! New best HPWL: 118627.99 um (improvement: -25.12 um)
+  → Found improvement! New best HPWL: 118595.35 um (improvement: -32.64 um)
+  → Found improvement! New best HPWL: 118577.57 um (improvement: -17.78 um)
+  → Found improvement! New best HPWL: 118508.97 um (improvement: -68.60 um)
+  → Found improvement! New best HPWL: 118503.49 um (improvement: -5.48 um)
+  → Found improvement! New best HPWL: 118478.19 um (improvement: -25.30 um)
+  → Found improvement! New best HPWL: 118467.29 um (improvement: -27.20 um)
+  → Found improvement! New best HPWL: 118450.57 um (improvement: -16.72 um)
+  → Found improvement! New best HPWL: 118428.81 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 118417.93 um (improvement: -10.88 um)
+T=6.24 | W=100.4um | Current HPWL=118452.93 um | Best HPWL=118417.93 um | Accept Rate=62.7% | Improvements: 23/300 (7.7%) | Refine: 189240/201887 (93.7%) | Explore: 80239/86413 (92.9%)
+  → Found improvement! New best HPWL: 114379.28 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 114355.16 um (improvement: -32.64 um)
+  → Found improvement! New best HPWL: 114339.34 um (improvement: -15.82 um)
+  → Found improvement! New best HPWL: 114321.16 um (improvement: -18.18 um)
+  → Found improvement! New best HPWL: 114241.28 um (improvement: -79.88 um)
+  → Found improvement! New best HPWL: 114176.66 um (improvement: -66.88 um)
+  → Found improvement! New best HPWL: 114173.40 um (improvement: -3.26 um)
+  → Found improvement! New best HPWL: 114141.92 um (improvement: -31.48 um)
+  → Found improvement! New best HPWL: 114116.22 um (improvement: -28.00 um)
+  → Found improvement! New best HPWL: 114109.52 um (improvement: -6.70 um)
+  → Found improvement! New best HPWL: 114059.76 um (improvement: -49.76 um)
+  → Found improvement! New best HPWL: 114057.02 um (improvement: -2.74 um)
+  → Found improvement! New best HPWL: 114002.78 um (improvement: -54.24 um)
+  → Found improvement! New best HPWL: 113958.44 um (improvement: -44.34 um)
+T=5.10 | W=100.4um | Current HPWL=113958.44 um | Best HPWL=113958.44 um | Accept Rate=59.0% | Improvements: 15/300 (5.0%) | Refine: 190742/203961 (93.5%) | Explore: 80528/87339 (92.2%)
+  → Found improvement! New best HPWL: 110815.56 um (improvement: -1.90 um)
+  → Found improvement! New best HPWL: 110810.12 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 110810.12 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 110801.76 um (improvement: -10.66 um)
+  → Found improvement! New best HPWL: 110798.58 um (improvement: -3.18 um)
+  → Found improvement! New best HPWL: 110752.34 um (improvement: -46.24 um)
+  → Found improvement! New best HPWL: 110742.54 um (improvement: -9.80 um)
+  → Found improvement! New best HPWL: 110720.78 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 110607.90 um (improvement: -112.88 um)
+  → Found improvement! New best HPWL: 110602.90 um (improvement: -13.60 um)
+  → Found improvement! New best HPWL: 110602.80 um (improvement: -0.10 um)
+  → Found improvement! New best HPWL: 110600.50 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 110567.86 um (improvement: -32.64 um)
+T=4.17 | W=100.4um | Current HPWL=110567.86 um | Best HPWL=110567.86 um | Accept Rate=56.3% | Improvements: 13/300 (4.3%) | Refine: 192236/206075 (93.3%) | Explore: 80774/88225 (91.6%)
+  → Found improvement! New best HPWL: 107536.95 um (improvement: -46.20 um)
+  → Found improvement! New best HPWL: 107493.25 um (improvement: -43.70 um)
+  → Found improvement! New best HPWL: 107481.13 um (improvement: -19.04 um)
+  → Found improvement! New best HPWL: 107469.83 um (improvement: -11.30 um)
+  → Found improvement! New best HPWL: 107456.03 um (improvement: -13.80 um)
+  → Found improvement! New best HPWL: 107453.25 um (improvement: -2.78 um)
+  → Found improvement! New best HPWL: 107442.37 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 107409.73 um (improvement: -32.64 um)
+  → Found improvement! New best HPWL: 107395.93 um (improvement: -13.80 um)
+  → Found improvement! New best HPWL: 107360.63 um (improvement: -35.30 um)
+  → Found improvement! New best HPWL: 107360.21 um (improvement: -0.42 um)
+  → Found improvement! New best HPWL: 107341.21 um (improvement: -19.00 um)
+  → Found improvement! New best HPWL: 107322.59 um (improvement: -18.62 um)
+  → Found improvement! New best HPWL: 107289.95 um (improvement: -32.64 um)
+  → Found improvement! New best HPWL: 107276.71 um (improvement: -13.24 um)
+  → Found improvement! New best HPWL: 107256.01 um (improvement: -20.70 um)
+  → Found improvement! New best HPWL: 107182.63 um (improvement: -73.38 um)
+  → Found improvement! New best HPWL: 107171.59 um (improvement: -11.04 um)
+  → Found improvement! New best HPWL: 107145.67 um (improvement: -25.92 um)
+T=3.40 | W=100.4um | Current HPWL=107146.09 um | Best HPWL=107145.67 um | Accept Rate=62.0% | Improvements: 19/300 (6.3%) | Refine: 193765/208185 (93.1%) | Explore: 81027/89115 (90.9%)
+  → Found improvement! New best HPWL: 104405.40 um (improvement: -24.92 um)
+  → Found improvement! New best HPWL: 104399.96 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 104377.88 um (improvement: -22.08 um)
+  → Found improvement! New best HPWL: 104355.28 um (improvement: -22.60 um)
+  → Found improvement! New best HPWL: 104249.72 um (improvement: -105.56 um)
+  → Found improvement! New best HPWL: 104199.82 um (improvement: -50.90 um)
+  → Found improvement! New best HPWL: 104198.44 um (improvement: -1.38 um)
+  → Found improvement! New best HPWL: 104198.44 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 104191.36 um (improvement: -7.08 um)
+  → Found improvement! New best HPWL: 104180.48 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 104158.14 um (improvement: -22.34 um)
+T=2.78 | W=100.4um | Current HPWL=104158.14 um | Best HPWL=104158.14 um | Accept Rate=57.3% | Improvements: 12/300 (4.0%) | Refine: 195279/210266 (92.9%) | Explore: 81247/90034 (90.2%)
+  → Found improvement! New best HPWL: 101265.36 um (improvement: -79.32 um)
+  → Found improvement! New best HPWL: 101243.60 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 101183.36 um (improvement: -60.24 um)
+  → Found improvement! New best HPWL: 101173.10 um (improvement: -10.26 um)
+  → Found improvement! New best HPWL: 101093.78 um (improvement: -79.32 um)
+  → Found improvement! New best HPWL: 101086.88 um (improvement: -6.90 um)
+  → Found improvement! New best HPWL: 101048.80 um (improvement: -38.08 um)
+  → Found improvement! New best HPWL: 101040.22 um (improvement: -8.58 um)
+  → Found improvement! New best HPWL: 101037.70 um (improvement: -2.52 um)
+  → Found improvement! New best HPWL: 101035.86 um (improvement: -1.84 um)
+  → Found improvement! New best HPWL: 101031.16 um (improvement: -4.70 um)
+  → Found improvement! New best HPWL: 100994.80 um (improvement: -36.36 um)
+  → Found improvement! New best HPWL: 100985.82 um (improvement: -8.98 um)
+  → Found improvement! New best HPWL: 100985.82 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 100966.36 um (improvement: -19.46 um)
+  → Found improvement! New best HPWL: 100949.64 um (improvement: -16.72 um)
+  → Found improvement! New best HPWL: 100940.64 um (improvement: -9.00 um)
+  → Found improvement! New best HPWL: 100937.92 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 100921.46 um (improvement: -16.46 um)
+T=2.27 | W=100.4um | Current HPWL=100921.46 um | Best HPWL=100921.46 um | Accept Rate=58.7% | Improvements: 18/300 (6.0%) | Refine: 196814/212369 (92.7%) | Explore: 81458/90931 (89.6%)
+  → Found improvement! New best HPWL: 98508.65 um (improvement: -6.86 um)
+  → Found improvement! New best HPWL: 98435.93 um (improvement: -77.06 um)
+  → Found improvement! New best HPWL: 98410.85 um (improvement: -27.38 um)
+  → Found improvement! New best HPWL: 98372.77 um (improvement: -38.08 um)
+  → Found improvement! New best HPWL: 98370.05 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 98345.11 um (improvement: -24.94 um)
+  → Found improvement! New best HPWL: 98322.11 um (improvement: -23.00 um)
+  → Found improvement! New best HPWL: 98320.43 um (improvement: -1.68 um)
+  → Found improvement! New best HPWL: 98312.69 um (improvement: -7.74 um)
+  → Found improvement! New best HPWL: 98306.85 um (improvement: -5.84 um)
+  → Found improvement! New best HPWL: 98297.89 um (improvement: -8.96 um)
+T=1.86 | W=100.4um | Current HPWL=98297.89 um | Best HPWL=98297.89 um | Accept Rate=60.3% | Improvements: 11/300 (3.7%) | Refine: 198361/214478 (92.5%) | Explore: 81659/91822 (88.9%)
+  → Found improvement! New best HPWL: 95713.91 um (improvement: -53.34 um)
+  → Found improvement! New best HPWL: 95692.99 um (improvement: -20.92 um)
+  → Found improvement! New best HPWL: 95683.79 um (improvement: -9.20 um)
+  → Found improvement! New best HPWL: 95672.29 um (improvement: -11.50 um)
+  → Found improvement! New best HPWL: 95668.11 um (improvement: -11.08 um)
+  → Found improvement! New best HPWL: 95661.17 um (improvement: -6.94 um)
+  → Found improvement! New best HPWL: 95614.93 um (improvement: -46.24 um)
+  → Found improvement! New best HPWL: 95598.61 um (improvement: -16.32 um)
+  → Found improvement! New best HPWL: 95591.91 um (improvement: -6.70 um)
+  → Found improvement! New best HPWL: 95575.19 um (improvement: -16.72 um)
+  → Found improvement! New best HPWL: 95566.53 um (improvement: -8.66 um)
+  → Found improvement! New best HPWL: 95543.53 um (improvement: -23.00 um)
+T=1.52 | W=100.4um | Current HPWL=95543.53 um | Best HPWL=95543.53 um | Accept Rate=58.7% | Improvements: 12/300 (4.0%) | Refine: 199883/216581 (92.3%) | Explore: 81853/92719 (88.3%)
+  → Found improvement! New best HPWL: 92965.51 um (improvement: -19.88 um)
+  → Found improvement! New best HPWL: 92963.21 um (improvement: -2.30 um)
+  → Found improvement! New best HPWL: 92954.19 um (improvement: -9.02 um)
+  → Found improvement! New best HPWL: 92953.77 um (improvement: -0.42 um)
+  → Found improvement! New best HPWL: 92904.81 um (improvement: -48.96 um)
+  → Found improvement! New best HPWL: 92877.21 um (improvement: -27.60 um)
+  → Found improvement! New best HPWL: 92861.29 um (improvement: -15.92 um)
+  → Found improvement! New best HPWL: 92855.01 um (improvement: -6.28 um)
+  → Found improvement! New best HPWL: 92833.69 um (improvement: -21.32 um)
+  → Found improvement! New best HPWL: 92790.17 um (improvement: -43.52 um)
+  → Found improvement! New best HPWL: 92773.85 um (improvement: -16.32 um)
+  → Found improvement! New best HPWL: 92769.67 um (improvement: -4.18 um)
+  → Found improvement! New best HPWL: 92750.29 um (improvement: -19.38 um)
+  → Found improvement! New best HPWL: 92715.79 um (improvement: -34.50 um)
+  → Found improvement! New best HPWL: 92685.83 um (improvement: -29.96 um)
+T=1.24 | W=100.4um | Current HPWL=92685.83 um | Best HPWL=92685.83 um | Accept Rate=56.3% | Improvements: 16/300 (5.3%) | Refine: 201394/218656 (92.1%) | Explore: 82070/93644 (87.6%)
+  → Found improvement! New best HPWL: 90315.30 um (improvement: -10.12 um)
+  → Found improvement! New best HPWL: 90310.70 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 90286.24 um (improvement: -24.46 um)
+  → Found improvement! New best HPWL: 90266.78 um (improvement: -19.46 um)
+  → Found improvement! New best HPWL: 90254.90 um (improvement: -11.88 um)
+  → Found improvement! New best HPWL: 90232.34 um (improvement: -22.56 um)
+T=1.01 | W=100.4um | Current HPWL=90232.34 um | Best HPWL=90232.34 um | Accept Rate=57.7% | Improvements: 6/300 (2.0%) | Refine: 202916/220755 (91.9%) | Explore: 82247/94545 (87.0%)
+  → Found improvement! New best HPWL: 88790.33 um (improvement: -38.86 um)
+  → Found improvement! New best HPWL: 88789.29 um (improvement: -1.04 um)
+  → Found improvement! New best HPWL: 88785.61 um (improvement: -3.68 um)
+  → Found improvement! New best HPWL: 88761.69 um (improvement: -23.92 um)
+  → Found improvement! New best HPWL: 88751.87 um (improvement: -9.82 um)
+  → Found improvement! New best HPWL: 88751.23 um (improvement: -2.30 um)
+  → Found improvement! New best HPWL: 88744.79 um (improvement: -6.44 um)
+  → Found improvement! New best HPWL: 88739.35 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 88730.15 um (improvement: -9.20 um)
+  → Found improvement! New best HPWL: 88727.85 um (improvement: -2.30 um)
+  → Found improvement! New best HPWL: 88726.93 um (improvement: -0.92 um)
+  → Found improvement! New best HPWL: 88570.29 um (improvement: -156.64 um)
+  → Found improvement! New best HPWL: 88566.53 um (improvement: -3.76 um)
+T=0.83 | W=100.4um | Current HPWL=88566.53 um | Best HPWL=88566.53 um | Accept Rate=58.0% | Improvements: 13/300 (4.3%) | Refine: 204453/222888 (91.7%) | Explore: 82398/95412 (86.4%)
+  → Found improvement! New best HPWL: 87124.97 um (improvement: -13.50 um)
+  → Found improvement! New best HPWL: 87124.51 um (improvement: -0.46 um)
+  → Found improvement! New best HPWL: 87110.95 um (improvement: -13.56 um)
+  → Found improvement! New best HPWL: 87096.93 um (improvement: -14.02 um)
+  → Found improvement! New best HPWL: 87095.07 um (improvement: -1.86 um)
+  → Found improvement! New best HPWL: 87090.47 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 87046.31 um (improvement: -44.16 um)
+  → Found improvement! New best HPWL: 87022.87 um (improvement: -23.44 um)
+  → Found improvement! New best HPWL: 87012.39 um (improvement: -10.48 um)
+  → Found improvement! New best HPWL: 86987.07 um (improvement: -25.32 um)
+  → Found improvement! New best HPWL: 86985.23 um (improvement: -1.84 um)
+T=0.68 | W=100.4um | Current HPWL=86985.23 um | Best HPWL=86985.23 um | Accept Rate=58.0% | Improvements: 11/300 (3.7%) | Refine: 205996/225014 (91.5%) | Explore: 82546/96286 (85.7%)
+  → Found improvement! New best HPWL: 85286.37 um (improvement: -115.66 um)
+  → Found improvement! New best HPWL: 85248.29 um (improvement: -38.08 um)
+  → Found improvement! New best HPWL: 85245.99 um (improvement: -2.30 um)
+  → Found improvement! New best HPWL: 85227.01 um (improvement: -18.98 um)
+  → Found improvement! New best HPWL: 85222.41 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 85217.39 um (improvement: -5.02 um)
+  → Found improvement! New best HPWL: 85201.49 um (improvement: -15.90 um)
+T=0.55 | W=100.4um | Current HPWL=85201.49 um | Best HPWL=85201.49 um | Accept Rate=55.7% | Improvements: 7/300 (2.3%) | Refine: 207511/227158 (91.4%) | Explore: 82707/97142 (85.1%)
+  → Found improvement! New best HPWL: 83134.91 um (improvement: -29.96 um)
+  → Found improvement! New best HPWL: 83126.33 um (improvement: -8.58 um)
+  → Found improvement! New best HPWL: 83118.63 um (improvement: -7.70 um)
+  → Found improvement! New best HPWL: 83118.61 um (improvement: -0.02 um)
+  → Found improvement! New best HPWL: 83117.77 um (improvement: -0.84 um)
+T=0.45 | W=100.4um | Current HPWL=83117.77 um | Best HPWL=83117.77 um | Accept Rate=48.3% | Improvements: 5/300 (1.7%) | Refine: 208959/229208 (91.2%) | Explore: 82870/98092 (84.5%)
+  → Found improvement! New best HPWL: 82081.97 um (improvement: -11.66 um)
+  → Found improvement! New best HPWL: 82077.13 um (improvement: -4.84 um)
+  → Found improvement! New best HPWL: 82064.37 um (improvement: -12.76 um)
+  → Found improvement! New best HPWL: 82041.79 um (improvement: -22.58 um)
+  → Found improvement! New best HPWL: 82032.77 um (improvement: -9.02 um)
+  → Found improvement! New best HPWL: 82031.95 um (improvement: -0.82 um)
+T=0.37 | W=100.4um | Current HPWL=82031.95 um | Best HPWL=82031.95 um | Accept Rate=49.0% | Improvements: 6/300 (2.0%) | Refine: 210421/231285 (91.0%) | Explore: 82995/99015 (83.8%)
+  → Found improvement! New best HPWL: 81235.73 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 81235.73 um (improvement: -0.00 um)
+  → Found improvement! New best HPWL: 81213.97 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 81202.27 um (improvement: -11.70 um)
+  → Found improvement! New best HPWL: 81192.49 um (improvement: -9.78 um)
+  → Found improvement! New best HPWL: 81187.07 um (improvement: -5.42 um)
+  → Found improvement! New best HPWL: 81173.81 um (improvement: -13.26 um)
+T=0.30 | W=100.4um | Current HPWL=81173.81 um | Best HPWL=81173.81 um | Accept Rate=54.0% | Improvements: 7/300 (2.3%) | Refine: 211955/233390 (90.8%) | Explore: 83107/99910 (83.2%)
+  → Found improvement! New best HPWL: 80105.47 um (improvement: -8.20 um)
+  → Found improvement! New best HPWL: 80079.67 um (improvement: -25.80 um)
+  → Found improvement! New best HPWL: 80074.23 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 80060.43 um (improvement: -13.80 um)
+  → Found improvement! New best HPWL: 80052.27 um (improvement: -8.16 um)
+  → Found improvement! New best HPWL: 80027.35 um (improvement: -24.92 um)
+  → Found improvement! New best HPWL: 80021.03 um (improvement: -6.32 um)
+T=0.25 | W=100.4um | Current HPWL=80021.03 um | Best HPWL=80021.03 um | Accept Rate=52.0% | Improvements: 7/300 (2.3%) | Refine: 213475/235492 (90.7%) | Explore: 83247/100808 (82.6%)
+  → Found improvement! New best HPWL: 79409.43 um (improvement: -2.30 um)
+  → Found improvement! New best HPWL: 79388.51 um (improvement: -20.92 um)
+  → Found improvement! New best HPWL: 79380.55 um (improvement: -7.96 um)
+  → Found improvement! New best HPWL: 79334.65 um (improvement: -45.90 um)
+  → Found improvement! New best HPWL: 79330.05 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 79325.43 um (improvement: -4.62 um)
+  → Found improvement! New best HPWL: 79302.85 um (improvement: -22.58 um)
+  → Found improvement! New best HPWL: 79293.65 um (improvement: -9.20 um)
+  → Found improvement! New best HPWL: 79288.21 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 79222.13 um (improvement: -66.08 um)
+  → Found improvement! New best HPWL: 79217.95 um (improvement: -4.18 um)
+T=0.20 | W=100.4um | Current HPWL=79217.95 um | Best HPWL=79217.95 um | Accept Rate=56.7% | Improvements: 11/300 (3.7%) | Refine: 215026/237617 (90.5%) | Explore: 83380/101683 (82.0%)
+  → Found improvement! New best HPWL: 78651.86 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 78640.98 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 78627.90 um (improvement: -13.08 um)
+T=0.16 | W=100.4um | Current HPWL=78627.90 um | Best HPWL=78627.90 um | Accept Rate=55.7% | Improvements: 3/300 (1.0%) | Refine: 216581/239771 (90.3%) | Explore: 83482/102529 (81.4%)
+  → Found improvement! New best HPWL: 77378.50 um (improvement: -6.44 um)
+  → Found improvement! New best HPWL: 77373.90 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 77335.58 um (improvement: -38.32 um)
+  → Found improvement! New best HPWL: 77324.70 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 77317.80 um (improvement: -6.90 um)
+  → Found improvement! New best HPWL: 77290.82 um (improvement: -26.98 um)
+  → Found improvement! New best HPWL: 77270.82 um (improvement: -20.00 um)
+T=0.13 | W=100.4um | Current HPWL=77270.82 um | Best HPWL=77270.82 um | Accept Rate=56.7% | Improvements: 8/300 (2.7%) | Refine: 218091/241877 (90.2%) | Explore: 83632/103423 (80.9%)
+  → Found improvement! New best HPWL: 76272.08 um (improvement: -17.86 um)
+  → Found improvement! New best HPWL: 76251.90 um (improvement: -20.18 um)
+  → Found improvement! New best HPWL: 76235.98 um (improvement: -15.92 um)
+  → Found improvement! New best HPWL: 76227.40 um (improvement: -8.58 um)
+  → Found improvement! New best HPWL: 76221.96 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 76190.90 um (improvement: -31.06 um)
+  → Found improvement! New best HPWL: 76182.80 um (improvement: -8.10 um)
+  → Found improvement! New best HPWL: 76146.58 um (improvement: -36.22 um)
+  → Found improvement! New best HPWL: 76140.74 um (improvement: -5.84 um)
+  → Found improvement! New best HPWL: 76136.14 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 76130.30 um (improvement: -5.84 um)
+T=0.11 | W=100.4um | Current HPWL=76130.30 um | Best HPWL=76130.30 um | Accept Rate=54.0% | Improvements: 11/300 (3.7%) | Refine: 219578/243944 (90.0%) | Explore: 83766/104356 (80.3%)
+  → Found improvement! New best HPWL: 75198.66 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 75193.22 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 75179.96 um (improvement: -13.26 um)
+  → Found improvement! New best HPWL: 75177.66 um (improvement: -2.30 um)
+T=0.09 | W=100.4um | Current HPWL=75177.66 um | Best HPWL=75177.66 um | Accept Rate=54.3% | Improvements: 4/300 (1.3%) | Refine: 221056/246026 (89.9%) | Explore: 83883/105274 (79.7%)
+  → Found improvement! New best HPWL: 74397.53 um (improvement: -32.62 um)
+  → Found improvement! New best HPWL: 74395.23 um (improvement: -2.30 um)
+  → Found improvement! New best HPWL: 74393.77 um (improvement: -1.46 um)
+  → Found improvement! New best HPWL: 74382.89 um (improvement: -10.88 um)
+  → Found improvement! New best HPWL: 74371.39 um (improvement: -11.50 um)
+T=0.07 | W=100.4um | Current HPWL=74371.39 um | Best HPWL=74371.39 um | Accept Rate=54.0% | Improvements: 5/300 (1.7%) | Refine: 222505/248096 (89.7%) | Explore: 83993/106204 (79.1%)
+  → Found improvement! New best HPWL: 73758.46 um (improvement: -0.46 um)
+  → Found improvement! New best HPWL: 73754.90 um (improvement: -3.56 um)
+  → Found improvement! New best HPWL: 73729.98 um (improvement: -24.92 um)
+  → Found improvement! New best HPWL: 73728.30 um (improvement: -1.68 um)
+  → Found improvement! New best HPWL: 73706.54 um (improvement: -21.76 um)
+  → Found improvement! New best HPWL: 73701.94 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 73701.94 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 73693.74 um (improvement: -8.20 um)
+T=0.06 | W=100.4um | Current HPWL=73693.74 um | Best HPWL=73693.74 um | Accept Rate=51.0% | Improvements: 7/300 (2.3%) | Refine: 223987/250192 (89.5%) | Explore: 84101/107108 (78.5%)
+  → Found improvement! New best HPWL: 72970.94 um (improvement: -24.90 um)
+  → Found improvement! New best HPWL: 72966.34 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 72957.72 um (improvement: -8.62 um)
+  → Found improvement! New best HPWL: 72934.72 um (improvement: -23.00 um)
+  → Found improvement! New best HPWL: 72932.00 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 72902.08 um (improvement: -29.92 um)
+  → Found improvement! New best HPWL: 72897.48 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 72894.76 um (improvement: -2.72 um)
+  → Found improvement! New best HPWL: 72886.82 um (improvement: -7.94 um)
+  → Found improvement! New best HPWL: 72861.18 um (improvement: -25.64 um)
+T=0.05 | W=100.4um | Current HPWL=72861.18 um | Best HPWL=72861.18 um | Accept Rate=54.3% | Improvements: 10/300 (3.3%) | Refine: 225496/252305 (89.4%) | Explore: 84209/107995 (78.0%)
+  → Found improvement! New best HPWL: 72359.82 um (improvement: -9.20 um)
+  → Found improvement! New best HPWL: 72348.32 um (improvement: -11.50 um)
+  → Found improvement! New best HPWL: 72339.28 um (improvement: -9.04 um)
+  → Found improvement! New best HPWL: 72333.84 um (improvement: -5.44 um)
+T=0.04 | W=100.4um | Current HPWL=72333.84 um | Best HPWL=72333.84 um | Accept Rate=50.0% | Improvements: 4/300 (1.3%) | Refine: 226966/254390 (89.2%) | Explore: 84311/108910 (77.4%)
+  → Found improvement! New best HPWL: 71899.62 um (improvement: -9.64 um)
+  → Found improvement! New best HPWL: 71891.46 um (improvement: -8.16 um)
+  → Found improvement! New best HPWL: 71874.66 um (improvement: -16.80 um)
+T=0.03 | W=100.4um | Current HPWL=71874.66 um | Best HPWL=71874.66 um | Accept Rate=51.7% | Improvements: 3/300 (1.0%) | Refine: 228499/256523 (89.1%) | Explore: 84389/109777 (76.9%)
+  → Found improvement! New best HPWL: 71399.16 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 71394.56 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 71367.34 um (improvement: -27.22 um)
+  → Found improvement! New best HPWL: 71361.90 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 71329.46 um (improvement: -32.44 um)
+  → Found improvement! New best HPWL: 71324.02 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 71317.06 um (improvement: -6.96 um)
+  → Found improvement! New best HPWL: 71308.86 um (improvement: -8.20 um)
+  → Found improvement! New best HPWL: 71308.40 um (improvement: -0.46 um)
+T=0.03 | W=100.4um | Current HPWL=71308.40 um | Best HPWL=71308.40 um | Accept Rate=57.3% | Improvements: 9/300 (3.0%) | Refine: 230015/258638 (88.9%) | Explore: 84495/110662 (76.4%)
+  → Found improvement! New best HPWL: 70889.48 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 70889.48 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 70853.92 um (improvement: -35.56 um)
+  → Found improvement! New best HPWL: 70853.08 um (improvement: -0.84 um)
+  → Found improvement! New best HPWL: 70847.64 um (improvement: -5.44 um)
+  → Found improvement! New best HPWL: 70839.02 um (improvement: -8.62 um)
+  → Found improvement! New best HPWL: 70839.02 um (improvement: 0.00 um)
+T=0.02 | W=100.4um | Current HPWL=70839.02 um | Best HPWL=70839.02 um | Accept Rate=53.7% | Improvements: 6/300 (2.0%) | Refine: 231537/260746 (88.8%) | Explore: 84603/111554 (75.8%)
+T=0.02 | W=100.4um | Current HPWL=70675.34 um | Best HPWL=70675.34 um | Accept Rate=56.7% | Improvements: 5/300 (1.7%) | Refine: 232285/261802 (88.7%) | Explore: 84656/111998 (75.6%)
+T=0.02 | W=100.4um | Current HPWL=70650.64 um | Best HPWL=70650.64 um | Accept Rate=55.0% | Improvements: 4/300 (1.3%) | Refine: 232442/262028 (88.7%) | Explore: 84664/112072 (75.5%)
+T=0.02 | W=100.4um | Current HPWL=70612.82 um | Best HPWL=70612.82 um | Accept Rate=51.0% | Improvements: 3/300 (1.0%) | Refine: 232582/262222 (88.7%) | Explore: 84677/112178 (75.5%)
+T=0.02 | W=100.4um | Current HPWL=70579.08 um | Best HPWL=70579.08 um | Accept Rate=57.7% | Improvements: 3/300 (1.0%) | Refine: 232743/262433 (88.7%) | Explore: 84689/112267 (75.4%)
+T=0.02 | W=100.4um | Current HPWL=70562.56 um | Best HPWL=70562.56 um | Accept Rate=55.7% | Improvements: 2/300 (0.7%) | Refine: 232901/262643 (88.7%) | Explore: 84698/112357 (75.4%)
+  → Found improvement! New best HPWL: 70554.82 um (improvement: -7.74 um)
+  → Found improvement! New best HPWL: 70534.14 um (improvement: -20.68 um)
+  → Found improvement! New best HPWL: 70530.30 um (improvement: -3.84 um)
+  → Found improvement! New best HPWL: 70524.24 um (improvement: -6.06 um)
+  → Found improvement! New best HPWL: 70519.64 um (improvement: -4.60 um)
+  → Found improvement! New best HPWL: 70510.82 um (improvement: -8.82 um)
+T=0.02 | W=100.4um | Current HPWL=70510.82 um | Best HPWL=70510.82 um | Accept Rate=53.3% | Improvements: 6/300 (2.0%) | Refine: 233052/262846 (88.7%) | Explore: 84707/112454 (75.3%)
+T=0.02 | W=100.4um | Current HPWL=70484.26 um | Best HPWL=70484.26 um | Accept Rate=53.3% | Improvements: 4/300 (1.3%) | Refine: 233204/263054 (88.7%) | Explore: 84715/112546 (75.3%)
+T=0.02 | W=100.4um | Current HPWL=70464.40 um | Best HPWL=70464.40 um | Accept Rate=52.7% | Improvements: 3/300 (1.0%) | Refine: 233356/263260 (88.6%) | Explore: 84721/112640 (75.2%)
+T=0.02 | W=100.4um | Current HPWL=70398.20 um | Best HPWL=70398.20 um | Accept Rate=54.3% | Improvements: 5/300 (1.7%) | Refine: 233510/263476 (88.6%) | Explore: 84730/112724 (75.2%)
+T=0.02 | W=100.4um | Current HPWL=70385.66 um | Best HPWL=70385.66 um | Accept Rate=50.3% | Improvements: 1/300 (0.3%) | Refine: 233657/263676 (88.6%) | Explore: 84734/112824 (75.1%)
+T=0.02 | W=100.4um | Current HPWL=70385.66 um | Best HPWL=70385.66 um | Accept Rate=57.3% | Improvements: 0/300 (0.0%) | Refine: 233826/263902 (88.6%) | Explore: 84737/112898 (75.1%)
+T=0.02 | W=100.4um | Current HPWL=70297.94 um | Best HPWL=70297.94 um | Accept Rate=52.7% | Improvements: 6/300 (2.0%) | Refine: 233974/264106 (88.6%) | Explore: 84747/112994 (75.0%)
+T=0.02 | W=100.4um | Current HPWL=70263.18 um | Best HPWL=70263.18 um | Accept Rate=50.7% | Improvements: 3/300 (1.0%) | Refine: 234120/264317 (88.6%) | Explore: 84753/113083 (74.9%)
+T=0.02 | W=100.4um | Current HPWL=70253.52 um | Best HPWL=70253.52 um | Accept Rate=48.0% | Improvements: 1/300 (0.3%) | Refine: 234256/264516 (88.6%) | Explore: 84761/113184 (74.9%)
+T=0.01 | W=100.4um | Current HPWL=70150.24 um | Best HPWL=70150.24 um | Accept Rate=54.7% | Improvements: 6/300 (2.0%) | Refine: 234413/264723 (88.6%) | Explore: 84768/113277 (74.8%)
+  → Found improvement! New best HPWL: 70150.24 um (improvement: 0.00 um)
+  → Found improvement! New best HPWL: 70147.10 um (improvement: -3.14 um)
+  → Found improvement! New best HPWL: 70138.58 um (improvement: -8.52 um)
+  → Found improvement! New best HPWL: 70133.98 um (improvement: -4.60 um)
+T=0.01 | W=100.4um | Current HPWL=70133.98 um | Best HPWL=70133.98 um | Accept Rate=55.0% | Improvements: 3/300 (1.0%) | Refine: 234567/264934 (88.5%) | Explore: 84779/113366 (74.8%)
+T=0.01 | W=100.4um | Current HPWL=70090.44 um | Best HPWL=70090.44 um | Accept Rate=53.7% | Improvements: 6/300 (2.0%) | Refine: 234719/265140 (88.5%) | Explore: 84788/113460 (74.7%)
+T=0.01 | W=100.4um | Current HPWL=70052.04 um | Best HPWL=70052.04 um | Accept Rate=50.0% | Improvements: 2/300 (0.7%) | Refine: 234863/265348 (88.5%) | Explore: 84794/113552 (74.7%)
+T=0.01 | W=100.4um | Current HPWL=69979.78 um | Best HPWL=69979.78 um | Accept Rate=51.3% | Improvements: 5/300 (1.7%) | Refine: 235008/265554 (88.5%) | Explore: 84803/113646 (74.6%)
+T=0.01 | W=100.4um | Current HPWL=69941.70 um | Best HPWL=69941.70 um | Accept Rate=56.3% | Improvements: 4/300 (1.3%) | Refine: 235165/265769 (88.5%) | Explore: 84815/113731 (74.6%)
+T=0.01 | W=100.4um | Current HPWL=69883.80 um | Best HPWL=69883.80 um | Accept Rate=52.3% | Improvements: 6/300 (2.0%) | Refine: 235316/265990 (88.5%) | Explore: 84821/113810 (74.5%)
+T=0.01 | W=100.4um | Current HPWL=69858.40 um | Best HPWL=69858.40 um | Accept Rate=49.0% | Improvements: 4/300 (1.3%) | Refine: 235452/266191 (88.5%) | Explore: 84832/113909 (74.5%)
+T=0.01 | W=100.4um | Current HPWL=69857.94 um | Best HPWL=69857.94 um | Accept Rate=52.3% | Improvements: 1/300 (0.3%) | Refine: 235599/266401 (88.4%) | Explore: 84842/113999 (74.4%)
+T=0.01 | W=100.4um | Current HPWL=69834.36 um | Best HPWL=69834.36 um | Accept Rate=47.0% | Improvements: 2/300 (0.7%) | Refine: 235734/266602 (88.4%) | Explore: 84848/114098 (74.4%)
+T=0.01 | W=100.4um | Current HPWL=69796.60 um | Best HPWL=69796.60 um | Accept Rate=52.3% | Improvements: 4/300 (1.3%) | Refine: 235878/266808 (88.4%) | Explore: 84861/114192 (74.3%)
+  → Found improvement! New best HPWL: 69770.80 um (improvement: -25.80 um)
+  → Found improvement! New best HPWL: 69743.20 um (improvement: -27.60 um)
+T=0.01 | W=100.4um | Current HPWL=69743.20 um | Best HPWL=69743.20 um | Accept Rate=56.7% | Improvements: 2/300 (0.7%) | Refine: 236042/267040 (88.4%) | Explore: 84867/114260 (74.3%)
+T=0.01 | W=100.4um | Current HPWL=69694.66 um | Best HPWL=69694.66 um | Accept Rate=51.0% | Improvements: 2/300 (0.7%) | Refine: 236185/267243 (88.4%) | Explore: 84877/114357 (74.2%)
+T=0.01 | W=100.4um | Current HPWL=69613.66 um | Best HPWL=69613.66 um | Accept Rate=56.3% | Improvements: 5/300 (1.7%) | Refine: 236344/267457 (88.4%) | Explore: 84887/114443 (74.2%)
+T=0.01 | W=100.4um | Current HPWL=69569.58 um | Best HPWL=69569.58 um | Accept Rate=52.7% | Improvements: 3/300 (1.0%) | Refine: 236495/267674 (88.4%) | Explore: 84894/114526 (74.1%)
+T=0.01 | W=100.4um | Current HPWL=69514.48 um | Best HPWL=69514.48 um | Accept Rate=54.0% | Improvements: 6/300 (2.0%) | Refine: 236646/267875 (88.3%) | Explore: 84905/114625 (74.1%)
+T=0.01 | W=100.4um | Current HPWL=69371.92 um | Best HPWL=69371.92 um | Accept Rate=52.0% | Improvements: 13/300 (4.3%) | Refine: 236788/268076 (88.3%) | Explore: 84919/114724 (74.0%)
+T=0.01 | W=100.4um | Current HPWL=69327.96 um | Best HPWL=69327.96 um | Accept Rate=52.7% | Improvements: 4/300 (1.3%) | Refine: 236937/268289 (88.3%) | Explore: 84928/114811 (74.0%)
+T=0.01 | W=100.4um | Current HPWL=69231.18 um | Best HPWL=69231.18 um | Accept Rate=55.3% | Improvements: 6/300 (2.0%) | Refine: 237093/268497 (88.3%) | Explore: 84938/114903 (73.9%)
+T=0.01 | W=100.4um | Current HPWL=69163.76 um | Best HPWL=69163.76 um | Accept Rate=56.7% | Improvements: 7/300 (2.3%) | Refine: 237255/268716 (88.3%) | Explore: 84946/114984 (73.9%)
+
+============================================================
+SA Optimization Complete
+============================================================
+Initial HPWL: 165310.70 um
+Final Total HPWL: 69163.76 um
+Improvement: 96146.94 um (58.16%)
+Total Iterations: 1279
+============================================================
+
+
+Placement map written to: build/arith/sa_alpha0.98_moves300_Tfinal0.01/arith.map
+Total instances: 463
+
+Placement saved to build/arith/sa_alpha0.98_moves300_Tfinal0.01/arith_placement.json
+
+============================================================
+Placement Summary
+============================================================
+Final Total HPWL: 69163.76 um
+Total Instances: 463
+============================================================
+
+Placement completed successfully!
+Map file: build/arith/sa_alpha0.98_moves300_Tfinal0.01/arith.map
+JSON file: build/arith/sa_alpha0.98_moves300_Tfinal0.01/arith_placement.json
+
+================================================================================
+# End time: 2025-11-23T05:48:48.848822
+# Return code: 0

@@ -1,0 +1,140 @@
+{
+  "start_time": "2025-11-23T05:40:02.127210",
+  "designs": {
+    "arith": {
+      "greedy": {
+        "success": true,
+        "runtime": 218.77503156661987,
+        "output_dir": "build/arith/greedy",
+        "hpwl": 165616.42
+      },
+      "sa_a0.95_m100_T0.1": {
+        "success": true,
+        "runtime": 231.1717381477356,
+        "output_dir": "build/arith/sa_alpha0.95_moves100_Tfinal0.1",
+        "hpwl": 166278.62
+      },
+      "sa_a0.98_m300_T0.01": {
+        "success": true,
+        "runtime": 526.7054798603058,
+        "output_dir": "build/arith/sa_alpha0.98_moves300_Tfinal0.01",
+        "hpwl": 69163.76
+      },
+      "sa_a0.97_m200_T0.01": {
+        "success": true,
+        "runtime": 352.0594320297241,
+        "output_dir": "build/arith/sa_alpha0.97_moves200_Tfinal0.01",
+        "hpwl": 100053.88
+      },
+      "sa_a0.99_m500_T0.001": {
+        "success": true,
+        "runtime": 1036.9458236694336,
+        "output_dir": "build/arith/sa_alpha0.99_moves500_Tfinal0.001",
+        "hpwl": 50216.99
+      },
+      "sa_a0.9_m200_T0.1": {
+        "success": true,
+        "runtime": 228.1623101234436,
+        "output_dir": "build/arith/sa_alpha0.9_moves200_Tfinal0.1",
+        "hpwl": 165793.68
+      },
+      "sa_a0.85_m100_T0.1": {
+        "success": true,
+        "runtime": 225.00713467597961,
+        "output_dir": "build/arith/sa_alpha0.85_moves100_Tfinal0.1",
+        "hpwl": 165212.48
+      },
+      "sa_a0.8_m50_T0.1": {
+        "success": true,
+        "runtime": 258.7298753261566,
+        "output_dir": "build/arith/sa_alpha0.8_moves50_Tfinal0.1",
+        "hpwl": 166476.7
+      },
+      "sa_a0.8_m50_T0.01": {
+        "success": true,
+        "runtime": 267.9223258495331,
+        "output_dir": "build/arith/sa_alpha0.8_moves50_Tfinal0.01",
+        "hpwl": 165448.2
+      },
+      "sa_a0.8_m50_T0.001": {
+        "success": true,
+        "runtime": 173.08553075790405,
+        "output_dir": "build/arith/sa_alpha0.8_moves50_Tfinal0.001",
+        "hpwl": 166350.04
+      },
+      "sa_a0.8_m100_T0.1": {
+        "success": true,
+        "runtime": 226.48265075683594,
+        "output_dir": "build/arith/sa_alpha0.8_moves100_Tfinal0.1",
+        "hpwl": 166172.54
+      },
+      "sa_a0.8_m100_T0.01": {
+        "success": true,
+        "runtime": 255.52861189842224,
+        "output_dir": "build/arith/sa_alpha0.8_moves100_Tfinal0.01",
+        "hpwl": 165659.52
+      },
+      "sa_a0.8_m100_T0.001": {
+        "success": true,
+        "runtime": 199.38561248779297,
+        "output_dir": "build/arith/sa_alpha0.8_moves100_Tfinal0.001",
+        "hpwl": 166236.56
+      },
+      "sa_a0.8_m200_T0.1": {
+        "success": true,
+        "runtime": 211.50795221328735,
+        "output_dir": "build/arith/sa_alpha0.8_moves200_Tfinal0.1",
+        "hpwl": 165887.82
+      },
+      "sa_a0.8_m200_T0.01": {
+        "success": true,
+        "runtime": 241.8036344051361,
+        "output_dir": "build/arith/sa_alpha0.8_moves200_Tfinal0.01",
+        "hpwl": 166845.6
+      },
+      "sa_a0.8_m200_T0.001": {
+        "success": true,
+        "runtime": 276.7445435523987,
+        "output_dir": "build/arith/sa_alpha0.8_moves200_Tfinal0.001",
+        "hpwl": 167199.0
+      },
+      "sa_a0.8_m500_T0.1": {
+        "success": true,
+        "runtime": 312.6969485282898,
+        "output_dir": "build/arith/sa_alpha0.8_moves500_Tfinal0.1",
+        "hpwl": 167188.1
+      },
+      "sa_a0.8_m500_T0.01": {
+        "success": true,
+        "runtime": 344.85493874549866,
+        "output_dir": "build/arith/sa_alpha0.8_moves500_Tfinal0.01",
+        "hpwl": 155338.06
+      },
+      "sa_a0.8_m500_T0.001": {
+        "success": true,
+        "runtime": 330.9449374675751,
+        "output_dir": "build/arith/sa_alpha0.8_moves500_Tfinal0.001",
+        "hpwl": 145163.65
+      },
+      "sa_a0.85_m50_T0.1": {
+        "success": true,
+        "runtime": 280.8236894607544,
+        "output_dir": "build/arith/sa_alpha0.85_moves50_Tfinal0.1",
+        "hpwl": 168236.48
+      },
+      "sa_a0.85_m50_T0.01": {
+        "success": true,
+        "runtime": 160.7759873867035,
+        "output_dir": "build/arith/sa_alpha0.85_moves50_Tfinal0.01",
+        "hpwl": 168453.42
+      }
+    }
+  },
+  "summary": {
+    "total_runs": 21,
+    "successful": 21,
+    "failed": 0,
+    "total_runtime": 6360.114188909531
+  },
+  "end_time": "2025-11-23T05:57:19.093724"
+}

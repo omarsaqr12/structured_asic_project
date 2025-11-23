@@ -23,15 +23,7 @@ from parse_fabric import parse_fabric_cells, parse_pins
 from parse_design import parse_design
 from tqdm import tqdm
 
-try:
-    from scipy.spatial import KDTree
-    HAS_SCIPY = True
-except ImportError:
-    HAS_SCIPY = False
-    print("Warning: scipy not available. Falling back to linear search for slots.")
-    
-    
-HAS_SCIPY = False
+# Using linear search for slot finding (no KD-tree dependency)
 
 
 # ============================================================================
@@ -154,6 +146,229 @@ def calculate_total_hpwl(placement: Dict[str, Dict[str, Any]],
 
 
 # ============================================================================
+# Incremental HPWL Calculation (Performance Optimization)
+# ============================================================================
+
+def calculate_net_hpwl(net_id: int,
+                       placement: Dict[str, Dict[str, Any]],
+                       nets_dict: Dict[int, List[str]],
+                       fabric_db: Dict[str, List[Dict[str, Any]]],
+                       pins_db: Optional[Dict[str, Any]] = None,
+                       port_to_nets: Optional[Dict[str, List[int]]] = None,
+                       slot_lookup: Optional[Dict[str, Dict[str, Any]]] = None) -> float:
+    """
+    Calculate HPWL for a single net.
+    
+    This is optimized for incremental updates - only calculates one net at a time.
+    
+    Args:
+        net_id: Net ID to calculate HPWL for
+        placement: Dict mapping logical_instance_name -> {fabric_slot_name, x, y, orient}
+        nets_dict: Dict mapping net_id -> list of cell instances
+        fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+        pins_db: Optional pins database for I/O pin positions
+        port_to_nets: Optional port-to-net mapping for I/O nets
+        slot_lookup: Optional pre-built slot lookup dict (for performance)
+    
+    Returns:
+        HPWL for this net in microns (float)
+    """
+    # Build slot lookup if not provided
+    if slot_lookup is None:
+        slot_lookup = {}
+        for slots in fabric_db.values():
+            for slot in slots:
+                slot_lookup[slot['name']] = slot
+    
+    positions = []
+    
+    # Get positions of all cells on this net
+    cell_list = nets_dict.get(net_id, [])
+    for cell_name in cell_list:
+        if cell_name in placement:
+            cell_placement = placement[cell_name]
+            slot_name = cell_placement.get('fabric_slot_name')
+            
+            if slot_name and slot_name in slot_lookup:
+                slot = slot_lookup[slot_name]
+                positions.append((slot['x'], slot['y']))
+    
+    # Add I/O pin positions if this net is connected to pins
+    if pins_db and port_to_nets:
+        for pin in pins_db.get('pins', []):
+            if pin.get('status') == 'FIXED':
+                pin_name = pin['name']
+                if pin_name in port_to_nets:
+                    pin_nets = port_to_nets[pin_name]
+                    if net_id in pin_nets:
+                        positions.append((pin['x_um'], pin['y_um']))
+    
+    # Calculate HPWL for this net
+    return calculate_hpwl(positions)
+
+
+def get_affected_nets(moved_cells: Set[str],
+                      cell_to_nets: Dict[str, Set[int]]) -> Set[int]:
+    """
+    Find all nets affected by moved cells.
+    
+    Args:
+        moved_cells: Set of cell names that moved
+        cell_to_nets: Dict mapping cell_name -> set of net IDs
+    
+    Returns:
+        Set of net IDs that are affected by the moved cells
+    """
+    affected_nets = set()
+    for cell_name in moved_cells:
+        if cell_name in cell_to_nets:
+            affected_nets.update(cell_to_nets[cell_name])
+    return affected_nets
+
+
+class HPWLCache:
+    """
+    Cache for incremental HPWL calculation.
+    
+    Maintains HPWL values for each net and allows incremental updates
+    when only a few cells move.
+    """
+    def __init__(self,
+                 placement: Dict[str, Dict[str, Any]],
+                 nets_dict: Dict[int, List[str]],
+                 fabric_db: Dict[str, List[Dict[str, Any]]],
+                 pins_db: Optional[Dict[str, Any]] = None,
+                 port_to_nets: Optional[Dict[str, List[int]]] = None):
+        """
+        Initialize HPWL cache by calculating HPWL for all nets.
+        
+        Args:
+            placement: Initial placement dict
+            nets_dict: Dict mapping net_id -> list of cell instances
+            fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
+            pins_db: Optional pins database
+            port_to_nets: Optional port-to-net mapping
+        """
+        self.nets_dict = nets_dict
+        self.fabric_db = fabric_db
+        self.pins_db = pins_db
+        self.port_to_nets = port_to_nets
+        
+        # Build slot lookup once
+        self.slot_lookup = {}
+        for slots in fabric_db.values():
+            for slot in slots:
+                self.slot_lookup[slot['name']] = slot
+        
+        # Pre-compute net-to-pins mapping once (major optimization!)
+        self.net_to_pins = {}
+        if pins_db and port_to_nets:
+            for pin in pins_db.get('pins', []):
+                if pin.get('status') == 'FIXED':
+                    pin_name = pin['name']
+                    if pin_name in port_to_nets:
+                        pin_nets = port_to_nets[pin_name]
+                        pin_loc = (pin['x_um'], pin['y_um'])
+                        for net_id in pin_nets:
+                            if net_id not in self.net_to_pins:
+                                self.net_to_pins[net_id] = []
+                            self.net_to_pins[net_id].append(pin_loc)
+        
+        # Calculate initial HPWL for all nets (optimized)
+        self.net_hpwl = {}
+        for net_id in nets_dict.keys():
+            positions = []
+            cell_list = nets_dict.get(net_id, [])
+            for cell_name in cell_list:
+                if cell_name in placement:
+                    cell_placement = placement[cell_name]
+                    slot_name = cell_placement.get('fabric_slot_name')
+                    if slot_name and slot_name in self.slot_lookup:
+                        slot = self.slot_lookup[slot_name]
+                        positions.append((slot['x'], slot['y']))
+            
+            # Add I/O pin positions (using pre-computed mapping)
+            if net_id in self.net_to_pins:
+                positions.extend(self.net_to_pins[net_id])
+            
+            self.net_hpwl[net_id] = calculate_hpwl(positions)
+    
+    def get_total_hpwl(self) -> float:
+        """Get total HPWL from cache."""
+        return sum(self.net_hpwl.values())
+    
+    def get_net_hpwl(self, net_id: int) -> float:
+        """Get HPWL for a specific net."""
+        return self.net_hpwl.get(net_id, 0.0)
+    
+    def update_nets(self,
+                   new_placement: Dict[str, Dict[str, Any]],
+                   affected_nets: Set[int]):
+        """
+        Update HPWL cache for affected nets only.
+        
+        Args:
+            new_placement: New placement dict (after move)
+            affected_nets: Set of net IDs that need recalculation
+        """
+        for net_id in affected_nets:
+            # Fast calculation using cached slot_lookup and pre-computed pins
+            positions = []
+            cell_list = self.nets_dict.get(net_id, [])
+            for cell_name in cell_list:
+                if cell_name in new_placement:
+                    cell_placement = new_placement[cell_name]
+                    slot_name = cell_placement.get('fabric_slot_name')
+                    if slot_name and slot_name in self.slot_lookup:
+                        slot = self.slot_lookup[slot_name]
+                        positions.append((slot['x'], slot['y']))
+            
+            # Add I/O pin positions (using pre-computed mapping)
+            if net_id in self.net_to_pins:
+                positions.extend(self.net_to_pins[net_id])
+            
+            self.net_hpwl[net_id] = calculate_hpwl(positions)
+    
+    def calculate_delta(self,
+                       new_placement: Dict[str, Dict[str, Any]],
+                       affected_nets: Set[int]) -> float:
+        """
+        Calculate HPWL delta for affected nets without updating cache.
+        
+        This is used to evaluate a move before accepting it.
+        
+        Args:
+            new_placement: New placement dict (proposed move)
+            affected_nets: Set of net IDs that are affected
+        
+        Returns:
+            Delta HPWL (new - old)
+        """
+        delta = 0.0
+        for net_id in affected_nets:
+            old_hpwl = self.net_hpwl.get(net_id, 0.0)
+            
+            # Fast calculation using cached slot_lookup and pre-computed pins
+            positions = []
+            cell_list = self.nets_dict.get(net_id, [])
+            for cell_name in cell_list:
+                if cell_name in new_placement:
+                    cell_placement = new_placement[cell_name]
+                    slot_name = cell_placement.get('fabric_slot_name')
+                    if slot_name and slot_name in self.slot_lookup:
+                        slot = self.slot_lookup[slot_name]
+                        positions.append((slot['x'], slot['y']))
+            
+            # Add I/O pin positions (using pre-computed mapping)
+            if net_id in self.net_to_pins:
+                positions.extend(self.net_to_pins[net_id])
+            
+            new_hpwl = calculate_hpwl(positions)
+            delta += (new_hpwl - old_hpwl)
+        return delta
+
+
+# ============================================================================
 # End of HPWL Utilities
 # ============================================================================
 
@@ -243,32 +458,17 @@ def precompute_cell_nets(netlist_graph: Dict[str, Dict[str, Any]]) -> Dict[str, 
     return cell_to_nets
 
 
-def build_slot_spatial_index(fabric_db: Dict[str, List[Dict[str, Any]]]) -> Tuple[Dict, Dict]:
+def build_slot_spatial_index(fabric_db: Dict[str, List[Dict[str, Any]]]) -> Dict:
     """
-    Build KD-trees for fast spatial queries on fabric slots.
+    Build slot lists for linear search (no KD-tree).
     
     Args:
         fabric_db: Dict mapping cell_type -> List of {name, x, y, orient}
     
     Returns:
-        kdtrees: Dict mapping cell_type -> KDTree
-        slot_lists: Dict mapping cell_type -> List of slots (in same order as KDTree)
+        slot_lists: Dict mapping cell_type -> List of slots (same as fabric_db)
     """
-    kdtrees = {}
-    slot_lists = {}
-    
-    if not HAS_SCIPY:
-        return {}, fabric_db
-    
-    for cell_type, slots in fabric_db.items():
-        if not slots:
-            continue
-        
-        coords = [(slot['x'], slot['y']) for slot in slots]
-        kdtrees[cell_type] = KDTree(coords)
-        slot_lists[cell_type] = slots
-    
-    return kdtrees, slot_lists
+    return fabric_db
 
 
 def calculate_distance(x1: float, y1: float, x2: float, y2: float) -> float:
@@ -276,49 +476,6 @@ def calculate_distance(x1: float, y1: float, x2: float, y2: float) -> float:
     return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
 
-def find_nearest_slot_kdtree(target_x: float,
-                              target_y: float,
-                              cell_type: str,
-                              kdtrees: Dict,
-                              slot_lists: Dict,
-                              used_slots: Set[str],
-                              max_candidates: int = 50) -> Optional[Dict[str, Any]]:
-    """
-    Find nearest available slot using KD-tree for fast spatial search.
-    
-    Args:
-        target_x: Target X coordinate in microns
-        target_y: Target Y coordinate in microns
-        cell_type: Type of cell to place
-        kdtrees: Dict of KD-trees per cell type
-        slot_lists: Dict of slot lists per cell type
-        used_slots: Set of already used slot names
-        max_candidates: Number of nearest candidates to check
-    
-    Returns:
-        Best available slot dict or None
-    """
-    if cell_type not in kdtrees or cell_type not in slot_lists:
-        return None
-    
-    kdtree = kdtrees[cell_type]
-    slots = slot_lists[cell_type]
-    
-    # Query k nearest neighbors
-    k = min(max_candidates, len(slots))
-    distances, indices = kdtree.query([target_x, target_y], k=k)
-    
-    # Handle single result
-    if not isinstance(indices, (list, tuple)):
-        indices = [indices]
-    
-    # Find first available slot
-    for idx in indices:
-        slot = slots[idx]
-        if slot['name'] not in used_slots:
-            return slot
-    
-    return None
 
 
 def find_nearest_slot_linear(target_x: float,
@@ -357,7 +514,6 @@ def place_io_connected_cells_optimized(fabric_db: Dict[str, List[Dict[str, Any]]
                                         cell_to_nets: Dict[str, Set[int]],
                                         placement: Dict[str, Dict[str, Any]],
                                         used_slots: Set[str],
-                                        kdtrees: Dict,
                                         slot_lists: Dict) -> int:
     """
     Optimized placement of cells connected to fixed I/O pins.
@@ -371,8 +527,7 @@ def place_io_connected_cells_optimized(fabric_db: Dict[str, List[Dict[str, Any]]
         cell_to_nets: Pre-computed dict mapping cell_name -> set of net IDs
         placement: Current placement dict (will be updated)
         used_slots: Set of already used fabric slot names (will be updated)
-        kdtrees: KD-trees for spatial indexing
-        slot_lists: Slot lists corresponding to KD-trees
+        slot_lists: Slot lists for linear search
     
     Returns:
         Number of cells placed
@@ -429,15 +584,10 @@ def place_io_connected_cells_optimized(fabric_db: Dict[str, List[Dict[str, Any]]
         target_x = sum(x for x, y in pin_locations) / len(pin_locations)
         target_y = sum(y for x, y in pin_locations) / len(pin_locations)
         
-        # Find nearest available slot
-        if HAS_SCIPY and cell_type in kdtrees:
-            best_slot = find_nearest_slot_kdtree(
-                target_x, target_y, cell_type, kdtrees, slot_lists, used_slots
-            )
-        else:
-            available_slots = [slot for slot in fabric_db.get(cell_type, [])
-                             if slot['name'] not in used_slots]
-            best_slot = find_nearest_slot_linear(target_x, target_y, available_slots)
+        # Find nearest available slot using linear search
+        available_slots = [slot for slot in fabric_db.get(cell_type, [])
+                         if slot['name'] not in used_slots]
+        best_slot = find_nearest_slot_linear(target_x, target_y, available_slots)
         
         if best_slot:
             placement[cell_name] = {
@@ -568,7 +718,6 @@ def place_greedy_barycenter_optimized(fabric_db: Dict[str, List[Dict[str, Any]]]
                                        used_slots: Set[str],
                                        net_index: Dict[int, Set[str]],
                                        cell_to_nets: Dict[str, Set[int]],
-                                       kdtrees: Dict,
                                        slot_lists: Dict,
                                        pins_db: Optional[Dict[str, Any]] = None,
                                        port_to_nets: Optional[Dict[str, List[int]]] = None) -> int:
@@ -582,8 +731,7 @@ def place_greedy_barycenter_optimized(fabric_db: Dict[str, List[Dict[str, Any]]]
         used_slots: Set of already used fabric slot names (will be updated)
         net_index: Pre-built net-to-cells index
         cell_to_nets: Pre-computed cell-to-nets mapping
-        kdtrees: KD-trees for spatial indexing
-        slot_lists: Slot lists corresponding to KD-trees
+        slot_lists: Slot lists for linear search
         pins_db: Optional pins database
         port_to_nets: Optional port-to-net mapping
     
@@ -633,15 +781,10 @@ def place_greedy_barycenter_optimized(fabric_db: Dict[str, List[Dict[str, Any]]]
             else:
                 target_x, target_y = fallback_pos
             
-            # Find nearest available slot
-            if HAS_SCIPY and cell_type in kdtrees:
-                best_slot = find_nearest_slot_kdtree(
-                    target_x, target_y, cell_type, kdtrees, slot_lists, used_slots
-                )
-            else:
-                available_slots = [slot for slot in fabric_db.get(cell_type, [])
-                                 if slot['name'] not in used_slots]
-                best_slot = find_nearest_slot_linear(target_x, target_y, available_slots)
+            # Find nearest available slot using linear search
+            available_slots = [slot for slot in fabric_db.get(cell_type, [])
+                             if slot['name'] not in used_slots]
+            best_slot = find_nearest_slot_linear(target_x, target_y, available_slots)
             
             if not best_slot:
                 print(f"WARNING: No slots available for cell {best_cell} (type {cell_type})")
@@ -720,12 +863,9 @@ def place_design(fabric_cells_path: str,
     print("Building optimization indices...")
     net_index = build_net_index(netlist_graph)
     cell_to_nets = precompute_cell_nets(netlist_graph)
-    kdtrees, slot_lists = build_slot_spatial_index(fabric_db)
+    slot_lists = build_slot_spatial_index(fabric_db)
     
-    if HAS_SCIPY:
-        print(f"Built KD-trees for {len(kdtrees)} cell types")
-    else:
-        print("Using linear search (install scipy for faster placement)")
+    print(f"Using linear search for slot finding")
     
     # Initialize placement
     placement = {}
@@ -735,7 +875,7 @@ def place_design(fabric_cells_path: str,
     print("\nPlacing cells connected to I/O pins...")
     io_cells_placed = place_io_connected_cells_optimized(
         fabric_db, pins_db, netlist_graph, port_to_nets, 
-        cell_to_nets, placement, used_slots, kdtrees, slot_lists
+        cell_to_nets, placement, used_slots, slot_lists
     )
     print(f"Placed {io_cells_placed} cells connected to I/O pins.\n")
     
@@ -743,7 +883,7 @@ def place_design(fabric_cells_path: str,
     print("Placing remaining cells using optimized greedy barycenter algorithm...")
     remaining_cells_placed = place_greedy_barycenter_optimized(
         fabric_db, netlist_graph, placement, used_slots,
-        net_index, cell_to_nets, kdtrees, slot_lists, pins_db, port_to_nets
+        net_index, cell_to_nets, slot_lists, pins_db, port_to_nets
     )
     print(f"\nPlaced {remaining_cells_placed} remaining cells.")
     
@@ -917,7 +1057,13 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
     """
     # Initialize state
     current_placement = {k: v.copy() for k, v in initial_placement.items()}
-    current_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    
+    # Pre-compute cell-to-nets mapping for incremental HPWL calculation
+    cell_to_nets = precompute_cell_nets(netlist_graph)
+    
+    # Create HPWL cache for incremental calculation (CRITICAL OPTIMIZATION)
+    hpwl_cache = HPWLCache(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    current_hpwl = hpwl_cache.get_total_hpwl()
     
     best_placement = {k: v.copy() for k, v in current_placement.items()}
     best_hpwl = current_hpwl
@@ -972,13 +1118,15 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
         for move_idx in range(moves_per_temp):
             # Generate move using hybrid move set
             if generate_move_func is None:
-                # Use default generate_move function
+                # Use default generate_move function with incremental HPWL
                 new_placement, delta_cost, move_type = generate_move(
                     current_placement, T, W, fabric_db, netlist_graph, nets_dict,
-                    pins_db, port_to_nets, P_refine, P_explore
+                    pins_db, port_to_nets, P_refine, P_explore,
+                    hpwl_cache, cell_to_nets
                 )
             else:
                 # Use provided move generation function
+                # Note: Custom functions may not support incremental HPWL
                 new_placement, delta_cost, move_type = generate_move_func(
                     current_placement, T, W, fabric_db, netlist_graph, nets_dict, 
                     pins_db, port_to_nets, P_refine, P_explore
@@ -994,8 +1142,26 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
             
             # Accept or reject move
             if should_accept_move(delta_cost, T):
+                # Find moved cells to update cache (compare slot names)
+                moved_cells = set()
+                for cell_name in new_placement:
+                    if cell_name in current_placement:
+                        old_slot = current_placement[cell_name].get('fabric_slot_name')
+                        new_slot = new_placement[cell_name].get('fabric_slot_name')
+                        if old_slot != new_slot:
+                            moved_cells.add(cell_name)
+                
+                # Update HPWL cache for accepted move
+                if moved_cells and hpwl_cache is not None and cell_to_nets is not None:
+                    affected_nets = get_affected_nets(moved_cells, cell_to_nets)
+                    hpwl_cache.update_nets(new_placement, affected_nets)
+                    # Recalculate current_hpwl from cache to ensure consistency
+                    current_hpwl = hpwl_cache.get_total_hpwl()
+                else:
+                    # Fallback: use calculated new_hpwl (for custom move functions)
+                    current_hpwl = new_hpwl
+                
                 current_placement = new_placement
-                current_hpwl = new_hpwl
                 acceptance_count += 1
                 
                 # Track move-specific acceptances
@@ -1041,7 +1207,7 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
     print("SA Optimization Complete")
     print(f"{'='*60}")
     print(f"Initial HPWL: {calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets):.2f} um")
-    print(f"Final HPWL: {best_hpwl:.2f} um")
+    print(f"Final Total HPWL: {best_hpwl:.2f} um")
     improvement = calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets) - best_hpwl
     improvement_pct = (improvement / calculate_total_hpwl(initial_placement, nets_dict, fabric_db, pins_db, port_to_nets)) * 100
     print(f"Improvement: {improvement:.2f} um ({improvement_pct:.2f}%)")
@@ -1060,7 +1226,9 @@ def refine_move(current_placement: Dict[str, Dict[str, Any]],
                 netlist_graph: Dict[str, Dict[str, Any]],
                 nets_dict: Dict[int, List[str]],
                 pins_db: Optional[Dict[str, Any]] = None,
-                port_to_nets: Optional[Dict[str, List[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
+                port_to_nets: Optional[Dict[str, List[int]]] = None,
+                hpwl_cache: Optional[HPWLCache] = None,
+                cell_to_nets: Optional[Dict[str, Set[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
     """
     Refine move: Swap two cells of the same type.
     
@@ -1074,6 +1242,8 @@ def refine_move(current_placement: Dict[str, Dict[str, Any]],
         nets_dict: Dict mapping net_id -> list of cell instances
         pins_db: Optional pins database
         port_to_nets: Optional port-to-net mapping
+        hpwl_cache: Optional HPWL cache for incremental calculation
+        cell_to_nets: Optional pre-computed cell-to-nets mapping
     
     Returns:
         (new_placement, delta_cost, 'refine')
@@ -1112,11 +1282,14 @@ def refine_move(current_placement: Dict[str, Dict[str, Any]],
     slot1_name = current_placement[cell1]['fabric_slot_name']
     slot2_name = current_placement[cell2]['fabric_slot_name']
     
-    # Build slot lookup
-    slot_lookup = {}
-    for slots in fabric_db.values():
-        for slot in slots:
-            slot_lookup[slot['name']] = slot
+    # Use cache's slot lookup if available, otherwise build one
+    if hpwl_cache is not None and hasattr(hpwl_cache, 'slot_lookup'):
+        slot_lookup = hpwl_cache.slot_lookup
+    else:
+        slot_lookup = {}
+        for slots in fabric_db.values():
+            for slot in slots:
+                slot_lookup[slot['name']] = slot
     
     # Swap slots
     new_placement[cell1]['fabric_slot_name'] = slot2_name
@@ -1135,10 +1308,19 @@ def refine_move(current_placement: Dict[str, Dict[str, Any]],
         new_placement[cell2]['y'] = slot1['y']
         new_placement[cell2]['orient'] = slot1.get('orient', 'N')
     
-    # Calculate delta_cost (only affected nets)
-    old_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
-    new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
-    delta_cost = new_hpwl - old_hpwl
+    # Calculate delta_cost using incremental calculation if cache is available
+    if hpwl_cache is not None and cell_to_nets is not None:
+        # Find affected nets (only nets connected to swapped cells)
+        moved_cells = {cell1, cell2}
+        affected_nets = get_affected_nets(moved_cells, cell_to_nets)
+        
+        # Calculate delta for affected nets only (much faster!)
+        delta_cost = hpwl_cache.calculate_delta(new_placement, affected_nets)
+    else:
+        # Fallback to full calculation if cache not available
+        old_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+        new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+        delta_cost = new_hpwl - old_hpwl
     
     return new_placement, delta_cost, 'refine'
 
@@ -1149,7 +1331,9 @@ def explore_move(current_placement: Dict[str, Dict[str, Any]],
                  nets_dict: Dict[int, List[str]],
                  window_size: float,
                  pins_db: Optional[Dict[str, Any]] = None,
-                 port_to_nets: Optional[Dict[str, List[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
+                 port_to_nets: Optional[Dict[str, List[int]]] = None,
+                 hpwl_cache: Optional[HPWLCache] = None,
+                 cell_to_nets: Optional[Dict[str, Set[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
     """
     Explore move: Move a cell to a random slot within a window.
     
@@ -1164,6 +1348,8 @@ def explore_move(current_placement: Dict[str, Dict[str, Any]],
         window_size: Size of search window in microns
         pins_db: Optional pins database
         port_to_nets: Optional port-to-net mapping
+        hpwl_cache: Optional HPWL cache for incremental calculation
+        cell_to_nets: Optional pre-computed cell-to-nets mapping
     
     Returns:
         (new_placement, delta_cost, 'explore') or fallback to refine_move
@@ -1201,7 +1387,8 @@ def explore_move(current_placement: Dict[str, Dict[str, Any]],
     
     # If no slots in window, fallback to refine move
     if not available_slots:
-        return refine_move(current_placement, fabric_db, netlist_graph, nets_dict, pins_db, port_to_nets)
+        return refine_move(current_placement, fabric_db, netlist_graph, nets_dict, 
+                         pins_db, port_to_nets, hpwl_cache, cell_to_nets)
     
     # Randomly select a slot from available ones
     new_slot = random.choice(available_slots)
@@ -1215,10 +1402,19 @@ def explore_move(current_placement: Dict[str, Dict[str, Any]],
     new_placement[cell_to_move]['y'] = new_slot['y']
     new_placement[cell_to_move]['orient'] = new_slot.get('orient', 'N')
     
-    # Calculate delta_cost
-    old_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
-    new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
-    delta_cost = new_hpwl - old_hpwl
+    # Calculate delta_cost using incremental calculation if cache is available
+    if hpwl_cache is not None and cell_to_nets is not None:
+        # Find affected nets (only nets connected to moved cell)
+        moved_cells = {cell_to_move}
+        affected_nets = get_affected_nets(moved_cells, cell_to_nets)
+        
+        # Calculate delta for affected nets only (much faster!)
+        delta_cost = hpwl_cache.calculate_delta(new_placement, affected_nets)
+    else:
+        # Fallback to full calculation if cache not available
+        old_hpwl = calculate_total_hpwl(current_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+        new_hpwl = calculate_total_hpwl(new_placement, nets_dict, fabric_db, pins_db, port_to_nets)
+        delta_cost = new_hpwl - old_hpwl
     
     return new_placement, delta_cost, 'explore'
 
@@ -1275,7 +1471,9 @@ def generate_move(current_placement: Dict[str, Dict[str, Any]],
                   pins_db: Optional[Dict[str, Any]] = None,
                   port_to_nets: Optional[Dict[str, List[int]]] = None,
                   P_refine: float = 0.7,
-                  P_explore: float = 0.3) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
+                  P_explore: float = 0.3,
+                  hpwl_cache: Optional[HPWLCache] = None,
+                  cell_to_nets: Optional[Dict[str, Set[int]]] = None) -> Tuple[Dict[str, Dict[str, Any]], float, str]:
     """
     Generate a move for simulated annealing.
     
@@ -1293,6 +1491,8 @@ def generate_move(current_placement: Dict[str, Dict[str, Any]],
         port_to_nets: Optional port-to-net mapping
         P_refine: Probability of refine move (default: 0.7)
         P_explore: Probability of explore move (default: 0.3)
+        hpwl_cache: Optional HPWL cache for incremental calculation
+        cell_to_nets: Optional pre-computed cell-to-nets mapping
     
     Returns:
         (new_placement, delta_cost, move_type)
@@ -1300,10 +1500,11 @@ def generate_move(current_placement: Dict[str, Dict[str, Any]],
     move_type = select_move_type(P_refine, P_explore)
     
     if move_type == 'refine':
-        return refine_move(current_placement, fabric_db, netlist_graph, nets_dict, pins_db, port_to_nets)
+        return refine_move(current_placement, fabric_db, netlist_graph, nets_dict, 
+                         pins_db, port_to_nets, hpwl_cache, cell_to_nets)
     else:  # explore
         return explore_move(current_placement, fabric_db, netlist_graph, nets_dict, 
-                           window_size, pins_db, port_to_nets)
+                           window_size, pins_db, port_to_nets, hpwl_cache, cell_to_nets)
 
 
 # ============================================================================
@@ -1463,8 +1664,17 @@ def main():
                         help='SA moves per temperature step (default: 100)')
     parser.add_argument('--sa-T-final', type=float, default=0.1,
                         help='SA final temperature (default: 0.1)')
+    parser.add_argument('--seed', type=int, default=None,
+                        help='Random seed for reproducibility (default: None, uses system time)')
+    parser.add_argument('--initial-placement', type=str, default=None,
+                        help='Path to pre-computed greedy placement JSON (skips greedy, uses this as SA starting point)')
     
     args = parser.parse_args()
+    
+    # Set random seed if provided
+    if args.seed is not None:
+        random.seed(args.seed)
+        print(f"Random seed set to: {args.seed}")
     
     # Extract design name and set output paths
     design_name = extract_design_name(args.design)
@@ -1478,22 +1688,60 @@ def main():
         json_output_path = f'{output_dir}/{design_name}_placement.json'
     
     # Run placement
-    placement = place_design_with_sa(
-        args.fabric_cells, 
-        args.design, 
-        args.pins,
-        enable_sa=not args.no_sa,
-        sa_alpha=args.sa_alpha,
-        sa_moves_per_temp=args.sa_moves,
-        sa_T_final=args.sa_T_final
-    )
+    if args.initial_placement and not args.no_sa:
+        # Use pre-computed greedy placement and run SA only
+        print(f"Loading initial placement from: {args.initial_placement}")
+        with open(args.initial_placement, 'r') as f:
+            greedy_placement = json.load(f)
+        
+        # Prepare data for SA
+        fabric_db = parse_fabric_cells(args.fabric_cells)
+        _, netlist_graph = parse_design(args.design)
+        pins_db = parse_pins(args.pins)
+        port_to_nets = get_port_to_net_mapping(args.design)
+        nets_dict = extract_nets(netlist_graph)
+        
+        # Run SA only
+        placement = simulated_annealing(
+            greedy_placement,
+            fabric_db,
+            netlist_graph,
+            nets_dict,
+            pins_db,
+            port_to_nets,
+            T_initial=None,
+            alpha=args.sa_alpha,
+            T_final=args.sa_T_final,
+            moves_per_temp=args.sa_moves,
+            generate_move_func=None,
+            W_initial=None,
+            beta=0.98,
+            P_refine=0.7,
+            P_explore=0.3
+        )
+    else:
+        # Normal flow: run greedy (and optionally SA)
+        placement = place_design_with_sa(
+            args.fabric_cells, 
+            args.design, 
+            args.pins,
+            enable_sa=not args.no_sa,
+            sa_alpha=args.sa_alpha,
+            sa_moves_per_temp=args.sa_moves,
+            sa_T_final=args.sa_T_final
+        )
     
     if placement is None:
         sys.exit(1)
     
-    # Load fabric_db and netlist_graph for validation
+    # Load fabric_db and netlist_graph for validation and HPWL calculation
     fabric_db = parse_fabric_cells(args.fabric_cells)
     _, netlist_graph = parse_design(args.design)
+    pins_db = parse_pins(args.pins)
+    
+    # Extract nets and port mappings for HPWL calculation
+    nets_dict = extract_nets(netlist_graph)
+    port_to_nets = get_port_to_net_mapping(args.design)
     
     # Write .map file (required format)
     success = write_placement_map(placement, map_output_path, fabric_db, netlist_graph)
@@ -1505,6 +1753,15 @@ def main():
     # Also save JSON file for debugging/analysis
     save_placement(placement, json_output_path)
     
+    # Calculate and report Final Total HPWL (as required by spec)
+    final_hpwl = calculate_total_hpwl(placement, nets_dict, fabric_db, pins_db, port_to_nets)
+    
+    print("\n" + "="*60)
+    print("Placement Summary")
+    print("="*60)
+    print(f"Final Total HPWL: {final_hpwl:.2f} um")
+    print(f"Total Instances: {len(placement)}")
+    print("="*60)
     print("\nPlacement completed successfully!")
     print(f"Map file: {map_output_path}")
     print(f"JSON file: {json_output_path}")
