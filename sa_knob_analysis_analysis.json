@@ -1,0 +1,39 @@
+{
+  "total_experiments": 1,
+  "successful_experiments": 1,
+  "best_hpwl": {
+    "hpwl": 365584.3999999992,
+    "runtime": 1133.1671135425568,
+    "config": {
+      "alpha": 0.8,
+      "moves_per_temp": 50,
+      "p_refine": 0.5,
+      "p_explore": 0.5,
+      "T_final": 0.1
+    }
+  },
+  "fastest_runtime": {
+    "hpwl": 365584.3999999992,
+    "runtime": 1133.1671135425568,
+    "config": {
+      "alpha": 0.8,
+      "moves_per_temp": 50,
+      "p_refine": 0.5,
+      "p_explore": 0.5,
+      "T_final": 0.1
+    }
+  },
+  "pareto_points_count": 1,
+  "recommended_default": {
+    "hpwl": 365584.3999999992,
+    "runtime": 1133.1671135425568,
+    "config": {
+      "alpha": 0.8,
+      "moves_per_temp": 50,
+      "p_refine": 0.5,
+      "p_explore": 0.5,
+      "T_final": 0.1
+    },
+    "reason": "Best trade-off on Pareto frontier"
+  }
+}
