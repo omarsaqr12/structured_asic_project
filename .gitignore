@@ -18,10 +18,22 @@ project_dd2
 *.swp
 *.swo
 *~
-
+arith20vari/
+build_6502_full/
+arith_heatmaps/
+build_z80_full/
+comparison_detailed.png
+placement.json/
 # OS
 .DS_Store
 Thumbs.db
+
+
+arith_heathmaps/
+placement__12.json
+placement.json
+placer.py
+
 
 # Project specific
 # Keep build/ directory structure but ignore large generated files if needed
