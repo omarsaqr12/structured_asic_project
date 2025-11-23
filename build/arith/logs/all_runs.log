@@ -1,0 +1,34 @@
+# Consolidated log for all placer runs
+# Start time: 2025-11-23T05:40:02.127202
+# Designs: ['arith']
+# Configurations: 21
+================================================================================
+
+✓ [1/21] arith greedy: 218.8s, HPWL=165616.42 um
+✓ [2/21] arith sa_a0.95_m100_T0.1: 231.2s, HPWL=166278.62 um
+✓ [3/21] arith sa_a0.98_m300_T0.01: 526.7s, HPWL=69163.76 um
+✓ [4/21] arith sa_a0.97_m200_T0.01: 352.1s, HPWL=100053.88 um
+✓ [5/21] arith sa_a0.99_m500_T0.001: 1036.9s, HPWL=50216.99 um
+✓ [6/21] arith sa_a0.9_m200_T0.1: 228.2s, HPWL=165793.68 um
+✓ [7/21] arith sa_a0.85_m100_T0.1: 225.0s, HPWL=165212.48 um
+✓ [8/21] arith sa_a0.8_m50_T0.1: 258.7s, HPWL=166476.70 um
+✓ [9/21] arith sa_a0.8_m50_T0.01: 267.9s, HPWL=165448.20 um
+✓ [10/21] arith sa_a0.8_m50_T0.001: 173.1s, HPWL=166350.04 um
+✓ [11/21] arith sa_a0.8_m100_T0.1: 226.5s, HPWL=166172.54 um
+✓ [12/21] arith sa_a0.8_m100_T0.01: 255.5s, HPWL=165659.52 um
+✓ [13/21] arith sa_a0.8_m100_T0.001: 199.4s, HPWL=166236.56 um
+✓ [14/21] arith sa_a0.8_m200_T0.1: 211.5s, HPWL=165887.82 um
+✓ [15/21] arith sa_a0.8_m200_T0.01: 241.8s, HPWL=166845.60 um
+✓ [16/21] arith sa_a0.8_m200_T0.001: 276.7s, HPWL=167199.00 um
+✓ [17/21] arith sa_a0.8_m500_T0.1: 312.7s, HPWL=167188.10 um
+✓ [18/21] arith sa_a0.8_m500_T0.01: 344.9s, HPWL=155338.06 um
+✓ [19/21] arith sa_a0.8_m500_T0.001: 330.9s, HPWL=145163.65 um
+✓ [20/21] arith sa_a0.85_m50_T0.1: 280.8s, HPWL=168236.48 um
+✓ [21/21] arith sa_a0.85_m50_T0.01: 160.8s, HPWL=168453.42 um
+
+================================================================================
+# End time: 2025-11-23T05:57:19.093735
+# Total runs: 21
+# Successful: 21
+# Failed: 0
+# Total runtime: 6360.1 seconds

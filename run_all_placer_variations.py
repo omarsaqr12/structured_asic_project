@@ -246,18 +246,12 @@ def run_placer(design_path: str, config: Dict, log_file: Optional[str] = None) -
         if success:
             hpwl = extract_hpwl_from_output(output_text)
             
-            # HPWL should always be in output if placer succeeds (it prints "Final Total HPWL" at end)
-            # Fallback calculation is only needed if regex fails or output is corrupted
+            # If not found in output, try calculating from placement file
             if hpwl is None:
-                # This should rarely happen - log a warning
                 design_name = extract_design_name(design_path)
-                print(f"  WARNING: HPWL not found in output for {design_name}, calculating from placement file...", flush=True)
                 placement_json = f'{output_dir}/{design_name}_placement.json'
                 if os.path.exists(placement_json):
-                    try:
-                        hpwl = calculate_hpwl_from_placement(placement_json, design_path)
-                    except Exception as e:
-                        print(f"  ERROR: Could not calculate HPWL from placement: {e}", flush=True)
+                    hpwl = calculate_hpwl_from_placement(placement_json, design_path)
         else:
             # Placer failed - print error details
             print(f"\n  ERROR: Placer returned exit code {result.returncode}")
@@ -462,6 +456,59 @@ def generate_sa_knob_configs() -> List[Dict]:
     return configs[:20]  # Return exactly 20 configs
 
 
+def generate_heavy_mode_configs() -> List[Dict]:
+    """
+    Generate heavy mode configurations (20 configs).
+    
+    Heavy mode requirements:
+    - Start from alpha=0.9, moves=300
+    - Cover area before successful config (alpha=0.99, moves=500, T_final=0.001)
+    - Cover area after successful config (higher moves, alpha=0.99)
+    - Don't start small (use larger parameter values)
+    
+    Returns:
+        List of SA configuration dicts (20 configs)
+    """
+    # Heavy mode: Explore around the successful config (alpha=0.99, moves=500, T_final=0.001)
+    # Strategy: Systematically cover the parameter space
+    # - Before: lower alpha (0.9-0.98), lower moves (300-450)
+    # - At: the successful config (0.99, 500, 0.001) and nearby
+    # - After: alpha=0.99, higher moves (600-1000+)
+    
+    configs = [
+        # AREA BEFORE: Lower alpha, lower moves (starting from 0.9, 300)
+        # Starting point and progression towards successful config
+        {'alpha': 0.9, 'moves': 300, 't_final': 0.1},      # Base: start from 0.9, 300
+        {'alpha': 0.9, 'moves': 300, 't_final': 0.01},     # Base with different T_final
+        {'alpha': 0.9, 'moves': 300, 't_final': 0.001},   # Base with T_final=0.001 (like successful)
+        {'alpha': 0.92, 'moves': 350, 't_final': 0.01},   # Progress: higher alpha, higher moves
+        {'alpha': 0.94, 'moves': 400, 't_final': 0.001},  # Progress: getting closer
+        {'alpha': 0.96, 'moves': 450, 't_final': 0.01},   # Progress: closer to successful
+        {'alpha': 0.98, 'moves': 500, 't_final': 0.001},  # Almost at successful (lower alpha)
+        
+        # AT SUCCESSFUL CONFIG AREA: Around alpha=0.99, moves=500
+        {'alpha': 0.99, 'moves': 500, 't_final': 0.001},  # THE SUCCESSFUL CONFIG
+        {'alpha': 0.99, 'moves': 500, 't_final': 0.01},   # Same alpha/moves, different T_final
+        {'alpha': 0.99, 'moves': 500, 't_final': 0.1},    # Same alpha/moves, different T_final
+        {'alpha': 0.99, 'moves': 450, 't_final': 0.001},  # Slightly lower moves
+        {'alpha': 0.99, 'moves': 400, 't_final': 0.001},  # Lower moves, same alpha
+        
+        # AREA AFTER: Higher moves with alpha=0.99 (exploring beyond successful)
+        {'alpha': 0.99, 'moves': 600, 't_final': 0.001},  # Higher moves, same config
+        {'alpha': 0.99, 'moves': 600, 't_final': 0.01},   # Higher moves, different T_final
+        {'alpha': 0.99, 'moves': 700, 't_final': 0.001},  # Even higher moves
+        {'alpha': 0.99, 'moves': 800, 't_final': 0.001},  # Even higher moves
+        {'alpha': 0.99, 'moves': 1000, 't_final': 0.001},  # Much higher moves
+        
+        # Additional exploration: High alpha with intermediate moves
+        {'alpha': 0.98, 'moves': 600, 't_final': 0.001},  # High moves, slightly lower alpha
+        {'alpha': 0.97, 'moves': 700, 't_final': 0.001},  # High moves, lower alpha
+        {'alpha': 0.96, 'moves': 800, 't_final': 0.001},  # High moves, even lower alpha
+    ]
+    
+    return configs[:20]  # Return exactly 20 configs
+
+
 def generate_all_configs(max_sa_configs: Optional[int] = None) -> List[Dict]:
     """
     Generate all configuration combinations.
@@ -557,7 +604,8 @@ def run_all_variations(designs: Optional[List[str]] = None,
                       configs: Optional[List[Dict]] = None,
                       parallel: bool = False,
                       max_parallel: int = 4,
-                      log_dir: str = 'logs') -> Dict:
+                      log_dir: str = 'logs',
+                      design_greedy_placements: Optional[Dict[str, str]] = None) -> Dict:
     """
     Run all placer variations.
     
@@ -606,7 +654,14 @@ def run_all_variations(designs: Optional[List[str]] = None,
     for design_path in designs:
         design_name = extract_design_name(design_path)
         for config in configs:
-            runs.append((design_path, design_name, config))
+            # Create a copy of config to avoid modifying the original
+            config_copy = config.copy()
+            
+            # If this config should use greedy placement and we have greedy placements
+            if config.get('_use_greedy_placement') and design_greedy_placements and design_path in design_greedy_placements:
+                config_copy['_greedy_placement'] = design_greedy_placements[design_path]
+            
+            runs.append((design_path, design_name, config_copy))
     
     results['summary']['total_runs'] = len(runs)
     
@@ -898,8 +953,13 @@ def main():
                        help='Run SA knob exploration (Task 1.D): ONE design (6502) with 20 configs, generate plot')
     parser.add_argument('--plot-output', default='sa_knob_analysis.png',
                        help='Output file for scatter plot (default: sa_knob_analysis.png)')
+    parser.add_argument('--heavy-mode', action='store_true',
+                       help='Run heavy mode: 20 configs starting from alpha=0.9, moves=300, don\'t start small')
     
     args = parser.parse_args()
+    
+    # Initialize design_greedy_placements (used in heavy mode)
+    design_greedy_placements = None
     
     # Handle SA knob exploration mode (Task 1.D)
     if args.sa_knob_exploration:
@@ -939,6 +999,57 @@ def main():
         # Store greedy placement path for SA runs
         for config in configs:
             config['_greedy_placement'] = greedy_placement_json
+    elif args.heavy_mode:
+        # Heavy mode: 20 configs starting from alpha=0.9, moves=300, don't start small
+        # Determine designs
+        if args.designs:
+            designs = args.designs
+        elif args.all_designs:
+            designs = DESIGNS  # All designs
+        else:
+            # Default: 6502 only
+            designs = ['designs/6502_mapped.json']
+        
+        configs = generate_heavy_mode_configs()  # 20 heavy mode SA configs
+        
+        # First, run greedy once for each design and save it
+        print("="*80)
+        print("Heavy Mode")
+        print(f"Designs: {[extract_design_name(d) for d in designs]}")
+        print(f"Step 1: Running greedy placement once for each design (will be reused for all SA runs)...")
+        print("="*80)
+        print()
+        
+        # Run greedy for each design and store placement paths
+        design_greedy_placements = {}
+        for design_path in designs:
+            design_name = extract_design_name(design_path)
+            greedy_output_dir = f'build/{design_name}/greedy'
+            greedy_placement_json = f'{greedy_output_dir}/{design_name}_placement.json'
+            
+            # Run greedy once
+            greedy_config = {'no_sa': True}
+            greedy_log = f'{args.log_dir}/{design_name}_greedy_initial.log'
+            success, runtime, _, _ = run_placer(design_path, greedy_config, greedy_log)
+            
+            if not success or not os.path.exists(greedy_placement_json):
+                print(f"ERROR: Failed to generate greedy placement for {design_name}. Cannot proceed with heavy mode.")
+                sys.exit(1)
+            
+            design_greedy_placements[design_path] = greedy_placement_json
+            print(f"✓ Greedy placement for {design_name} completed and saved to: {greedy_placement_json}")
+        
+        print(f"\n  All greedy placements completed. They will be reused as initial state for all {len(configs)} SA configurations per design")
+        print("="*80)
+        print(f"\nStep 2: Running {len(configs)} SA configurations for each design...")
+        print("="*80)
+        print()
+        
+        # Store greedy placement paths - will be set per design when creating runs
+        # We'll pass this to run_all_variations via a custom parameter
+        # For now, mark configs to use greedy placement
+        for config in configs:
+            config['_use_greedy_placement'] = True
     else:
         # Regular mode: Determine designs
         if args.designs:
@@ -993,7 +1104,8 @@ def main():
         configs=configs,
         parallel=args.parallel,
         max_parallel=args.max_parallel,
-        log_dir=args.log_dir
+        log_dir=args.log_dir,
+        design_greedy_placements=design_greedy_placements
     )
     
     # Print summary
@@ -1022,4 +1134,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -1,0 +1,86 @@
+# Log file for: designs/6502_mapped.json
+# Configuration: {'alpha': 0.9, 'moves': 300, 't_final': 0.001, '_use_greedy_placement': True, '_greedy_placement': 'build/6502/greedy/6502_placement.json'}
+# Start time: 2025-11-23T08:51:00.680000
+# Command: /home/mohab/Downloads/work/venv/bin/python placer.py --design designs/6502_mapped.json --fabric-cells fabric/fabric_cells.yaml --pins fabric/pins.yaml --output build/6502/sa_alpha0.9_moves300_Tfinal0.001 --sa-alpha 0.9 --sa-moves 300 --sa-T-final 0.001 --initial-placement build/6502/greedy/6502_placement.json --seed 934095638
+================================================================================
+
+Random seed set to: 934095638
+Loading initial placement from: build/6502/greedy/6502_placement.json
+
+============================================================
+Simulated Annealing Optimization
+============================================================
+Initial HPWL: 431210.20 um
+Initial Temperature: 4312102000.00
+Cooling Rate (alpha): 0.9
+Moves per Temperature: 300
+Final Temperature: 0.001
+Initial Window Size: 501.80 um
+Window Cooling Rate (beta): 0.98
+Move Probabilities: Refine=70.0%, Explore=30.0%
+============================================================
+
+T=4312102000.00 | W=501.8um | Current HPWL=518431.33 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 7/300 (2.3%) | Refine: 216/216 (100.0%) | Explore: 84/84 (100.0%)
+T=1503536998.91 | W=410.0um | Current HPWL=963198.07 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 39/300 (13.0%) | Refine: 2310/2310 (100.0%) | Explore: 990/990 (100.0%)
+T=524250935.41 | W=335.0um | Current HPWL=1116614.41 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 49/300 (16.3%) | Refine: 4425/4425 (100.0%) | Explore: 1875/1875 (100.0%)
+T=182794998.38 | W=273.7um | Current HPWL=1201336.30 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 59/300 (19.7%) | Refine: 6514/6514 (100.0%) | Explore: 2786/2786 (100.0%)
+T=63736674.89 | W=223.7um | Current HPWL=1234778.05 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 67/300 (22.3%) | Refine: 8598/8598 (100.0%) | Explore: 3702/3702 (100.0%)
+T=22223604.38 | W=182.7um | Current HPWL=1254108.77 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 69/300 (23.0%) | Refine: 10719/10719 (100.0%) | Explore: 4581/4581 (100.0%)
+T=7748891.71 | W=149.3um | Current HPWL=1269993.39 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 75/300 (25.0%) | Refine: 12808/12808 (100.0%) | Explore: 5492/5492 (100.0%)
+T=2701871.47 | W=122.0um | Current HPWL=1289364.37 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 66/300 (22.0%) | Refine: 14903/14903 (100.0%) | Explore: 6397/6397 (100.0%)
+T=942084.33 | W=100.4um | Current HPWL=1295587.49 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 75/300 (25.0%) | Refine: 17010/17010 (100.0%) | Explore: 7290/7290 (100.0%)
+T=328484.49 | W=100.4um | Current HPWL=1290096.78 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 72/300 (24.0%) | Refine: 19108/19108 (100.0%) | Explore: 8192/8192 (100.0%)
+T=114535.46 | W=100.4um | Current HPWL=1299231.24 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 52/300 (17.3%) | Refine: 21188/21188 (100.0%) | Explore: 9112/9112 (100.0%)
+T=39936.05 | W=100.4um | Current HPWL=1306838.39 um | Best HPWL=431210.20 um | Accept Rate=99.7% | Improvements: 66/300 (22.0%) | Refine: 23271/23272 (100.0%) | Explore: 10028/10028 (100.0%)
+T=13924.84 | W=100.4um | Current HPWL=1298243.22 um | Best HPWL=431210.20 um | Accept Rate=100.0% | Improvements: 69/300 (23.0%) | Refine: 25413/25418 (100.0%) | Explore: 10880/10882 (100.0%)
+T=4855.29 | W=100.4um | Current HPWL=1297896.42 um | Best HPWL=431210.20 um | Accept Rate=98.7% | Improvements: 63/300 (21.0%) | Refine: 27490/27514 (99.9%) | Explore: 11779/11786 (99.9%)
+T=1692.94 | W=100.4um | Current HPWL=1300635.57 um | Best HPWL=431210.20 um | Accept Rate=97.3% | Improvements: 67/300 (22.3%) | Refine: 29538/29609 (99.8%) | Explore: 12676/12691 (99.9%)
+T=590.29 | W=100.4um | Current HPWL=1286293.71 um | Best HPWL=431210.20 um | Accept Rate=93.0% | Improvements: 57/300 (19.0%) | Refine: 31546/31703 (99.5%) | Explore: 13554/13597 (99.7%)
+T=205.82 | W=100.4um | Current HPWL=1251315.89 um | Best HPWL=431210.20 um | Accept Rate=88.3% | Improvements: 64/300 (21.3%) | Refine: 33452/33803 (99.0%) | Explore: 14396/14497 (99.3%)
+T=71.77 | W=100.4um | Current HPWL=1203659.00 um | Best HPWL=431210.20 um | Accept Rate=84.0% | Improvements: 64/300 (21.3%) | Refine: 35291/35916 (98.3%) | Explore: 15124/15384 (98.3%)
+T=25.02 | W=100.4um | Current HPWL=1150035.76 um | Best HPWL=431210.20 um | Accept Rate=81.7% | Improvements: 46/300 (15.3%) | Refine: 37055/38022 (97.5%) | Explore: 15761/16278 (96.8%)
+T=8.73 | W=100.4um | Current HPWL=1103075.57 um | Best HPWL=431210.20 um | Accept Rate=74.7% | Improvements: 48/300 (16.0%) | Refine: 38707/40066 (96.6%) | Explore: 16335/17234 (94.8%)
+T=3.04 | W=100.4um | Current HPWL=1058380.31 um | Best HPWL=431210.20 um | Accept Rate=65.7% | Improvements: 48/300 (16.0%) | Refine: 40358/42171 (95.7%) | Explore: 16800/18129 (92.7%)
+T=1.06 | W=100.4um | Current HPWL=1020727.27 um | Best HPWL=431210.20 um | Accept Rate=71.0% | Improvements: 46/300 (15.3%) | Refine: 42023/44325 (94.8%) | Explore: 17242/18975 (90.9%)
+T=0.37 | W=100.4um | Current HPWL=985826.83 um | Best HPWL=431210.20 um | Accept Rate=71.3% | Improvements: 48/300 (16.0%) | Refine: 43653/46431 (94.0%) | Explore: 17692/19869 (89.0%)
+T=0.13 | W=100.4um | Current HPWL=956042.94 um | Best HPWL=431210.20 um | Accept Rate=62.3% | Improvements: 31/300 (10.3%) | Refine: 45257/48550 (93.2%) | Explore: 18120/20750 (87.3%)
+T=0.04 | W=100.4um | Current HPWL=930256.74 um | Best HPWL=431210.20 um | Accept Rate=67.0% | Improvements: 49/300 (16.3%) | Refine: 46887/50679 (92.5%) | Explore: 18541/21621 (85.8%)
+T=0.02 | W=100.4um | Current HPWL=906131.26 um | Best HPWL=431210.20 um | Accept Rate=63.7% | Improvements: 38/300 (12.7%) | Refine: 48468/52795 (91.8%) | Explore: 18973/22505 (84.3%)
+T=0.01 | W=100.4um | Current HPWL=883471.80 um | Best HPWL=431210.20 um | Accept Rate=64.7% | Improvements: 43/300 (14.3%) | Refine: 50065/54916 (91.2%) | Explore: 19392/23384 (82.9%)
+T=0.00 | W=100.4um | Current HPWL=863660.29 um | Best HPWL=431210.20 um | Accept Rate=63.7% | Improvements: 29/300 (9.7%) | Refine: 51656/57054 (90.5%) | Explore: 19785/24246 (81.6%)
+T=0.00 | W=100.4um | Current HPWL=861051.29 um | Best HPWL=431210.20 um | Accept Rate=64.0% | Improvements: 43/300 (14.3%) | Refine: 51805/57251 (90.5%) | Explore: 19828/24349 (81.4%)
+T=0.00 | W=100.4um | Current HPWL=859149.83 um | Best HPWL=431210.20 um | Accept Rate=60.7% | Improvements: 37/300 (12.3%) | Refine: 51945/57453 (90.4%) | Explore: 19870/24447 (81.3%)
+T=0.00 | W=100.4um | Current HPWL=857241.91 um | Best HPWL=431210.20 um | Accept Rate=64.7% | Improvements: 39/300 (13.0%) | Refine: 52095/57660 (90.3%) | Explore: 19914/24540 (81.1%)
+T=0.00 | W=100.4um | Current HPWL=854832.89 um | Best HPWL=431210.20 um | Accept Rate=61.7% | Improvements: 37/300 (12.3%) | Refine: 52240/57872 (90.3%) | Explore: 19954/24628 (81.0%)
+T=0.00 | W=100.4um | Current HPWL=852477.75 um | Best HPWL=431210.20 um | Accept Rate=66.3% | Improvements: 40/300 (13.3%) | Refine: 52394/58084 (90.2%) | Explore: 19999/24716 (80.9%)
+T=0.00 | W=100.4um | Current HPWL=849410.01 um | Best HPWL=431210.20 um | Accept Rate=65.0% | Improvements: 33/300 (11.0%) | Refine: 52548/58289 (90.2%) | Explore: 20040/24811 (80.8%)
+
+============================================================
+SA Optimization Complete
+============================================================
+Initial HPWL: 431210.20 um
+Final Total HPWL: 431210.20 um
+Improvement: 0.00 um (0.00%)
+Total Iterations: 277
+============================================================
+
+
+Placement map written to: build/6502/sa_alpha0.9_moves300_Tfinal0.001/6502.map
+Total instances: 2899
+
+Placement saved to build/6502/sa_alpha0.9_moves300_Tfinal0.001/6502_placement.json
+
+============================================================
+Placement Summary
+============================================================
+Final Total HPWL: 431210.20 um
+Total Instances: 2899
+============================================================
+
+Placement completed successfully!
+Map file: build/6502/sa_alpha0.9_moves300_Tfinal0.001/6502.map
+JSON file: build/6502/sa_alpha0.9_moves300_Tfinal0.001/6502_placement.json
+
+================================================================================
+# End time: 2025-11-23T08:51:00.680019
+# Return code: 0
