@@ -1140,7 +1140,7 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
             elif move_type == 'explore':
                 explore_attempts += 1
             
-            # Accept or reject move
+            # Accept or reject move using Metropolis criterion
             if should_accept_move(delta_cost, T):
                 # Find moved cells to update cache (compare slot names)
                 moved_cells = set()
@@ -1152,15 +1152,22 @@ def simulated_annealing(initial_placement: Dict[str, Dict[str, Any]],
                             moved_cells.add(cell_name)
                 
                 # Update HPWL cache for accepted move
+                # This keeps the cache synchronized with the current placement state
                 if moved_cells and hpwl_cache is not None and cell_to_nets is not None:
+                    # Update cache for affected nets only (incremental update)
                     affected_nets = get_affected_nets(moved_cells, cell_to_nets)
                     hpwl_cache.update_nets(new_placement, affected_nets)
-                    # Recalculate current_hpwl from cache to ensure consistency
+                    # Get updated HPWL from cache (ensures consistency)
                     current_hpwl = hpwl_cache.get_total_hpwl()
+                elif hpwl_cache is not None:
+                    # Edge case: move accepted but no cells moved (shouldn't happen in practice)
+                    # Keep cache and current_hpwl unchanged
+                    pass
                 else:
-                    # Fallback: use calculated new_hpwl (for custom move functions)
+                    # Fallback: use calculated new_hpwl (for custom move functions without cache)
                     current_hpwl = new_hpwl
                 
+                # Update current placement state
                 current_placement = new_placement
                 acceptance_count += 1
                 
