@@ -1,0 +1,174 @@
+# Log file for: designs/arith_mapped.json
+# Configuration: {'no_sa': True}
+# Start time: 2025-11-23T05:43:40.918175
+# Command: /home/mohab/Downloads/work/venv/bin/python placer.py --design designs/arith_mapped.json --fabric-cells fabric/fabric_cells.yaml --pins fabric/pins.yaml --output build/arith/greedy --no-sa --seed 408336017
+================================================================================
+
+Random seed set to: 408336017
+Validating design against fabric...
+============================================================
+Fabric Utilization Report
+============================================================
+sky130_fd_sc_hd__clkbuf_4: 67/9720 used (0.7%)
+sky130_fd_sc_hd__clkinv_2: 68/12960 used (0.5%)
+sky130_fd_sc_hd__conb_1: 3/9720 used (0.0%)
+sky130_fd_sc_hd__decap_3: 0/9720 used (0.0%)
+sky130_fd_sc_hd__decap_4: 0/9720 used (0.0%)
+sky130_fd_sc_hd__dfbbp_1: 11/6480 used (0.2%)
+sky130_fd_sc_hd__nand2_2: 187/48600 used (0.4%)
+sky130_fd_sc_hd__or2_2: 127/25920 used (0.5%)
+sky130_fd_sc_hd__tapvpwrvgnd_1: 0/25920 used (0.0%)
+============================================================
+
+VALIDATION PASSED: Design can be built on this fabric.
+
+Validation passed. Proceeding with placement...
+
+Loading fabric and design data...
+Building optimization indices...
+Using linear search for slot finding
+
+Placing cells connected to I/O pins...
+
+Placing I/O cells:   0%|          | 0/188 [00:00<?, ?it/s]
+Placing I/O cells:   3%|▎         | 5/188 [00:00<00:03, 46.69it/s]
+Placing I/O cells:   5%|▌         | 10/188 [00:00<00:04, 43.44it/s]
+Placing I/O cells:   8%|▊         | 15/188 [00:00<00:04, 39.81it/s]
+Placing I/O cells:  11%|█         | 20/188 [00:00<00:04, 40.41it/s]
+Placing I/O cells:  14%|█▍        | 26/188 [00:00<00:03, 46.23it/s]
+Placing I/O cells:  16%|█▋        | 31/188 [00:00<00:03, 41.86it/s]
+Placing I/O cells:  19%|█▉        | 36/188 [00:00<00:03, 43.52it/s]
+Placing I/O cells:  22%|██▏       | 41/188 [00:00<00:03, 45.16it/s]
+Placing I/O cells:  24%|██▍       | 46/188 [00:01<00:03, 39.62it/s]
+Placing I/O cells:  28%|██▊       | 53/188 [00:01<00:02, 47.21it/s]
+Placing I/O cells:  32%|███▏      | 61/188 [00:01<00:02, 54.98it/s]
+Placing I/O cells:  36%|███▌      | 67/188 [00:01<00:02, 44.49it/s]
+Placing I/O cells:  38%|███▊      | 72/188 [00:01<00:02, 45.42it/s]
+Placing I/O cells:  41%|████      | 77/188 [00:01<00:02, 42.04it/s]
+Placing I/O cells:  45%|████▌     | 85/188 [00:01<00:02, 48.83it/s]
+Placing I/O cells:  48%|████▊     | 91/188 [00:02<00:02, 46.42it/s]
+Placing I/O cells:  52%|█████▏    | 98/188 [00:02<00:01, 49.79it/s]
+Placing I/O cells:  55%|█████▌    | 104/188 [00:02<00:01, 51.20it/s]
+Placing I/O cells:  59%|█████▊    | 110/188 [00:02<00:01, 45.22it/s]
+Placing I/O cells:  62%|██████▏   | 116/188 [00:02<00:01, 46.77it/s]
+Placing I/O cells:  64%|██████▍   | 121/188 [00:02<00:01, 45.45it/s]
+Placing I/O cells:  67%|██████▋   | 126/188 [00:02<00:01, 42.18it/s]
+Placing I/O cells:  70%|██████▉   | 131/188 [00:02<00:01, 42.35it/s]
+Placing I/O cells:  73%|███████▎  | 137/188 [00:03<00:01, 44.15it/s]
+Placing I/O cells:  76%|███████▌  | 142/188 [00:03<00:01, 38.65it/s]
+Placing I/O cells:  78%|███████▊  | 147/188 [00:03<00:01, 36.77it/s]
+Placing I/O cells:  80%|████████  | 151/188 [00:03<00:01, 36.87it/s]
+Placing I/O cells:  83%|████████▎ | 156/188 [00:03<00:00, 38.44it/s]
+Placing I/O cells:  87%|████████▋ | 163/188 [00:03<00:00, 45.93it/s]
+Placing I/O cells:  89%|████████▉ | 168/188 [00:03<00:00, 42.84it/s]
+Placing I/O cells:  92%|█████████▏| 173/188 [00:03<00:00, 40.04it/s]
+Placing I/O cells:  95%|█████████▍| 178/188 [00:04<00:00, 35.86it/s]
+Placing I/O cells:  97%|█████████▋| 182/188 [00:04<00:00, 34.40it/s]
+Placing I/O cells: 100%|██████████| 188/188 [00:04<00:00, 43.25it/s]
+Placed 188 cells connected to I/O pins.
+
+Placing remaining cells using optimized greedy barycenter algorithm...
+Computing initial cell scores...
+
+Initial scoring:   0%|          | 0/275 [00:00<?, ?it/s]
+Initial scoring: 100%|██████████| 275/275 [00:00<00:00, 24327.37it/s]
+Placing cells with incremental updates...
+
+Placing remaining cells:   0%|          | 0/275 [00:00<?, ?it/s]
+Placing remaining cells:   2%|▏         | 5/275 [00:00<00:06, 40.42it/s]
+Placing remaining cells:   4%|▎         | 10/275 [00:00<00:07, 36.21it/s]
+Placing remaining cells:   5%|▌         | 14/275 [00:00<00:07, 35.26it/s]
+Placing remaining cells:   7%|▋         | 18/275 [00:00<00:07, 32.45it/s]
+Placing remaining cells:   8%|▊         | 22/275 [00:00<00:07, 31.80it/s]
+Placing remaining cells:   9%|▉         | 26/275 [00:00<00:08, 30.32it/s]
+Placing remaining cells:  11%|█         | 30/275 [00:00<00:09, 26.82it/s]
+Placing remaining cells:  12%|█▏        | 33/275 [00:01<00:09, 26.38it/s]
+Placing remaining cells:  13%|█▎        | 36/275 [00:01<00:08, 26.67it/s]
+Placing remaining cells:  14%|█▍        | 39/275 [00:01<00:09, 24.81it/s]
+Placing remaining cells:  16%|█▌        | 43/275 [00:01<00:08, 27.16it/s]
+Placing remaining cells:  17%|█▋        | 48/275 [00:01<00:07, 31.22it/s]
+Placing remaining cells:  19%|█▉        | 52/275 [00:01<00:07, 28.70it/s]
+Placing remaining cells:  21%|██        | 57/275 [00:01<00:06, 32.09it/s]
+Placing remaining cells:  22%|██▏       | 61/275 [00:02<00:06, 31.27it/s]
+Placing remaining cells:  24%|██▎       | 65/275 [00:02<00:07, 28.68it/s]
+Placing remaining cells:  25%|██▌       | 70/275 [00:02<00:06, 32.14it/s]
+Placing remaining cells:  27%|██▋       | 74/275 [00:02<00:06, 29.97it/s]
+Placing remaining cells:  28%|██▊       | 78/275 [00:02<00:06, 28.52it/s]
+Placing remaining cells:  29%|██▉       | 81/275 [00:02<00:07, 27.54it/s]
+Placing remaining cells:  31%|███       | 85/275 [00:02<00:06, 28.68it/s]
+Placing remaining cells:  32%|███▏      | 89/275 [00:03<00:06, 29.64it/s]
+Placing remaining cells:  33%|███▎      | 92/275 [00:03<00:06, 26.90it/s]
+Placing remaining cells:  35%|███▍      | 95/275 [00:03<00:07, 25.14it/s]
+Placing remaining cells:  36%|███▌      | 98/275 [00:03<00:06, 25.68it/s]
+Placing remaining cells:  37%|███▋      | 101/275 [00:03<00:07, 24.08it/s]
+Placing remaining cells:  38%|███▊      | 104/275 [00:03<00:06, 24.79it/s]
+Placing remaining cells:  39%|███▉      | 107/275 [00:03<00:07, 23.47it/s]
+Placing remaining cells:  40%|████      | 110/275 [00:03<00:06, 23.89it/s]
+Placing remaining cells:  41%|████▏     | 114/275 [00:04<00:06, 25.67it/s]
+Placing remaining cells:  43%|████▎     | 118/275 [00:04<00:05, 26.87it/s]
+Placing remaining cells:  44%|████▍     | 121/275 [00:04<00:05, 26.47it/s]
+Placing remaining cells:  45%|████▌     | 124/275 [00:04<00:06, 24.93it/s]
+Placing remaining cells:  47%|████▋     | 128/275 [00:04<00:05, 25.81it/s]
+Placing remaining cells:  48%|████▊     | 131/275 [00:04<00:05, 24.46it/s]
+Placing remaining cells:  49%|████▊     | 134/275 [00:04<00:05, 24.75it/s]
+Placing remaining cells:  51%|█████     | 139/275 [00:04<00:04, 28.14it/s]
+Placing remaining cells:  52%|█████▏    | 142/275 [00:05<00:04, 27.34it/s]
+Placing remaining cells:  53%|█████▎    | 145/275 [00:05<00:04, 26.82it/s]
+Placing remaining cells:  54%|█████▍    | 148/275 [00:05<00:05, 25.06it/s]
+Placing remaining cells:  55%|█████▍    | 151/275 [00:05<00:05, 23.86it/s]
+Placing remaining cells:  56%|█████▌    | 154/275 [00:05<00:04, 24.71it/s]
+Placing remaining cells:  57%|█████▋    | 157/275 [00:05<00:05, 23.51it/s]
+Placing remaining cells:  59%|█████▊    | 161/275 [00:05<00:04, 25.39it/s]
+Placing remaining cells:  60%|█████▉    | 164/275 [00:06<00:04, 25.31it/s]
+Placing remaining cells:  61%|██████    | 168/275 [00:06<00:03, 28.22it/s]
+Placing remaining cells:  62%|██████▏   | 171/275 [00:06<00:03, 27.44it/s]
+Placing remaining cells:  63%|██████▎   | 174/275 [00:06<00:03, 26.91it/s]
+Placing remaining cells:  64%|██████▍   | 177/275 [00:06<00:03, 26.40it/s]
+Placing remaining cells:  65%|██████▌   | 180/275 [00:06<00:03, 24.70it/s]
+Placing remaining cells:  67%|██████▋   | 185/275 [00:06<00:03, 28.66it/s]
+Placing remaining cells:  68%|██████▊   | 188/275 [00:06<00:03, 26.32it/s]
+Placing remaining cells:  69%|██████▉   | 191/275 [00:07<00:03, 26.00it/s]
+Placing remaining cells:  71%|███████   | 194/275 [00:07<00:03, 25.91it/s]
+Placing remaining cells:  72%|███████▏  | 197/275 [00:07<00:03, 24.32it/s]
+Placing remaining cells:  73%|███████▎  | 200/275 [00:07<00:03, 24.64it/s]
+Placing remaining cells:  74%|███████▍  | 203/275 [00:07<00:03, 23.47it/s]
+Placing remaining cells:  75%|███████▍  | 206/275 [00:07<00:02, 23.95it/s]
+Placing remaining cells:  76%|███████▋  | 210/275 [00:07<00:02, 27.19it/s]
+Placing remaining cells:  77%|███████▋  | 213/275 [00:07<00:02, 26.80it/s]
+Placing remaining cells:  79%|███████▊  | 216/275 [00:07<00:02, 27.20it/s]
+Placing remaining cells:  80%|███████▉  | 219/275 [00:08<00:02, 26.83it/s]
+Placing remaining cells:  81%|████████  | 222/275 [00:08<00:02, 25.29it/s]
+Placing remaining cells:  83%|████████▎ | 229/275 [00:08<00:01, 36.77it/s]
+Placing remaining cells:  85%|████████▌ | 234/275 [00:08<00:01, 37.97it/s]
+Placing remaining cells:  87%|████████▋ | 240/275 [00:08<00:00, 40.96it/s]
+Placing remaining cells:  89%|████████▉ | 246/275 [00:08<00:00, 43.08it/s]
+Placing remaining cells:  91%|█████████▏| 251/275 [00:08<00:00, 40.42it/s]
+Placing remaining cells:  93%|█████████▎| 256/275 [00:08<00:00, 40.55it/s]
+Placing remaining cells:  95%|█████████▍| 261/275 [00:09<00:00, 41.61it/s]
+Placing remaining cells:  97%|█████████▋| 266/275 [00:09<00:00, 41.40it/s]
+Placing remaining cells:  99%|█████████▊| 271/275 [00:09<00:00, 42.33it/s]
+Placing remaining cells: 100%|██████████| 275/275 [00:09<00:00, 29.29it/s]
+
+Placed 275 remaining cells.
+
+Placement Summary: 463/463 cells placed (100.0%)
+
+Placement map written to: build/arith/greedy/arith.map
+Total instances: 463
+
+Placement saved to build/arith/greedy/arith_placement.json
+
+============================================================
+Placement Summary
+============================================================
+Final Total HPWL: 165616.42 um
+Total Instances: 463
+============================================================
+
+Placement completed successfully!
+Map file: build/arith/greedy/arith.map
+JSON file: build/arith/greedy/arith_placement.json
+
+================================================================================
+# End time: 2025-11-23T05:43:40.918252
+# Return code: 0

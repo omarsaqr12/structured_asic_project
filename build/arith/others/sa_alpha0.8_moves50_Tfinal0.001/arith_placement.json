@@ -1,0 +1,2780 @@
+{
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2106": {
+    "fabric_slot_name": "T20Y0__R0_INV_0",
+    "x": 564.36,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2530": {
+    "fabric_slot_name": "T22Y65__R1_BUF_0",
+    "x": 619.1,
+    "y": 714.92,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2157": {
+    "fabric_slot_name": "T35Y89__R0_NAND_4",
+    "x": 987.56,
+    "y": 973.32,
+    "orient": "N"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1425": {
+    "fabric_slot_name": "T17Y0__R1_DFBBP_0",
+    "x": 489.84,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2254": {
+    "fabric_slot_name": "T7Y0__R0_OR_2",
+    "x": 221.66,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2133": {
+    "fabric_slot_name": "T24Y89__R3_NAND_0",
+    "x": 667.86,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2120": {
+    "fabric_slot_name": "T15Y89__R2_OR_4",
+    "x": 442.46,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2499": {
+    "fabric_slot_name": "T2Y45__R1_BUF_0",
+    "x": 67.1,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2340": {
+    "fabric_slot_name": "T0Y40__R2_OR_0",
+    "x": 19.26,
+    "y": 445.64,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2437": {
+    "fabric_slot_name": "T32Y24__R3_NAND_1",
+    "x": 890.96,
+    "y": 274.28,
+    "orient": "FS"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1431": {
+    "fabric_slot_name": "T22Y29__R3_DFBBP_0",
+    "x": 627.84,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2516": {
+    "fabric_slot_name": "T4Y85__R1_BUF_0",
+    "x": 122.3,
+    "y": 932.52,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2124": {
+    "fabric_slot_name": "T19Y89__R2_OR_4",
+    "x": 552.86,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2177": {
+    "fabric_slot_name": "T0Y0__R0_NAND_0",
+    "x": 5.46,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2202": {
+    "fabric_slot_name": "T19Y0__R0_OR_2",
+    "x": 552.86,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2379": {
+    "fabric_slot_name": "T0Y50__R2_OR_0",
+    "x": 19.26,
+    "y": 554.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2474": {
+    "fabric_slot_name": "T8Y89__R3_NAND_0",
+    "x": 226.26,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2102": {
+    "fabric_slot_name": "T0Y0__R0_INV_0",
+    "x": 12.36,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2143": {
+    "fabric_slot_name": "T23Y89__R2_OR_4",
+    "x": 663.26,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2326": {
+    "fabric_slot_name": "T25Y9__R2_OR_4",
+    "x": 718.46,
+    "y": 108.36,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2529": {
+    "fabric_slot_name": "T22Y60__R1_BUF_0",
+    "x": 619.1,
+    "y": 660.52,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2479": {
+    "fabric_slot_name": "T12Y89__R3_BUF_0",
+    "x": 345.86,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2514": {
+    "fabric_slot_name": "T4Y75__R1_BUF_0",
+    "x": 122.3,
+    "y": 823.72,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2531": {
+    "fabric_slot_name": "T22Y70__R1_BUF_0",
+    "x": 619.1,
+    "y": 769.32,
+    "orient": "FS"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1429": {
+    "fabric_slot_name": "T19Y29__R3_DFBBP_0",
+    "x": 545.04,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2520": {
+    "fabric_slot_name": "T12Y0__R1_BUF_0",
+    "x": 343.1,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2459": {
+    "fabric_slot_name": "T0Y20__R2_OR_0",
+    "x": 19.26,
+    "y": 228.04,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2503": {
+    "fabric_slot_name": "T16Y89__R3_BUF_0",
+    "x": 456.26,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2112": {
+    "fabric_slot_name": "T4Y89__R3_NAND_0",
+    "x": 115.86,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2502": {
+    "fabric_slot_name": "T14Y89__R3_BUF_0",
+    "x": 401.06,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2406": {
+    "fabric_slot_name": "T30Y19__R3_NAND_1",
+    "x": 835.76,
+    "y": 219.88,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2131": {
+    "fabric_slot_name": "T24Y89__R3_NAND_1",
+    "x": 670.16,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2492": {
+    "fabric_slot_name": "T18Y25__R1_BUF_0",
+    "x": 508.7,
+    "y": 279.72,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2534": {
+    "fabric_slot_name": "T22Y85__R1_BUF_0",
+    "x": 619.1,
+    "y": 932.52,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2129": {
+    "fabric_slot_name": "T0Y89__R3_NAND_0",
+    "x": 5.46,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2545": {
+    "fabric_slot_name": "T22Y45__R1_BUF_0",
+    "x": 619.1,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2104": {
+    "fabric_slot_name": "T12Y0__R0_INV_0",
+    "x": 343.56,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2263": {
+    "fabric_slot_name": "T35Y10__R0_OR_2",
+    "x": 994.46,
+    "y": 113.8,
+    "orient": "N"
+  },
+  "$flatten\\A.\\counter_inst.$auto$ff.cc:266:slice$1480": {
+    "fabric_slot_name": "T14Y29__R3_DFBBP_0",
+    "x": 407.04,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2322": {
+    "fabric_slot_name": "T16Y0__R0_NAND_0",
+    "x": 447.06,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2518": {
+    "fabric_slot_name": "T8Y0__R1_BUF_0",
+    "x": 232.7,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2097": {
+    "fabric_slot_name": "T0Y89__R2_INV_0",
+    "x": 5.46,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2300": {
+    "fabric_slot_name": "T0Y30__R0_NAND_0",
+    "x": 5.46,
+    "y": 331.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2119": {
+    "fabric_slot_name": "T16Y89__R3_NAND_0",
+    "x": 447.06,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1432": {
+    "fabric_slot_name": "T23Y29__R3_DFBBP_0",
+    "x": 655.44,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2515": {
+    "fabric_slot_name": "T4Y80__R1_BUF_0",
+    "x": 122.3,
+    "y": 878.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2362": {
+    "fabric_slot_name": "T19Y0__R0_OR_1",
+    "x": 550.56,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2168": {
+    "fabric_slot_name": "T35Y80__R0_OR_2",
+    "x": 994.46,
+    "y": 875.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2382": {
+    "fabric_slot_name": "T35Y40__R0_NAND_4",
+    "x": 987.56,
+    "y": 440.2,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2527": {
+    "fabric_slot_name": "T22Y50__R1_BUF_0",
+    "x": 619.1,
+    "y": 551.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2281": {
+    "fabric_slot_name": "T11Y0__R0_OR_2",
+    "x": 332.06,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2532": {
+    "fabric_slot_name": "T22Y75__R1_BUF_0",
+    "x": 619.1,
+    "y": 823.72,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2496": {
+    "fabric_slot_name": "T18Y45__R1_BUF_0",
+    "x": 508.7,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2465": {
+    "fabric_slot_name": "T0Y89__R2_INV_1",
+    "x": 7.3,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2411": {
+    "fabric_slot_name": "T23Y0__R0_OR_2",
+    "x": 663.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2509": {
+    "fabric_slot_name": "T4Y50__R1_BUF_0",
+    "x": 122.3,
+    "y": 551.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2365": {
+    "fabric_slot_name": "T27Y14__R2_OR_4",
+    "x": 773.66,
+    "y": 162.76,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2533": {
+    "fabric_slot_name": "T22Y80__R1_BUF_0",
+    "x": 619.1,
+    "y": 878.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2366": {
+    "fabric_slot_name": "T28Y14__R3_NAND_1",
+    "x": 780.56,
+    "y": 165.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2507": {
+    "fabric_slot_name": "T6Y0__R1_BUF_0",
+    "x": 177.5,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2188": {
+    "fabric_slot_name": "T35Y79__R2_OR_4",
+    "x": 994.46,
+    "y": 869.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2123": {
+    "fabric_slot_name": "T20Y89__R3_NAND_0",
+    "x": 557.46,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2105": {
+    "fabric_slot_name": "T16Y0__R0_INV_0",
+    "x": 453.96,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2519": {
+    "fabric_slot_name": "T10Y0__R1_BUF_0",
+    "x": 287.9,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2282": {
+    "fabric_slot_name": "T24Y4__R3_NAND_1",
+    "x": 670.16,
+    "y": 56.68,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2490": {
+    "fabric_slot_name": "T18Y15__R1_BUF_0",
+    "x": 508.7,
+    "y": 170.92,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2539": {
+    "fabric_slot_name": "T10Y45__R1_BUF_0",
+    "x": 287.9,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2512": {
+    "fabric_slot_name": "T4Y65__R1_BUF_0",
+    "x": 122.3,
+    "y": 714.92,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2478": {
+    "fabric_slot_name": "T0Y80__R2_INV_0",
+    "x": 5.46,
+    "y": 880.84,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2500": {
+    "fabric_slot_name": "T10Y89__R3_BUF_0",
+    "x": 290.66,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2250": {
+    "fabric_slot_name": "T8Y0__R0_NAND_0",
+    "x": 226.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2401": {
+    "fabric_slot_name": "T24Y0__R0_NAND_0",
+    "x": 667.86,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2505": {
+    "fabric_slot_name": "T20Y89__R3_BUF_0",
+    "x": 566.66,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2460": {
+    "fabric_slot_name": "T0Y30__R2_OR_0",
+    "x": 19.26,
+    "y": 336.84,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2489": {
+    "fabric_slot_name": "T18Y10__R1_BUF_0",
+    "x": 508.7,
+    "y": 116.52,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2327": {
+    "fabric_slot_name": "T26Y9__R3_NAND_1",
+    "x": 725.36,
+    "y": 111.08,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2108": {
+    "fabric_slot_name": "T28Y0__R0_INV_0",
+    "x": 785.16,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2544": {
+    "fabric_slot_name": "T20Y45__R1_BUF_0",
+    "x": 563.9,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2481": {
+    "fabric_slot_name": "T20Y89__R1_BUF_0",
+    "x": 563.9,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2264": {
+    "fabric_slot_name": "T35Y10__R0_NAND_4",
+    "x": 987.56,
+    "y": 113.8,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2421": {
+    "fabric_slot_name": "T35Y50__R0_NAND_4",
+    "x": 987.56,
+    "y": 549.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2504": {
+    "fabric_slot_name": "T18Y89__R3_BUF_0",
+    "x": 511.46,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2159": {
+    "fabric_slot_name": "T15Y0__R0_OR_2",
+    "x": 442.46,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2536": {
+    "fabric_slot_name": "T8Y45__R1_BUF_0",
+    "x": 232.7,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2403": {
+    "fabric_slot_name": "T23Y0__R0_OR_1",
+    "x": 660.96,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2462": {
+    "fabric_slot_name": "T0Y49__R2_OR_0",
+    "x": 19.26,
+    "y": 543.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2153": {
+    "fabric_slot_name": "T0Y89__R3_NAND_1",
+    "x": 7.76,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2302": {
+    "fabric_slot_name": "T35Y20__R0_NAND_4",
+    "x": 987.56,
+    "y": 222.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2323": {
+    "fabric_slot_name": "T15Y0__R0_OR_1",
+    "x": 440.16,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2180": {
+    "fabric_slot_name": "T3Y0__R0_OR_2",
+    "x": 111.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2110": {
+    "fabric_slot_name": "T8Y89__R3_NAND_1",
+    "x": 228.56,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2171": {
+    "fabric_slot_name": "T35Y80__R0_NAND_4",
+    "x": 987.56,
+    "y": 875.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2449": {
+    "fabric_slot_name": "T28Y0__R0_NAND_0",
+    "x": 778.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2420": {
+    "fabric_slot_name": "T0Y60__R2_OR_0",
+    "x": 19.26,
+    "y": 663.24,
+    "orient": "N"
+  },
+  "$flatten\\A.\\counter_inst.$auto$ff.cc:266:slice$1481": {
+    "fabric_slot_name": "T15Y29__R3_DFBBP_0",
+    "x": 434.64,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2488": {
+    "fabric_slot_name": "T18Y5__R1_BUF_0",
+    "x": 508.7,
+    "y": 62.12,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2493": {
+    "fabric_slot_name": "T18Y30__R1_BUF_0",
+    "x": 508.7,
+    "y": 334.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2101": {
+    "fabric_slot_name": "T35Y0__R0_INV_0",
+    "x": 978.36,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2146": {
+    "fabric_slot_name": "T0Y89__R3_NAND_2",
+    "x": 10.06,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2521": {
+    "fabric_slot_name": "T14Y0__R1_BUF_0",
+    "x": 398.3,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2184": {
+    "fabric_slot_name": "T4Y0__R0_NAND_0",
+    "x": 115.86,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2541": {
+    "fabric_slot_name": "T14Y45__R1_BUF_0",
+    "x": 398.3,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2152": {
+    "fabric_slot_name": "T15Y89__R2_OR_3",
+    "x": 440.16,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2224": {
+    "fabric_slot_name": "T35Y0__R0_OR_2",
+    "x": 994.46,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2422": {
+    "fabric_slot_name": "T35Y50__R0_OR_2",
+    "x": 994.46,
+    "y": 549.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2537": {
+    "fabric_slot_name": "T4Y89__R3_BUF_0",
+    "x": 125.06,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2210": {
+    "fabric_slot_name": "T35Y80__R2_OR_4",
+    "x": 994.46,
+    "y": 880.84,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2494": {
+    "fabric_slot_name": "T18Y35__R1_BUF_0",
+    "x": 508.7,
+    "y": 388.52,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2543": {
+    "fabric_slot_name": "T18Y45__R0_BUF_0",
+    "x": 511.0,
+    "y": 494.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2458": {
+    "fabric_slot_name": "T0Y5__R2_OR_0",
+    "x": 19.26,
+    "y": 64.84,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2511": {
+    "fabric_slot_name": "T4Y60__R1_BUF_0",
+    "x": 122.3,
+    "y": 660.52,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2510": {
+    "fabric_slot_name": "T4Y55__R1_BUF_0",
+    "x": 122.3,
+    "y": 606.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2262": {
+    "fabric_slot_name": "T0Y19__R2_OR_0",
+    "x": 19.26,
+    "y": 217.16,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2486": {
+    "fabric_slot_name": "T2Y0__R1_BUF_0",
+    "x": 67.1,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2522": {
+    "fabric_slot_name": "T16Y0__R1_BUF_0",
+    "x": 453.5,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2192": {
+    "fabric_slot_name": "T1Y0__R0_OR_2",
+    "x": 56.06,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$hilomap.cc:48:hilomap_worker$2058": {
+    "fabric_slot_name": "T8Y89__R2_CONB_0",
+    "x": 236.84,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2485": {
+    "fabric_slot_name": "T24Y89__R3_BUF_0",
+    "x": 677.06,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2251": {
+    "fabric_slot_name": "T7Y0__R0_OR_1",
+    "x": 219.36,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2342": {
+    "fabric_slot_name": "T35Y30__R0_NAND_4",
+    "x": 987.56,
+    "y": 331.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2198": {
+    "fabric_slot_name": "T35Y70__R0_OR_2",
+    "x": 994.46,
+    "y": 766.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2100": {
+    "fabric_slot_name": "T35Y80__R0_INV_0",
+    "x": 978.36,
+    "y": 875.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2114": {
+    "fabric_slot_name": "T12Y89__R3_NAND_0",
+    "x": 336.66,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2223": {
+    "fabric_slot_name": "T0Y10__R2_OR_0",
+    "x": 19.26,
+    "y": 119.24,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2506": {
+    "fabric_slot_name": "T22Y89__R3_BUF_0",
+    "x": 621.86,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2242": {
+    "fabric_slot_name": "T22Y0__R0_NAND_1",
+    "x": 614.96,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2535": {
+    "fabric_slot_name": "T22Y89__R1_BUF_0",
+    "x": 619.1,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2497": {
+    "fabric_slot_name": "T4Y0__R1_BUF_0",
+    "x": 122.3,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2457": {
+    "fabric_slot_name": "T0Y70__R2_OR_0",
+    "x": 19.26,
+    "y": 772.04,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2331": {
+    "fabric_slot_name": "T15Y0__R0_OR_0",
+    "x": 437.86,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2361": {
+    "fabric_slot_name": "T20Y0__R0_NAND_0",
+    "x": 557.46,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2461": {
+    "fabric_slot_name": "T0Y39__R2_OR_0",
+    "x": 19.26,
+    "y": 434.76,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2501": {
+    "fabric_slot_name": "T12Y89__R1_BUF_0",
+    "x": 343.1,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2301": {
+    "fabric_slot_name": "T35Y20__R0_OR_2",
+    "x": 994.46,
+    "y": 222.6,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2540": {
+    "fabric_slot_name": "T12Y45__R1_BUF_0",
+    "x": 343.1,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2103": {
+    "fabric_slot_name": "T8Y0__R0_INV_0",
+    "x": 233.16,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2107": {
+    "fabric_slot_name": "T24Y0__R0_INV_0",
+    "x": 674.76,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2181": {
+    "fabric_slot_name": "T20Y0__R0_NAND_1",
+    "x": 559.76,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2487": {
+    "fabric_slot_name": "T18Y0__R1_BUF_0",
+    "x": 508.7,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1424": {
+    "fabric_slot_name": "T18Y0__R1_DFBBP_0",
+    "x": 517.44,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2164": {
+    "fabric_slot_name": "T35Y65__R0_NAND_4",
+    "x": 987.56,
+    "y": 712.2,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2116": {
+    "fabric_slot_name": "T11Y89__R2_OR_4",
+    "x": 332.06,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2524": {
+    "fabric_slot_name": "T4Y45__R1_BUF_0",
+    "x": 122.3,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2482": {
+    "fabric_slot_name": "T24Y89__R1_BUF_0",
+    "x": 674.3,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2218": {
+    "fabric_slot_name": "T35Y80__R0_OR_1",
+    "x": 992.16,
+    "y": 875.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2191": {
+    "fabric_slot_name": "T2Y0__R0_NAND_0",
+    "x": 60.66,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2187": {
+    "fabric_slot_name": "T35Y70__R0_NAND_4",
+    "x": 987.56,
+    "y": 766.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2126": {
+    "fabric_slot_name": "T0Y89__R3_NAND_3",
+    "x": 12.36,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2528": {
+    "fabric_slot_name": "T22Y55__R1_BUF_0",
+    "x": 619.1,
+    "y": 606.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2278": {
+    "fabric_slot_name": "T11Y0__R0_OR_1",
+    "x": 329.76,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2441": {
+    "fabric_slot_name": "T31Y24__R2_OR_4",
+    "x": 884.06,
+    "y": 271.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2156": {
+    "fabric_slot_name": "T0Y89__R2_NAND_0",
+    "x": 9.14,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2291": {
+    "fabric_slot_name": "T23Y4__R2_OR_4",
+    "x": 663.26,
+    "y": 53.96,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2498": {
+    "fabric_slot_name": "T0Y45__R1_BUF_0",
+    "x": 11.9,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2525": {
+    "fabric_slot_name": "T6Y45__R1_BUF_0",
+    "x": 177.5,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2145": {
+    "fabric_slot_name": "T13Y89__R2_OR_4",
+    "x": 387.26,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2508": {
+    "fabric_slot_name": "T4Y45__R0_BUF_0",
+    "x": 124.6,
+    "y": 494.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2160": {
+    "fabric_slot_name": "T35Y65__R0_OR_2",
+    "x": 994.46,
+    "y": 712.2,
+    "orient": "N"
+  },
+  "$auto$hilomap.cc:40:hilomap_worker$2060": {
+    "fabric_slot_name": "T0Y0__R2_CONB_0",
+    "x": 16.04,
+    "y": 10.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2370": {
+    "fabric_slot_name": "T19Y0__R0_OR_0",
+    "x": 548.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$flatten\\A.\\counter_inst.$auto$ff.cc:266:slice$1483": {
+    "fabric_slot_name": "T18Y29__R3_DFBBP_0",
+    "x": 517.44,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2140": {
+    "fabric_slot_name": "T23Y89__R2_OR_3",
+    "x": 660.96,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2277": {
+    "fabric_slot_name": "T12Y0__R0_NAND_0",
+    "x": 336.66,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2225": {
+    "fabric_slot_name": "T35Y0__R0_NAND_4",
+    "x": 987.56,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2542": {
+    "fabric_slot_name": "T16Y45__R1_BUF_0",
+    "x": 453.5,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2165": {
+    "fabric_slot_name": "T16Y0__R0_NAND_1",
+    "x": 449.36,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1422": {
+    "fabric_slot_name": "T17Y0__R3_DFBBP_0",
+    "x": 489.84,
+    "y": 13.16,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2523": {
+    "fabric_slot_name": "T18Y0__R0_BUF_0",
+    "x": 511.0,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2099": {
+    "fabric_slot_name": "T35Y60__R0_INV_0",
+    "x": 978.36,
+    "y": 657.8,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2185": {
+    "fabric_slot_name": "T3Y0__R0_OR_1",
+    "x": 108.96,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2491": {
+    "fabric_slot_name": "T18Y20__R1_BUF_0",
+    "x": 508.7,
+    "y": 225.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2463": {
+    "fabric_slot_name": "T0Y59__R2_OR_0",
+    "x": 19.26,
+    "y": 652.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2241": {
+    "fabric_slot_name": "T21Y0__R0_OR_2",
+    "x": 608.06,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2464": {
+    "fabric_slot_name": "T0Y69__R2_OR_0",
+    "x": 19.26,
+    "y": 761.16,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2480": {
+    "fabric_slot_name": "T16Y89__R1_BUF_0",
+    "x": 453.5,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$flatten\\A.\\gray_inst.$auto$ff.cc:266:slice$1430": {
+    "fabric_slot_name": "T21Y29__R3_DFBBP_0",
+    "x": 600.24,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2109": {
+    "fabric_slot_name": "T0Y89__R2_NAND_1",
+    "x": 11.44,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2207": {
+    "fabric_slot_name": "T32Y0__R0_NAND_0",
+    "x": 888.66,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2538": {
+    "fabric_slot_name": "T6Y89__R3_BUF_0",
+    "x": 180.26,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2380": {
+    "fabric_slot_name": "T35Y40__R0_OR_2",
+    "x": 994.46,
+    "y": 440.2,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2495": {
+    "fabric_slot_name": "T18Y40__R1_BUF_0",
+    "x": 508.7,
+    "y": 442.92,
+    "orient": "FS"
+  },
+  "$auto$insbuf.cc:97:execute$2513": {
+    "fabric_slot_name": "T4Y70__R1_BUF_0",
+    "x": 122.3,
+    "y": 769.32,
+    "orient": "FS"
+  },
+  "$flatten\\A.\\counter_inst.$auto$ff.cc:266:slice$1482": {
+    "fabric_slot_name": "T17Y29__R3_DFBBP_0",
+    "x": 489.84,
+    "y": 328.68,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2341": {
+    "fabric_slot_name": "T35Y30__R0_OR_2",
+    "x": 994.46,
+    "y": 331.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2405": {
+    "fabric_slot_name": "T29Y19__R2_OR_4",
+    "x": 828.86,
+    "y": 217.16,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2526": {
+    "fabric_slot_name": "T22Y45__R0_BUF_0",
+    "x": 621.4,
+    "y": 494.6,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2517": {
+    "fabric_slot_name": "T4Y89__R1_BUF_0",
+    "x": 122.3,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2173": {
+    "fabric_slot_name": "T35Y79__R2_OR_3",
+    "x": 992.16,
+    "y": 869.96,
+    "orient": "N"
+  },
+  "$auto$hilomap.cc:40:hilomap_worker$2547": {
+    "fabric_slot_name": "T18Y21__R3_CONB_0",
+    "x": 516.06,
+    "y": 241.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2178": {
+    "fabric_slot_name": "T20Y25__R0_OR_2",
+    "x": 580.46,
+    "y": 277.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2179": {
+    "fabric_slot_name": "T15Y3__R2_INV_0",
+    "x": 419.46,
+    "y": 43.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2149": {
+    "fabric_slot_name": "T17Y53__R3_NAND_0",
+    "x": 474.66,
+    "y": 589.8,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2150": {
+    "fabric_slot_name": "T16Y54__R0_OR_2",
+    "x": 470.06,
+    "y": 592.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2127": {
+    "fabric_slot_name": "T12Y71__R3_NAND_3",
+    "x": 343.56,
+    "y": 785.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2167": {
+    "fabric_slot_name": "T29Y50__R0_NAND_0",
+    "x": 805.86,
+    "y": 549.0,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2483": {
+    "fabric_slot_name": "T20Y57__R1_BUF_0",
+    "x": 563.9,
+    "y": 627.88,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2098": {
+    "fabric_slot_name": "T20Y57__R2_INV_1",
+    "x": 559.3,
+    "y": 630.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2121": {
+    "fabric_slot_name": "T18Y89__R3_NAND_0",
+    "x": 502.26,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2199": {
+    "fabric_slot_name": "T31Y64__R0_OR_2",
+    "x": 884.06,
+    "y": 701.32,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2162": {
+    "fabric_slot_name": "T31Y63__R0_OR_2",
+    "x": 884.06,
+    "y": 690.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2194": {
+    "fabric_slot_name": "T31Y63__R2_OR_4",
+    "x": 884.06,
+    "y": 695.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2193": {
+    "fabric_slot_name": "T5Y0__R0_NAND_0",
+    "x": 143.46,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2246": {
+    "fabric_slot_name": "T17Y0__R1_NAND_2",
+    "x": 483.86,
+    "y": 7.72,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2247": {
+    "fabric_slot_name": "T17Y0__R2_OR_0",
+    "x": 488.46,
+    "y": 10.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2287": {
+    "fabric_slot_name": "T25Y5__R1_NAND_2",
+    "x": 704.66,
+    "y": 62.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2288": {
+    "fabric_slot_name": "T25Y5__R2_OR_0",
+    "x": 709.26,
+    "y": 64.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2318": {
+    "fabric_slot_name": "T28Y11__R2_NAND_2",
+    "x": 786.54,
+    "y": 130.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2319": {
+    "fabric_slot_name": "T28Y11__R2_OR_0",
+    "x": 792.06,
+    "y": 130.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2357": {
+    "fabric_slot_name": "T30Y17__R3_NAND_0",
+    "x": 833.46,
+    "y": 198.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2358": {
+    "fabric_slot_name": "T29Y18__R0_OR_2",
+    "x": 828.86,
+    "y": 200.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2397": {
+    "fabric_slot_name": "T31Y24__R2_OR_0",
+    "x": 874.86,
+    "y": 271.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2324": {
+    "fabric_slot_name": "T18Y0__R0_NAND_0",
+    "x": 502.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2289": {
+    "fabric_slot_name": "T27Y8__R1_NAND_0",
+    "x": 750.66,
+    "y": 94.76,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2279": {
+    "fabric_slot_name": "T14Y0__R0_NAND_0",
+    "x": 391.86,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2137": {
+    "fabric_slot_name": "T13Y49__R1_NAND_0",
+    "x": 364.26,
+    "y": 540.84,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2138": {
+    "fabric_slot_name": "T12Y49__R2_OR_4",
+    "x": 359.66,
+    "y": 543.56,
+    "orient": "N"
+  },
+  "$auto$insbuf.cc:97:execute$2484": {
+    "fabric_slot_name": "T13Y49__R1_BUF_0",
+    "x": 370.7,
+    "y": 540.84,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2134": {
+    "fabric_slot_name": "T12Y69__R2_OR_0",
+    "x": 350.46,
+    "y": 761.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2252": {
+    "fabric_slot_name": "T10Y0__R0_NAND_0",
+    "x": 281.46,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2320": {
+    "fabric_slot_name": "T29Y14__R3_NAND_2",
+    "x": 810.46,
+    "y": 165.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2248": {
+    "fabric_slot_name": "T21Y3__R0_NAND_3",
+    "x": 598.86,
+    "y": 37.64,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2144": {
+    "fabric_slot_name": "T15Y84__R2_NAND_0",
+    "x": 423.14,
+    "y": 924.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2130": {
+    "fabric_slot_name": "T15Y84__R2_INV_1",
+    "x": 421.3,
+    "y": 924.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2359": {
+    "fabric_slot_name": "T30Y20__R0_NAND_3",
+    "x": 847.26,
+    "y": 222.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2158": {
+    "fabric_slot_name": "T19Y69__R0_NAND_4",
+    "x": 545.96,
+    "y": 755.72,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2363": {
+    "fabric_slot_name": "T21Y0__R0_NAND_2",
+    "x": 589.66,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2402": {
+    "fabric_slot_name": "T30Y21__R0_OR_0",
+    "x": 851.86,
+    "y": 233.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2125": {
+    "fabric_slot_name": "T19Y70__R0_NAND_3",
+    "x": 543.66,
+    "y": 766.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2128": {
+    "fabric_slot_name": "T10Y54__R0_NAND_0",
+    "x": 281.46,
+    "y": 592.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2174": {
+    "fabric_slot_name": "T26Y43__R0_OR_2",
+    "x": 746.06,
+    "y": 472.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2182": {
+    "fabric_slot_name": "T27Y41__R0_OR_0",
+    "x": 769.06,
+    "y": 451.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2372": {
+    "fabric_slot_name": "T29Y44__R2_OR_1",
+    "x": 821.96,
+    "y": 489.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2332": {
+    "fabric_slot_name": "T29Y43__R2_OR_0",
+    "x": 819.66,
+    "y": 478.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2439": {
+    "fabric_slot_name": "T30Y46__R2_OR_0",
+    "x": 847.26,
+    "y": 510.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2255": {
+    "fabric_slot_name": "T28Y42__R2_OR_4",
+    "x": 801.26,
+    "y": 467.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2410": {
+    "fabric_slot_name": "T29Y45__R0_OR_2",
+    "x": 828.86,
+    "y": 494.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2283": {
+    "fabric_slot_name": "T28Y43__R2_OR_4",
+    "x": 801.26,
+    "y": 478.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2271": {
+    "fabric_slot_name": "T14Y66__R2_OR_1",
+    "x": 407.96,
+    "y": 728.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2429": {
+    "fabric_slot_name": "T19Y78__R2_OR_0",
+    "x": 543.66,
+    "y": 859.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2389": {
+    "fabric_slot_name": "T19Y78__R2_OR_1",
+    "x": 545.96,
+    "y": 859.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2214": {
+    "fabric_slot_name": "T19Y78__R2_OR_2",
+    "x": 548.26,
+    "y": 859.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2310": {
+    "fabric_slot_name": "T19Y79__R0_OR_0",
+    "x": 548.26,
+    "y": 864.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2349": {
+    "fabric_slot_name": "T19Y79__R0_OR_1",
+    "x": 550.56,
+    "y": 864.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2211": {
+    "fabric_slot_name": "T19Y79__R0_INV_0",
+    "x": 536.76,
+    "y": 864.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2399": {
+    "fabric_slot_name": "T21Y0__R0_NAND_4",
+    "x": 601.16,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2111": {
+    "fabric_slot_name": "T7Y70__R0_NAND_4",
+    "x": 214.76,
+    "y": 766.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2151": {
+    "fabric_slot_name": "T11Y65__R3_NAND_3",
+    "x": 315.96,
+    "y": 720.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2139": {
+    "fabric_slot_name": "T14Y33__R0_NAND_3",
+    "x": 405.66,
+    "y": 364.04,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2452": {
+    "fabric_slot_name": "T33Y33__R2_NAND_1",
+    "x": 922.24,
+    "y": 369.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2135": {
+    "fabric_slot_name": "T12Y56__R0_NAND_4",
+    "x": 352.76,
+    "y": 614.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2132": {
+    "fabric_slot_name": "T19Y67__R3_NAND_0",
+    "x": 529.86,
+    "y": 742.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2141": {
+    "fabric_slot_name": "T22Y82__R1_NAND_2",
+    "x": 621.86,
+    "y": 899.88,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2400": {
+    "fabric_slot_name": "T25Y7__R0_NAND_3",
+    "x": 709.26,
+    "y": 81.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2398": {
+    "fabric_slot_name": "T29Y17__R2_NAND_1",
+    "x": 811.84,
+    "y": 195.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2448": {
+    "fabric_slot_name": "T28Y11__R1_NAND_2",
+    "x": 787.46,
+    "y": 127.4,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2446": {
+    "fabric_slot_name": "T24Y4__R0_NAND_4",
+    "x": 683.96,
+    "y": 48.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2447": {
+    "fabric_slot_name": "T30Y35__R2_OR_4",
+    "x": 856.46,
+    "y": 391.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2249": {
+    "fabric_slot_name": "T27Y34__R0_OR_2",
+    "x": 773.66,
+    "y": 374.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2290": {
+    "fabric_slot_name": "T29Y35__R2_OR_0",
+    "x": 819.66,
+    "y": 391.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2321": {
+    "fabric_slot_name": "T29Y37__R0_OR_2",
+    "x": 828.86,
+    "y": 407.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2201": {
+    "fabric_slot_name": "T25Y34__R2_OR_4",
+    "x": 718.46,
+    "y": 380.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2360": {
+    "fabric_slot_name": "T29Y37__R2_OR_0",
+    "x": 819.66,
+    "y": 413.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2200": {
+    "fabric_slot_name": "T29Y37__R0_INV_0",
+    "x": 812.76,
+    "y": 407.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2196": {
+    "fabric_slot_name": "T19Y9__R3_NAND_3",
+    "x": 536.76,
+    "y": 111.08,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2280": {
+    "fabric_slot_name": "T20Y3__R1_NAND_0",
+    "x": 557.46,
+    "y": 40.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2325": {
+    "fabric_slot_name": "T20Y3__R0_NAND_4",
+    "x": 573.56,
+    "y": 37.64,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2253": {
+    "fabric_slot_name": "T19Y3__R1_NAND_2",
+    "x": 539.06,
+    "y": 40.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2364": {
+    "fabric_slot_name": "T21Y3__R1_NAND_0",
+    "x": 585.06,
+    "y": 40.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2195": {
+    "fabric_slot_name": "T22Y11__R0_INV_0",
+    "x": 619.56,
+    "y": 124.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2404": {
+    "fabric_slot_name": "T25Y19__R2_OR_1",
+    "x": 711.56,
+    "y": 217.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2166": {
+    "fabric_slot_name": "T24Y30__R2_INV_0",
+    "x": 667.86,
+    "y": 336.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2161": {
+    "fabric_slot_name": "T34Y69__R0_INV_0",
+    "x": 950.76,
+    "y": 755.72,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2113": {
+    "fabric_slot_name": "T9Y89__R1_INV_0",
+    "x": 258.46,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2115": {
+    "fabric_slot_name": "T15Y89__R2_INV_0",
+    "x": 419.46,
+    "y": 978.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2117": {
+    "fabric_slot_name": "T13Y89__R3_NAND_0",
+    "x": 364.26,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2222": {
+    "fabric_slot_name": "T10Y44__R2_NAND_0",
+    "x": 285.14,
+    "y": 489.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2183": {
+    "fabric_slot_name": "T15Y20__R0_NAND_4",
+    "x": 435.56,
+    "y": 222.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2226": {
+    "fabric_slot_name": "T35Y0__R0_NAND_3",
+    "x": 985.26,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2412": {
+    "fabric_slot_name": "T27Y32__R0_NAND_4",
+    "x": 766.76,
+    "y": 353.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2450": {
+    "fabric_slot_name": "T28Y29__R0_NAND_0",
+    "x": 778.26,
+    "y": 320.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2451": {
+    "fabric_slot_name": "T25Y21__R2_OR_0",
+    "x": 709.26,
+    "y": 238.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2272": {
+    "fabric_slot_name": "T25Y21__R0_NAND_3",
+    "x": 709.26,
+    "y": 233.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2243": {
+    "fabric_slot_name": "T25Y21__R0_NAND_4",
+    "x": 711.56,
+    "y": 233.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2328": {
+    "fabric_slot_name": "T27Y24__R3_NAND_1",
+    "x": 752.96,
+    "y": 274.28,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2292": {
+    "fabric_slot_name": "T26Y23__R2_NAND_2",
+    "x": 731.34,
+    "y": 260.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2367": {
+    "fabric_slot_name": "T27Y25__R3_NAND_3",
+    "x": 757.56,
+    "y": 285.16,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2189": {
+    "fabric_slot_name": "T28Y35__R0_INV_0",
+    "x": 785.16,
+    "y": 385.8,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2440": {
+    "fabric_slot_name": "T27Y26__R0_NAND_0",
+    "x": 750.66,
+    "y": 287.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2190": {
+    "fabric_slot_name": "T27Y25__R3_NAND_0",
+    "x": 750.66,
+    "y": 285.16,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2407": {
+    "fabric_slot_name": "T27Y26__R1_NAND_0",
+    "x": 750.66,
+    "y": 290.6,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2351": {
+    "fabric_slot_name": "T27Y26__R0_NAND_4",
+    "x": 766.76,
+    "y": 287.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2383": {
+    "fabric_slot_name": "T33Y35__R1_NAND_0",
+    "x": 916.26,
+    "y": 388.52,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2423": {
+    "fabric_slot_name": "T33Y42__R0_NAND_0",
+    "x": 916.26,
+    "y": 461.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2312": {
+    "fabric_slot_name": "T26Y24__R0_NAND_3",
+    "x": 736.86,
+    "y": 266.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2391": {
+    "fabric_slot_name": "T28Y28__R1_NAND_2",
+    "x": 787.46,
+    "y": 312.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2392": {
+    "fabric_slot_name": "T29Y30__R0_NAND_3",
+    "x": 819.66,
+    "y": 331.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2394": {
+    "fabric_slot_name": "T29Y29__R2_OR_0",
+    "x": 819.66,
+    "y": 325.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2384": {
+    "fabric_slot_name": "T30Y30__R2_INV_0",
+    "x": 833.46,
+    "y": 336.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2430": {
+    "fabric_slot_name": "T30Y31__R3_NAND_0",
+    "x": 833.46,
+    "y": 350.44,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2431": {
+    "fabric_slot_name": "T29Y33__R0_OR_2",
+    "x": 828.86,
+    "y": 364.04,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2433": {
+    "fabric_slot_name": "T30Y33__R1_NAND_0",
+    "x": 833.46,
+    "y": 366.76,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2467": {
+    "fabric_slot_name": "T29Y33__R2_OR_4",
+    "x": 828.86,
+    "y": 369.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2424": {
+    "fabric_slot_name": "T30Y33__R2_INV_0",
+    "x": 833.46,
+    "y": 369.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2425": {
+    "fabric_slot_name": "T33Y36__R1_NAND_0",
+    "x": 916.26,
+    "y": 399.4,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2387": {
+    "fabric_slot_name": "T31Y33__R1_NAND_0",
+    "x": 861.06,
+    "y": 366.76,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2388": {
+    "fabric_slot_name": "T28Y45__R1_NAND_2",
+    "x": 787.46,
+    "y": 497.32,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2386": {
+    "fabric_slot_name": "T29Y36__R2_OR_3",
+    "x": 826.56,
+    "y": 402.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2385": {
+    "fabric_slot_name": "T32Y33__R2_NAND_1",
+    "x": 894.64,
+    "y": 369.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2343": {
+    "fabric_slot_name": "T34Y31__R0_NAND_4",
+    "x": 959.96,
+    "y": 342.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2353": {
+    "fabric_slot_name": "T30Y28__R2_NAND_0",
+    "x": 837.14,
+    "y": 315.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2352": {
+    "fabric_slot_name": "T30Y28__R2_OR_3",
+    "x": 854.16,
+    "y": 315.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2186": {
+    "fabric_slot_name": "T11Y9__R0_NAND_4",
+    "x": 325.16,
+    "y": 102.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2215": {
+    "fabric_slot_name": "T20Y22__R0_OR_2",
+    "x": 580.46,
+    "y": 244.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2216": {
+    "fabric_slot_name": "T21Y21__R3_NAND_0",
+    "x": 585.06,
+    "y": 241.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2212": {
+    "fabric_slot_name": "T19Y19__R2_OR_4",
+    "x": 552.86,
+    "y": 217.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2209": {
+    "fabric_slot_name": "T20Y19__R3_NAND_1",
+    "x": 559.76,
+    "y": 219.88,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2228": {
+    "fabric_slot_name": "T12Y9__R1_NAND_0",
+    "x": 336.66,
+    "y": 105.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2213": {
+    "fabric_slot_name": "T18Y31__R3_NAND_0",
+    "x": 502.26,
+    "y": 350.44,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2235": {
+    "fabric_slot_name": "T23Y21__R0_NAND_0",
+    "x": 640.26,
+    "y": 233.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2236": {
+    "fabric_slot_name": "T28Y14__R0_NAND_0",
+    "x": 778.26,
+    "y": 157.32,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2470": {
+    "fabric_slot_name": "T29Y57__R1_NAND_2",
+    "x": 815.06,
+    "y": 627.88,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2237": {
+    "fabric_slot_name": "T28Y11__R2_OR_4",
+    "x": 801.26,
+    "y": 130.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2238": {
+    "fabric_slot_name": "T27Y15__R2_NAND_2",
+    "x": 758.94,
+    "y": 173.64,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2227": {
+    "fabric_slot_name": "T31Y8__R2_INV_0",
+    "x": 861.06,
+    "y": 97.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2381": {
+    "fabric_slot_name": "T34Y37__R2_INV_0",
+    "x": 943.86,
+    "y": 413.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2468": {
+    "fabric_slot_name": "T34Y43__R0_NAND_2",
+    "x": 948.46,
+    "y": 472.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2208": {
+    "fabric_slot_name": "T24Y13__R2_INV_0",
+    "x": 667.86,
+    "y": 151.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2344": {
+    "fabric_slot_name": "T32Y29__R2_INV_0",
+    "x": 888.66,
+    "y": 325.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2368": {
+    "fabric_slot_name": "T29Y44__R0_NAND_3",
+    "x": 819.66,
+    "y": 483.72,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2169": {
+    "fabric_slot_name": "T32Y62__R1_NAND_2",
+    "x": 897.86,
+    "y": 682.28,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2329": {
+    "fabric_slot_name": "T30Y48__R2_NAND_1",
+    "x": 839.44,
+    "y": 532.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2293": {
+    "fabric_slot_name": "T30Y48__R1_NAND_0",
+    "x": 833.46,
+    "y": 529.96,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2244": {
+    "fabric_slot_name": "T30Y47__R3_NAND_0",
+    "x": 833.46,
+    "y": 524.52,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2163": {
+    "fabric_slot_name": "T31Y52__R2_INV_0",
+    "x": 861.06,
+    "y": 576.2,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2170": {
+    "fabric_slot_name": "T16Y20__R3_NAND_1",
+    "x": 449.36,
+    "y": 230.76,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2330": {
+    "fabric_slot_name": "T28Y29__R0_NAND_1",
+    "x": 780.56,
+    "y": 320.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2197": {
+    "fabric_slot_name": "T23Y17__R3_NAND_2",
+    "x": 644.86,
+    "y": 198.12,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2273": {
+    "fabric_slot_name": "T26Y22__R1_NAND_0",
+    "x": 723.06,
+    "y": 247.08,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2265": {
+    "fabric_slot_name": "T32Y14__R0_NAND_3",
+    "x": 902.46,
+    "y": 157.32,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2274": {
+    "fabric_slot_name": "T27Y19__R0_OR_2",
+    "x": 773.66,
+    "y": 211.72,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2268": {
+    "fabric_slot_name": "T29Y18__R1_NAND_0",
+    "x": 805.86,
+    "y": 203.56,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2269": {
+    "fabric_slot_name": "T28Y18__R2_OR_4",
+    "x": 801.26,
+    "y": 206.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2270": {
+    "fabric_slot_name": "T24Y34__R2_NAND_0",
+    "x": 671.54,
+    "y": 380.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2275": {
+    "fabric_slot_name": "T26Y22__R0_NAND_4",
+    "x": 739.16,
+    "y": 244.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2206": {
+    "fabric_slot_name": "T7Y15__R0_OR_2",
+    "x": 221.66,
+    "y": 168.2,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2408": {
+    "fabric_slot_name": "T30Y36__R0_NAND_3",
+    "x": 847.26,
+    "y": 396.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2203": {
+    "fabric_slot_name": "T27Y29__R2_NAND_0",
+    "x": 754.34,
+    "y": 325.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2442": {
+    "fabric_slot_name": "T30Y35__R2_NAND_0",
+    "x": 837.14,
+    "y": 391.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2369": {
+    "fabric_slot_name": "T28Y29__R0_NAND_4",
+    "x": 794.36,
+    "y": 320.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2276": {
+    "fabric_slot_name": "T30Y51__R0_OR_2",
+    "x": 856.46,
+    "y": 559.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2239": {
+    "fabric_slot_name": "T31Y48__R2_OR_0",
+    "x": 874.86,
+    "y": 532.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2219": {
+    "fabric_slot_name": "T33Y59__R2_INV_0",
+    "x": 916.26,
+    "y": 652.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2333": {
+    "fabric_slot_name": "T22Y22__R0_NAND_4",
+    "x": 628.76,
+    "y": 244.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2245": {
+    "fabric_slot_name": "T26Y23__R3_NAND_0",
+    "x": 723.06,
+    "y": 263.4,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2305": {
+    "fabric_slot_name": "T34Y12__R0_NAND_0",
+    "x": 943.86,
+    "y": 135.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2266": {
+    "fabric_slot_name": "T35Y4__R0_NAND_1",
+    "x": 973.76,
+    "y": 48.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2267": {
+    "fabric_slot_name": "T32Y13__R2_INV_0",
+    "x": 888.66,
+    "y": 151.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2229": {
+    "fabric_slot_name": "T26Y7__R1_NAND_0",
+    "x": 723.06,
+    "y": 83.88,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2231": {
+    "fabric_slot_name": "T22Y8__R2_OR_4",
+    "x": 635.66,
+    "y": 97.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2232": {
+    "fabric_slot_name": "T24Y48__R1_NAND_0",
+    "x": 667.86,
+    "y": 529.96,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2306": {
+    "fabric_slot_name": "T34Y12__R0_NAND_1",
+    "x": 946.16,
+    "y": 135.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2258": {
+    "fabric_slot_name": "T22Y13__R0_NAND_4",
+    "x": 628.76,
+    "y": 146.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2172": {
+    "fabric_slot_name": "T34Y74__R2_OR_4",
+    "x": 966.86,
+    "y": 815.56,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2175": {
+    "fabric_slot_name": "T31Y58__R3_NAND_0",
+    "x": 861.06,
+    "y": 644.2,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2220": {
+    "fabric_slot_name": "T27Y40__R3_NAND_0",
+    "x": 750.66,
+    "y": 448.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2395": {
+    "fabric_slot_name": "T30Y43__R1_NAND_0",
+    "x": 833.46,
+    "y": 475.56,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2355": {
+    "fabric_slot_name": "T30Y43__R0_NAND_2",
+    "x": 838.06,
+    "y": 472.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2434": {
+    "fabric_slot_name": "T30Y44__R0_NAND_0",
+    "x": 833.46,
+    "y": 483.72,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2316": {
+    "fabric_slot_name": "T30Y46__R0_NAND_0",
+    "x": 833.46,
+    "y": 505.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2476": {
+    "fabric_slot_name": "T29Y46__R0_OR_2",
+    "x": 828.86,
+    "y": 505.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2315": {
+    "fabric_slot_name": "T28Y34__R2_OR_0",
+    "x": 792.06,
+    "y": 380.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2313": {
+    "fabric_slot_name": "T27Y28__R0_NAND_3",
+    "x": 764.46,
+    "y": 309.64,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2303": {
+    "fabric_slot_name": "T32Y25__R3_NAND_0",
+    "x": 888.66,
+    "y": 285.16,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2304": {
+    "fabric_slot_name": "T29Y29__R1_INV_0",
+    "x": 810.46,
+    "y": 323.24,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2308": {
+    "fabric_slot_name": "T31Y20__R2_OR_1",
+    "x": 877.16,
+    "y": 228.04,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2307": {
+    "fabric_slot_name": "T31Y21__R0_NAND_4",
+    "x": 877.16,
+    "y": 233.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2309": {
+    "fabric_slot_name": "T27Y40__R0_NAND_4",
+    "x": 766.76,
+    "y": 440.2,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2345": {
+    "fabric_slot_name": "T31Y27__R0_NAND_4",
+    "x": 877.16,
+    "y": 298.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2346": {
+    "fabric_slot_name": "T32Y30__R0_NAND_0",
+    "x": 888.66,
+    "y": 331.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2347": {
+    "fabric_slot_name": "T31Y29__R0_OR_2",
+    "x": 884.06,
+    "y": 320.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2348": {
+    "fabric_slot_name": "T29Y43__R0_NAND_0",
+    "x": 805.86,
+    "y": 472.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2221": {
+    "fabric_slot_name": "T18Y42__R2_OR_1",
+    "x": 518.36,
+    "y": 467.4,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2217": {
+    "fabric_slot_name": "T21Y28__R2_INV_0",
+    "x": 585.06,
+    "y": 315.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2374": {
+    "fabric_slot_name": "T29Y36__R3_NAND_1",
+    "x": 808.16,
+    "y": 404.84,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2453": {
+    "fabric_slot_name": "T30Y17__R0_NAND_4",
+    "x": 849.56,
+    "y": 189.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2475": {
+    "fabric_slot_name": "T19Y68__R0_NAND_0",
+    "x": 529.86,
+    "y": 744.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2473": {
+    "fabric_slot_name": "T24Y51__R0_NAND_3",
+    "x": 681.66,
+    "y": 559.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2154": {
+    "fabric_slot_name": "T8Y89__R1_NAND_0",
+    "x": 226.26,
+    "y": 976.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2409": {
+    "fabric_slot_name": "T28Y31__R0_NAND_4",
+    "x": 794.36,
+    "y": 342.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2335": {
+    "fabric_slot_name": "T24Y16__R1_NAND_2",
+    "x": 677.06,
+    "y": 181.8,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2294": {
+    "fabric_slot_name": "T27Y26__R3_NAND_0",
+    "x": 750.66,
+    "y": 296.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2295": {
+    "fabric_slot_name": "T28Y31__R0_NAND_2",
+    "x": 782.86,
+    "y": 342.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2256": {
+    "fabric_slot_name": "T18Y21__R1_NAND_2",
+    "x": 511.46,
+    "y": 236.2,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2414": {
+    "fabric_slot_name": "T27Y10__R2_NAND_1",
+    "x": 756.64,
+    "y": 119.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2284": {
+    "fabric_slot_name": "T20Y21__R3_NAND_3",
+    "x": 564.36,
+    "y": 241.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2456": {
+    "fabric_slot_name": "T10Y74__R1_NAND_0",
+    "x": 281.46,
+    "y": 812.84,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2147": {
+    "fabric_slot_name": "T7Y89__R3_NAND_0",
+    "x": 198.66,
+    "y": 981.48,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2373": {
+    "fabric_slot_name": "T25Y20__R2_NAND_1",
+    "x": 701.44,
+    "y": 228.04,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2375": {
+    "fabric_slot_name": "T26Y28__R2_OR_4",
+    "x": 746.06,
+    "y": 315.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2427": {
+    "fabric_slot_name": "T31Y34__R2_OR_0",
+    "x": 874.86,
+    "y": 380.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2426": {
+    "fabric_slot_name": "T31Y35__R0_NAND_3",
+    "x": 874.86,
+    "y": 385.8,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2428": {
+    "fabric_slot_name": "T27Y49__R0_NAND_3",
+    "x": 764.46,
+    "y": 538.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2443": {
+    "fabric_slot_name": "T30Y41__R1_NAND_2",
+    "x": 842.66,
+    "y": 453.8,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2413": {
+    "fabric_slot_name": "T27Y31__R2_OR_4",
+    "x": 773.66,
+    "y": 347.72,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2477": {
+    "fabric_slot_name": "T15Y63__R1_NAND_0",
+    "x": 419.46,
+    "y": 693.16,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2466": {
+    "fabric_slot_name": "T22Y53__R2_OR_0",
+    "x": 626.46,
+    "y": 587.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2438": {
+    "fabric_slot_name": "T28Y42__R0_INV_0",
+    "x": 785.16,
+    "y": 461.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2435": {
+    "fabric_slot_name": "T26Y48__R2_OR_0",
+    "x": 736.86,
+    "y": 532.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2204": {
+    "fabric_slot_name": "T26Y32__R0_NAND_3",
+    "x": 736.86,
+    "y": 353.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2205": {
+    "fabric_slot_name": "T19Y21__R2_OR_0",
+    "x": 543.66,
+    "y": 238.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2118": {
+    "fabric_slot_name": "T14Y60__R0_INV_0",
+    "x": 398.76,
+    "y": 657.8,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2230": {
+    "fabric_slot_name": "T30Y6__R0_INV_0",
+    "x": 840.36,
+    "y": 70.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2233": {
+    "fabric_slot_name": "T26Y27__R0_OR_2",
+    "x": 746.06,
+    "y": 298.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2314": {
+    "fabric_slot_name": "T27Y27__R0_INV_0",
+    "x": 757.56,
+    "y": 298.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2317": {
+    "fabric_slot_name": "T28Y36__R2_OR_1",
+    "x": 794.36,
+    "y": 402.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2339": {
+    "fabric_slot_name": "T14Y38__R0_NAND_3",
+    "x": 405.66,
+    "y": 418.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2311": {
+    "fabric_slot_name": "T10Y59__R2_INV_1",
+    "x": 283.3,
+    "y": 652.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2390": {
+    "fabric_slot_name": "T10Y69__R2_INV_1",
+    "x": 283.3,
+    "y": 761.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2240": {
+    "fabric_slot_name": "T16Y34__R1_INV_0",
+    "x": 451.66,
+    "y": 377.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2155": {
+    "fabric_slot_name": "T15Y59__R1_INV_0",
+    "x": 424.06,
+    "y": 649.64,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2354": {
+    "fabric_slot_name": "T29Y28__R1_INV_0",
+    "x": 810.46,
+    "y": 312.36,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2356": {
+    "fabric_slot_name": "T29Y35__R2_OR_2",
+    "x": 824.26,
+    "y": 391.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2378": {
+    "fabric_slot_name": "T15Y43__R0_NAND_1",
+    "x": 421.76,
+    "y": 472.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2136": {
+    "fabric_slot_name": "T15Y28__R0_INV_0",
+    "x": 426.36,
+    "y": 309.64,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2122": {
+    "fabric_slot_name": "T18Y59__R2_INV_0",
+    "x": 502.26,
+    "y": 652.36,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2393": {
+    "fabric_slot_name": "T30Y30__R2_INV_1",
+    "x": 835.3,
+    "y": 336.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2396": {
+    "fabric_slot_name": "T29Y36__R2_OR_4",
+    "x": 828.86,
+    "y": 402.12,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2419": {
+    "fabric_slot_name": "T15Y48__R2_NAND_0",
+    "x": 423.14,
+    "y": 532.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2148": {
+    "fabric_slot_name": "T14Y60__R1_INV_0",
+    "x": 396.46,
+    "y": 660.52,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2350": {
+    "fabric_slot_name": "T10Y64__R2_INV_1",
+    "x": 283.3,
+    "y": 706.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2436": {
+    "fabric_slot_name": "T13Y59__R0_INV_0",
+    "x": 371.16,
+    "y": 646.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2432": {
+    "fabric_slot_name": "T28Y41__R0_INV_0",
+    "x": 785.16,
+    "y": 451.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2142": {
+    "fabric_slot_name": "T21Y55__R2_INV_0",
+    "x": 585.06,
+    "y": 608.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2176": {
+    "fabric_slot_name": "T15Y29__R0_INV_0",
+    "x": 426.36,
+    "y": 320.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2445": {
+    "fabric_slot_name": "T27Y26__R0_NAND_1",
+    "x": 752.96,
+    "y": 287.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2454": {
+    "fabric_slot_name": "T28Y21__R2_OR_4",
+    "x": 801.26,
+    "y": 238.92,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2444": {
+    "fabric_slot_name": "T29Y33__R2_INV_0",
+    "x": 805.86,
+    "y": 369.48,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2455": {
+    "fabric_slot_name": "T19Y48__R0_INV_0",
+    "x": 536.76,
+    "y": 527.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2376": {
+    "fabric_slot_name": "T26Y28__R2_OR_3",
+    "x": 743.76,
+    "y": 315.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2377": {
+    "fabric_slot_name": "T21Y35__R2_INV_0",
+    "x": 585.06,
+    "y": 391.24,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2371": {
+    "fabric_slot_name": "T23Y14__R1_INV_0",
+    "x": 644.86,
+    "y": 160.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2298": {
+    "fabric_slot_name": "T31Y51__R0_NAND_0",
+    "x": 861.06,
+    "y": 559.88,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2299": {
+    "fabric_slot_name": "T15Y40__R0_INV_0",
+    "x": 426.36,
+    "y": 440.2,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2471": {
+    "fabric_slot_name": "T29Y57__R2_OR_0",
+    "x": 819.66,
+    "y": 630.6,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2469": {
+    "fabric_slot_name": "T32Y50__R2_INV_0",
+    "x": 888.66,
+    "y": 554.44,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2472": {
+    "fabric_slot_name": "T27Y54__R2_INV_0",
+    "x": 750.66,
+    "y": 597.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2296": {
+    "fabric_slot_name": "T27Y31__R0_OR_2",
+    "x": 773.66,
+    "y": 342.28,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2286": {
+    "fabric_slot_name": "T24Y17__R0_NAND_0",
+    "x": 667.86,
+    "y": 189.96,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2297": {
+    "fabric_slot_name": "T29Y41__R0_INV_0",
+    "x": 812.76,
+    "y": 451.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2285": {
+    "fabric_slot_name": "T22Y19__R1_INV_0",
+    "x": 617.26,
+    "y": 214.44,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2416": {
+    "fabric_slot_name": "T24Y0__R0_NAND_1",
+    "x": 670.16,
+    "y": 5.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2417": {
+    "fabric_slot_name": "T25Y16__R0_OR_2",
+    "x": 718.46,
+    "y": 179.08,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2415": {
+    "fabric_slot_name": "T26Y5__R2_INV_0",
+    "x": 723.06,
+    "y": 64.84,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2418": {
+    "fabric_slot_name": "T20Y32__R0_INV_0",
+    "x": 564.36,
+    "y": 353.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2261": {
+    "fabric_slot_name": "T0Y19__R2_OR_1",
+    "x": 21.56,
+    "y": 217.16,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2260": {
+    "fabric_slot_name": "T11Y16__R2_OR_1",
+    "x": 325.16,
+    "y": 184.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2259": {
+    "fabric_slot_name": "T19Y25__R0_NAND_4",
+    "x": 545.96,
+    "y": 277.0,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2234": {
+    "fabric_slot_name": "T14Y23__R2_INV_0",
+    "x": 391.86,
+    "y": 260.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2257": {
+    "fabric_slot_name": "T19Y23__R2_INV_0",
+    "x": 529.86,
+    "y": 260.68,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2337": {
+    "fabric_slot_name": "T24Y16__R2_OR_0",
+    "x": 681.66,
+    "y": 184.52,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2336": {
+    "fabric_slot_name": "T27Y26__R3_NAND_2",
+    "x": 755.26,
+    "y": 296.04,
+    "orient": "FS"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2338": {
+    "fabric_slot_name": "T19Y27__R0_INV_0",
+    "x": 536.76,
+    "y": 298.76,
+    "orient": "N"
+  },
+  "$abc$2096$auto$blifparse.cc:396:parse_blif$2334": {
+    "fabric_slot_name": "T25Y24__R2_INV_0",
+    "x": 695.46,
+    "y": 271.56,
+    "orient": "N"
+  }
+}
