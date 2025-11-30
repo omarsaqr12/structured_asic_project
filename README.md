@@ -249,8 +249,9 @@ Best run stored separately in: `build/<design_name>/Best_<config>/`
 
 - Diminishing returns with longer SA runs
 - Sweet spot around α=0.99, moves=1000, T_final=0.001
-- **39.2% HPWL improvement** over greedy-only placement
+- **38.72% HPWL improvement** over greedy-only placement (431,210.20 μm → 264,256.14 μm)
 - Demonstrates effectiveness of SA in escaping local minima
+- Detailed net length distribution analysis shown in histogram comparison below
 
 ### **Best Configuration Results**
 
@@ -268,6 +269,7 @@ Best run stored separately in: `build/<design_name>/Best_<config>/`
 - SA redistributes cells more evenly across the fabric
 - Hotspots reduced, indicating better load balancing
 - Global exploration moves enabled discovery of non-intuitive but superior placements
+- **HPWL Results**: 38.72% reduction (166,954.06 μm improvement) - see histogram analysis below for detailed distribution changes
 
 ### **Net Length Distribution**
 
@@ -275,14 +277,25 @@ Best run stored separately in: `build/<design_name>/Best_<config>/`
 | ------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | ![Greedy Histogram](build/6502/greedy/greedyHisto.jpeg) | ![SA Histogram](build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/histogram_final.png) |
 
+**Quantitative Results from Histogram Analysis**:
+
+- **Total HPWL Reduction**: 38.72% improvement (431,210.20 μm → 264,256.14 μm)
+- **Absolute Reduction**: 166,954.06 μm reduction in total wirelength
+- **Distribution Shift**: SA histogram shows significant reduction in long net counts
+- **Mean HPWL Reduction**: Visible decrease in average net length (see histogram statistics)
+- **Long Net Optimization**: SA preferentially reduces nets in higher HPWL ranges (>500 μm)
+- **⚠️ Trade-off - Maximum Net Length**: The maximum net length increases in SA-optimized placement, which is a negative aspect. While SA improves overall distribution and total HPWL, it may create a few extremely long nets as a side effect of global optimization
+
 **Insights**:
 
-- Most nets have short HPWL (good locality) in both placements
-- Long-tail distribution indicates a few critical long nets
+- Most nets have short HPWL (good locality) in both placements, confirming good initial greedy placement
+- Long-tail distribution indicates a few critical long nets that SA successfully optimizes
 - **SA successfully reduces long net lengths more than short nets** - visible shift in distribution toward shorter nets
-- Greedy placement shows more nets in the longer HPWL ranges
+- Greedy placement shows more nets in the longer HPWL ranges (right tail of distribution)
 - Distribution shift toward shorter nets in SA histogram confirms optimization effectiveness
 - The contrast demonstrates SA's ability to escape local minima and find globally better placements
+- **Key Observation**: The histogram comparison visually confirms the 38.72% total HPWL reduction, with the SA histogram showing fewer nets in high HPWL bins and more nets concentrated in lower HPWL ranges
+- **Important Trade-off**: While SA dramatically improves total HPWL and average net lengths, the maximum net length increases. This is a known limitation where global optimization prioritizes overall wirelength reduction over eliminating the longest individual nets, which may impact timing-critical paths
 
 ---
 
