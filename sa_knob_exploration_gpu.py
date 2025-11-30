@@ -40,6 +40,7 @@ from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_compl
 from tqdm import tqdm
 import multiprocessing as mp
 import threading
+import sys
 
 # Try to import PyTorch for GPU acceleration
 try:
@@ -190,6 +191,70 @@ def calculate_total_hpwl_gpu(placement: Dict[str, Dict[str, Any]],
     return total_hpwl
 
 
+def run_experiments_interactive(worker_args: List[Tuple], output_csv: str, use_gpu: bool) -> List[Dict[str, Any]]:
+    """
+    Run experiments one at a time with prompts to continue/quit after each.
+    """
+    results = []
+    
+    for i, args in enumerate(worker_args):
+        experiment_id = args[0]
+        config = args[5]
+        exp_num = experiment_id + 1
+        
+        # Print experiment start
+        gpu_available = use_gpu and HAS_TORCH and torch.cuda.is_available()
+        gpu_indicator = "🚀 GPU" if gpu_available else "💻 CPU"
+        print(f"\n{'='*60}")
+        print(f"🚀 Starting Experiment {exp_num}/60 ({gpu_indicator})")
+        print(f"Config: α={config['alpha']:.2f}, moves={config['moves_per_temp']}, p_ref={config['p_refine']:.2f}")
+        print(f"{'='*60}\n")
+        
+        # Run the experiment
+        try:
+            result = run_experiment_worker(args)
+            results.append(result)
+            
+            # Print completion
+            exp_time = result['runtime']
+            gpu_status = "🚀 GPU" if result.get('gpu_used', False) else "💻 CPU"
+            
+            if result['success']:
+                print(f"\n✅ Experiment {exp_num}/60 COMPLETED in {exp_time:.1f}s ({gpu_status})")
+                print(f"   HPWL: {result['hpwl']:.2f} um")
+            else:
+                print(f"\n❌ Experiment {exp_num}/60 FAILED in {exp_time:.1f}s ({gpu_status})")
+                print(f"   Error: {result.get('error', 'Unknown')}")
+            
+            # Save progress
+            if output_csv:
+                sorted_results = sorted(results, key=lambda x: x['experiment_id'])
+                save_results_csv(sorted_results, output_csv)
+                print(f"💾 Progress saved: {len(results)}/60 experiments")
+            
+            # Prompt to continue
+            if i < len(worker_args) - 1:  # Not the last experiment
+                print(f"\n{'='*60}")
+                print(f"Experiment {exp_num} complete. {len(worker_args) - exp_num} remaining.")
+                print(f"{'='*60}")
+                user_input = input("\nPress Enter to continue to next experiment, or 'q' to quit and save: ").strip().lower()
+                if user_input == 'q':
+                    print(f"\n⚠️  Stopped by user. Completed {exp_num}/60 experiments.")
+                    print(f"Results saved to: {output_csv}")
+                    break
+        
+        except KeyboardInterrupt:
+            print(f"\n\n⚠️  Interrupted during experiment {exp_num}")
+            if results:
+                sorted_results = sorted(results, key=lambda x: x['experiment_id'])
+                if output_csv:
+                    save_results_csv(sorted_results, output_csv)
+                    print(f"✅ Results saved to: {output_csv}")
+            raise
+    
+    return results
+
+
 def run_experiment_worker(args_tuple: Tuple) -> Dict[str, Any]:
     """
     Worker function for parallel experiment execution.
@@ -332,7 +397,8 @@ def run_all_experiments_parallel(design_name: str,
                                  seed: int = None,
                                  output_csv: str = None,
                                  max_workers: int = None,
-                                 use_gpu: bool = True) -> List[Dict[str, Any]]:
+                                 use_gpu: bool = True,
+                                 interactive: bool = False) -> List[Dict[str, Any]]:
     """
     Run all combinations of knob settings in parallel using multiprocessing.
     
@@ -392,6 +458,8 @@ def run_all_experiments_parallel(design_name: str,
     else:
         print(f"GPU acceleration: ❌ DISABLED (CPU only)")
     print(f"\n💡 Press Ctrl+C at any time to stop and save progress")
+    if interactive:
+        print(f"⚠️  INTERACTIVE MODE: Will run experiments one at a time with prompts")
     print(f"{'='*60}\n")
     
     # Prepare arguments for workers
@@ -411,6 +479,10 @@ def run_all_experiments_parallel(design_name: str,
     results = []
     completed_count = 0
     start_times = {}  # Track start time for each experiment
+    
+    # Interactive mode: run sequentially with prompts
+    if interactive:
+        return run_experiments_interactive(worker_args, output_csv, use_gpu)
     
     # Run experiments in parallel with progress bar
     # Use ThreadPoolExecutor for GPU (shares CUDA context) or ProcessPoolExecutor for CPU
@@ -436,11 +508,24 @@ def run_all_experiments_parallel(design_name: str,
             # Process completed tasks with progress bar
             with tqdm(total=len(all_configs), desc="Running experiments", 
                      unit="exp", ncols=120, bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]') as pbar:
-                for future in as_completed(future_to_config):
-                    experiment_id, config = future_to_config[future]
-                    result = future.result()
-                    results.append(result)
-                    completed_count += 1
+                try:
+                    for future in as_completed(future_to_config):
+                        experiment_id, config = future_to_config[future]
+                        try:
+                            result = future.result(timeout=1)  # Add timeout to make interrupt more responsive
+                        except Exception as e:
+                            # Handle worker exceptions
+                            result = {
+                                'experiment_id': experiment_id,
+                                'hpwl': float('inf'),
+                                'runtime': 0.0,
+                                'config': config,
+                                'success': False,
+                                'error': str(e),
+                                'gpu_used': False
+                            }
+                        results.append(result)
+                        completed_count += 1
                     
                     # Calculate time taken for this experiment
                     exp_time = result['runtime']
@@ -471,14 +556,20 @@ def run_all_experiments_parallel(design_name: str,
                             'Error': result.get('error', 'Unknown')[:15]
                         })
                     
-                    pbar.update(1)
-                    
-                    # Save incrementally after each experiment
-                    if output_csv:
-                        # Sort results by experiment_id to maintain order
-                        sorted_results = sorted(results, key=lambda x: x['experiment_id'])
-                        save_results_csv(sorted_results, output_csv)
-                        print(f"💾 Progress saved: {completed_count}/60 experiments")
+                        pbar.update(1)
+                        
+                        # Save incrementally after each experiment
+                        if output_csv:
+                            # Sort results by experiment_id to maintain order
+                            sorted_results = sorted(results, key=lambda x: x['experiment_id'])
+                            save_results_csv(sorted_results, output_csv)
+                            print(f"💾 Progress saved: {completed_count}/60 experiments")
+                except KeyboardInterrupt:
+                    # Cancel all pending futures
+                    print("\n\n⚠️  Interrupt received! Cancelling remaining experiments...")
+                    for future in future_to_config:
+                        future.cancel()
+                    raise  # Re-raise to outer handler
     
     except KeyboardInterrupt:
         print("\n\n" + "="*60)
@@ -761,6 +852,7 @@ def print_analysis(analysis: Dict[str, Any]):
 
 
 def main():
+    
     parser = argparse.ArgumentParser(
         description='GPU-Accelerated SA knob exploration: Run experiments in parallel with CUDA'
     )
@@ -784,6 +876,8 @@ def main():
                         help='Number of parallel workers (default: CPU count)')
     parser.add_argument('--no-gpu', action='store_true',
                         help='Disable GPU acceleration (CPU only)')
+    parser.add_argument('--interactive', action='store_true',
+                        help='Run experiments one at a time with prompts to continue/quit after each')
     
     # Knob ranges
     parser.add_argument('--alpha-min', type=float, default=0.80,
@@ -803,7 +897,7 @@ def main():
     if args.netlist is None:
         args.netlist = f'designs/{args.design}_mapped.json'
     
-    # Set default CSV path
+    # Set default CSV path (always use _gpu suffix for GPU version)
     if args.csv is None:
         args.csv = f'sa_knob_results_{args.design}_gpu.csv'
     
@@ -835,7 +929,8 @@ def main():
                 seed=args.seed,
                 output_csv=args.csv,
                 max_workers=args.workers,
-                use_gpu=not args.no_gpu
+                use_gpu=not args.no_gpu,
+                interactive=args.interactive
             )
             total_time = time.time() - start_time
             
