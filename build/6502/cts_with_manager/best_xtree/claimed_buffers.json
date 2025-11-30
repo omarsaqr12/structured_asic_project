@@ -1,0 +1,451 @@
+{
+  "cts_buffer_0": {
+    "slot": "T18Y36__R1_BUF_0",
+    "x": 508.7,
+    "y": 399.4,
+    "type": "BUF",
+    "level": 0,
+    "children": [
+      "cts_buffer_1",
+      "cts_buffer_22"
+    ]
+  },
+  "cts_buffer_1": {
+    "slot": "T13Y29__R0_BUF_0",
+    "x": 373.0,
+    "y": 320.52,
+    "type": "BUF",
+    "level": 1,
+    "children": [
+      "cts_buffer_2",
+      "cts_buffer_12"
+    ]
+  },
+  "cts_buffer_2": {
+    "slot": "T9Y36__R0_BUF_0",
+    "x": 262.6,
+    "y": 396.68,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_3",
+      "cts_buffer_6"
+    ]
+  },
+  "cts_buffer_3": {
+    "slot": "T8Y27__R3_BUF_0",
+    "x": 235.46,
+    "y": 306.92,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_4",
+      "cts_buffer_5"
+    ]
+  },
+  "cts_buffer_4": {
+    "slot": "T7Y31__R3_BUF_0",
+    "x": 207.86,
+    "y": 350.44,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_5": {
+    "slot": "T9Y23__R3_BUF_0",
+    "x": 263.06,
+    "y": 263.4,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_6": {
+    "slot": "T10Y43__R0_BUF_0",
+    "x": 290.2,
+    "y": 472.84,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_7",
+      "cts_buffer_10"
+    ]
+  },
+  "cts_buffer_7": {
+    "slot": "T8Y48__R3_BUF_0",
+    "x": 235.46,
+    "y": 535.4,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_8",
+      "cts_buffer_9"
+    ]
+  },
+  "cts_buffer_8": {
+    "slot": "T8Y45__R0_BUF_0",
+    "x": 235.0,
+    "y": 494.6,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_9": {
+    "slot": "T8Y53__R0_BUF_0",
+    "x": 235.0,
+    "y": 581.64,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_10": {
+    "slot": "T13Y36__R0_BUF_0",
+    "x": 373.0,
+    "y": 396.68,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_11"
+    ]
+  },
+  "cts_buffer_11": {
+    "slot": "T12Y35__R0_BUF_0",
+    "x": 345.4,
+    "y": 385.8,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_12": {
+    "slot": "T16Y22__R3_BUF_0",
+    "x": 456.26,
+    "y": 252.52,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_13",
+      "cts_buffer_17"
+    ]
+  },
+  "cts_buffer_13": {
+    "slot": "T13Y18__R3_BUF_0",
+    "x": 373.46,
+    "y": 209.0,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_14",
+      "cts_buffer_16"
+    ]
+  },
+  "cts_buffer_14": {
+    "slot": "T12Y22__R1_BUF_0",
+    "x": 343.1,
+    "y": 247.08,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_15"
+    ]
+  },
+  "cts_buffer_15": {
+    "slot": "T13Y23__R1_BUF_0",
+    "x": 370.7,
+    "y": 257.96,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_16": {
+    "slot": "T15Y16__R1_BUF_0",
+    "x": 425.9,
+    "y": 181.8,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_17": {
+    "slot": "T19Y26__R1_BUF_0",
+    "x": 536.3,
+    "y": 290.6,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_18",
+      "cts_buffer_19"
+    ]
+  },
+  "cts_buffer_18": {
+    "slot": "T16Y30__R1_BUF_0",
+    "x": 453.5,
+    "y": 334.12,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_19": {
+    "slot": "T21Y22__R1_BUF_0",
+    "x": 591.5,
+    "y": 247.08,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_20",
+      "cts_buffer_21"
+    ]
+  },
+  "cts_buffer_20": {
+    "slot": "T21Y18__R1_BUF_0",
+    "x": 591.5,
+    "y": 203.56,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_21": {
+    "slot": "T20Y26__R3_BUF_0",
+    "x": 566.66,
+    "y": 296.04,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_22": {
+    "slot": "T22Y43__R1_BUF_0",
+    "x": 619.1,
+    "y": 475.56,
+    "type": "BUF",
+    "level": 1,
+    "children": [
+      "cts_buffer_23",
+      "cts_buffer_35"
+    ]
+  },
+  "cts_buffer_23": {
+    "slot": "T18Y54__R3_BUF_0",
+    "x": 511.46,
+    "y": 600.68,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_24",
+      "cts_buffer_30"
+    ]
+  },
+  "cts_buffer_24": {
+    "slot": "T16Y50__R3_BUF_0",
+    "x": 456.26,
+    "y": 557.16,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_25",
+      "cts_buffer_27"
+    ]
+  },
+  "cts_buffer_25": {
+    "slot": "T13Y61__R1_BUF_0",
+    "x": 370.7,
+    "y": 671.4,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_26"
+    ]
+  },
+  "cts_buffer_26": {
+    "slot": "T14Y59__R3_BUF_0",
+    "x": 401.06,
+    "y": 655.08,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_27": {
+    "slot": "T19Y43__R1_BUF_0",
+    "x": 536.3,
+    "y": 475.56,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_28",
+      "cts_buffer_29"
+    ]
+  },
+  "cts_buffer_28": {
+    "slot": "T17Y42__R3_BUF_0",
+    "x": 483.86,
+    "y": 470.12,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_29": {
+    "slot": "T19Y44__R3_BUF_0",
+    "x": 539.06,
+    "y": 491.88,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_30": {
+    "slot": "T20Y59__R3_BUF_0",
+    "x": 566.66,
+    "y": 655.08,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_31",
+      "cts_buffer_33"
+    ]
+  },
+  "cts_buffer_31": {
+    "slot": "T19Y64__R1_BUF_0",
+    "x": 536.3,
+    "y": 704.04,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_32"
+    ]
+  },
+  "cts_buffer_32": {
+    "slot": "T17Y62__R1_BUF_0",
+    "x": 481.1,
+    "y": 682.28,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_33": {
+    "slot": "T23Y52__R1_BUF_0",
+    "x": 646.7,
+    "y": 573.48,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_34"
+    ]
+  },
+  "cts_buffer_34": {
+    "slot": "T22Y49__R1_BUF_0",
+    "x": 619.1,
+    "y": 540.84,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_35": {
+    "slot": "T25Y31__R3_BUF_0",
+    "x": 704.66,
+    "y": 350.44,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_36",
+      "cts_buffer_43"
+    ]
+  },
+  "cts_buffer_36": {
+    "slot": "T24Y26__R3_BUF_0",
+    "x": 677.06,
+    "y": 296.04,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_37",
+      "cts_buffer_40"
+    ]
+  },
+  "cts_buffer_37": {
+    "slot": "T22Y31__R3_BUF_0",
+    "x": 621.86,
+    "y": 350.44,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_38"
+    ]
+  },
+  "cts_buffer_38": {
+    "slot": "T23Y32__R1_BUF_0",
+    "x": 646.7,
+    "y": 355.88,
+    "type": "BUF",
+    "level": 5,
+    "children": [
+      "cts_buffer_39"
+    ]
+  },
+  "cts_buffer_39": {
+    "slot": "T22Y35__R1_BUF_0",
+    "x": 619.1,
+    "y": 388.52,
+    "type": "BUF",
+    "level": 6,
+    "children": []
+  },
+  "cts_buffer_40": {
+    "slot": "T27Y21__R1_BUF_0",
+    "x": 757.1,
+    "y": 236.2,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_41",
+      "cts_buffer_42"
+    ]
+  },
+  "cts_buffer_41": {
+    "slot": "T26Y17__R3_BUF_0",
+    "x": 732.26,
+    "y": 198.12,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_42": {
+    "slot": "T27Y23__R1_BUF_0",
+    "x": 757.1,
+    "y": 257.96,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_43": {
+    "slot": "T27Y40__R1_BUF_0",
+    "x": 757.1,
+    "y": 442.92,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_44",
+      "cts_buffer_45"
+    ]
+  },
+  "cts_buffer_44": {
+    "slot": "T25Y47__R0_BUF_0",
+    "x": 704.2,
+    "y": 516.36,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_45": {
+    "slot": "T28Y37__R0_BUF_0",
+    "x": 787.0,
+    "y": 407.56,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_46"
+    ]
+  },
+  "cts_buffer_46": {
+    "slot": "T27Y32__R0_BUF_0",
+    "x": 759.4,
+    "y": 353.16,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  }
+}

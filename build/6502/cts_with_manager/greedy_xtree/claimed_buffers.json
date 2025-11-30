@@ -1,0 +1,450 @@
+{
+  "cts_buffer_0": {
+    "slot": "T18Y4__R1_BUF_0",
+    "x": 508.7,
+    "y": 51.24,
+    "type": "BUF",
+    "level": 0,
+    "children": [
+      "cts_buffer_1",
+      "cts_buffer_21"
+    ]
+  },
+  "cts_buffer_1": {
+    "slot": "T16Y3__R3_BUF_0",
+    "x": 456.26,
+    "y": 45.8,
+    "type": "BUF",
+    "level": 1,
+    "children": [
+      "cts_buffer_2",
+      "cts_buffer_12"
+    ]
+  },
+  "cts_buffer_2": {
+    "slot": "T15Y5__R1_BUF_0",
+    "x": 425.9,
+    "y": 62.12,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_3",
+      "cts_buffer_8"
+    ]
+  },
+  "cts_buffer_3": {
+    "slot": "T14Y4__R0_BUF_0",
+    "x": 400.6,
+    "y": 48.52,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_4",
+      "cts_buffer_5"
+    ]
+  },
+  "cts_buffer_4": {
+    "slot": "T13Y8__R1_BUF_0",
+    "x": 370.7,
+    "y": 94.76,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_5": {
+    "slot": "T15Y2__R1_BUF_0",
+    "x": 425.9,
+    "y": 29.48,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_6",
+      "cts_buffer_7"
+    ]
+  },
+  "cts_buffer_6": {
+    "slot": "T14Y1__R3_BUF_0",
+    "x": 401.06,
+    "y": 24.04,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_7": {
+    "slot": "T15Y3__R1_BUF_0",
+    "x": 425.9,
+    "y": 40.36,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_8": {
+    "slot": "T16Y6__R1_BUF_0",
+    "x": 453.5,
+    "y": 73.0,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_9",
+      "cts_buffer_10"
+    ]
+  },
+  "cts_buffer_9": {
+    "slot": "T15Y7__R0_BUF_0",
+    "x": 428.2,
+    "y": 81.16,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_10": {
+    "slot": "T16Y6__R0_BUF_0",
+    "x": 455.8,
+    "y": 70.28,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_11"
+    ]
+  },
+  "cts_buffer_11": {
+    "slot": "T16Y6__R3_BUF_0",
+    "x": 456.26,
+    "y": 78.44,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_12": {
+    "slot": "T17Y2__R0_BUF_0",
+    "x": 483.4,
+    "y": 26.76,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_13",
+      "cts_buffer_17"
+    ]
+  },
+  "cts_buffer_13": {
+    "slot": "T16Y1__R3_BUF_0",
+    "x": 456.26,
+    "y": 24.04,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_14",
+      "cts_buffer_16"
+    ]
+  },
+  "cts_buffer_14": {
+    "slot": "T16Y2__R1_BUF_0",
+    "x": 453.5,
+    "y": 29.48,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_15"
+    ]
+  },
+  "cts_buffer_15": {
+    "slot": "T16Y2__R3_BUF_0",
+    "x": 456.26,
+    "y": 34.92,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_16": {
+    "slot": "T17Y1__R1_BUF_0",
+    "x": 481.1,
+    "y": 18.6,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_17": {
+    "slot": "T18Y2__R1_BUF_0",
+    "x": 508.7,
+    "y": 29.48,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_18",
+      "cts_buffer_20"
+    ]
+  },
+  "cts_buffer_18": {
+    "slot": "T17Y3__R3_BUF_0",
+    "x": 483.86,
+    "y": 45.8,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_19"
+    ]
+  },
+  "cts_buffer_19": {
+    "slot": "T17Y2__R3_BUF_0",
+    "x": 483.86,
+    "y": 34.92,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_20": {
+    "slot": "T18Y1__R0_BUF_0",
+    "x": 511.0,
+    "y": 15.88,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_21": {
+    "slot": "T19Y5__R3_BUF_0",
+    "x": 539.06,
+    "y": 67.56,
+    "type": "BUF",
+    "level": 1,
+    "children": [
+      "cts_buffer_22",
+      "cts_buffer_34"
+    ]
+  },
+  "cts_buffer_22": {
+    "slot": "T18Y7__R3_BUF_0",
+    "x": 511.46,
+    "y": 89.32,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_23",
+      "cts_buffer_29"
+    ]
+  },
+  "cts_buffer_23": {
+    "slot": "T17Y6__R3_BUF_0",
+    "x": 483.86,
+    "y": 78.44,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_24",
+      "cts_buffer_26"
+    ]
+  },
+  "cts_buffer_24": {
+    "slot": "T17Y8__R1_BUF_0",
+    "x": 481.1,
+    "y": 94.76,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_25"
+    ]
+  },
+  "cts_buffer_25": {
+    "slot": "T17Y8__R0_BUF_0",
+    "x": 483.4,
+    "y": 92.04,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_26": {
+    "slot": "T18Y5__R0_BUF_0",
+    "x": 511.0,
+    "y": 59.4,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_27",
+      "cts_buffer_28"
+    ]
+  },
+  "cts_buffer_27": {
+    "slot": "T18Y4__R3_BUF_0",
+    "x": 511.46,
+    "y": 56.68,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_28": {
+    "slot": "T18Y5__R3_BUF_0",
+    "x": 511.46,
+    "y": 67.56,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_29": {
+    "slot": "T19Y8__R1_BUF_0",
+    "x": 536.3,
+    "y": 94.76,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_30",
+      "cts_buffer_31"
+    ]
+  },
+  "cts_buffer_30": {
+    "slot": "T18Y9__R1_BUF_0",
+    "x": 508.7,
+    "y": 105.64,
+    "type": "BUF",
+    "level": 4,
+    "children": []
+  },
+  "cts_buffer_31": {
+    "slot": "T19Y7__R3_BUF_0",
+    "x": 539.06,
+    "y": 89.32,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_32",
+      "cts_buffer_33"
+    ]
+  },
+  "cts_buffer_32": {
+    "slot": "T19Y6__R3_BUF_0",
+    "x": 539.06,
+    "y": 78.44,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_33": {
+    "slot": "T19Y8__R3_BUF_0",
+    "x": 539.06,
+    "y": 100.2,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_34": {
+    "slot": "T20Y3__R3_BUF_0",
+    "x": 566.66,
+    "y": 45.8,
+    "type": "BUF",
+    "level": 2,
+    "children": [
+      "cts_buffer_35",
+      "cts_buffer_40"
+    ]
+  },
+  "cts_buffer_35": {
+    "slot": "T20Y2__R1_BUF_0",
+    "x": 563.9,
+    "y": 29.48,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_36",
+      "cts_buffer_38"
+    ]
+  },
+  "cts_buffer_36": {
+    "slot": "T19Y3__R0_BUF_0",
+    "x": 538.6,
+    "y": 37.64,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_37"
+    ]
+  },
+  "cts_buffer_37": {
+    "slot": "T19Y4__R0_BUF_0",
+    "x": 538.6,
+    "y": 48.52,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_38": {
+    "slot": "T20Y1__R3_BUF_0",
+    "x": 566.66,
+    "y": 24.04,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_39"
+    ]
+  },
+  "cts_buffer_39": {
+    "slot": "T21Y2__R1_BUF_0",
+    "x": 591.5,
+    "y": 29.48,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_40": {
+    "slot": "T21Y5__R1_BUF_0",
+    "x": 591.5,
+    "y": 62.12,
+    "type": "BUF",
+    "level": 3,
+    "children": [
+      "cts_buffer_41",
+      "cts_buffer_44"
+    ]
+  },
+  "cts_buffer_41": {
+    "slot": "T20Y6__R0_BUF_0",
+    "x": 566.2,
+    "y": 70.28,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_42",
+      "cts_buffer_43"
+    ]
+  },
+  "cts_buffer_42": {
+    "slot": "T20Y4__R3_BUF_0",
+    "x": 566.66,
+    "y": 56.68,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_43": {
+    "slot": "T20Y7__R0_BUF_0",
+    "x": 566.2,
+    "y": 81.16,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_44": {
+    "slot": "T21Y3__R3_BUF_0",
+    "x": 594.26,
+    "y": 45.8,
+    "type": "BUF",
+    "level": 4,
+    "children": [
+      "cts_buffer_45",
+      "cts_buffer_46"
+    ]
+  },
+  "cts_buffer_45": {
+    "slot": "T21Y2__R0_BUF_0",
+    "x": 593.8,
+    "y": 26.76,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  },
+  "cts_buffer_46": {
+    "slot": "T21Y4__R3_BUF_0",
+    "x": 594.26,
+    "y": 56.68,
+    "type": "BUF",
+    "level": 5,
+    "children": []
+  }
+}
