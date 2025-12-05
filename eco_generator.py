@@ -104,6 +104,71 @@ def find_unused_logic_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
     return unused_cells
 
 
+def count_used_logic_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
+                           used_slots: Set[str]) -> int:
+    """
+    Count all used logic cells in the fabric.
+    
+    Args:
+        fabric_db: Fabric database from parse_fabric_cells
+        used_slots: Set of used fabric slot names
+    
+    Returns:
+        Number of used logic cells
+    """
+    used_count = 0
+    
+    for cell_type in LOGIC_CELL_TYPES.keys():
+        if cell_type in fabric_db:
+            for slot in fabric_db[cell_type]:
+                if slot['name'] in used_slots:
+                    used_count += 1
+    
+    return used_count
+
+
+def count_total_fabric_cells(fabric_db: Dict[str, List[Dict[str, Any]]]) -> int:
+    """
+    Count total number of cells in the fabric (all types).
+    
+    Args:
+        fabric_db: Fabric database from parse_fabric_cells
+    
+    Returns:
+        Total number of fabric cells
+    """
+    total = 0
+    for cell_type, slots in fabric_db.items():
+        total += len(slots)
+    return total
+
+
+def count_unused_non_logic_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
+                                 used_slots: Set[str]) -> int:
+    """
+    Count unused cells that are NOT logic cells (e.g., DFFs, decaps, taps, etc.).
+    
+    Args:
+        fabric_db: Fabric database from parse_fabric_cells
+        used_slots: Set of used fabric slot names
+    
+    Returns:
+        Number of unused non-logic cells
+    """
+    unused_count = 0
+    
+    for cell_type, slots in fabric_db.items():
+        # Skip logic cell types (they're handled separately)
+        if cell_type in LOGIC_CELL_TYPES:
+            continue
+        
+        for slot in slots:
+            if slot['name'] not in used_slots:
+                unused_count += 1
+    
+    return unused_count
+
+
 def find_available_conb(fabric_db: Dict[str, List[Dict[str, Any]]],
                         used_slots: Set[str]) -> Optional[Dict[str, Any]]:
     """
@@ -260,13 +325,30 @@ def generate_eco(placement_path: str,
     used_slots = get_used_slots(placement_path, placement_map_path, cts_placement_map)
     print(f"Found {len(used_slots)} used fabric slots")
     
+    # Calculate statistics
+    total_fabric_cells = count_total_fabric_cells(fabric_db)
+    used_cells_count = len(used_slots)
+    unused_cells_count = total_fabric_cells - used_cells_count
+    
     # Find unused logic cells
     print("\nFinding unused logic cells...")
     unused_logic_cells = find_unused_logic_cells(fabric_db, used_slots)
+    used_logic_cells_count = count_used_logic_cells(fabric_db, used_slots)
+    unused_non_logic_cells_count = count_unused_non_logic_cells(fabric_db, used_slots)
     print(f"Found {len(unused_logic_cells)} unused logic cells")
+    print(f"Found {used_logic_cells_count} used logic cells")
     
     if not unused_logic_cells:
         print("No unused logic cells found. Nothing to do.")
+        print("\n" + "=" * 60)
+        print("ECO Generation Summary")
+        print("=" * 60)
+        print(f"Total Fabric cells: {total_fabric_cells}")
+        print(f"Used cells (from .map): {used_cells_count}")
+        print(f"Unused cells: {unused_cells_count}")
+        print(f"Unused logic cells (added to netlist): 0")
+        print(f"Unused cells not added to netlist: {unused_cells_count}")
+        print("=" * 60)
         return {
             'conb_cell': None,
             'conb_lo_net': None,
@@ -468,6 +550,11 @@ def generate_eco(placement_path: str,
         write_verilog(design_data, top_module, output_verilog_path)
         print("✓ Verilog saved")
     
+    # Calculate final statistics
+    unused_logic_added = len(tied_cells)
+    unused_logic_not_added = len(unused_logic_cells) - unused_logic_added
+    unused_cells_not_added = unused_non_logic_cells_count + unused_logic_not_added
+    
     print("\n" + "=" * 60)
     print("ECO Generation Summary")
     print("=" * 60)
@@ -477,7 +564,11 @@ def generate_eco(placement_path: str,
               f"{cts_tree['_metadata']['num_sinks']} sinks)")
     print(f"conb_1 cell: {conb_logical_name} ({conb_cell['name']})")
     print(f"conb_1 LO net ID: {conb_lo_net_id}")
-    print(f"Unused logic cells tied: {len(tied_cells)}")
+    print(f"Total Fabric cells: {total_fabric_cells}")
+    print(f"Used cells (from .map): {used_cells_count}")
+    print(f"Unused cells: {unused_cells_count}")
+    print(f"Unused logic cells (added to netlist): {unused_logic_added}")
+    print(f"Unused cells not added to netlist: {unused_cells_not_added}")
     print("=" * 60)
     
     return eco_data
