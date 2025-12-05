@@ -1,0 +1,2417 @@
+{
+  "root": {
+    "type": "buffer",
+    "x": 502.26,
+    "y": 402.12,
+    "buffer_slot": "T18Y36__R2_INV_0",
+    "children": [
+      {
+        "type": "buffer",
+        "x": 508.7,
+        "y": 268.84,
+        "buffer_slot": "T18Y24__R1_BUF_0",
+        "children": [
+          {
+            "type": "buffer",
+            "x": 343.1,
+            "y": 257.96,
+            "buffer_slot": "T12Y23__R1_BUF_0",
+            "children": [
+              {
+                "type": "buffer",
+                "x": 364.26,
+                "y": 206.28,
+                "buffer_slot": "T13Y18__R2_INV_0",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 262.6,
+                    "y": 200.84,
+                    "buffer_slot": "T9Y18__R0_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 310.44,
+                        "y": 177.72,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4109",
+                            "dff_slot": "T13Y13__R1_DFBBP_0",
+                            "x": 379.44,
+                            "y": 149.16
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4982",
+                            "dff_slot": "T12Y15__R1_DFBBP_0",
+                            "x": 351.84,
+                            "y": 170.92
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5179",
+                            "dff_slot": "T10Y16__R3_DFBBP_0",
+                            "x": 296.64,
+                            "y": 187.24
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5166",
+                            "dff_slot": "T7Y18__R1_DFBBP_0",
+                            "x": 213.84,
+                            "y": 203.56
+                          }
+                        ]
+                      },
+                      {
+                        "type": "sink",
+                        "x": 234.54,
+                        "y": 225.32000000000002,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7685",
+                            "dff_slot": "T9Y18__R3_DFBBP_0",
+                            "x": 269.04,
+                            "y": 209.0
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5172",
+                            "dff_slot": "T6Y19__R3_DFBBP_0",
+                            "x": 186.24,
+                            "y": 219.88
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5161",
+                            "dff_slot": "T6Y20__R1_DFBBP_0",
+                            "x": 186.24,
+                            "y": 225.32
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4933",
+                            "dff_slot": "T10Y22__R1_DFBBP_0",
+                            "x": 296.64,
+                            "y": 247.08
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 428.2,
+                    "y": 200.84,
+                    "buffer_slot": "T15Y18__R0_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 441.53999999999996,
+                        "y": 164.12,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4937",
+                            "dff_slot": "T17Y9__R1_DFBBP_0",
+                            "x": 489.84,
+                            "y": 105.64
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5199",
+                            "dff_slot": "T16Y15__R1_DFBBP_0",
+                            "x": 462.24,
+                            "y": 170.92
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5210",
+                            "dff_slot": "T14Y16__R3_DFBBP_0",
+                            "x": 407.04,
+                            "y": 187.24
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5208",
+                            "dff_slot": "T14Y17__R1_DFBBP_0",
+                            "x": 407.04,
+                            "y": 192.68
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 424.06,
+                        "y": 236.2,
+                        "buffer_slot": "T15Y21__R1_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 379.44,
+                            "y": 238.92000000000002,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5174",
+                                "dff_slot": "T13Y20__R3_DFBBP_0",
+                                "x": 379.44,
+                                "y": 230.76
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5168",
+                                "dff_slot": "T13Y22__R1_DFBBP_0",
+                                "x": 379.44,
+                                "y": 247.08
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 453.03999999999996,
+                            "y": 227.13333333333333,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7684",
+                                "dff_slot": "T14Y19__R3_DFBBP_0",
+                                "x": 407.04,
+                                "y": 219.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5151",
+                                "dff_slot": "T16Y19__R3_DFBBP_0",
+                                "x": 462.24,
+                                "y": 219.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8806",
+                                "dff_slot": "T17Y21__R3_DFBBP_0",
+                                "x": 489.84,
+                                "y": 241.64
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "buffer",
+                "x": 336.66,
+                "y": 304.2,
+                "buffer_slot": "T12Y27__R2_INV_0",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 260.3,
+                    "y": 312.36,
+                    "buffer_slot": "T9Y28__R1_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 248.34,
+                        "y": 287.88,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5213",
+                            "dff_slot": "T10Y24__R1_DFBBP_0",
+                            "x": 296.64,
+                            "y": 268.84
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5224",
+                            "dff_slot": "T6Y26__R1_DFBBP_0",
+                            "x": 186.24,
+                            "y": 290.6
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5228",
+                            "dff_slot": "T11Y26__R1_DFBBP_0",
+                            "x": 324.24,
+                            "y": 290.6
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5146",
+                            "dff_slot": "T6Y27__R1_DFBBP_0",
+                            "x": 186.24,
+                            "y": 301.48
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 263.06,
+                        "y": 328.68,
+                        "buffer_slot": "T9Y29__R3_BUF_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 200.04000000000002,
+                            "y": 320.52,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5171",
+                                "dff_slot": "T6Y28__R3_DFBBP_0",
+                                "x": 186.24,
+                                "y": 317.8
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5141",
+                                "dff_slot": "T7Y29__R1_DFBBP_0",
+                                "x": 213.84,
+                                "y": 323.24
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 305.84,
+                            "y": 334.12,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5223",
+                                "dff_slot": "T10Y27__R3_DFBBP_0",
+                                "x": 296.64,
+                                "y": 306.92
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5155",
+                                "dff_slot": "T10Y29__R3_DFBBP_0",
+                                "x": 296.64,
+                                "y": 328.68
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4107",
+                                "dff_slot": "T11Y33__R1_DFBBP_0",
+                                "x": 324.24,
+                                "y": 366.76
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 400.6,
+                    "y": 309.64,
+                    "buffer_slot": "T14Y28__R0_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 379.43999999999994,
+                        "y": 282.44,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7687",
+                            "dff_slot": "T13Y23__R1_DFBBP_0",
+                            "x": 379.44,
+                            "y": 257.96
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5225",
+                            "dff_slot": "T12Y25__R3_DFBBP_0",
+                            "x": 351.84,
+                            "y": 285.16
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5138",
+                            "dff_slot": "T12Y26__R1_DFBBP_0",
+                            "x": 351.84,
+                            "y": 290.6
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5137",
+                            "dff_slot": "T15Y26__R3_DFBBP_0",
+                            "x": 434.64,
+                            "y": 296.04
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 419.46,
+                        "y": 336.84,
+                        "buffer_slot": "T15Y30__R2_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 393.24,
+                            "y": 336.84000000000003,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4106",
+                                "dff_slot": "T13Y32__R1_DFBBP_0",
+                                "x": 379.44,
+                                "y": 355.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5134",
+                                "dff_slot": "T14Y28__R3_DFBBP_0",
+                                "x": 407.04,
+                                "y": 317.8
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 434.64000000000004,
+                            "y": 330.49333333333334,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5195",
+                                "dff_slot": "T14Y32__R3_DFBBP_0",
+                                "x": 407.04,
+                                "y": 361.32
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4912",
+                                "dff_slot": "T15Y27__R1_DFBBP_0",
+                                "x": 434.64,
+                                "y": 301.48
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4985",
+                                "dff_slot": "T16Y29__R3_DFBBP_0",
+                                "x": 462.24,
+                                "y": 328.68
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "buffer",
+            "x": 672.46,
+            "y": 279.72,
+            "buffer_slot": "T24Y25__R1_INV_0",
+            "children": [
+              {
+                "type": "buffer",
+                "x": 701.9,
+                "y": 225.32,
+                "buffer_slot": "T25Y20__R1_BUF_0",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 640.26,
+                    "y": 238.92,
+                    "buffer_slot": "T23Y21__R2_INV_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 662.34,
+                        "y": 183.16,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4935",
+                            "dff_slot": "T24Y9__R1_DFBBP_0",
+                            "x": 683.04,
+                            "y": 105.64
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4934",
+                            "dff_slot": "T23Y15__R3_DFBBP_0",
+                            "x": 655.44,
+                            "y": 176.36
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8805",
+                            "dff_slot": "T21Y20__R1_DFBBP_0",
+                            "x": 600.24,
+                            "y": 225.32
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5158",
+                            "dff_slot": "T25Y20__R1_DFBBP_0",
+                            "x": 710.64,
+                            "y": 225.32
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 619.56,
+                        "y": 277.0,
+                        "buffer_slot": "T22Y25__R0_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 545.04,
+                            "y": 271.56,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5173",
+                                "dff_slot": "T18Y23__R1_DFBBP_0",
+                                "x": 517.44,
+                                "y": 257.96
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5183",
+                                "dff_slot": "T20Y25__R3_DFBBP_0",
+                                "x": 572.64,
+                                "y": 285.16
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 673.84,
+                            "y": 281.5333333333333,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4983",
+                                "dff_slot": "T22Y24__R3_DFBBP_0",
+                                "x": 627.84,
+                                "y": 274.28
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8810",
+                                "dff_slot": "T24Y26__R3_DFBBP_0",
+                                "x": 683.04,
+                                "y": 296.04
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7681",
+                                "dff_slot": "T25Y24__R3_DFBBP_0",
+                                "x": 710.64,
+                                "y": 274.28
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 759.86,
+                    "y": 219.88,
+                    "buffer_slot": "T27Y19__R3_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 765.84,
+                        "y": 191.32,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5218",
+                            "dff_slot": "T26Y16__R1_DFBBP_0",
+                            "x": 738.24,
+                            "y": 181.8
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4105",
+                            "dff_slot": "T26Y16__R3_DFBBP_0",
+                            "x": 738.24,
+                            "y": 187.24
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4938",
+                            "dff_slot": "T27Y16__R3_DFBBP_0",
+                            "x": 765.84,
+                            "y": 187.24
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8807",
+                            "dff_slot": "T29Y18__R3_DFBBP_0",
+                            "x": 821.04,
+                            "y": 209.0
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 759.4,
+                        "y": 244.36,
+                        "buffer_slot": "T27Y22__R0_BUF_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 738.24,
+                            "y": 244.35999999999999,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4108",
+                                "dff_slot": "T26Y19__R1_DFBBP_0",
+                                "x": 738.24,
+                                "y": 214.44
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5154",
+                                "dff_slot": "T26Y24__R3_DFBBP_0",
+                                "x": 738.24,
+                                "y": 274.28
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 775.04,
+                            "y": 247.08,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5157",
+                                "dff_slot": "T27Y20__R1_DFBBP_0",
+                                "x": 765.84,
+                                "y": 225.32
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7456",
+                                "dff_slot": "T27Y24__R1_DFBBP_0",
+                                "x": 765.84,
+                                "y": 268.84
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5219",
+                                "dff_slot": "T28Y22__R1_DFBBP_0",
+                                "x": 793.44,
+                                "y": 247.08
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "buffer",
+                "x": 642.1,
+                "y": 336.84,
+                "buffer_slot": "T23Y30__R2_INV_1",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 566.2,
+                    "y": 331.4,
+                    "buffer_slot": "T20Y30__R0_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 572.64,
+                        "y": 312.36,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5207",
+                            "dff_slot": "T19Y27__R1_DFBBP_0",
+                            "x": 545.04,
+                            "y": 301.48
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5145",
+                            "dff_slot": "T20Y28__R1_DFBBP_0",
+                            "x": 572.64,
+                            "y": 312.36
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7682",
+                            "dff_slot": "T21Y28__R1_DFBBP_0",
+                            "x": 600.24,
+                            "y": 312.36
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5197",
+                            "dff_slot": "T20Y29__R1_DFBBP_0",
+                            "x": 572.64,
+                            "y": 323.24
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 566.66,
+                        "y": 350.44,
+                        "buffer_slot": "T20Y31__R3_BUF_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 503.64,
+                            "y": 350.44,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5143",
+                                "dff_slot": "T17Y29__R3_DFBBP_0",
+                                "x": 489.84,
+                                "y": 328.68
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5182",
+                                "dff_slot": "T18Y33__R3_DFBBP_0",
+                                "x": 517.44,
+                                "y": 372.2
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 609.44,
+                            "y": 345.0,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5152",
+                                "dff_slot": "T20Y31__R3_DFBBP_0",
+                                "x": 572.64,
+                                "y": 350.44
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4984",
+                                "dff_slot": "T22Y29__R1_DFBBP_0",
+                                "x": 627.84,
+                                "y": 323.24
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5167",
+                                "dff_slot": "T22Y32__R3_DFBBP_0",
+                                "x": 627.84,
+                                "y": 361.32
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 704.2,
+                    "y": 331.4,
+                    "buffer_slot": "T25Y30__R0_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 710.64,
+                        "y": 312.36,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5198",
+                            "dff_slot": "T25Y26__R3_DFBBP_0",
+                            "x": 710.64,
+                            "y": 296.04
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5160",
+                            "dff_slot": "T24Y28__R1_DFBBP_0",
+                            "x": 683.04,
+                            "y": 312.36
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4111",
+                            "dff_slot": "T24Y28__R3_DFBBP_0",
+                            "x": 683.04,
+                            "y": 317.8
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5230",
+                            "dff_slot": "T27Y29__R1_DFBBP_0",
+                            "x": 765.84,
+                            "y": 323.24
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 704.66,
+                        "y": 350.44,
+                        "buffer_slot": "T25Y31__R3_BUF_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 641.6400000000001,
+                            "y": 355.88,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5140",
+                                "dff_slot": "T22Y33__R3_DFBBP_0",
+                                "x": 627.84,
+                                "y": 372.2
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8811",
+                                "dff_slot": "T23Y30__R3_DFBBP_0",
+                                "x": 655.44,
+                                "y": 339.56
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 756.64,
+                            "y": 348.6266666666667,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4980",
+                                "dff_slot": "T25Y32__R1_DFBBP_0",
+                                "x": 710.64,
+                                "y": 355.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4908",
+                                "dff_slot": "T25Y32__R3_DFBBP_0",
+                                "x": 710.64,
+                                "y": 361.32
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5216",
+                                "dff_slot": "T30Y29__R3_DFBBP_0",
+                                "x": 848.64,
+                                "y": 328.68
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "buffer",
+        "x": 483.86,
+        "y": 535.4,
+        "buffer_slot": "T17Y48__R3_BUF_0",
+        "children": [
+          {
+            "type": "buffer",
+            "x": 343.1,
+            "y": 540.84,
+            "buffer_slot": "T12Y49__R1_BUF_0",
+            "children": [
+              {
+                "type": "buffer",
+                "x": 345.4,
+                "y": 440.2,
+                "buffer_slot": "T12Y40__R0_BUF_0",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 253.86,
+                    "y": 434.76,
+                    "buffer_slot": "T9Y39__R2_INV_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 282.84000000000003,
+                        "y": 395.32,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7686",
+                            "dff_slot": "T11Y34__R3_DFBBP_0",
+                            "x": 324.24,
+                            "y": 383.08
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4936",
+                            "dff_slot": "T7Y35__R1_DFBBP_0",
+                            "x": 213.84,
+                            "y": 388.52
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5153",
+                            "dff_slot": "T12Y36__R1_DFBBP_0",
+                            "x": 351.84,
+                            "y": 399.4
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5209",
+                            "dff_slot": "T8Y37__R1_DFBBP_0",
+                            "x": 241.44,
+                            "y": 410.28
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 228.1,
+                        "y": 467.4,
+                        "buffer_slot": "T8Y42__R2_INV_1",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 200.04000000000002,
+                            "y": 464.68,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4981",
+                                "dff_slot": "T6Y38__R1_DFBBP_0",
+                                "x": 186.24,
+                                "y": 421.16
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5232",
+                                "dff_slot": "T7Y46__R1_DFBBP_0",
+                                "x": 213.84,
+                                "y": 508.2
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 250.64000000000001,
+                            "y": 473.74666666666667,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5159",
+                                "dff_slot": "T8Y40__R3_DFBBP_0",
+                                "x": 241.44,
+                                "y": 448.36
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5233",
+                                "dff_slot": "T8Y46__R1_DFBBP_0",
+                                "x": 241.44,
+                                "y": 508.2
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5169",
+                                "dff_slot": "T9Y42__R1_DFBBP_0",
+                                "x": 269.04,
+                                "y": 464.68
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 447.06,
+                    "y": 445.64,
+                    "buffer_slot": "T16Y40__R2_INV_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 393.24,
+                        "y": 404.84,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4110",
+                            "dff_slot": "T13Y35__R3_DFBBP_0",
+                            "x": 379.44,
+                            "y": 393.96
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5212",
+                            "dff_slot": "T16Y35__R3_DFBBP_0",
+                            "x": 462.24,
+                            "y": 393.96
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5215",
+                            "dff_slot": "T12Y37__R1_DFBBP_0",
+                            "x": 351.84,
+                            "y": 410.28
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4909",
+                            "dff_slot": "T13Y38__R1_DFBBP_0",
+                            "x": 379.44,
+                            "y": 421.16
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 474.66,
+                        "y": 478.28,
+                        "buffer_slot": "T17Y43__R2_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 462.24,
+                            "y": 442.92,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5156",
+                                "dff_slot": "T16Y39__R1_DFBBP_0",
+                                "x": 462.24,
+                                "y": 432.04
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5202",
+                                "dff_slot": "T16Y41__R1_DFBBP_0",
+                                "x": 462.24,
+                                "y": 453.8
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 480.63999999999993,
+                            "y": 495.50666666666666,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5227",
+                                "dff_slot": "T16Y43__R1_DFBBP_0",
+                                "x": 462.24,
+                                "y": 475.56
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5231",
+                                "dff_slot": "T17Y44__R3_DFBBP_0",
+                                "x": 489.84,
+                                "y": 491.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7680",
+                                "dff_slot": "T17Y47__R1_DFBBP_0",
+                                "x": 489.84,
+                                "y": 519.08
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "buffer",
+                "x": 345.86,
+                "y": 644.2,
+                "buffer_slot": "T12Y58__R3_BUF_0",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 263.06,
+                    "y": 611.56,
+                    "buffer_slot": "T9Y55__R3_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 255.24,
+                        "y": 553.08,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7683",
+                            "dff_slot": "T10Y48__R1_DFBBP_0",
+                            "x": 296.64,
+                            "y": 529.96
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5200",
+                            "dff_slot": "T7Y49__R1_DFBBP_0",
+                            "x": 213.84,
+                            "y": 540.84
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5235",
+                            "dff_slot": "T9Y51__R3_DFBBP_0",
+                            "x": 269.04,
+                            "y": 568.04
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5234",
+                            "dff_slot": "T8Y52__R1_DFBBP_0",
+                            "x": 241.44,
+                            "y": 573.48
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 262.6,
+                        "y": 657.8,
+                        "buffer_slot": "T9Y60__R0_BUF_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 200.04000000000002,
+                            "y": 687.72,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5144",
+                                "dff_slot": "T6Y54__R3_DFBBP_0",
+                                "x": 186.24,
+                                "y": 600.68
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5170",
+                                "dff_slot": "T7Y70__R3_DFBBP_0",
+                                "x": 213.84,
+                                "y": 774.76
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 315.03999999999996,
+                            "y": 638.7600000000001,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5229",
+                                "dff_slot": "T8Y55__R3_DFBBP_0",
+                                "x": 241.44,
+                                "y": 611.56
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5221",
+                                "dff_slot": "T12Y57__R1_DFBBP_0",
+                                "x": 351.84,
+                                "y": 627.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5190",
+                                "dff_slot": "T12Y61__R3_DFBBP_0",
+                                "x": 351.84,
+                                "y": 676.84
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 425.9,
+                    "y": 671.4,
+                    "buffer_slot": "T15Y61__R1_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 448.44,
+                        "y": 633.32,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8804",
+                            "dff_slot": "T16Y56__R1_DFBBP_0",
+                            "x": 462.24,
+                            "y": 617.0
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5194",
+                            "dff_slot": "T15Y57__R1_DFBBP_0",
+                            "x": 434.64,
+                            "y": 627.88
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4913",
+                            "dff_slot": "T14Y58__R3_DFBBP_0",
+                            "x": 407.04,
+                            "y": 644.2
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5180",
+                            "dff_slot": "T17Y58__R3_DFBBP_0",
+                            "x": 489.84,
+                            "y": 644.2
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 419.46,
+                        "y": 706.76,
+                        "buffer_slot": "T15Y64__R2_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 365.64,
+                            "y": 687.72,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5193",
+                                "dff_slot": "T12Y64__R1_DFBBP_0",
+                                "x": 351.84,
+                                "y": 704.04
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4910",
+                                "dff_slot": "T13Y61__R1_DFBBP_0",
+                                "x": 379.44,
+                                "y": 671.4
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 443.84,
+                            "y": 714.92,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4914",
+                                "dff_slot": "T15Y64__R3_DFBBP_0",
+                                "x": 434.64,
+                                "y": 709.48
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5178",
+                                "dff_slot": "T15Y67__R3_DFBBP_0",
+                                "x": 434.64,
+                                "y": 742.12
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5192",
+                                "dff_slot": "T16Y63__R1_DFBBP_0",
+                                "x": 462.24,
+                                "y": 693.16
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "buffer",
+            "x": 640.26,
+            "y": 532.68,
+            "buffer_slot": "T23Y48__R2_INV_0",
+            "children": [
+              {
+                "type": "buffer",
+                "x": 640.26,
+                "y": 445.64,
+                "buffer_slot": "T23Y40__R2_INV_0",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 563.9,
+                    "y": 442.92,
+                    "buffer_slot": "T20Y40__R1_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 558.84,
+                        "y": 402.12,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5214",
+                            "dff_slot": "T20Y33__R3_DFBBP_0",
+                            "x": 572.64,
+                            "y": 372.2
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5201",
+                            "dff_slot": "T20Y36__R3_DFBBP_0",
+                            "x": 572.64,
+                            "y": 404.84
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5181",
+                            "dff_slot": "T20Y37__R1_DFBBP_0",
+                            "x": 572.64,
+                            "y": 410.28
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5139",
+                            "dff_slot": "T18Y38__R1_DFBBP_0",
+                            "x": 517.44,
+                            "y": 421.16
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 566.2,
+                        "y": 472.84,
+                        "buffer_slot": "T20Y43__R0_BUF_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 531.24,
+                            "y": 478.28,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5205",
+                                "dff_slot": "T18Y44__R1_DFBBP_0",
+                                "x": 517.44,
+                                "y": 486.44
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5204",
+                                "dff_slot": "T19Y42__R3_DFBBP_0",
+                                "x": 545.04,
+                                "y": 470.12
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 591.0400000000001,
+                            "y": 468.3066666666667,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5191",
+                                "dff_slot": "T20Y40__R1_DFBBP_0",
+                                "x": 572.64,
+                                "y": 442.92
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5175",
+                                "dff_slot": "T21Y43__R1_DFBBP_0",
+                                "x": 600.24,
+                                "y": 475.56
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5226",
+                                "dff_slot": "T21Y44__R1_DFBBP_0",
+                                "x": 600.24,
+                                "y": 486.44
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 704.2,
+                    "y": 451.08,
+                    "buffer_slot": "T25Y41__R0_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 724.44,
+                        "y": 415.72,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8809",
+                            "dff_slot": "T23Y35__R1_DFBBP_0",
+                            "x": 655.44,
+                            "y": 388.52
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7679",
+                            "dff_slot": "T27Y37__R1_DFBBP_0",
+                            "x": 765.84,
+                            "y": 410.28
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5220",
+                            "dff_slot": "T30Y38__R1_DFBBP_0",
+                            "x": 848.64,
+                            "y": 421.16
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5135",
+                            "dff_slot": "T22Y40__R1_DFBBP_0",
+                            "x": 627.84,
+                            "y": 442.92
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 700.06,
+                        "y": 486.44,
+                        "buffer_slot": "T25Y44__R1_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 627.84,
+                            "y": 500.03999999999996,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5177",
+                                "dff_slot": "T22Y45__R1_DFBBP_0",
+                                "x": 627.84,
+                                "y": 497.32
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4911",
+                                "dff_slot": "T22Y45__R3_DFBBP_0",
+                                "x": 627.84,
+                                "y": 502.76
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 747.44,
+                            "y": 481.0,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5136",
+                                "dff_slot": "T23Y45__R3_DFBBP_0",
+                                "x": 655.44,
+                                "y": 502.76
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5142",
+                                "dff_slot": "T28Y41__R3_DFBBP_0",
+                                "x": 793.44,
+                                "y": 459.24
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5217",
+                                "dff_slot": "T28Y43__R3_DFBBP_0",
+                                "x": 793.44,
+                                "y": 481.0
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "buffer",
+                "x": 642.1,
+                "y": 608.84,
+                "buffer_slot": "T23Y55__R2_INV_1",
+                "children": [
+                  {
+                    "type": "buffer",
+                    "x": 539.06,
+                    "y": 600.68,
+                    "buffer_slot": "T19Y54__R3_BUF_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 545.04,
+                        "y": 520.44,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5237",
+                            "dff_slot": "T18Y46__R1_DFBBP_0",
+                            "x": 517.44,
+                            "y": 508.2
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7689",
+                            "dff_slot": "T19Y46__R1_DFBBP_0",
+                            "x": 545.04,
+                            "y": 508.2
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5236",
+                            "dff_slot": "T18Y47__R3_DFBBP_0",
+                            "x": 517.44,
+                            "y": 524.52
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7690",
+                            "dff_slot": "T21Y49__R1_DFBBP_0",
+                            "x": 600.24,
+                            "y": 540.84
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 557.46,
+                        "y": 663.24,
+                        "buffer_slot": "T20Y60__R2_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 503.64,
+                            "y": 665.96,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5176",
+                                "dff_slot": "T17Y64__R1_DFBBP_0",
+                                "x": 489.84,
+                                "y": 704.04
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5222",
+                                "dff_slot": "T18Y57__R1_DFBBP_0",
+                                "x": 517.44,
+                                "y": 627.88
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 581.84,
+                            "y": 671.4,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4979",
+                                "dff_slot": "T20Y62__R1_DFBBP_0",
+                                "x": 572.64,
+                                "y": 682.28
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5196",
+                                "dff_slot": "T20Y68__R1_DFBBP_0",
+                                "x": 572.64,
+                                "y": 747.56
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5203",
+                                "dff_slot": "T21Y53__R1_DFBBP_0",
+                                "x": 600.24,
+                                "y": 584.36
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "buffer",
+                    "x": 723.06,
+                    "y": 619.72,
+                    "buffer_slot": "T26Y56__R2_INV_0",
+                    "children": [
+                      {
+                        "type": "sink",
+                        "x": 772.74,
+                        "y": 538.12,
+                        "sinks": [
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4112",
+                            "dff_slot": "T30Y47__R1_DFBBP_0",
+                            "x": 848.64,
+                            "y": 519.08
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5189",
+                            "dff_slot": "T27Y47__R3_DFBBP_0",
+                            "x": 765.84,
+                            "y": 524.52
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4986",
+                            "dff_slot": "T26Y48__R3_DFBBP_0",
+                            "x": 738.24,
+                            "y": 535.4
+                          },
+                          {
+                            "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5211",
+                            "dff_slot": "T26Y52__R1_DFBBP_0",
+                            "x": 738.24,
+                            "y": 573.48
+                          }
+                        ]
+                      },
+                      {
+                        "type": "buffer",
+                        "x": 674.76,
+                        "y": 690.44,
+                        "buffer_slot": "T24Y63__R0_INV_0",
+                        "children": [
+                          {
+                            "type": "sink",
+                            "x": 614.04,
+                            "y": 690.44,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4907",
+                                "dff_slot": "T21Y55__R1_DFBBP_0",
+                                "x": 600.24,
+                                "y": 606.12
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5206",
+                                "dff_slot": "T22Y70__R3_DFBBP_0",
+                                "x": 627.84,
+                                "y": 774.76
+                              }
+                            ]
+                          },
+                          {
+                            "type": "sink",
+                            "x": 710.64,
+                            "y": 687.7199999999999,
+                            "sinks": [
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4931",
+                                "dff_slot": "T23Y69__R3_DFBBP_0",
+                                "x": 655.44,
+                                "y": 763.88
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8808",
+                                "dff_slot": "T26Y56__R1_DFBBP_0",
+                                "x": 738.24,
+                                "y": 617.0
+                              },
+                              {
+                                "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4932",
+                                "dff_slot": "T26Y62__R1_DFBBP_0",
+                                "x": 738.24,
+                                "y": 682.28
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sinks": [
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4109",
+      "dff_slot": "T13Y13__R1_DFBBP_0",
+      "x": 379.44,
+      "y": 149.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4982",
+      "dff_slot": "T12Y15__R1_DFBBP_0",
+      "x": 351.84,
+      "y": 170.92
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5179",
+      "dff_slot": "T10Y16__R3_DFBBP_0",
+      "x": 296.64,
+      "y": 187.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5166",
+      "dff_slot": "T7Y18__R1_DFBBP_0",
+      "x": 213.84,
+      "y": 203.56
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7685",
+      "dff_slot": "T9Y18__R3_DFBBP_0",
+      "x": 269.04,
+      "y": 209.0
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5172",
+      "dff_slot": "T6Y19__R3_DFBBP_0",
+      "x": 186.24,
+      "y": 219.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5161",
+      "dff_slot": "T6Y20__R1_DFBBP_0",
+      "x": 186.24,
+      "y": 225.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4933",
+      "dff_slot": "T10Y22__R1_DFBBP_0",
+      "x": 296.64,
+      "y": 247.08
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4937",
+      "dff_slot": "T17Y9__R1_DFBBP_0",
+      "x": 489.84,
+      "y": 105.64
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5199",
+      "dff_slot": "T16Y15__R1_DFBBP_0",
+      "x": 462.24,
+      "y": 170.92
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5210",
+      "dff_slot": "T14Y16__R3_DFBBP_0",
+      "x": 407.04,
+      "y": 187.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5208",
+      "dff_slot": "T14Y17__R1_DFBBP_0",
+      "x": 407.04,
+      "y": 192.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5174",
+      "dff_slot": "T13Y20__R3_DFBBP_0",
+      "x": 379.44,
+      "y": 230.76
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5168",
+      "dff_slot": "T13Y22__R1_DFBBP_0",
+      "x": 379.44,
+      "y": 247.08
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7684",
+      "dff_slot": "T14Y19__R3_DFBBP_0",
+      "x": 407.04,
+      "y": 219.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5151",
+      "dff_slot": "T16Y19__R3_DFBBP_0",
+      "x": 462.24,
+      "y": 219.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8806",
+      "dff_slot": "T17Y21__R3_DFBBP_0",
+      "x": 489.84,
+      "y": 241.64
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5213",
+      "dff_slot": "T10Y24__R1_DFBBP_0",
+      "x": 296.64,
+      "y": 268.84
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5224",
+      "dff_slot": "T6Y26__R1_DFBBP_0",
+      "x": 186.24,
+      "y": 290.6
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5228",
+      "dff_slot": "T11Y26__R1_DFBBP_0",
+      "x": 324.24,
+      "y": 290.6
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5146",
+      "dff_slot": "T6Y27__R1_DFBBP_0",
+      "x": 186.24,
+      "y": 301.48
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5171",
+      "dff_slot": "T6Y28__R3_DFBBP_0",
+      "x": 186.24,
+      "y": 317.8
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5141",
+      "dff_slot": "T7Y29__R1_DFBBP_0",
+      "x": 213.84,
+      "y": 323.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5223",
+      "dff_slot": "T10Y27__R3_DFBBP_0",
+      "x": 296.64,
+      "y": 306.92
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5155",
+      "dff_slot": "T10Y29__R3_DFBBP_0",
+      "x": 296.64,
+      "y": 328.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4107",
+      "dff_slot": "T11Y33__R1_DFBBP_0",
+      "x": 324.24,
+      "y": 366.76
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7687",
+      "dff_slot": "T13Y23__R1_DFBBP_0",
+      "x": 379.44,
+      "y": 257.96
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5225",
+      "dff_slot": "T12Y25__R3_DFBBP_0",
+      "x": 351.84,
+      "y": 285.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5138",
+      "dff_slot": "T12Y26__R1_DFBBP_0",
+      "x": 351.84,
+      "y": 290.6
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5137",
+      "dff_slot": "T15Y26__R3_DFBBP_0",
+      "x": 434.64,
+      "y": 296.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4106",
+      "dff_slot": "T13Y32__R1_DFBBP_0",
+      "x": 379.44,
+      "y": 355.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5134",
+      "dff_slot": "T14Y28__R3_DFBBP_0",
+      "x": 407.04,
+      "y": 317.8
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5195",
+      "dff_slot": "T14Y32__R3_DFBBP_0",
+      "x": 407.04,
+      "y": 361.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4912",
+      "dff_slot": "T15Y27__R1_DFBBP_0",
+      "x": 434.64,
+      "y": 301.48
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4985",
+      "dff_slot": "T16Y29__R3_DFBBP_0",
+      "x": 462.24,
+      "y": 328.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4935",
+      "dff_slot": "T24Y9__R1_DFBBP_0",
+      "x": 683.04,
+      "y": 105.64
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4934",
+      "dff_slot": "T23Y15__R3_DFBBP_0",
+      "x": 655.44,
+      "y": 176.36
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8805",
+      "dff_slot": "T21Y20__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 225.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5158",
+      "dff_slot": "T25Y20__R1_DFBBP_0",
+      "x": 710.64,
+      "y": 225.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5173",
+      "dff_slot": "T18Y23__R1_DFBBP_0",
+      "x": 517.44,
+      "y": 257.96
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5183",
+      "dff_slot": "T20Y25__R3_DFBBP_0",
+      "x": 572.64,
+      "y": 285.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4983",
+      "dff_slot": "T22Y24__R3_DFBBP_0",
+      "x": 627.84,
+      "y": 274.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8810",
+      "dff_slot": "T24Y26__R3_DFBBP_0",
+      "x": 683.04,
+      "y": 296.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7681",
+      "dff_slot": "T25Y24__R3_DFBBP_0",
+      "x": 710.64,
+      "y": 274.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5218",
+      "dff_slot": "T26Y16__R1_DFBBP_0",
+      "x": 738.24,
+      "y": 181.8
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4105",
+      "dff_slot": "T26Y16__R3_DFBBP_0",
+      "x": 738.24,
+      "y": 187.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4938",
+      "dff_slot": "T27Y16__R3_DFBBP_0",
+      "x": 765.84,
+      "y": 187.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8807",
+      "dff_slot": "T29Y18__R3_DFBBP_0",
+      "x": 821.04,
+      "y": 209.0
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4108",
+      "dff_slot": "T26Y19__R1_DFBBP_0",
+      "x": 738.24,
+      "y": 214.44
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5154",
+      "dff_slot": "T26Y24__R3_DFBBP_0",
+      "x": 738.24,
+      "y": 274.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5157",
+      "dff_slot": "T27Y20__R1_DFBBP_0",
+      "x": 765.84,
+      "y": 225.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7456",
+      "dff_slot": "T27Y24__R1_DFBBP_0",
+      "x": 765.84,
+      "y": 268.84
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5219",
+      "dff_slot": "T28Y22__R1_DFBBP_0",
+      "x": 793.44,
+      "y": 247.08
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5207",
+      "dff_slot": "T19Y27__R1_DFBBP_0",
+      "x": 545.04,
+      "y": 301.48
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5145",
+      "dff_slot": "T20Y28__R1_DFBBP_0",
+      "x": 572.64,
+      "y": 312.36
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7682",
+      "dff_slot": "T21Y28__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 312.36
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5197",
+      "dff_slot": "T20Y29__R1_DFBBP_0",
+      "x": 572.64,
+      "y": 323.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5143",
+      "dff_slot": "T17Y29__R3_DFBBP_0",
+      "x": 489.84,
+      "y": 328.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5182",
+      "dff_slot": "T18Y33__R3_DFBBP_0",
+      "x": 517.44,
+      "y": 372.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5152",
+      "dff_slot": "T20Y31__R3_DFBBP_0",
+      "x": 572.64,
+      "y": 350.44
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4984",
+      "dff_slot": "T22Y29__R1_DFBBP_0",
+      "x": 627.84,
+      "y": 323.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5167",
+      "dff_slot": "T22Y32__R3_DFBBP_0",
+      "x": 627.84,
+      "y": 361.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5198",
+      "dff_slot": "T25Y26__R3_DFBBP_0",
+      "x": 710.64,
+      "y": 296.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5160",
+      "dff_slot": "T24Y28__R1_DFBBP_0",
+      "x": 683.04,
+      "y": 312.36
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4111",
+      "dff_slot": "T24Y28__R3_DFBBP_0",
+      "x": 683.04,
+      "y": 317.8
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5230",
+      "dff_slot": "T27Y29__R1_DFBBP_0",
+      "x": 765.84,
+      "y": 323.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5140",
+      "dff_slot": "T22Y33__R3_DFBBP_0",
+      "x": 627.84,
+      "y": 372.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8811",
+      "dff_slot": "T23Y30__R3_DFBBP_0",
+      "x": 655.44,
+      "y": 339.56
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4980",
+      "dff_slot": "T25Y32__R1_DFBBP_0",
+      "x": 710.64,
+      "y": 355.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4908",
+      "dff_slot": "T25Y32__R3_DFBBP_0",
+      "x": 710.64,
+      "y": 361.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5216",
+      "dff_slot": "T30Y29__R3_DFBBP_0",
+      "x": 848.64,
+      "y": 328.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7686",
+      "dff_slot": "T11Y34__R3_DFBBP_0",
+      "x": 324.24,
+      "y": 383.08
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4936",
+      "dff_slot": "T7Y35__R1_DFBBP_0",
+      "x": 213.84,
+      "y": 388.52
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5153",
+      "dff_slot": "T12Y36__R1_DFBBP_0",
+      "x": 351.84,
+      "y": 399.4
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5209",
+      "dff_slot": "T8Y37__R1_DFBBP_0",
+      "x": 241.44,
+      "y": 410.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4981",
+      "dff_slot": "T6Y38__R1_DFBBP_0",
+      "x": 186.24,
+      "y": 421.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5232",
+      "dff_slot": "T7Y46__R1_DFBBP_0",
+      "x": 213.84,
+      "y": 508.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5159",
+      "dff_slot": "T8Y40__R3_DFBBP_0",
+      "x": 241.44,
+      "y": 448.36
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5233",
+      "dff_slot": "T8Y46__R1_DFBBP_0",
+      "x": 241.44,
+      "y": 508.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5169",
+      "dff_slot": "T9Y42__R1_DFBBP_0",
+      "x": 269.04,
+      "y": 464.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4110",
+      "dff_slot": "T13Y35__R3_DFBBP_0",
+      "x": 379.44,
+      "y": 393.96
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5212",
+      "dff_slot": "T16Y35__R3_DFBBP_0",
+      "x": 462.24,
+      "y": 393.96
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5215",
+      "dff_slot": "T12Y37__R1_DFBBP_0",
+      "x": 351.84,
+      "y": 410.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4909",
+      "dff_slot": "T13Y38__R1_DFBBP_0",
+      "x": 379.44,
+      "y": 421.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5156",
+      "dff_slot": "T16Y39__R1_DFBBP_0",
+      "x": 462.24,
+      "y": 432.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5202",
+      "dff_slot": "T16Y41__R1_DFBBP_0",
+      "x": 462.24,
+      "y": 453.8
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5227",
+      "dff_slot": "T16Y43__R1_DFBBP_0",
+      "x": 462.24,
+      "y": 475.56
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5231",
+      "dff_slot": "T17Y44__R3_DFBBP_0",
+      "x": 489.84,
+      "y": 491.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7680",
+      "dff_slot": "T17Y47__R1_DFBBP_0",
+      "x": 489.84,
+      "y": 519.08
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7683",
+      "dff_slot": "T10Y48__R1_DFBBP_0",
+      "x": 296.64,
+      "y": 529.96
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5200",
+      "dff_slot": "T7Y49__R1_DFBBP_0",
+      "x": 213.84,
+      "y": 540.84
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5235",
+      "dff_slot": "T9Y51__R3_DFBBP_0",
+      "x": 269.04,
+      "y": 568.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5234",
+      "dff_slot": "T8Y52__R1_DFBBP_0",
+      "x": 241.44,
+      "y": 573.48
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5144",
+      "dff_slot": "T6Y54__R3_DFBBP_0",
+      "x": 186.24,
+      "y": 600.68
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5170",
+      "dff_slot": "T7Y70__R3_DFBBP_0",
+      "x": 213.84,
+      "y": 774.76
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5229",
+      "dff_slot": "T8Y55__R3_DFBBP_0",
+      "x": 241.44,
+      "y": 611.56
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5221",
+      "dff_slot": "T12Y57__R1_DFBBP_0",
+      "x": 351.84,
+      "y": 627.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5190",
+      "dff_slot": "T12Y61__R3_DFBBP_0",
+      "x": 351.84,
+      "y": 676.84
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8804",
+      "dff_slot": "T16Y56__R1_DFBBP_0",
+      "x": 462.24,
+      "y": 617.0
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5194",
+      "dff_slot": "T15Y57__R1_DFBBP_0",
+      "x": 434.64,
+      "y": 627.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4913",
+      "dff_slot": "T14Y58__R3_DFBBP_0",
+      "x": 407.04,
+      "y": 644.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5180",
+      "dff_slot": "T17Y58__R3_DFBBP_0",
+      "x": 489.84,
+      "y": 644.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5193",
+      "dff_slot": "T12Y64__R1_DFBBP_0",
+      "x": 351.84,
+      "y": 704.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4910",
+      "dff_slot": "T13Y61__R1_DFBBP_0",
+      "x": 379.44,
+      "y": 671.4
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4914",
+      "dff_slot": "T15Y64__R3_DFBBP_0",
+      "x": 434.64,
+      "y": 709.48
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5178",
+      "dff_slot": "T15Y67__R3_DFBBP_0",
+      "x": 434.64,
+      "y": 742.12
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5192",
+      "dff_slot": "T16Y63__R1_DFBBP_0",
+      "x": 462.24,
+      "y": 693.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5214",
+      "dff_slot": "T20Y33__R3_DFBBP_0",
+      "x": 572.64,
+      "y": 372.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5201",
+      "dff_slot": "T20Y36__R3_DFBBP_0",
+      "x": 572.64,
+      "y": 404.84
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5181",
+      "dff_slot": "T20Y37__R1_DFBBP_0",
+      "x": 572.64,
+      "y": 410.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5139",
+      "dff_slot": "T18Y38__R1_DFBBP_0",
+      "x": 517.44,
+      "y": 421.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5205",
+      "dff_slot": "T18Y44__R1_DFBBP_0",
+      "x": 517.44,
+      "y": 486.44
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5204",
+      "dff_slot": "T19Y42__R3_DFBBP_0",
+      "x": 545.04,
+      "y": 470.12
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5191",
+      "dff_slot": "T20Y40__R1_DFBBP_0",
+      "x": 572.64,
+      "y": 442.92
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5175",
+      "dff_slot": "T21Y43__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 475.56
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5226",
+      "dff_slot": "T21Y44__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 486.44
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8809",
+      "dff_slot": "T23Y35__R1_DFBBP_0",
+      "x": 655.44,
+      "y": 388.52
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7679",
+      "dff_slot": "T27Y37__R1_DFBBP_0",
+      "x": 765.84,
+      "y": 410.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5220",
+      "dff_slot": "T30Y38__R1_DFBBP_0",
+      "x": 848.64,
+      "y": 421.16
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5135",
+      "dff_slot": "T22Y40__R1_DFBBP_0",
+      "x": 627.84,
+      "y": 442.92
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5177",
+      "dff_slot": "T22Y45__R1_DFBBP_0",
+      "x": 627.84,
+      "y": 497.32
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4911",
+      "dff_slot": "T22Y45__R3_DFBBP_0",
+      "x": 627.84,
+      "y": 502.76
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5136",
+      "dff_slot": "T23Y45__R3_DFBBP_0",
+      "x": 655.44,
+      "y": 502.76
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5142",
+      "dff_slot": "T28Y41__R3_DFBBP_0",
+      "x": 793.44,
+      "y": 459.24
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5217",
+      "dff_slot": "T28Y43__R3_DFBBP_0",
+      "x": 793.44,
+      "y": 481.0
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5237",
+      "dff_slot": "T18Y46__R1_DFBBP_0",
+      "x": 517.44,
+      "y": 508.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7689",
+      "dff_slot": "T19Y46__R1_DFBBP_0",
+      "x": 545.04,
+      "y": 508.2
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5236",
+      "dff_slot": "T18Y47__R3_DFBBP_0",
+      "x": 517.44,
+      "y": 524.52
+    },
+    {
+      "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7690",
+      "dff_slot": "T21Y49__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 540.84
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5176",
+      "dff_slot": "T17Y64__R1_DFBBP_0",
+      "x": 489.84,
+      "y": 704.04
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5222",
+      "dff_slot": "T18Y57__R1_DFBBP_0",
+      "x": 517.44,
+      "y": 627.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4979",
+      "dff_slot": "T20Y62__R1_DFBBP_0",
+      "x": 572.64,
+      "y": 682.28
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5196",
+      "dff_slot": "T20Y68__R1_DFBBP_0",
+      "x": 572.64,
+      "y": 747.56
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5203",
+      "dff_slot": "T21Y53__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 584.36
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4112",
+      "dff_slot": "T30Y47__R1_DFBBP_0",
+      "x": 848.64,
+      "y": 519.08
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5189",
+      "dff_slot": "T27Y47__R3_DFBBP_0",
+      "x": 765.84,
+      "y": 524.52
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4986",
+      "dff_slot": "T26Y48__R3_DFBBP_0",
+      "x": 738.24,
+      "y": 535.4
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5211",
+      "dff_slot": "T26Y52__R1_DFBBP_0",
+      "x": 738.24,
+      "y": 573.48
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4907",
+      "dff_slot": "T21Y55__R1_DFBBP_0",
+      "x": 600.24,
+      "y": 606.12
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5206",
+      "dff_slot": "T22Y70__R3_DFBBP_0",
+      "x": 627.84,
+      "y": 774.76
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4931",
+      "dff_slot": "T23Y69__R3_DFBBP_0",
+      "x": 655.44,
+      "y": 763.88
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8808",
+      "dff_slot": "T26Y56__R1_DFBBP_0",
+      "x": 738.24,
+      "y": 617.0
+    },
+    {
+      "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4932",
+      "dff_slot": "T26Y62__R1_DFBBP_0",
+      "x": 738.24,
+      "y": 682.28
+    }
+  ]
+}
