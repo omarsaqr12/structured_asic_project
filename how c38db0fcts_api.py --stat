@@ -1,0 +1,5 @@
+[33m7e55021[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/cts-api[m[33m, [m[1;31morigin/feature/cts-api[m[33m)[m Rename cts_api.py to cts_API.py
+[33m176878f[m Add CTS API documentation
+[33m43f25c2[m Add GitHub issue and PR templates for CTS API
+[33mc38db0f[m Add minimal CTS API for eco_generator.py integration (fixes #<issue_number>)
+[33m697b7df[m[33m ([m[1;31morigin/feature/buffer-manager-cts[m[33m, [m[1;32mfeature/buffer-manager-cts[m[33m)[m Add GitHub issue and PR templates for BufferManager CTS

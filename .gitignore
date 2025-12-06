@@ -30,3 +30,32 @@ Thumbs.db
 # build/*/*.spef
 # build/*/*.rpt
 
+# Documentation files to exclude
+ISSUE_DEF_GENERATION.md
+PR_DEF_GENERATION.md
+PHASE4_5_TASK_DISTRIBUTION.md
+PHASE3_TASK_DISTRIBUTION (1).md
+CTS_API_DOCUMENTATION.md
+BUFFER_MANAGER_FILE_LOCATIONS.md
+BUFFER_MANAGER_USAGE.md
+.github/ISSUE_TEMPLATE/buffer-manager-cts.md
+.github/ISSUE_TEMPLATE/cts-xtree-implementation.md
+.github/pull_request_template_buffer_manager.md
+
+# Junk/accidental files
+how c38db0fcts_api.py --stat
+cleanup_and_push.bat
+push_to_github.bat
+
+# Archive files
+*.zip
+
+# Generated/temporary files
+claimed_buffers.json
+cts_tree_with_manager.json
+placement_aes_128.json
+placement_z80.json
+sa_knob_analysis_analysis.json
+test_eco_6502_eco.json
+test_eco_6502.json
+test_eco_6502.v
