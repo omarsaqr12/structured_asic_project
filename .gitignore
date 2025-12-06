@@ -30,3 +30,14 @@ Thumbs.db
 # build/*/*.spef
 # build/*/*.rpt
 
+# Documentation files to exclude
+ISSUE_DEF_GENERATION.md
+PR_DEF_GENERATION.md
+PHASE4_5_TASK_DISTRIBUTION.md
+PHASE3_TASK_DISTRIBUTION (1).md
+CTS_API_DOCUMENTATION.md
+BUFFER_MANAGER_FILE_LOCATIONS.md
+BUFFER_MANAGER_USAGE.md
+.github/ISSUE_TEMPLATE/buffer-manager-cts.md
+.github/ISSUE_TEMPLATE/cts-xtree-implementation.md
+.github/pull_request_template_buffer_manager.md
