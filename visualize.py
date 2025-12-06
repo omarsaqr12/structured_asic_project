@@ -5,6 +5,8 @@ Generates fabric layout plos showing die, core, pins, and fabric slots.
 """
 
 import argparse
+import json
+import os
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.colors import ListedColormap
@@ -483,11 +485,204 @@ def plot_net_length_histogram(placement_map_path: str,
     print(f"Net length histogram saved to {output_path}")
 
 
+def plot_cts_tree(cts_tree_path: str,
+                  claimed_buffers_path: str,
+                  fabric_cells_path: str,
+                  pins_path: str,
+                  output_path: str):
+    """
+    Generate CTS tree visualization overlaid on fabric layout.
+    
+    Args:
+        cts_tree_path: Path to CTS tree JSON file
+        claimed_buffers_path: Path to claimed_buffers.json file
+        fabric_cells_path: Path to fabric_cells.yaml
+        pins_path: Path to pins.yaml
+        output_path: Path to output PNG file
+    """
+    print(f"Loading CTS tree from: {cts_tree_path}")
+    # Load CTS tree
+    with open(cts_tree_path, 'r') as f:
+        cts_tree = json.load(f)
+    print(f"Loaded CTS tree. Root keys: {list(cts_tree.keys())}")
+    
+    # Quick estimate: count DFFs from the 'sinks' key if available, otherwise count recursively
+    if 'sinks' in cts_tree and isinstance(cts_tree['sinks'], list):
+        total_dffs = len(cts_tree['sinks'])
+        print(f"Found {total_dffs} DFFs in sinks list")
+    else:
+        print("Counting DFFs in tree structure...", end='', flush=True)
+        def count_dffs(node):
+            """Count total DFFs in tree for progress tracking."""
+            count = 0
+            if node['type'] == 'buffer':
+                for child in node.get('children', []):
+                    count += count_dffs(child)
+            elif node['type'] == 'sink':
+                count += len(node.get('sinks', []))
+            return count
+        total_dffs = count_dffs(cts_tree['root'])
+        print(f" Done. Total DFFs: {total_dffs}")
+    
+    # Load claimed buffers (for buffer coordinates)
+    claimed_buffers = {}
+    if claimed_buffers_path and os.path.exists(claimed_buffers_path):
+        with open(claimed_buffers_path, 'r') as f:
+            claimed_buffers = json.load(f)
+    
+    # Parse fabric and pins
+    print("Loading fabric and pins data...", end='', flush=True)
+    fabric_db = parse_fabric_cells(fabric_cells_path)
+    pins_db = parse_pins(pins_path)
+    print(" Done.")
+    
+    # Create figure
+    print("Creating plot figure...", end='', flush=True)
+    fig, ax = plt.subplots(1, 1, figsize=(16, 16))
+    
+    # Get die and core dimensions
+    die_width = pins_db['die']['width_um']
+    die_height = pins_db['die']['height_um']
+    core_width = pins_db['core']['width_um']
+    core_height = pins_db['core']['height_um']
+    core_margin = pins_db['die']['core_margin_um']
+    core_x = core_margin
+    core_y = core_margin
+    
+    # Draw die boundary (light background)
+    die_rect = patches.Rectangle(
+        (0, 0), die_width, die_height,
+        linewidth=2, edgecolor='black', facecolor='lightgray', alpha=0.2
+    )
+    ax.add_patch(die_rect)
+    
+    # Draw core boundary
+    core_rect = patches.Rectangle(
+        (core_x, core_y), core_width, core_height,
+        linewidth=2, edgecolor='blue', facecolor='none', linestyle='--', alpha=0.5
+    )
+    ax.add_patch(core_rect)
+    print(" Done.")
+    
+    # Draw fabric slots (light, semi-transparent) - skip for performance, only draw core outline
+    # Commented out for performance - uncomment if needed for debugging
+    # for cell_type, slots in fabric_db.items():
+    #     color = CELL_COLORS.get(cell_type, CELL_COLORS['unknown'])
+    #     width_um, height_um = get_cell_dimensions(cell_type)
+    #     
+    #     for slot in slots:
+    #         x = slot['x']
+    #         y = slot['y']
+    #         slot_rect = patches.Rectangle(
+    #             (x, y), width_um, height_um,
+    #             linewidth=0.1, edgecolor='gray', facecolor=color, alpha=0.1
+    #         )
+    #         ax.add_patch(slot_rect)
+    
+    processed_dffs = [0]  # Use list to allow modification in nested function
+    print(f"Plotting {total_dffs} DFFs and tree structure...")
+    print("Progress: 0%", end='', flush=True)
+    
+    # Recursive function to plot tree
+    def plot_tree_node(node, parent_x=None, parent_y=None, level=0):
+        """Recursively plot tree nodes and connections."""
+        if node['type'] == 'buffer':
+            x = node['x']
+            y = node['y']
+            buffer_name = node.get('buffer_name', 'unknown')
+            
+            # Draw connection from parent
+            if parent_x is not None and parent_y is not None:
+                ax.plot([parent_x, x], [parent_y, y], 'b-', linewidth=1.5, alpha=0.6, zorder=5)
+            
+            # Draw buffer (blue square, red if root)
+            if level == 0:
+                # Root buffer - red square, larger
+                buffer_rect = patches.Rectangle(
+                    (x - 5, y - 5), 10, 10,
+                    linewidth=2, edgecolor='red', facecolor='red', alpha=0.8, zorder=10
+                )
+                ax.add_patch(buffer_rect)
+                ax.text(x, y + 8, 'ROOT', fontsize=8, ha='center', va='bottom',
+                       bbox=dict(boxstyle='round,pad=0.3', facecolor='yellow', alpha=0.7), zorder=11)
+            else:
+                # Regular buffer - blue square
+                buffer_rect = patches.Rectangle(
+                    (x - 3, y - 3), 6, 6,
+                    linewidth=1.5, edgecolor='blue', facecolor='blue', alpha=0.7, zorder=9
+                )
+                ax.add_patch(buffer_rect)
+            
+            # Process children
+            for child in node.get('children', []):
+                plot_tree_node(child, x, y, level + 1)
+        
+        elif node['type'] == 'sink':
+            # Draw connection from parent buffer to sink center
+            if parent_x is not None and parent_y is not None:
+                sink_x = node['x']
+                sink_y = node['y']
+                ax.plot([parent_x, sink_x], [parent_y, sink_y], 'g-', linewidth=1, alpha=0.5, zorder=4)
+            
+            # Draw DFFs (green circles) - this is the slow part
+            for sink in node.get('sinks', []):
+                dff_x = sink['x']
+                dff_y = sink['y']
+                dff_circle = plt.Circle((dff_x, dff_y), radius=2, color='green', 
+                                       alpha=0.7, zorder=8)
+                ax.add_patch(dff_circle)
+                # Update progress for each DFF
+                processed_dffs[0] += 1
+                if total_dffs > 0:
+                    progress = int((processed_dffs[0] / total_dffs) * 100)
+                    # Update every 1% or every 10 DFFs, whichever is more frequent
+                    if processed_dffs[0] % max(1, min(total_dffs // 100, 10)) == 0:
+                        print(f"\rProgress: {progress}% ({processed_dffs[0]}/{total_dffs} DFFs)", end='', flush=True)
+    
+    # Plot tree starting from root
+    if 'root' in cts_tree:
+        plot_tree_node(cts_tree['root'])
+        print(f"\rProgress: 100% ({total_dffs}/{total_dffs} DFFs) - Tree plotting complete")
+    else:
+        print(f"Warning: No 'root' key found in CTS tree. Available keys: {list(cts_tree.keys())}")
+        return
+    
+    # Set axis properties
+    ax.set_xlim(-50, die_width + 50)
+    ax.set_ylim(-50, die_height + 50)
+    ax.set_aspect('equal')
+    ax.set_xlabel('X (microns)', fontsize=12)
+    ax.set_ylabel('Y (microns)', fontsize=12)
+    ax.set_title('CTS Tree Visualization', fontsize=14, fontweight='bold')
+    ax.grid(True, alpha=0.3)
+    
+    # Add legend
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Line2D([0], [0], marker='s', color='w', markerfacecolor='red', 
+               markersize=10, label='Root Buffer', markeredgecolor='red', markeredgewidth=2),
+        Line2D([0], [0], marker='s', color='w', markerfacecolor='blue', 
+               markersize=8, label='CTS Buffer', markeredgecolor='blue', markeredgewidth=1.5),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='green', 
+               markersize=8, label='DFF (Sink)', markeredgecolor='green', markeredgewidth=1),
+        Line2D([0], [0], color='blue', linewidth=1.5, label='Buffer Connection'),
+        Line2D([0], [0], color='green', linewidth=1, label='Buffer to DFF'),
+    ]
+    ax.legend(handles=legend_elements, loc='upper right', fontsize=9)
+    
+    print("\nGenerating plot layout...")
+    plt.tight_layout()
+    print("Saving image file...")
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()  # Close figure to free memory
+    print(f"✓ CTS tree visualization saved to {output_path}")
+
+
 def main():
     import os
     
     parser = argparse.ArgumentParser(description='Visualize fabric layout and placement results')
-    parser.add_argument('command', choices=['init', 'interactive', 'density', 'netlength'],
+    parser.add_argument('command', choices=['init', 'interactive', 'density', 'netlength', 'cts'],
                         help='Visualization command')
     
     # Common arguments
@@ -514,6 +709,12 @@ def main():
     parser.add_argument('--grid-resolution', type=int, default=50,
                         help='Grid resolution for density heatmap (default: 50)')
     
+    # CTS-specific arguments
+    parser.add_argument('--cts-tree', type=str, default=None,
+                        help='Path to CTS tree JSON file (for cts command)')
+    parser.add_argument('--claimed-buffers', type=str, default=None,
+                        help='Path to claimed_buffers.json file (for cts command)')
+    
     args = parser.parse_args()
     
     # Handle default paths based on design name
@@ -525,12 +726,35 @@ def main():
                 args.output = f'build/{args.design}/{args.design}_density.png'
             elif args.command == 'netlength':
                 args.output = f'build/{args.design}/{args.design}_net_length.png'
+            elif args.command == 'cts':
+                args.output = f'build/{args.design}/{args.design}_cts_tree.png'
         
         if args.map is None and args.command in ['density', 'netlength']:
             args.map = f'build/{args.design}/{args.design}.map'
         
         if args.netlist is None and args.command == 'netlength':
             args.netlist = f'designs/{args.design}_mapped.json'
+        
+        if args.cts_tree is None and args.command == 'cts':
+            # Try common CTS tree locations
+            possible_paths = [
+                f'build/{args.design}/cts_with_manager/best_htree/{args.design}_cts_tree.json',
+                f'build/{args.design}/cts_with_manager/greedy_htree/{args.design}_cts_tree.json',
+                f'build/{args.design}/cts/best/{args.design}_cts_tree.json',
+                f'build/{args.design}/cts/greedy/{args.design}_cts_tree.json',
+            ]
+            for path in possible_paths:
+                if os.path.exists(path):
+                    args.cts_tree = path
+                    break
+        
+        if args.claimed_buffers is None and args.command == 'cts':
+            # Try to find claimed_buffers.json in same directory as cts_tree
+            if args.cts_tree:
+                cts_dir = os.path.dirname(args.cts_tree)
+                claimed_path = os.path.join(cts_dir, 'claimed_buffers.json')
+                if os.path.exists(claimed_path):
+                    args.claimed_buffers = claimed_path
     
     # Execute command
     if args.command == 'init':
@@ -593,6 +817,30 @@ def main():
             args.netlist,          # netlist_path
             args.fabric_cells,     # fabric_cells_path
             args.output            # output_path
+        )
+    
+    elif args.command == 'cts':
+        # Validate required arguments
+        if args.cts_tree is None:
+            parser.error("--cts-tree is required for 'cts' command (or use --design to auto-detect)")
+        if args.output is None:
+            parser.error("--output is required for 'cts' command (or use --design)")
+        
+        # Check if files exist
+        if not os.path.exists(args.cts_tree):
+            parser.error(f"CTS tree file not found: {args.cts_tree}")
+        if not os.path.exists(args.fabric_cells):
+            parser.error(f"Fabric cells file not found: {args.fabric_cells}")
+        if not os.path.exists(args.pins):
+            parser.error(f"Pins file not found: {args.pins}")
+        
+        # Call plot_cts_tree
+        plot_cts_tree(
+            args.cts_tree,          # cts_tree_path
+            args.claimed_buffers,   # claimed_buffers_path (optional)
+            args.fabric_cells,      # fabric_cells_path
+            args.pins,              # pins_path
+            args.output             # output_path
         )
 
 
