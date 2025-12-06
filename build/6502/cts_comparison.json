@@ -1,0 +1,2607 @@
+{
+  "htree": {
+    "skew": 0.3925612070386473,
+    "max_delay": 1.5915532919378976,
+    "min_delay": 1.1989920848992504,
+    "total_wirelength": 78311.03995351646,
+    "avg_wirelength": 547.6296500245907,
+    "buffer_count": 46,
+    "avg_path_length": 5.524475524475524,
+    "num_sinks": 143,
+    "sink_paths": [
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4109",
+        "dff_x": 379.44,
+        "dff_y": 149.16,
+        "delay": 1.3142942354494311,
+        "wirelength": 564.2942354494312,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4982",
+        "dff_x": 351.84,
+        "dff_y": 170.92,
+        "delay": 1.28157184393609,
+        "wirelength": 531.5718439360899,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5179",
+        "dff_x": 296.64,
+        "dff_y": 187.24,
+        "delay": 1.2563822607592114,
+        "wirelength": 506.3822607592115,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5166",
+        "dff_x": 213.84,
+        "dff_y": 203.56,
+        "delay": 1.3396134343531039,
+        "wirelength": 589.6134343531039,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7685",
+        "dff_x": 269.04,
+        "dff_y": 209.0,
+        "delay": 1.2618861776742076,
+        "wirelength": 511.8861776742077,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5172",
+        "dff_x": 186.24,
+        "dff_y": 219.88,
+        "delay": 1.272326234390507,
+        "wirelength": 522.326234390507,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5161",
+        "dff_x": 186.24,
+        "dff_y": 225.32,
+        "delay": 1.2720208478577368,
+        "wirelength": 522.0208478577368,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4933",
+        "dff_x": 296.64,
+        "dff_y": 247.08,
+        "delay": 1.2895228812609685,
+        "wirelength": 539.5228812609683,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4937",
+        "dff_x": 489.84,
+        "dff_y": 105.64,
+        "delay": 1.3013985993172523,
+        "wirelength": 551.3985993172521,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5199",
+        "dff_x": 462.24,
+        "dff_y": 170.92,
+        "delay": 1.2473396814460886,
+        "wirelength": 497.33968144608855,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5210",
+        "dff_x": 407.04,
+        "dff_y": 187.24,
+        "delay": 1.2670819055481741,
+        "wirelength": 517.081905548174,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5208",
+        "dff_x": 407.04,
+        "dff_y": 192.68,
+        "delay": 1.2703389202791022,
+        "wirelength": 520.338920279102,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5174",
+        "dff_x": 379.44,
+        "dff_y": 230.76,
+        "delay": 1.4263458364064205,
+        "wirelength": 526.3458364064206,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5168",
+        "dff_x": 379.44,
+        "dff_y": 247.08,
+        "delay": 1.4263458364064205,
+        "wirelength": 526.3458364064205,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7684",
+        "dff_x": 407.04,
+        "dff_y": 219.88,
+        "delay": 1.4413296342855715,
+        "wirelength": 541.3296342855715,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5151",
+        "dff_x": 462.24,
+        "dff_y": 219.88,
+        "delay": 1.406476698890186,
+        "wirelength": 506.47669889018596,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8806",
+        "dff_x": 489.84,
+        "dff_y": 241.64,
+        "delay": 1.434317367234282,
+        "wirelength": 534.317367234282,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5213",
+        "dff_x": 296.64,
+        "dff_y": 268.84,
+        "delay": 1.240784608887154,
+        "wirelength": 490.784608887154,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5224",
+        "dff_x": 186.24,
+        "dff_y": 290.6,
+        "delay": 1.2510267952289824,
+        "wirelength": 501.02679522898256,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5228",
+        "dff_x": 324.24,
+        "dff_y": 290.6,
+        "delay": 1.2648159775085446,
+        "wirelength": 514.8159775085446,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5146",
+        "dff_x": 186.24,
+        "dff_y": 301.48,
+        "delay": 1.2524390257982156,
+        "wirelength": 502.4390257982157,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5171",
+        "dff_x": 186.24,
+        "dff_y": 317.8,
+        "delay": 1.4057851865289706,
+        "wirelength": 505.78518652897054,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5141",
+        "dff_x": 213.84,
+        "dff_y": 323.24,
+        "delay": 1.4057851865289703,
+        "wirelength": 505.78518652897054,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5223",
+        "dff_x": 296.64,
+        "dff_y": 306.92,
+        "delay": 1.4000118430882653,
+        "wirelength": 500.0118430882655,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5155",
+        "dff_x": 296.64,
+        "dff_y": 328.68,
+        "delay": 1.3819860952965575,
+        "wirelength": 481.9860952965577,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4107",
+        "dff_x": 324.24,
+        "dff_y": 366.76,
+        "delay": 1.408767131880628,
+        "wirelength": 508.7671318806281,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7687",
+        "dff_x": 379.44,
+        "dff_y": 257.96,
+        "delay": 1.2457989179615738,
+        "wirelength": 495.7989179615738,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5225",
+        "dff_x": 351.84,
+        "dff_y": 285.16,
+        "delay": 1.2490526230872867,
+        "wirelength": 499.05262308728675,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5138",
+        "dff_x": 351.84,
+        "dff_y": 290.6,
+        "delay": 1.2500999116900746,
+        "wirelength": 500.0999116900745,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5137",
+        "dff_x": 434.64,
+        "dff_y": 296.04,
+        "delay": 1.2781695995757814,
+        "wirelength": 528.1695995757814,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4106",
+        "dff_x": 379.44,
+        "dff_y": 355.88,
+        "delay": 1.428350308693526,
+        "wirelength": 528.3503086935261,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5134",
+        "dff_x": 407.04,
+        "dff_y": 317.8,
+        "delay": 1.428350308693526,
+        "wirelength": 528.3503086935262,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5195",
+        "dff_x": 407.04,
+        "dff_y": 361.32,
+        "delay": 1.422901525077209,
+        "wirelength": 522.9015250772089,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4912",
+        "dff_x": 434.64,
+        "dff_y": 301.48,
+        "delay": 1.4105380124967009,
+        "wirelength": 510.5380124967008,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4985",
+        "dff_x": 462.24,
+        "dff_y": 328.68,
+        "delay": 1.4091841834571501,
+        "wirelength": 509.18418345715,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4935",
+        "dff_x": 683.04,
+        "dff_y": 105.64,
+        "delay": 1.299314019738433,
+        "wirelength": 549.314019738433,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4934",
+        "dff_x": 655.44,
+        "dff_y": 176.36,
+        "delay": 1.2287654867597078,
+        "wirelength": 478.7654867597076,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8805",
+        "dff_x": 600.24,
+        "dff_y": 225.32,
+        "delay": 1.2941370131366658,
+        "wirelength": 544.1370131366657,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5158",
+        "dff_x": 710.64,
+        "dff_y": 225.32,
+        "delay": 1.2831899208213973,
+        "wirelength": 533.1899208213971,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5173",
+        "dff_x": 517.44,
+        "dff_y": 257.96,
+        "delay": 1.46688248279855,
+        "wirelength": 566.8824827985502,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5183",
+        "dff_x": 572.64,
+        "dff_y": 285.16,
+        "delay": 1.46688248279855,
+        "wirelength": 566.8824827985503,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4983",
+        "dff_x": 627.84,
+        "dff_y": 274.28,
+        "delay": 1.4582975026693044,
+        "wirelength": 558.2975026693045,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8810",
+        "dff_x": 683.04,
+        "dff_y": 296.04,
+        "delay": 1.4289071478068918,
+        "wirelength": 528.907147806892,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7681",
+        "dff_x": 710.64,
+        "dff_y": 274.28,
+        "delay": 1.4492371671238085,
+        "wirelength": 549.2371671238087,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5218",
+        "dff_x": 738.24,
+        "dff_y": 181.8,
+        "delay": 1.2241078106138135,
+        "wirelength": 474.10781061381323,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4105",
+        "dff_x": 738.24,
+        "dff_y": 187.24,
+        "delay": 1.2228120203830466,
+        "wirelength": 472.81202038304656,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4938",
+        "dff_x": 765.84,
+        "dff_y": 187.24,
+        "delay": 1.1989920848992504,
+        "wirelength": 448.99208489925013,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8807",
+        "dff_x": 821.04,
+        "dff_y": 209.0,
+        "delay": 1.2528743346830535,
+        "wirelength": 502.87433468305335,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4108",
+        "dff_x": 738.24,
+        "dff_y": 214.44,
+        "delay": 1.391297064405571,
+        "wirelength": 491.2970644055712,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5154",
+        "dff_x": 738.24,
+        "dff_y": 274.28,
+        "delay": 1.391297064405571,
+        "wirelength": 491.2970644055712,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5157",
+        "dff_x": 765.84,
+        "dff_y": 225.32,
+        "delay": 1.3797167602250235,
+        "wirelength": 479.7167602250235,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7456",
+        "dff_x": 765.84,
+        "dff_y": 268.84,
+        "delay": 1.3797167602250235,
+        "wirelength": 479.71676022502345,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5219",
+        "dff_x": 793.44,
+        "dff_y": 247.08,
+        "delay": 1.3744918242462745,
+        "wirelength": 474.49182424627435,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5207",
+        "dff_x": 545.04,
+        "dff_y": 301.48,
+        "delay": 1.2378306400587966,
+        "wirelength": 487.8306400587966,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5145",
+        "dff_x": 572.64,
+        "dff_y": 312.36,
+        "delay": 1.2081635808853632,
+        "wirelength": 458.16358088536316,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7682",
+        "dff_x": 600.24,
+        "dff_y": 312.36,
+        "delay": 1.2357635808853633,
+        "wirelength": 485.7635808853632,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5197",
+        "dff_x": 572.64,
+        "dff_y": 323.24,
+        "delay": 1.2190435808853632,
+        "wirelength": 469.04358088536316,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5143",
+        "dff_x": 489.84,
+        "dff_y": 328.68,
+        "delay": 1.445896491590197,
+        "wirelength": 545.896491590197,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5182",
+        "dff_x": 517.44,
+        "dff_y": 372.2,
+        "delay": 1.445896491590197,
+        "wirelength": 545.8964915901971,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5152",
+        "dff_x": 572.64,
+        "dff_y": 350.44,
+        "delay": 1.4374339131383422,
+        "wirelength": 537.4339131383423,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4984",
+        "dff_x": 627.84,
+        "dff_y": 323.24,
+        "delay": 1.4287306235214394,
+        "wirelength": 528.7306235214394,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5167",
+        "dff_x": 627.84,
+        "dff_y": 361.32,
+        "delay": 1.4248287628302896,
+        "wirelength": 524.8287628302895,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5198",
+        "dff_x": 710.64,
+        "dff_y": 296.04,
+        "delay": 1.201501939161981,
+        "wirelength": 451.50193916198117,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5160",
+        "dff_x": 683.04,
+        "dff_y": 312.36,
+        "delay": 1.2127819391619812,
+        "wirelength": 462.7819391619812,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4111",
+        "dff_x": 683.04,
+        "dff_y": 317.8,
+        "delay": 1.2133129469647599,
+        "wirelength": 463.31294696476,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5230",
+        "dff_x": 765.84,
+        "dff_y": 323.24,
+        "delay": 1.2414439547675387,
+        "wirelength": 491.44395476753874,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5140",
+        "dff_x": 627.84,
+        "dff_y": 372.2,
+        "delay": 1.418754691041305,
+        "wirelength": 518.7546910413049,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8811",
+        "dff_x": 655.44,
+        "dff_y": 339.56,
+        "delay": 1.4187546910413047,
+        "wirelength": 518.7546910413048,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4980",
+        "dff_x": 710.64,
+        "dff_y": 355.88,
+        "delay": 1.4327078288277726,
+        "wirelength": 532.7078288277728,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4908",
+        "dff_x": 710.64,
+        "dff_y": 361.32,
+        "delay": 1.4338586688639918,
+        "wirelength": 533.8586688639921,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5216",
+        "dff_x": 848.64,
+        "dff_y": 328.68,
+        "delay": 1.4802769860912188,
+        "wirelength": 580.276986091219,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7686",
+        "dff_x": 324.24,
+        "dff_y": 383.08,
+        "delay": 1.3015291182902897,
+        "wirelength": 551.5291182902897,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4936",
+        "dff_x": 213.84,
+        "dff_y": 388.52,
+        "delay": 1.3276918905118211,
+        "wirelength": 577.6918905118212,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5153",
+        "dff_x": 351.84,
+        "dff_y": 399.4,
+        "delay": 1.3274781485289096,
+        "wirelength": 577.4781485289096,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5209",
+        "dff_x": 241.44,
+        "dff_y": 410.28,
+        "delay": 1.3023776413277046,
+        "wirelength": 552.3776413277046,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4981",
+        "dff_x": 186.24,
+        "dff_y": 421.16,
+        "delay": 1.4922279348813952,
+        "wirelength": 592.2279348813954,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5232",
+        "dff_x": 213.84,
+        "dff_y": 508.2,
+        "delay": 1.4922279348813952,
+        "wirelength": 592.2279348813954,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5159",
+        "dff_x": 241.44,
+        "dff_y": 448.36,
+        "delay": 1.4533465426998755,
+        "wirelength": 553.3465426998755,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5233",
+        "dff_x": 241.44,
+        "dff_y": 508.2,
+        "delay": 1.4620047807633452,
+        "wirelength": 562.0047807633453,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5169",
+        "dff_x": 269.04,
+        "dff_y": 464.68,
+        "delay": 1.4468568114864586,
+        "wirelength": 546.8568114864587,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4110",
+        "dff_x": 379.44,
+        "dff_y": 393.96,
+        "delay": 1.2798788955832605,
+        "wirelength": 529.8788955832603,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5212",
+        "dff_x": 462.24,
+        "dff_y": 393.96,
+        "delay": 1.332158298676339,
+        "wirelength": 582.1582986763386,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5215",
+        "dff_x": 351.84,
+        "dff_y": 410.28,
+        "delay": 1.3040616607754547,
+        "wirelength": 554.0616607754545,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4909",
+        "dff_x": 379.44,
+        "dff_y": 421.16,
+        "delay": 1.283678248023657,
+        "wirelength": 533.6782480236568,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5156",
+        "dff_x": 462.24,
+        "dff_y": 432.04,
+        "delay": 1.474788004864314,
+        "wirelength": 574.7880048643141,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5202",
+        "dff_x": 462.24,
+        "dff_y": 453.8,
+        "delay": 1.474788004864314,
+        "wirelength": 574.7880048643141,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5227",
+        "dff_x": 462.24,
+        "dff_y": 475.56,
+        "delay": 1.4733001382387734,
+        "wirelength": 573.3001382387736,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5231",
+        "dff_x": 489.84,
+        "dff_y": 491.88,
+        "delay": 1.4560519231905058,
+        "wirelength": 556.0519231905059,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7680",
+        "dff_x": 489.84,
+        "dff_y": 519.08,
+        "delay": 1.4714678840912814,
+        "wirelength": 571.4678840912815,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7683",
+        "dff_x": 296.64,
+        "dff_y": 529.96,
+        "delay": 1.327931792924933,
+        "wirelength": 577.9317929249329,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5200",
+        "dff_x": 213.84,
+        "dff_y": 540.84,
+        "delay": 1.3236849916884754,
+        "wirelength": 573.6849916884754,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5235",
+        "dff_x": 269.04,
+        "dff_y": 568.04,
+        "delay": 1.3008664271752834,
+        "wirelength": 550.8664271752833,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5234",
+        "dff_x": 241.44,
+        "dff_y": 573.48,
+        "delay": 1.305142751997853,
+        "wirelength": 555.1427519978528,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5144",
+        "dff_x": 186.24,
+        "dff_y": 600.68,
+        "delay": 1.5752291121871425,
+        "wirelength": 675.2291121871426,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5170",
+        "dff_x": 213.84,
+        "dff_y": 774.76,
+        "delay": 1.5752291121871425,
+        "wirelength": 675.2291121871425,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5229",
+        "dff_x": 241.44,
+        "dff_y": 611.56,
+        "delay": 1.552010097593639,
+        "wirelength": 652.0100975936391,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5221",
+        "dff_x": 351.84,
+        "dff_y": 627.88,
+        "delay": 1.5119194769527757,
+        "wirelength": 611.9194769527758,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5190",
+        "dff_x": 351.84,
+        "dff_y": 676.84,
+        "delay": 1.5265007097273826,
+        "wirelength": 626.5007097273826,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8804",
+        "dff_x": 462.24,
+        "dff_y": 617.0,
+        "delay": 1.2826705585647569,
+        "wirelength": 532.6705585647568,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5194",
+        "dff_x": 434.64,
+        "dff_y": 627.88,
+        "delay": 1.2761316198803543,
+        "wirelength": 526.1316198803543,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4913",
+        "dff_x": 407.04,
+        "dff_y": 644.2,
+        "delay": 1.30410386560492,
+        "wirelength": 554.10386560492,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5180",
+        "dff_x": 489.84,
+        "dff_y": 644.2,
+        "delay": 1.30410386560492,
+        "wirelength": 554.10386560492,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5193",
+        "dff_x": 351.84,
+        "dff_y": 704.04,
+        "delay": 1.4651147166601801,
+        "wirelength": 565.1147166601803,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4910",
+        "dff_x": 379.44,
+        "dff_y": 671.4,
+        "delay": 1.4651147166601803,
+        "wirelength": 565.1147166601804,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4914",
+        "dff_x": 434.64,
+        "dff_y": 709.48,
+        "delay": 1.4622464387641763,
+        "wirelength": 562.2464387641764,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5178",
+        "dff_x": 434.64,
+        "dff_y": 742.12,
+        "delay": 1.480272186555884,
+        "wirelength": 580.2721865558843,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5192",
+        "dff_x": 462.24,
+        "dff_y": 693.16,
+        "delay": 1.4800550511496275,
+        "wirelength": 580.0550511496277,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5214",
+        "dff_x": 572.64,
+        "dff_y": 372.2,
+        "delay": 1.284914191347763,
+        "wirelength": 534.9141913477631,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5201",
+        "dff_x": 572.64,
+        "dff_y": 404.84,
+        "delay": 1.2660305465499826,
+        "wirelength": 516.0305465499828,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5181",
+        "dff_x": 572.64,
+        "dff_y": 410.28,
+        "delay": 1.2679970606126552,
+        "wirelength": 517.9970606126551,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5139",
+        "dff_x": 517.44,
+        "dff_y": 421.16,
+        "delay": 1.2975334703151258,
+        "wirelength": 547.5334703151259,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5205",
+        "dff_x": 517.44,
+        "dff_y": 486.44,
+        "delay": 1.4422734784316014,
+        "wirelength": 542.2734784316015,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5204",
+        "dff_x": 545.04,
+        "dff_y": 470.12,
+        "delay": 1.4422734784316014,
+        "wirelength": 542.2734784316015,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5191",
+        "dff_x": 572.64,
+        "dff_y": 442.92,
+        "delay": 1.4474645380301803,
+        "wirelength": 547.4645380301805,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5175",
+        "dff_x": 600.24,
+        "dff_y": 475.56,
+        "delay": 1.4278264345154823,
+        "wirelength": 527.8264345154826,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5226",
+        "dff_x": 600.24,
+        "dff_y": 486.44,
+        "delay": 1.4364446851612096,
+        "wirelength": 536.4446851612099,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8809",
+        "dff_x": 655.44,
+        "dff_y": 388.52,
+        "delay": 1.299815594706033,
+        "wirelength": 549.8155947060332,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7679",
+        "dff_x": 765.84,
+        "dff_y": 410.28,
+        "delay": 1.2674038277953665,
+        "wirelength": 517.4038277953666,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5220",
+        "dff_x": 848.64,
+        "dff_y": 421.16,
+        "delay": 1.3499670265631236,
+        "wirelength": 599.9670265631237,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5135",
+        "dff_x": 627.84,
+        "dff_y": 442.92,
+        "delay": 1.3260043117923126,
+        "wirelength": 576.0043117923128,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5177",
+        "dff_x": 627.84,
+        "dff_y": 497.32,
+        "delay": 1.448358093223133,
+        "wirelength": 548.3580932231334,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4911",
+        "dff_x": 627.84,
+        "dff_y": 502.76,
+        "delay": 1.448358093223133,
+        "wirelength": 548.3580932231334,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5136",
+        "dff_x": 655.44,
+        "dff_y": 502.76,
+        "delay": 1.5107418365105212,
+        "wirelength": 610.7418365105215,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5142",
+        "dff_x": 793.44,
+        "dff_y": 459.24,
+        "delay": 1.4670906036197993,
+        "wirelength": 567.0906036197995,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5217",
+        "dff_x": 793.44,
+        "dff_y": 481.0,
+        "delay": 1.4622034971978382,
+        "wirelength": 562.2034971978384,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5237",
+        "dff_x": 517.44,
+        "dff_y": 508.2,
+        "delay": 1.330644382526462,
+        "wirelength": 580.6443825264619,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7689",
+        "dff_x": 545.04,
+        "dff_y": 508.2,
+        "delay": 1.3126920391261891,
+        "wirelength": 562.6920391261892,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5236",
+        "dff_x": 517.44,
+        "dff_y": 524.52,
+        "delay": 1.3283519746099854,
+        "wirelength": 578.3519746099854,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7690",
+        "dff_x": 600.24,
+        "dff_y": 540.84,
+        "delay": 1.3593009983353375,
+        "wirelength": 609.3009983353375,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5176",
+        "dff_x": 489.84,
+        "dff_y": 704.04,
+        "delay": 1.511192925889261,
+        "wirelength": 611.192925889261,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5222",
+        "dff_x": 517.44,
+        "dff_y": 627.88,
+        "delay": 1.511192925889261,
+        "wirelength": 611.1929258892611,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4979",
+        "dff_x": 572.64,
+        "dff_y": 682.28,
+        "delay": 1.4926423200680028,
+        "wirelength": 592.642320068003,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5196",
+        "dff_x": 572.64,
+        "dff_y": 747.56,
+        "delay": 1.5551076676878424,
+        "wirelength": 655.1076676878424,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5203",
+        "dff_x": 600.24,
+        "dff_y": 584.36,
+        "delay": 1.5673576049368363,
+        "wirelength": 667.3576049368364,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4112",
+        "dff_x": 848.64,
+        "dff_y": 519.08,
+        "delay": 1.406614425414376,
+        "wirelength": 656.6144254143762,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5189",
+        "dff_x": 765.84,
+        "dff_y": 524.52,
+        "delay": 1.343612951844107,
+        "wirelength": 593.6129518441071,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4986",
+        "dff_x": 738.24,
+        "dff_y": 535.4,
+        "delay": 1.36296976302823,
+        "wirelength": 612.9697630282301,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5211",
+        "dff_x": 738.24,
+        "dff_y": 573.48,
+        "delay": 1.3777649285665143,
+        "wirelength": 627.7649285665145,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4907",
+        "dff_x": 600.24,
+        "dff_y": 606.12,
+        "delay": 1.5915532919378976,
+        "wirelength": 691.5532919378977,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5206",
+        "dff_x": 627.84,
+        "dff_y": 774.76,
+        "delay": 1.5915532919378976,
+        "wirelength": 691.5532919378976,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4931",
+        "dff_x": 655.44,
+        "dff_y": 763.88,
+        "delay": 1.5717605262814012,
+        "wirelength": 671.7605262814013,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8808",
+        "dff_x": 738.24,
+        "dff_y": 617.0,
+        "delay": 1.5536149259516219,
+        "wirelength": 653.614925951622,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4932",
+        "dff_x": 738.24,
+        "dff_y": 682.28,
+        "delay": 1.5058309918786408,
+        "wirelength": 605.8309918786409,
+        "buffer_count": 6,
+        "path_length": 6
+      }
+    ]
+  },
+  "xtree": {
+    "skew": 0.4018661048181895,
+    "max_delay": 1.6186724848803729,
+    "min_delay": 1.2168063800621833,
+    "total_wirelength": 77995.5343627335,
+    "avg_wirelength": 545.4233172219125,
+    "buffer_count": 47,
+    "avg_path_length": 5.629370629370629,
+    "num_sinks": 143,
+    "sink_paths": [
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5141",
+        "dff_x": 213.84,
+        "dff_y": 323.24,
+        "delay": 1.2565847037560054,
+        "wirelength": 506.58470375600524,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5146",
+        "dff_x": 186.24,
+        "dff_y": 301.48,
+        "delay": 1.240732324722992,
+        "wirelength": 490.73232472299185,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5171",
+        "dff_x": 186.24,
+        "dff_y": 317.8,
+        "delay": 1.2428022715316978,
+        "wirelength": 492.8022715316976,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5224",
+        "dff_x": 186.24,
+        "dff_y": 290.6,
+        "delay": 1.2500234392249452,
+        "wirelength": 500.02343922494515,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4936",
+        "dff_x": 213.84,
+        "dff_y": 388.52,
+        "delay": 1.2610527136517249,
+        "wirelength": 511.05271365172496,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4981",
+        "dff_x": 186.24,
+        "dff_y": 421.16,
+        "delay": 1.274099556356666,
+        "wirelength": 524.099556356666,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5209",
+        "dff_x": 241.44,
+        "dff_y": 410.28,
+        "delay": 1.2707566343336696,
+        "wirelength": 520.7566343336696,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5161",
+        "dff_x": 186.24,
+        "dff_y": 225.32,
+        "delay": 1.2817391355493488,
+        "wirelength": 531.739135549349,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5166",
+        "dff_x": 213.84,
+        "dff_y": 203.56,
+        "delay": 1.2911758467116161,
+        "wirelength": 541.1758467116163,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5172",
+        "dff_x": 186.24,
+        "dff_y": 219.88,
+        "delay": 1.2787113273178445,
+        "wirelength": 528.7113273178446,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5155",
+        "dff_x": 296.64,
+        "dff_y": 328.68,
+        "delay": 1.2708432262761487,
+        "wirelength": 520.8432262761487,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5213",
+        "dff_x": 296.64,
+        "dff_y": 268.84,
+        "delay": 1.2708432262761487,
+        "wirelength": 520.8432262761487,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5223",
+        "dff_x": 296.64,
+        "dff_y": 306.92,
+        "delay": 1.250824144910968,
+        "wirelength": 500.8241449109681,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5228",
+        "dff_x": 324.24,
+        "dff_y": 290.6,
+        "delay": 1.2623882051554836,
+        "wirelength": 512.3882051554835,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5200",
+        "dff_x": 213.84,
+        "dff_y": 540.84,
+        "delay": 1.4468890591562058,
+        "wirelength": 546.889059156206,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5232",
+        "dff_x": 213.84,
+        "dff_y": 508.2,
+        "delay": 1.4375124353582027,
+        "wirelength": 537.512435358203,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5233",
+        "dff_x": 241.44,
+        "dff_y": 508.2,
+        "delay": 1.444640147129539,
+        "wirelength": 544.6401471295392,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5159",
+        "dff_x": 241.44,
+        "dff_y": 448.36,
+        "delay": 1.4551754871341303,
+        "wirelength": 555.1754871341303,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5169",
+        "dff_x": 269.04,
+        "dff_y": 464.68,
+        "delay": 1.4551754871341303,
+        "wirelength": 555.1754871341303,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5144",
+        "dff_x": 186.24,
+        "dff_y": 600.68,
+        "delay": 1.4567691432734848,
+        "wirelength": 556.7691432734849,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5229",
+        "dff_x": 241.44,
+        "dff_y": 611.56,
+        "delay": 1.4441639929654322,
+        "wirelength": 544.1639929654324,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5234",
+        "dff_x": 241.44,
+        "dff_y": 573.48,
+        "delay": 1.448065853656582,
+        "wirelength": 548.0658536565821,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5235",
+        "dff_x": 269.04,
+        "dff_y": 568.04,
+        "delay": 1.4828875832394337,
+        "wirelength": 582.8875832394339,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7683",
+        "dff_x": 296.64,
+        "dff_y": 529.96,
+        "delay": 1.4828875832394337,
+        "wirelength": 582.8875832394338,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4107",
+        "dff_x": 324.24,
+        "dff_y": 366.76,
+        "delay": 1.4495957324861062,
+        "wirelength": 549.5957324861063,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5153",
+        "dff_x": 351.84,
+        "dff_y": 399.4,
+        "delay": 1.439435538173383,
+        "wirelength": 539.4355381733832,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5215",
+        "dff_x": 351.84,
+        "dff_y": 410.28,
+        "delay": 1.4472996347368245,
+        "wirelength": 547.2996347368246,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7686",
+        "dff_x": 324.24,
+        "dff_y": 383.08,
+        "delay": 1.4380547915256017,
+        "wirelength": 538.0547915256018,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4106",
+        "dff_x": 379.44,
+        "dff_y": 355.88,
+        "delay": 1.4595754419709739,
+        "wirelength": 559.575441970974,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4110",
+        "dff_x": 379.44,
+        "dff_y": 393.96,
+        "delay": 1.3087374498479476,
+        "wirelength": 558.7374498479475,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4909",
+        "dff_x": 379.44,
+        "dff_y": 421.16,
+        "delay": 1.3017222259892807,
+        "wirelength": 551.7222259892807,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5156",
+        "dff_x": 462.24,
+        "dff_y": 432.04,
+        "delay": 1.3311532056435034,
+        "wirelength": 581.1532056435035,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4933",
+        "dff_x": 296.64,
+        "dff_y": 247.08,
+        "delay": 1.255138290756255,
+        "wirelength": 505.138290756255,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5179",
+        "dff_x": 296.64,
+        "dff_y": 187.24,
+        "delay": 1.249940259064395,
+        "wirelength": 499.94025906439515,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7685",
+        "dff_x": 269.04,
+        "dff_y": 209.0,
+        "delay": 1.24041382844898,
+        "wirelength": 490.41382844898,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5138",
+        "dff_x": 351.84,
+        "dff_y": 290.6,
+        "delay": 1.3744572537044695,
+        "wirelength": 474.4572537044696,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5225",
+        "dff_x": 351.84,
+        "dff_y": 285.16,
+        "delay": 1.3744572537044695,
+        "wirelength": 474.45725370446957,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5168",
+        "dff_x": 379.44,
+        "dff_y": 247.08,
+        "delay": 1.3535937421775488,
+        "wirelength": 453.59374217754885,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5174",
+        "dff_x": 379.44,
+        "dff_y": 230.76,
+        "delay": 1.366287075510882,
+        "wirelength": 466.2870755108822,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7687",
+        "dff_x": 379.44,
+        "dff_y": 257.96,
+        "delay": 1.3644737421775486,
+        "wirelength": 464.47374217754884,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4109",
+        "dff_x": 379.44,
+        "dff_y": 149.16,
+        "delay": 1.2292004917147414,
+        "wirelength": 479.20049171474164,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4937",
+        "dff_x": 489.84,
+        "dff_y": 105.64,
+        "delay": 1.2968076240322342,
+        "wirelength": 546.8076240322342,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4982",
+        "dff_x": 351.84,
+        "dff_y": 170.92,
+        "delay": 1.2592628060147484,
+        "wirelength": 509.26280601474855,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5210",
+        "dff_x": 407.04,
+        "dff_y": 187.24,
+        "delay": 1.2353005562309451,
+        "wirelength": 485.3005562309453,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5151",
+        "dff_x": 462.24,
+        "dff_y": 219.88,
+        "delay": 1.221555695011057,
+        "wirelength": 471.5556950110572,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5199",
+        "dff_x": 462.24,
+        "dff_y": 170.92,
+        "delay": 1.228731238492801,
+        "wirelength": 478.7312384928013,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5208",
+        "dff_x": 407.04,
+        "dff_y": 192.68,
+        "delay": 1.2168063800621833,
+        "wirelength": 466.8063800621837,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7684",
+        "dff_x": 407.04,
+        "dff_y": 219.88,
+        "delay": 1.2215556950110569,
+        "wirelength": 471.5556950110572,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4912",
+        "dff_x": 434.64,
+        "dff_y": 301.48,
+        "delay": 1.2549889568946877,
+        "wirelength": 504.98895689468776,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5134",
+        "dff_x": 407.04,
+        "dff_y": 317.8,
+        "delay": 1.2464276485877805,
+        "wirelength": 496.42764858778065,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5137",
+        "dff_x": 434.64,
+        "dff_y": 296.04,
+        "delay": 1.2594861446763344,
+        "wirelength": 509.48614467633433,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5195",
+        "dff_x": 407.04,
+        "dff_y": 361.32,
+        "delay": 1.2769218780676335,
+        "wirelength": 526.9218780676337,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4985",
+        "dff_x": 462.24,
+        "dff_y": 328.68,
+        "delay": 1.2674273211552833,
+        "wirelength": 517.4273211552832,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5143",
+        "dff_x": 489.84,
+        "dff_y": 328.68,
+        "delay": 1.2613080180835152,
+        "wirelength": 511.3080180835151,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5182",
+        "dff_x": 517.44,
+        "dff_y": 372.2,
+        "delay": 1.271411808384129,
+        "wirelength": 521.4118083841291,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5212",
+        "dff_x": 462.24,
+        "dff_y": 393.96,
+        "delay": 1.2765890257932193,
+        "wirelength": 526.5890257932193,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5173",
+        "dff_x": 517.44,
+        "dff_y": 257.96,
+        "delay": 1.4589440480693847,
+        "wirelength": 558.9440480693845,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8805",
+        "dff_x": 600.24,
+        "dff_y": 225.32,
+        "delay": 1.5007849856446827,
+        "wirelength": 600.7849856446826,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8806",
+        "dff_x": 489.84,
+        "dff_y": 241.64,
+        "delay": 1.4803492843990422,
+        "wirelength": 580.3492843990421,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4934",
+        "dff_x": 655.44,
+        "dff_y": 176.36,
+        "delay": 1.5046530668048006,
+        "wirelength": 604.6530668048005,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4935",
+        "dff_x": 683.04,
+        "dff_y": 105.64,
+        "delay": 1.5046530668048004,
+        "wirelength": 604.6530668048003,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5145",
+        "dff_x": 572.64,
+        "dff_y": 312.36,
+        "delay": 1.4041250304567734,
+        "wirelength": 504.12503045677335,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5197",
+        "dff_x": 572.64,
+        "dff_y": 323.24,
+        "delay": 1.4091733426375195,
+        "wirelength": 509.1733426375195,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5207",
+        "dff_x": 545.04,
+        "dff_y": 301.48,
+        "delay": 1.4163010544088557,
+        "wirelength": 516.3010544088556,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4983",
+        "dff_x": 627.84,
+        "dff_y": 274.28,
+        "delay": 1.4437571693826983,
+        "wirelength": 543.7571693826982,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5183",
+        "dff_x": 572.64,
+        "dff_y": 285.16,
+        "delay": 1.4437571693826983,
+        "wirelength": 543.7571693826982,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5170",
+        "dff_x": 213.84,
+        "dff_y": 774.76,
+        "delay": 1.45357803351013,
+        "wirelength": 703.57803351013,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5190",
+        "dff_x": 351.84,
+        "dff_y": 676.84,
+        "delay": 1.3794134601843344,
+        "wirelength": 629.4134601843344,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5221",
+        "dff_x": 351.84,
+        "dff_y": 627.88,
+        "delay": 1.4104633311064418,
+        "wirelength": 660.4633311064417,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4910",
+        "dff_x": 379.44,
+        "dff_y": 671.4,
+        "delay": 1.51619807769043,
+        "wirelength": 616.1980776904302,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5193",
+        "dff_x": 351.84,
+        "dff_y": 704.04,
+        "delay": 1.5161980776904298,
+        "wirelength": 616.1980776904301,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4913",
+        "dff_x": 407.04,
+        "dff_y": 644.2,
+        "delay": 1.5199362768573237,
+        "wirelength": 619.936276857324,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5194",
+        "dff_x": 434.64,
+        "dff_y": 627.88,
+        "delay": 1.4905694341523825,
+        "wirelength": 590.5694341523828,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8804",
+        "dff_x": 462.24,
+        "dff_y": 617.0,
+        "delay": 1.5191350525967375,
+        "wirelength": 619.1350525967378,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5202",
+        "dff_x": 462.24,
+        "dff_y": 453.8,
+        "delay": 1.471391579651376,
+        "wirelength": 571.3915796513755,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5227",
+        "dff_x": 462.24,
+        "dff_y": 475.56,
+        "delay": 1.4588024831195223,
+        "wirelength": 558.802483119522,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5231",
+        "dff_x": 489.84,
+        "dff_y": 491.88,
+        "delay": 1.4752591364305605,
+        "wirelength": 575.2591364305601,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5139",
+        "dff_x": 517.44,
+        "dff_y": 421.16,
+        "delay": 1.5064625708930082,
+        "wirelength": 606.462570893008,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5205",
+        "dff_x": 517.44,
+        "dff_y": 486.44,
+        "delay": 1.5064625708930082,
+        "wirelength": 606.462570893008,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5236",
+        "dff_x": 517.44,
+        "dff_y": 524.52,
+        "delay": 1.4414908718895951,
+        "wirelength": 541.4908718895952,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5237",
+        "dff_x": 517.44,
+        "dff_y": 508.2,
+        "delay": 1.438770871889595,
+        "wirelength": 538.7708718895951,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7680",
+        "dff_x": 489.84,
+        "dff_y": 519.08,
+        "delay": 1.4598708073733917,
+        "wirelength": 559.8708073733916,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7689",
+        "dff_x": 545.04,
+        "dff_y": 508.2,
+        "delay": 1.460396212696699,
+        "wirelength": 560.3962126966989,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5175",
+        "dff_x": 600.24,
+        "dff_y": 475.56,
+        "delay": 1.4687226544088197,
+        "wirelength": 568.7226544088195,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5191",
+        "dff_x": 572.64,
+        "dff_y": 442.92,
+        "delay": 1.4736797394449834,
+        "wirelength": 573.6797394449834,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5204",
+        "dff_x": 545.04,
+        "dff_y": 470.12,
+        "delay": 1.4814611501878185,
+        "wirelength": 581.4611501878186,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5226",
+        "dff_x": 600.24,
+        "dff_y": 486.44,
+        "delay": 1.4741569997817923,
+        "wirelength": 574.1569997817921,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4914",
+        "dff_x": 434.64,
+        "dff_y": 709.48,
+        "delay": 1.4538377041481432,
+        "wirelength": 553.8377041481433,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5178",
+        "dff_x": 434.64,
+        "dff_y": 742.12,
+        "delay": 1.471863451939851,
+        "wirelength": 571.8634519398512,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5192",
+        "dff_x": 462.24,
+        "dff_y": 693.16,
+        "delay": 1.4716463165335945,
+        "wirelength": 571.6463165335946,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5176",
+        "dff_x": 489.84,
+        "dff_y": 704.04,
+        "delay": 1.4694959268417462,
+        "wirelength": 569.4959268417465,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5180",
+        "dff_x": 489.84,
+        "dff_y": 644.2,
+        "delay": 1.440416474083126,
+        "wirelength": 540.4164740831262,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5222",
+        "dff_x": 517.44,
+        "dff_y": 627.88,
+        "delay": 1.4591389478648848,
+        "wirelength": 559.138947864885,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4931",
+        "dff_x": 655.44,
+        "dff_y": 763.88,
+        "delay": 1.3176826308262086,
+        "wirelength": 567.6826308262087,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4979",
+        "dff_x": 572.64,
+        "dff_y": 682.28,
+        "delay": 1.3337802548488011,
+        "wirelength": 583.7802548488011,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5196",
+        "dff_x": 572.64,
+        "dff_y": 747.56,
+        "delay": 1.2996335413038882,
+        "wirelength": 549.6335413038881,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5206",
+        "dff_x": 627.84,
+        "dff_y": 774.76,
+        "delay": 1.3033577617872614,
+        "wirelength": 553.3577617872613,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4907",
+        "dff_x": 600.24,
+        "dff_y": 606.12,
+        "delay": 1.5036096849335805,
+        "wirelength": 603.6096849335805,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5203",
+        "dff_x": 600.24,
+        "dff_y": 584.36,
+        "delay": 1.4818496849335805,
+        "wirelength": 581.8496849335805,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7690",
+        "dff_x": 600.24,
+        "dff_y": 540.84,
+        "delay": 1.5108630182669138,
+        "wirelength": 610.8630182669139,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4911",
+        "dff_x": 627.84,
+        "dff_y": 502.76,
+        "delay": 1.4781644658020137,
+        "wirelength": 578.1644658020136,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5177",
+        "dff_x": 627.84,
+        "dff_y": 497.32,
+        "delay": 1.4781644658020137,
+        "wirelength": 578.1644658020136,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4932",
+        "dff_x": 738.24,
+        "dff_y": 682.28,
+        "delay": 1.3926933639427048,
+        "wirelength": 642.6933639427048,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8808",
+        "dff_x": 738.24,
+        "dff_y": 617.0,
+        "delay": 1.3926933639427048,
+        "wirelength": 642.6933639427048,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4984",
+        "dff_x": 627.84,
+        "dff_y": 323.24,
+        "delay": 1.2428901441598204,
+        "wirelength": 492.89014415982047,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5152",
+        "dff_x": 572.64,
+        "dff_y": 350.44,
+        "delay": 1.228109946372055,
+        "wirelength": 478.10994637205516,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5214",
+        "dff_x": 572.64,
+        "dff_y": 372.2,
+        "delay": 1.243375294288623,
+        "wirelength": 493.375294288623,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7682",
+        "dff_x": 600.24,
+        "dff_y": 312.36,
+        "delay": 1.2327863538592063,
+        "wirelength": 482.7863538592065,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5167",
+        "dff_x": 627.84,
+        "dff_y": 361.32,
+        "delay": 1.6186724848803729,
+        "wirelength": 568.6724848803731,
+        "buffer_count": 7,
+        "path_length": 7
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5181",
+        "dff_x": 572.64,
+        "dff_y": 410.28,
+        "delay": 1.5965006892500617,
+        "wirelength": 546.5006892500619,
+        "buffer_count": 7,
+        "path_length": 7
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5201",
+        "dff_x": 572.64,
+        "dff_y": 404.84,
+        "delay": 1.5930205724563467,
+        "wirelength": 543.0205724563469,
+        "buffer_count": 7,
+        "path_length": 7
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5140",
+        "dff_x": 627.84,
+        "dff_y": 372.2,
+        "delay": 1.582377245869634,
+        "wirelength": 532.3772458696342,
+        "buffer_count": 7,
+        "path_length": 7
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8809",
+        "dff_x": 655.44,
+        "dff_y": 388.52,
+        "delay": 1.582377245869634,
+        "wirelength": 532.3772458696341,
+        "buffer_count": 7,
+        "path_length": 7
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4111",
+        "dff_x": 683.04,
+        "dff_y": 317.8,
+        "delay": 1.405877579232131,
+        "wirelength": 505.8775792321309,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5160",
+        "dff_x": 683.04,
+        "dff_y": 312.36,
+        "delay": 1.4068608362634671,
+        "wirelength": 506.86083626346715,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8810",
+        "dff_x": 683.04,
+        "dff_y": 296.04,
+        "delay": 1.420380147107248,
+        "wirelength": 520.3801471072479,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8811",
+        "dff_x": 655.44,
+        "dff_y": 339.56,
+        "delay": 1.4298774617168173,
+        "wirelength": 529.8774617168173,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4108",
+        "dff_x": 738.24,
+        "dff_y": 214.44,
+        "delay": 1.4300566723735573,
+        "wirelength": 530.0566723735574,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5158",
+        "dff_x": 710.64,
+        "dff_y": 225.32,
+        "delay": 1.4300566723735575,
+        "wirelength": 530.0566723735575,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4105",
+        "dff_x": 738.24,
+        "dff_y": 187.24,
+        "delay": 1.4212653465291252,
+        "wirelength": 521.2653465291254,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4938",
+        "dff_x": 765.84,
+        "dff_y": 187.24,
+        "delay": 1.4303774806786744,
+        "wirelength": 530.3774806786746,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5218",
+        "dff_x": 738.24,
+        "dff_y": 181.8,
+        "delay": 1.4217773636526767,
+        "wirelength": 521.777363652677,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5154",
+        "dff_x": 738.24,
+        "dff_y": 274.28,
+        "delay": 1.4092705094165148,
+        "wirelength": 509.2705094165148,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5198",
+        "dff_x": 710.64,
+        "dff_y": 296.04,
+        "delay": 1.4284771454198633,
+        "wirelength": 528.4771454198634,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7456",
+        "dff_x": 765.84,
+        "dff_y": 268.84,
+        "delay": 1.437043889923549,
+        "wirelength": 537.0438899235489,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7681",
+        "dff_x": 710.64,
+        "dff_y": 274.28,
+        "delay": 1.4223527562865679,
+        "wirelength": 522.352756286568,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5157",
+        "dff_x": 765.84,
+        "dff_y": 225.32,
+        "delay": 1.4437083842478216,
+        "wirelength": 543.7083842478216,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5219",
+        "dff_x": 793.44,
+        "dff_y": 247.08,
+        "delay": 1.4359955466207057,
+        "wirelength": 535.9955466207058,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$8807",
+        "dff_x": 821.04,
+        "dff_y": 209.0,
+        "delay": 1.4490727770253686,
+        "wirelength": 549.0727770253687,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5135",
+        "dff_x": 627.84,
+        "dff_y": 442.92,
+        "delay": 1.34167778426417,
+        "wirelength": 591.6777842641701,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5136",
+        "dff_x": 655.44,
+        "dff_y": 502.76,
+        "delay": 1.34167778426417,
+        "wirelength": 591.67778426417,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4986",
+        "dff_x": 738.24,
+        "dff_y": 535.4,
+        "delay": 1.2970090154501497,
+        "wirelength": 547.0090154501498,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5189",
+        "dff_x": 765.84,
+        "dff_y": 524.52,
+        "delay": 1.3112294222669132,
+        "wirelength": 561.2294222669132,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5211",
+        "dff_x": 738.24,
+        "dff_y": 573.48,
+        "delay": 1.3145292292543502,
+        "wirelength": 564.5292292543503,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4908",
+        "dff_x": 710.64,
+        "dff_y": 361.32,
+        "delay": 1.4606381851007506,
+        "wirelength": 560.6381851007505,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4980",
+        "dff_x": 710.64,
+        "dff_y": 355.88,
+        "delay": 1.4643445987658659,
+        "wirelength": 564.3445987658657,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.\\ALU.$auto$ff.cc:266:slice$7679",
+        "dff_x": 765.84,
+        "dff_y": 410.28,
+        "delay": 1.487618396295363,
+        "wirelength": 587.6183962953631,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5216",
+        "dff_x": 848.64,
+        "dff_y": 328.68,
+        "delay": 1.4958403901131414,
+        "wirelength": 595.8403901131414,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5230",
+        "dff_x": 765.84,
+        "dff_y": 323.24,
+        "delay": 1.4958403901131414,
+        "wirelength": 595.8403901131414,
+        "buffer_count": 6,
+        "path_length": 6
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$4112",
+        "dff_x": 848.64,
+        "dff_y": 519.08,
+        "delay": 1.3157431744681336,
+        "wirelength": 565.7431744681336,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5142",
+        "dff_x": 793.44,
+        "dff_y": 459.24,
+        "delay": 1.2892066608013997,
+        "wirelength": 539.2066608013995,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5217",
+        "dff_x": 793.44,
+        "dff_y": 481.0,
+        "delay": 1.2892066608013997,
+        "wirelength": 539.2066608013995,
+        "buffer_count": 5,
+        "path_length": 5
+      },
+      {
+        "dff_name": "$flatten\\CPU.$auto$ff.cc:266:slice$5220",
+        "dff_x": 848.64,
+        "dff_y": 421.16,
+        "delay": 1.3157431744681338,
+        "wirelength": 565.7431744681336,
+        "buffer_count": 5,
+        "path_length": 5
+      }
+    ]
+  },
+  "comparison": {
+    "skew_diff": -0.009304897779542243,
+    "wirelength_diff": 315.50559078296646,
+    "buffer_diff": -1,
+    "skew_winner": "H-Tree",
+    "wirelength_winner": "X-Tree"
+  }
+}
