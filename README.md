@@ -15,6 +15,41 @@ The primary optimization objective is to minimize **Half-Perimeter Wirelength (H
 
 ---
 
+## 🆕 New Features (v2.0)
+
+### 🎬 Animation System
+Visualize physical design algorithms in real-time with MP4 video generation:
+- **SA Placement Animation** - Watch simulated annealing optimize cell placement
+- **CTS Tree Animation** - Visualize H-Tree and X-Tree clock distribution networks
+- **Congestion Heatmaps** - Animated routing congestion visualization
+
+```bash
+python animate_sa_placement.py --design 6502 --fps 10
+python create_cts_animations.py  # Creates both H-Tree and X-Tree videos
+```
+
+### 🌳 Clock Tree Synthesis (CTS)
+Complete CTS implementation with buffer management:
+- **H-Tree**: Balanced horizontal/vertical partitioning
+- **X-Tree**: Diagonal NW/SE and NE/SW partitioning
+- **Buffer Manager**: Automatic buffer allocation from fabric slots
+
+### 🛣️ Automated Routing
+OpenROAD-based routing with automatic error recovery:
+```bash
+python auto_route.py 6502  # Iteratively routes design, excluding problematic cells
+```
+
+### ⏱️ SDC Generation
+Automatic timing constraint generation for STA:
+```bash
+python generate_sdc.py --design all  # Generates SDC for all designs
+```
+
+📖 See [CHANGELOG.md](CHANGELOG.md) for full details on new features.
+
+---
+
 ## Design Flow Architecture
 
 ### Phase 1: Database Construction and Validation
@@ -435,21 +470,54 @@ structured_asic_project/
 ├── plot_fabric_with_placement.py      # Heatmap generator
 ├── plot_net_length_histogram.py       # Net distribution plots
 ├── run_parameter_sweep.py             # Automated SA tuning
+│
+├── # NEW: Animation System
+├── animate_sa_placement.py            # SA optimization animation
+├── animate_cts_tree.py                # CTS tree animation
+├── animate_congestion.py              # Congestion heatmap animation
+├── animate_net_hpwl.py                # Net wirelength animation
+├── create_cts_animations.py           # Wrapper for CTS animations
+│
+├── # NEW: Clock Tree Synthesis
+├── cts_api.py                         # CTS API
+├── cts_htree.py                       # H-Tree implementation
+├── cts_xtree.py                       # X-Tree implementation
+├── buffer_manager.py                  # Buffer allocation manager
+├── cts_simulator.py                   # CTS timing simulation
+│
+├── # NEW: Routing Support
+├── auto_route.py                      # Automated routing loop
+├── make_def.py                        # DEF file generator (modified)
+├── route.tcl                          # OpenROAD routing script
+├── extract_drt_errors.py              # Error log parser
+│
+├── # NEW: SDC Generation
+├── generate_sdc.py                    # SDC constraint generator
+│
 ├── fabric/
 │   ├── fabric_cells.yaml              # Physical slot definitions
 │   └── pins.yaml                       # I/O pin locations
 ├── designs/
 │   └── 6502_mapped.json               # Example: 6502 microprocessor
+├── tech/
+│   ├── sky130_fd_sc_hd.lef            # Cell LEF (modified)
+│   ├── sky130_fd_sc_hd.tlef           # Technology LEF (modified)
+│   └── sky130_fd_sc_hd_merged.lef     # Merged LEF for routing
+├── sdc/
+│   └── *.sdc                          # Generated SDC files
 └── build/
     └── 6502/
         ├── greedy/
-            ├── greedy_heatmap.png          # Greedy-only heatmap
-            └── greedyHisto.jpeg            # Greedy net length distribution
-        ├── runtime_vs_hpwl_6502.png       # Performance analysis
-        ├── logs/                           # Detailed run logs
+        │   ├── greedy_heatmap.png
+        │   └── greedyHisto.jpeg
+        ├── runtime_vs_hpwl_6502.png
+        ├── logs/
+        ├── sa_animation.mp4               # NEW: SA animation
+        ├── 6502_cts_htree_animation.mp4   # NEW: H-Tree animation
+        ├── 6502_cts_xtree_animation.mp4   # NEW: X-Tree animation
         └── Best_sa_alpha0.99_moves1000_Tfinal0.001/
             ├── sa_alpha0.99_moves1000_Tfinal0.001_heatmap.png
-            ├── histogram_final.png         # SA-optimized net length distribution
+            ├── histogram_final.png
             ├── 6502.map
             └── 6502_placement.json
 ```

@@ -106,6 +106,7 @@ def parse_pins(pins_path: str) -> Dict[str, Any]:
             'width_um': pin_placement['core']['width_um'],
             'height_um': pin_placement['core']['height_um']
         },
+        'tracks': pin_placement.get('tracks', {}),  # Include tracks information
         'pins': []
     }
     

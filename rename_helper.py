@@ -59,8 +59,23 @@ def rename_instances(verilog_path: str, map_path: str, output_path: str):
         verilog_content = f.read()
     
     # Create reverse mapping for special cases (CTS buffers, unused cells)
-    # These should keep their names
-    special_prefixes = ['cts_buffer_', 'eco_unused_', '$']
+    # These should keep their names (but still need sanitization if they contain $)
+    special_prefixes = ['cts_buffer_', 'eco_unused_']
+    
+    def sanitize_identifier(name: str) -> str:
+        """
+        Sanitize Verilog identifier by replacing invalid characters.
+        Verilog identifiers can contain letters, digits, underscores, and $.
+        Colons (:), dots (.), and backslashes (\) are not allowed in identifiers.
+        """
+        sanitized = name
+        # Replace invalid characters with underscore
+        if '\\' in sanitized or ':' in sanitized or '.' in sanitized or '$' in sanitized:
+            sanitized = sanitized.replace('\\', '_')  # Backslash
+            sanitized = sanitized.replace(':', '_')   # Colon
+            sanitized = sanitized.replace('.', '_')   # Dot
+            sanitized = sanitized.replace('$', '_')   # Dollar sign
+        return sanitized
     
     # Replace instance names
     # Pattern: cell_type instance_name (
@@ -72,13 +87,25 @@ def rename_instances(verilog_path: str, map_path: str, output_path: str):
     for line in lines:
         # Check if this line contains a cell instance declaration
         # Pattern: sky130_fd_sc_hd__<type> <instance_name> (
-        instance_match = re.search(r'(sky130_fd_sc_hd__\w+)\s+(\S+)\s*\(', line)
+        # Updated to match instance names with $, :, and other characters
+        instance_match = re.search(r'(sky130_fd_sc_hd__\w+)\s+([^\s(]+)\s*\(', line)
         
         if instance_match:
             cell_type = instance_match.group(1)
             instance_name = instance_match.group(2)
             
-            # Skip special cases (CTS buffers, unused cells, etc.)
+            # Sanitize instance name if it contains invalid characters (\, $, :, .)
+            original_name = instance_name
+            if '\\' in instance_name or ':' in instance_name or '.' in instance_name or '$' in instance_name:
+                instance_name = sanitize_identifier(instance_name)
+                # Replace the invalid name in the line
+                line = re.sub(
+                    rf'\b{re.escape(original_name)}\b',
+                    instance_name,
+                    line
+                )
+            
+            # Check if this is a special case (CTS buffers, unused cells, etc.)
             should_rename = True
             for prefix in special_prefixes:
                 if instance_name.startswith(prefix):

@@ -110,7 +110,21 @@ def rename_instances_in_verilog(
     
     # Pattern to match instance declarations: cell_type instance_name (
     # Exclude module declarations
-    instance_pattern = re.compile(r'(\w+)\s+(\w+)\s*\(')
+    # Updated pattern to handle instance names with $ (which need to be sanitized)
+    # Pattern matches: cell_type followed by whitespace, then instance_name (can contain $, letters, digits, underscore, dot, colon)
+    # Note: \S+ matches any non-whitespace characters, but we'll validate it's a valid instance name
+    instance_pattern = re.compile(r'(\w+)\s+([\w\$\.:]+)\s*\(')
+    
+    def sanitize_identifier(name: str) -> str:
+        """
+        Sanitize Verilog identifier by replacing invalid characters.
+        Verilog identifiers cannot start with $, so we replace $ with _.
+        """
+        if name.startswith('$'):
+            # Replace $ with _ to make it a valid Verilog identifier
+            sanitized = name.replace('$', '_')
+            return sanitized
+        return name
     
     for line in lines:
         # Check if this line contains an instance declaration
@@ -126,6 +140,18 @@ def rename_instances_in_verilog(
             instance_name = match.group(2)
             stats['total_instances'] += 1
             
+            # Sanitize instance name if it contains invalid characters
+            original_name = instance_name
+            if '$' in instance_name:
+                instance_name = sanitize_identifier(instance_name)
+                # Replace the invalid name in the line using regex to avoid partial matches
+                # Match the instance name as a whole word (not part of another identifier)
+                line = re.sub(
+                    rf'\b{re.escape(original_name)}\b',
+                    instance_name,
+                    line
+                )
+            
             # Check if this instance should be renamed
             should_rename = True
             is_special = False
@@ -136,7 +162,7 @@ def rename_instances_in_verilog(
                     is_special = True
                     break
             
-            # Look up instance name in placement map
+            # Look up instance name in placement map (use sanitized name)
             if instance_name in placement_map:
                 new_name = placement_map[instance_name]
                 # Replace instance name in the line
