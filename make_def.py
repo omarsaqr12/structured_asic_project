@@ -56,8 +56,16 @@ def get_io_ports_and_nets(design_json_path: str, placement_map: Dict[str, str]) 
     if not os.path.exists(design_json_path):
         raise FileNotFoundError(f"Design JSON not found: {design_json_path}")
     
-    with open(design_json_path, 'r') as f:
-        design_data = json.load(f)
+    try:
+        with open(design_json_path, 'r') as f:
+            design_data = json.load(f)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON format in {design_json_path}: {e}")
+    except Exception as e:
+        raise IOError(f"Error reading {design_json_path}: {e}")
+    
+    if not isinstance(design_data, dict):
+        raise ValueError(f"Design JSON must be a dictionary, got {type(design_data)}")
     
     # Find the top module (usually the first module or one marked as top)
     modules = design_data.get('modules', {})
@@ -100,9 +108,19 @@ def get_io_ports_and_nets(design_json_path: str, placement_map: Dict[str, str]) 
         elif direction == 'output':
             output_ports.append(port_name)
         
-        # Store port's bit number (assume single-bit ports for now)
-        if bits:
-            port_bits[port_name] = bits[0]
+        # Store port's bit numbers (handle multi-bit ports)
+        # For multi-bit ports, we'll use the first bit for net connectivity
+        # In practice, each bit should be treated as a separate net
+        if bits and isinstance(bits, list):
+            # Use first bit for now (can be extended to handle all bits)
+            if len(bits) > 0 and isinstance(bits[0], int):
+                port_bits[port_name] = bits[0]
+            elif len(bits) > 0:
+                # Handle string bits like "0" or "1" (constants)
+                try:
+                    port_bits[port_name] = int(bits[0])
+                except (ValueError, TypeError):
+                    pass  # Skip constant bits
     
     # Build nets from cell connections
     # nets[bit_id] = [(instance_name, pin_name), ...]
@@ -113,144 +131,84 @@ def get_io_ports_and_nets(design_json_path: str, placement_map: Dict[str, str]) 
         if isinstance(bit_id, int):  # Skip constant bits like "0" or "1"
             nets[bit_id].append(("PIN", port_name))
     
-        # Process cells - track which cells are placed vs unplaced
-        cells = top_module.get('cells', {})
-        placed_cells = set(placement_map.keys())
-        unplaced_cells = set()
+    # Process cells - track which cells are placed vs unplaced
+    cells = top_module.get('cells', {})
+    if not cells:
+        print("  WARNING: No cells found in design")
+        return input_ports, output_ports, {}
+    
+    placed_cells = set(placement_map.keys())
+    unplaced_cells = set()
+    
+    # First pass: identify all cells and their connections
+    all_cell_connections = {}  # bit_id -> set of unplaced cell names
+    for cell_name, cell_data in cells.items():
+        connections = cell_data.get('connections', {})
+        if not connections:
+            continue
+            
+        # Get cell type for validation
+        cell_type = cell_data.get('type', 'UNKNOWN')
         
-        # First pass: identify all cells and their connections
-        all_cell_connections = {}  # cell_name -> {pin_name -> [bit_ids]}
-        for cell_name, cell_data in cells.items():
-            if cell_name in placed_cells:
-                connections = cell_data.get('connections', {})
-                for pin_name, bit_list in connections.items():
-                    for bit_id in bit_list:
-                        if isinstance(bit_id, int):  # Skip constant bits
-                            nets[bit_id].append((cell_name, pin_name))
-            else:
-                # Track unplaced cells and their bit connections
-                unplaced_cells.add(cell_name)
-                connections = cell_data.get('connections', {})
-                for pin_name, bit_list in connections.items():
-                    for bit_id in bit_list:
-                        if isinstance(bit_id, int):
-                            # Mark this bit as connected to an unplaced cell
-                            if bit_id not in all_cell_connections:
-                                all_cell_connections[bit_id] = set()
-                            all_cell_connections[bit_id].add(cell_name)
+        # Skip invalid cells (Yosys internal or non-Sky130)
+        if not is_valid_cell(cell_name, cell_type):
+            # Mark as unplaced so their nets are excluded
+            unplaced_cells.add(cell_name)
+            for pin_name, bit_list in connections.items():
+                if not isinstance(bit_list, list):
+                    continue
+                for bit_id in bit_list:
+                    if isinstance(bit_id, int):
+                        # Mark this bit as connected to an invalid cell
+                        if bit_id not in all_cell_connections:
+                            all_cell_connections[bit_id] = set()
+                        all_cell_connections[bit_id].add(cell_name)
+            continue
         
-        # Find bits that connect to unplaced cells (these nets are incomplete)
-        bits_with_unplaced = set()
-        for bit_id, unplaced_set in all_cell_connections.items():
-            if unplaced_set:  # If any unplaced cell connects to this bit
-                bits_with_unplaced.add(bit_id)
-        
-        if bits_with_unplaced:
-            print(f"  WARNING: {len(bits_with_unplaced)} nets connect to unplaced cells - excluding them")
-            print(f"           Unplaced cells: {len(unplaced_cells)} (e.g., buffer cells from synthesis)")
-        
-        # Known problematic cells with no routing access points (DRT-0073 errors)
-        # These cells are at fabric positions where pin A cannot be accessed
-        problematic_cells = {
-            # Batch 1
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11484",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9661",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10382",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10871",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10393",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10176",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10143",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10229",
-            # Batch 2
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10402",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11342",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10409",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10851",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10354",
-            # Batch 3
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10551",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10803",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10966",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11010",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9298",
-            # Batch 4
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10624",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11059",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11126",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11182",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9663",
-            # Batch 5
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10649",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11180",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11181",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11218",
-            # Batch 6
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10810",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11226",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11258",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11332",
-            # Batch 7 - all remaining problematic cells
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10860",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$10975",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11248",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11286",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11300",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11349",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11394",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11402",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11423",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11429",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11447",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11569",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11595",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11597",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11643",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11650",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$11683",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9307",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9345",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9375",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9405",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9432",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9452",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9533",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9547",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9658",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9668",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9671",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9698",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9742",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9913",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9941",
-            "$abc$9276$auto$blifparse.cc:396:parse_blif$9949",
-        }
-        
-        # Find bits connected to problematic cells
-        bits_with_problematic = set()
-        for cell_name, cell_data in cells.items():
-            if cell_name in problematic_cells:
-                connections = cell_data.get('connections', {})
-                for pin_name, bit_list in connections.items():
-                    for bit_id in bit_list:
-                        if isinstance(bit_id, int):
-                            bits_with_problematic.add(bit_id)
-        
-        if bits_with_problematic:
-            print(f"  Excluding {len(bits_with_problematic)} nets connected to 8 problematic cells")
-        
-        # Combine exclusions
-        bits_to_exclude = bits_with_unplaced | bits_with_problematic
-        
-        # Filter nets:
-        # 1. Must have 2+ connections (routable)
-        # 2. Must NOT connect to any unplaced or problematic cells
-        routable_nets = {
-            bit_id: conns 
-            for bit_id, conns in nets.items() 
-            if len(conns) >= 2 and bit_id not in bits_to_exclude
-        }
-        
-        return input_ports, output_ports, routable_nets
+        if cell_name in placed_cells:
+            # Add connections from placed cells to nets
+            for pin_name, bit_list in connections.items():
+                if not isinstance(bit_list, list):
+                    continue
+                for bit_id in bit_list:
+                    if isinstance(bit_id, int):  # Skip constant bits
+                        nets[bit_id].append((cell_name, pin_name))
+        else:
+            # Track unplaced cells and their bit connections
+            unplaced_cells.add(cell_name)
+            for pin_name, bit_list in connections.items():
+                if not isinstance(bit_list, list):
+                    continue
+                for bit_id in bit_list:
+                    if isinstance(bit_id, int):
+                        # Mark this bit as connected to an unplaced cell
+                        if bit_id not in all_cell_connections:
+                            all_cell_connections[bit_id] = set()
+                        all_cell_connections[bit_id].add(cell_name)
+    
+    # Find bits that connect to unplaced cells (these nets are incomplete)
+    bits_with_unplaced = set()
+    for bit_id, unplaced_set in all_cell_connections.items():
+        if unplaced_set:  # If any unplaced cell connects to this bit
+            bits_with_unplaced.add(bit_id)
+    
+    if bits_with_unplaced:
+        print(f"  WARNING: {len(bits_with_unplaced)} nets connect to unplaced cells - excluding them")
+        print(f"           Unplaced cells: {len(unplaced_cells)} (e.g., buffer cells from synthesis)")
+        bits_to_exclude = bits_with_unplaced
+    else:
+        bits_to_exclude = set()
+    
+    # Filter nets:
+    # 1. Must have 2+ connections (routable)
+    # 2. Must NOT connect to any unplaced or problematic cells
+    routable_nets = {
+        bit_id: conns 
+        for bit_id, conns in nets.items() 
+        if len(conns) >= 2 and bit_id not in bits_to_exclude
+    }
+    
+    return input_ports, output_ports, routable_nets
 
 
 def get_io_ports(design_json_path: str) -> Tuple[List[str], List[str]]:
@@ -380,6 +338,78 @@ def build_fabric_slot_lookup(fabric_db: Dict[str, List[Dict[str, Any]]]) -> Dict
     return slot_lookup
 
 
+def is_valid_cell(cell_name: str, cell_type: str) -> bool:
+    """
+    Check if cell should be included in DEF.
+    
+    Filters out:
+    - Yosys internal cells ($abc$, $auto$)
+    - Cells not in Sky130 library
+    
+    Args:
+        cell_name: Logical cell name
+        cell_type: Sky130 cell type
+    
+    Returns:
+        True if cell should be included, False otherwise
+    """
+    # Filter out Yosys internal cells
+    if cell_name.startswith('$abc$') or cell_name.startswith('$auto$'):
+        return False
+    
+    # Filter out cells not in Sky130 library
+    if not cell_type.startswith('sky130_fd_sc_hd__'):
+        return False
+    
+    return True
+
+
+def map_pin_name_to_lef(pin_name: str, cell_type: str) -> str:
+    """
+    Map JSON pin names to LEF pin names based on cell type.
+    
+    The JSON file may use different pin names than the LEF file.
+    Based on Sky130 LEF files:
+    - Buffer cells (clkbuf_4): JSON uses "Y", LEF uses "X" for output
+    - Inverter cells (clkinv_2): Both JSON and LEF use "Y" for output
+    - NAND/OR gates: Both use "Y" for output
+    - DFF cells: Use specific pin names (Q, Q_N, D, CLK, etc.)
+    
+    Args:
+        pin_name: Pin name from JSON file
+        cell_type: Sky130 cell type (e.g., 'sky130_fd_sc_hd__clkbuf_4')
+    
+    Returns:
+        LEF pin name
+    """
+    # Buffer cells: JSON uses "Y", LEF uses "X" for output
+    if cell_type == 'sky130_fd_sc_hd__clkbuf_4':
+        if pin_name == 'Y':
+            return 'X'  # Output pin: JSON "Y" -> LEF "X"
+        elif pin_name == 'A':
+            return 'A'  # Input pin (same in both)
+    
+    # Inverter cells: Both JSON and LEF use "Y" for output
+    # If JSON has "X", it might be a mistake - keep it as is or map to "Y"
+    if cell_type == 'sky130_fd_sc_hd__clkinv_2':
+        if pin_name == 'Y':
+            return 'Y'  # Output pin (same in both)
+        elif pin_name == 'X':
+            # JSON might have "X" but LEF uses "Y" - map it
+            return 'Y'
+        elif pin_name == 'A':
+            return 'A'  # Input pin (same in both)
+    
+    # NAND, OR gates: Both use "Y" for output, "A"/"B" for inputs
+    if cell_type in ['sky130_fd_sc_hd__nand2_2', 'sky130_fd_sc_hd__or2_2']:
+        # Pin names should match - no mapping needed
+        return pin_name
+    
+    # For other cells, pin names usually match
+    # Add more mappings as needed
+    return pin_name
+
+
 def generate_def_file(
     design_name: str,
     placement_map: Dict[str, str],
@@ -404,93 +434,22 @@ def generate_def_file(
     # Get used slot names
     used_slots = set(placement_map.values())
     
-    # Helper function to identify problematic cells
-    # Only exclude cells that we've specifically identified as having no access points
-    # These cells were identified by DRT-0073 errors during detailed routing
-    problematic_cell_set = {
-        # Batch 1
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11484",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9661",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10382",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10871",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10393",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10176",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10143",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10229",
-        # Batch 2
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10402",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11342",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10409",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10851",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10354",
-        # Batch 3
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10551",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10803",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10966",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11010",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9298",
-        # Batch 4
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10624",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11059",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11126",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11182",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9663",
-        # Batch 5
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10649",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11180",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11181",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11218",
-        # Batch 6
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10810",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11226",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11258",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11332",
-        # Batch 7 - all remaining problematic cells
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10860",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$10975",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11248",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11286",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11300",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11349",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11394",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11402",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11423",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11429",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11447",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11569",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11595",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11597",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11643",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11650",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$11683",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9307",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9345",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9375",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9405",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9432",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9452",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9533",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9547",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9658",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9668",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9671",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9698",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9742",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9913",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9941",
-        "$abc$9276$auto$blifparse.cc:396:parse_blif$9949",
-    }
-    
-    def is_problematic_cell(cell_name):
-        """Check if cell is in the known problematic set"""
-        return cell_name in problematic_cell_set
-    
     # Get DIEAREA
-    min_x, min_y, max_x, max_y = get_diearea(pins_db)
+    try:
+        min_x, min_y, max_x, max_y = get_diearea(pins_db)
+        
+        # Validate DIEAREA
+        if max_x <= min_x or max_y <= min_y:
+            raise ValueError(f"Invalid DIEAREA: ({min_x}, {min_y}) to ({max_x}, {max_y})")
+        
+        if max_x <= 0 or max_y <= 0:
+            raise ValueError(f"Invalid DIEAREA dimensions: {max_x} x {max_y}")
+    except (KeyError, ValueError, TypeError) as e:
+        raise ValueError(f"Error getting DIEAREA from pins database: {e}")
     
     # Count total components first
     num_used = sum(1 for slot_name in placement_map.values() if slot_name in slot_lookup)
-    num_unused = sum(1 for slots in fabric_db.values() for slot in slots if slot['name'] not in used_slots)
+    num_unused = sum(1 for slots in fabric_db.values() for slot in slots if slot.get('name') not in used_slots)
     total_components = num_used + num_unused
     
     # Open output file with explicit buffering
@@ -538,6 +497,16 @@ def generate_def_file(
         for port_name in all_ports:
             try:
                 x_um, y_um, layer = get_pin_info(port_name, pins_db)
+                
+                # Validate coordinates
+                if not isinstance(x_um, (int, float)) or not isinstance(y_um, (int, float)):
+                    print(f"Warning: Invalid coordinates for pin {port_name}: ({x_um}, {y_um}). Skipping.")
+                    continue
+                
+                if x_um < 0 or y_um < 0:
+                    print(f"Warning: Negative coordinates for pin {port_name}: ({x_um}, {y_um}). Skipping.")
+                    continue
+                
                 x_db = int(x_um * 1000)  # Convert to database units
                 y_db = int(y_um * 1000)
                 
@@ -578,14 +547,15 @@ def generate_def_file(
                 y2 = half_height
                 
                 # Write pin with PORT geometry so it's on the routing grid
-                # Use FIXED instead of PLACED for pre-route DEF files
+                # Use PLACED status so place_pins can adjust pin positions to align with tracks
+                # According to Pin_Placement.md, place_pins can adjust PLACED pins but not FIXED pins
                 # Format: - pin_name + NET net_name + DIRECTION + USE SIGNAL
                 #         + PORT + LAYER layer ( x1 y1 ) ( x2 y2 )
-                #         + FIXED ( x y ) orientation
+                #         + PLACED ( x y ) orientation
                 f.write(f"- {port_name} + NET {port_name} + DIRECTION {direction} + USE SIGNAL\n")
                 f.write(f"  + PORT\n")
                 f.write(f"    + LAYER {layer} ( {x1} {y1} ) ( {x2} {y2} )\n")
-                f.write(f"  + FIXED ( {pin_x} {pin_y} ) N ;\n")
+                f.write(f"  + PLACED ( {pin_x} {pin_y} ) N ;\n")
             except ValueError as e:
                 # Pin not found in pins.yaml - skip or use default
                 print(f"Warning: {e}. Skipping pin {port_name}.")
@@ -594,88 +564,189 @@ def generate_def_file(
         f.write("END PINS\n")
         f.write("\n")
         
-        # Use pattern-based exclusion for ABC buffer cells (same as NETS section)
-        # These are auto-generated cells that often have inaccessible pins
-        
-        # Count components excluding problematic ones (pattern-based)
-        num_used_valid = sum(1 for ln in placement_map.keys() 
-                           if not is_problematic_cell(ln) and placement_map[ln] in slot_lookup)
+        # Count components
+        num_used = sum(1 for ln in placement_map.keys() if placement_map[ln] in slot_lookup)
         num_unused = sum(1 for slots in fabric_db.values() for slot in slots if slot['name'] not in used_slots)
-        actual_total_components = num_used_valid + num_unused
+        total_components = num_used + num_unused
         
         # Write COMPONENTS section - stream directly without building list
-        f.write(f"COMPONENTS {actual_total_components} ;\n")
+        f.write(f"COMPONENTS {total_components} ;\n")
         
         component_count = 0
-        skipped_problematic = 0
+        # Track which cells are actually written to COMPONENTS (for net filtering)
+        written_components = set()
         
-        # Write used components (from placement.map), excluding problematic cells
+        # Write used components (from placement.map)
+        skipped_invalid = 0
         for logical_name, slot_name in placement_map.items():
-            # Skip problematic ABC buffer cells (pattern-based)
-            if is_problematic_cell(logical_name):
-                skipped_problematic += 1
-                continue
-                
             if slot_name in slot_lookup:
-                slot_info = slot_lookup[slot_name]
-                x_db = int(slot_info['x'] * 1000)
-                y_db = int(slot_info['y'] * 1000)
-                orient = slot_info['orient']
-                
-                f.write(f"- {logical_name} {slot_info['cell_type']}\n")
-                f.write(f"  + FIXED ( {x_db} {y_db} ) {orient} ;\n")
-                
-                component_count += 1
-                if component_count % 10000 == 0:
-                    f.flush()
-        
-        if skipped_problematic > 0:
-            print(f"  Skipped {skipped_problematic} problematic cells from COMPONENTS")
-        
-        # Write unused components (from fabric_cells.yaml, not in placement.map)
-        for cell_type, slots in fabric_db.items():
-            for slot in slots:
-                slot_name = slot['name']
-                if slot_name not in used_slots:
-                    x_db = int(slot['x'] * 1000)
-                    y_db = int(slot['y'] * 1000)
-                    orient = slot.get('orient', 'N')
+                try:
+                    slot_info = slot_lookup[slot_name]
+                    cell_type = slot_info.get('cell_type', 'UNKNOWN')
                     
-                    f.write(f"- {slot_name} {cell_type}\n")
+                    # Add validation - filter out invalid cells
+                    if not is_valid_cell(logical_name, cell_type):
+                        skipped_invalid += 1
+                        continue
+                    
+                    # Validate coordinates
+                    x = slot_info.get('x', 0)
+                    y = slot_info.get('y', 0)
+                    if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+                        print(f"Warning: Invalid coordinates for slot {slot_name}. Skipping component {logical_name}.")
+                        continue
+                    
+                    x_db = int(x * 1000)
+                    y_db = int(y * 1000)
+                    orient = slot_info.get('orient', 'N')
+                    
+                    # Validate orientation
+                    valid_orientations = ['N', 'S', 'E', 'W', 'FN', 'FS', 'FE', 'FW']
+                    if orient not in valid_orientations:
+                        print(f"Warning: Invalid orientation '{orient}' for slot {slot_name}. Using 'N'.")
+                        orient = 'N'
+                    
+                    f.write(f"- {logical_name} {cell_type}\n")
                     f.write(f"  + FIXED ( {x_db} {y_db} ) {orient} ;\n")
+                    
+                    # Track that this component was successfully written
+                    written_components.add(logical_name)
                     
                     component_count += 1
                     if component_count % 10000 == 0:
                         f.flush()
+                except (KeyError, ValueError, TypeError) as e:
+                    print(f"Warning: Error processing component {logical_name} in slot {slot_name}: {e}. Skipping.")
+                    continue
+            else:
+                print(f"Warning: Slot {slot_name} not found in fabric database. Skipping component {logical_name}.")
+        
+        if skipped_invalid > 0:
+            print(f"  Skipped {skipped_invalid} invalid cells (Yosys internal or non-Sky130 cells)")
+        
+        # Write unused components (from fabric_cells.yaml, not in placement.map)
+        for cell_type, slots in fabric_db.items():
+            for slot in slots:
+                slot_name = slot.get('name', 'UNKNOWN')
+                if slot_name not in used_slots:
+                    try:
+                        x = slot.get('x', 0)
+                        y = slot.get('y', 0)
+                        
+                        # Validate coordinates
+                        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+                            print(f"Warning: Invalid coordinates for slot {slot_name}. Skipping.")
+                            continue
+                        
+                        x_db = int(x * 1000)
+                        y_db = int(y * 1000)
+                        orient = slot.get('orient', 'N')
+                        
+                        # Validate orientation
+                        valid_orientations = ['N', 'S', 'E', 'W', 'FN', 'FS', 'FE', 'FW']
+                        if orient not in valid_orientations:
+                            orient = 'N'
+                        
+                        f.write(f"- {slot_name} {cell_type}\n")
+                        f.write(f"  + FIXED ( {x_db} {y_db} ) {orient} ;\n")
+                        
+                        component_count += 1
+                        if component_count % 10000 == 0:
+                            f.flush()
+                    except (KeyError, ValueError, TypeError) as e:
+                        print(f"Warning: Error processing unused slot {slot_name}: {e}. Skipping.")
+                        continue
         
         f.write("END COMPONENTS\n")
         f.write("\n")
         
         # Write NETS section - CRITICAL for routing!
         if nets:
+            # Use the set of cells that were actually written to COMPONENTS
+            # This ensures we only reference cells that exist in the DEF file
+            valid_cells = written_components
+            
+            # Build mapping: logical_name -> cell_type (for pin name mapping)
+            instance_to_cell_type = {}
+            for logical_name, slot_name in placement_map.items():
+                if slot_name in slot_lookup and logical_name in written_components:
+                    instance_to_cell_type[logical_name] = slot_lookup[slot_name]['cell_type']
+            
+            # Also build set of valid pin names (from input/output ports)
+            valid_pins = set(input_ports + output_ports)
+            
             f.write(f"NETS {len(nets)} ;\n")
             
             net_count = 0
+            skipped_nets = 0
+            invalid_connections = 0
             for bit_id, connections in nets.items():
-                # Generate net name
-                net_name = f"net_{bit_id}"
-                
-                # Build connection list
-                conn_strs = []
-                for inst_name, pin_name in connections:
-                    conn_strs.append(f"( {inst_name} {pin_name} )")
-                
-                # Write net
-                f.write(f"- {net_name}\n")
-                f.write(f"  {' '.join(conn_strs)} ;\n")
-                
-                net_count += 1
-                if net_count % 1000 == 0:
-                    f.flush()
+                try:
+                    # Validate connections
+                    if not connections or len(connections) < 2:
+                        skipped_nets += 1
+                        continue
+                    
+                    # Generate net name (ensure valid DEF identifier)
+                    # DEF net names cannot start with digits, so prefix if needed
+                    if isinstance(bit_id, int) and bit_id >= 0:
+                        net_name = f"net_{bit_id}"
+                    else:
+                        net_name = f"net_{abs(hash(str(bit_id)))}"
+                    
+                    # Build connection list - only include valid connections
+                    conn_strs = []
+                    for inst_name, pin_name in connections:
+                        # Validate instance and pin names
+                        if not inst_name or not pin_name:
+                            continue
+                        
+                        # Check if this is a PIN connection (always valid)
+                        if inst_name == "PIN":
+                            if pin_name in valid_pins:
+                                inst_name_escaped = "PIN"
+                                pin_name_escaped = str(pin_name).replace(' ', '_')
+                                conn_strs.append(f"( {inst_name_escaped} {pin_name_escaped} )")
+                            else:
+                                invalid_connections += 1
+                        # Check if this is a cell connection (must be in valid_cells)
+                        elif inst_name in valid_cells:
+                            # Map pin name from JSON to LEF pin name based on cell type
+                            cell_type = instance_to_cell_type.get(inst_name, '')
+                            lef_pin_name = map_pin_name_to_lef(pin_name, cell_type)
+                            
+                            # Escape special characters if needed
+                            inst_name_escaped = str(inst_name).replace(' ', '_')
+                            pin_name_escaped = str(lef_pin_name).replace(' ', '_')
+                            conn_strs.append(f"( {inst_name_escaped} {pin_name_escaped} )")
+                        else:
+                            # Cell not in COMPONENTS - skip this connection
+                            invalid_connections += 1
+                            continue
+                    
+                    # Only write net if it has at least 2 valid connections
+                    if len(conn_strs) >= 2:
+                        f.write(f"- {net_name}\n")
+                        f.write(f"  {' '.join(conn_strs)} ;\n")
+                        
+                        net_count += 1
+                        if net_count % 1000 == 0:
+                            f.flush()
+                    else:
+                        skipped_nets += 1
+                except Exception as e:
+                    print(f"Warning: Error writing net for bit_id {bit_id}: {e}. Skipping.")
+                    skipped_nets += 1
+                    continue
+            
+            if invalid_connections > 0:
+                print(f"  Filtered out {invalid_connections} invalid connections (cells not in COMPONENTS)")
             
             f.write("END NETS\n")
             f.write("\n")
             print(f"  Written {net_count} nets")
+            if skipped_nets > 0:
+                print(f"  Skipped {skipped_nets} nets (invalid or incomplete connections)")
         else:
             print("  WARNING: No nets provided - router will have nothing to route!")
         
@@ -715,18 +786,40 @@ def main():
     
     # Parse input files
     print("Parsing placement map...")
-    placement_map = parse_placement_map(placement_map_path)
-    print(f"  Found {len(placement_map)} placed cells")
+    try:
+        placement_map = parse_placement_map(placement_map_path)
+        print(f"  Found {len(placement_map)} placed cells")
+        if len(placement_map) == 0:
+            print("  WARNING: No cells in placement map!")
+    except Exception as e:
+        raise RuntimeError(f"Error parsing placement map: {e}")
     
     print("Parsing fabric cells...")
-    fabric_db = parse_fabric_cells(args.fabric_cells)
-    total_slots = sum(len(slots) for slots in fabric_db.values())
-    print(f"  Found {total_slots} total fabric slots")
+    try:
+        fabric_db = parse_fabric_cells(args.fabric_cells)
+        total_slots = sum(len(slots) for slots in fabric_db.values())
+        print(f"  Found {total_slots} total fabric slots")
+        if total_slots == 0:
+            raise ValueError("No fabric slots found in fabric_cells.yaml")
+    except Exception as e:
+        raise RuntimeError(f"Error parsing fabric cells: {e}")
     
     print("Parsing pins...")
-    pins_db = parse_pins(args.pins)
-    print(f"  Die: {pins_db['die']['width_um']} x {pins_db['die']['height_um']} um")
-    print(f"  Found {len(pins_db['pins'])} pins in pins.yaml")
+    try:
+        pins_db = parse_pins(args.pins)
+        if 'die' not in pins_db:
+            raise ValueError("Missing 'die' section in pins.yaml")
+        if 'pins' not in pins_db:
+            raise ValueError("Missing 'pins' section in pins.yaml")
+        
+        die = pins_db['die']
+        if 'width_um' not in die or 'height_um' not in die:
+            raise ValueError("Missing width_um or height_um in die section")
+        
+        print(f"  Die: {die['width_um']} x {die['height_um']} um")
+        print(f"  Found {len(pins_db['pins'])} pins in pins.yaml")
+    except Exception as e:
+        raise RuntimeError(f"Error parsing pins: {e}")
     
     print("Extracting I/O ports and net connectivity...")
     input_ports, output_ports, nets = get_io_ports_and_nets(design_json_path, placement_map)
