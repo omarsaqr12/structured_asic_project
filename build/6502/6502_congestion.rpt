@@ -1,0 +1,8 @@
+violation type: Vertical congestion
+	srcs: net:net_148 net:net_254 net:net_279 net:net_373 net:net_374 net:net_376 net:net_669 net:net_969 net:net_1575 net:net_1694 net:net_1716 net:net_1990
+	comment: capacity:11 usage:12 overflow:1
+	bbox = (262.2000, 310.5000) - (269.1000, 317.4000) on Layer -
+violation type: Vertical congestion
+	srcs: net:net_140 net:net_169 net:net_281 net:net_560 net:net_865 net:net_980 net:net_1570 net:net_1663 net:net_1733 net:net_1815 net:net_2047 net:net_2283
+	comment: capacity:11 usage:12 overflow:1
+	bbox = (276.0000, 310.5000) - (282.9000, 317.4000) on Layer -
