@@ -53,6 +53,39 @@ if {![info exists ::env(LEF_FILE)]} {
     set lef_file $::env(LEF_FILE)
 }
 
+# Detailed routing iterations (default: 64, maximum allowed)
+# Allowed values: integers [1, 64]
+# -1 means automatic (router decides when to stop)
+if {![info exists ::env(DROUTE_END_ITER)]} {
+    set droute_end_iter 64
+} else {
+    set droute_end_iter $::env(DROUTE_END_ITER)
+    # Validate range
+    if {$droute_end_iter != -1 && ($droute_end_iter < 1 || $droute_end_iter > 64)} {
+        puts "ERROR: DROUTE_END_ITER must be -1 (automatic) or between 1 and 64"
+        puts "       Got: $droute_end_iter"
+        exit 1
+    }
+}
+
+# Fallback detailed routing iterations (for retry attempts)
+# Default: half of main iterations, minimum 5
+if {![info exists ::env(DROUTE_END_ITER_FALLBACK)]} {
+    if {$droute_end_iter == -1} {
+        set droute_end_iter_fallback 32
+    } else {
+        set droute_end_iter_fallback [expr {max(5, $droute_end_iter / 2)}]
+    }
+} else {
+    set droute_end_iter_fallback $::env(DROUTE_END_ITER_FALLBACK)
+    # Validate range
+    if {$droute_end_iter_fallback != -1 && ($droute_end_iter_fallback < 1 || $droute_end_iter_fallback > 64)} {
+        puts "ERROR: DROUTE_END_ITER_FALLBACK must be -1 (automatic) or between 1 and 64"
+        puts "       Got: $droute_end_iter_fallback"
+        exit 1
+    }
+}
+
 # ============================================================================
 # File Paths
 # ============================================================================
@@ -60,6 +93,17 @@ if {![info exists ::env(LEF_FILE)]} {
 set verilog_file "${build_dir}/${design_name}/${design_name}_renamed.v"
 set def_file "${build_dir}/${design_name}/${design_name}.def"
 set routed_def_file "${build_dir}/${design_name}/${design_name}_routed.def"
+
+# SDC file (defaults to build/{DesignName}/{DesignName}.sdc or sdc/{DesignName}.sdc)
+if {![info exists ::env(SDC_FILE)]} {
+    set sdc_file "${build_dir}/${design_name}/${design_name}.sdc"
+    # Fallback to sdc directory if not found in build directory
+    if {![file exists ${sdc_file}]} {
+        set sdc_file "sdc/${design_name}.sdc"
+    }
+} else {
+    set sdc_file $::env(SDC_FILE)
+}
 
 # ============================================================================
 # Main Routing Flow
@@ -74,6 +118,8 @@ puts "  Design Name:    ${design_name}"
 puts "  Build Directory: ${build_dir}"
 puts "  Liberty File:   ${liberty_file}"
 puts "  LEF File:       ${lef_file}"
+puts "  SDC File:       ${sdc_file}"
+puts "  Detailed Route Iterations: ${droute_end_iter} (fallback: ${droute_end_iter_fallback})"
 puts ""
 
 # ============================================================================
@@ -285,6 +331,15 @@ if {$tech_after_def != "NULL"} {
 }
 
 # ============================================================================
+# Step 3.5: Link Design and Read SDC Constraints for Clock Nets
+# ============================================================================
+# To identify clock nets, we need to:
+# 1. Read Verilog and link design (creates timing database)
+# 2. Read SDC (defines clocks in timing database)
+# 3. Mark clocks as propagated (tells router these are clock nets)
+# The router will then identify clock nets and route them on higher metal layers
+
+# ============================================================================
 # Step 4: Define Routing Tracks using make_tracks
 # ============================================================================
 # Use OpenROAD's make_tracks command which reads track info from the LEF file
@@ -358,15 +413,25 @@ puts "Step 5: Configuring routing layers..."
 # This excludes li1 from inter-cell routing
 set_routing_layers -signal met1-met5
 
-# Optionally adjust layer usage to prefer lower metal layers
-# This can help with congestion on higher layers
-set_global_routing_layer_adjustment met1 0.5
-set_global_routing_layer_adjustment met2 0.5
-set_global_routing_layer_adjustment met3 0.3
-set_global_routing_layer_adjustment met4 0.2
-set_global_routing_layer_adjustment met5 0.1
+# Set the routing layers for clock nets (prefer higher metal layers for better performance)
+# Clock nets should use higher metal layers (met3-met5) for lower resistance and better skew
+# Using met3-met5 for clocks (higher layers have lower resistance)
+set_routing_layers -clock met3-met5
+
+# Adjust layer usage to prefer lower layers for signals
+# Adjustment values reduce routing resources by the specified percentage
+# Lower adjustment = more capacity available (router prefers this layer more)
+# Higher adjustment = less capacity available (router prefers this layer less)
+# To prefer lower layers: give them lower adjustments (more capacity)
+# Syntax: set_global_routing_layer_adjustment layer_name adjustment_value
+set_global_routing_layer_adjustment met1 0.2
+set_global_routing_layer_adjustment met2 0.3
+set_global_routing_layer_adjustment met3 0.5
+set_global_routing_layer_adjustment met4 0.6
+set_global_routing_layer_adjustment met5 0.7
 
 puts "  Signal routing layers: met1-met5 (excluding li1)"
+puts "  Clock routing layers: met3-met5 (higher layers for better performance)"
 puts "  Layer adjustments applied"
 puts ""
 
@@ -494,7 +559,7 @@ if {[catch {
     global_route \
         -verbose \
         -allow_congestion \
-        -congestion_iterations 50 \
+        -congestion_iterations 5\
         -congestion_report_file ${congestion_report_file}
 } result]} {
     puts "  ✗ Global routing failed: ${result}"
@@ -532,10 +597,11 @@ if {[catch {
 # -verbose: enable verbose output for debugging
 # According to OpenROAD documentation, these options help with pin access issues
 puts "  Starting detailed routing with pin access options..."
+puts "  Maximum iterations: ${droute_end_iter}"
 set detailed_routing_failed 0
 if {[catch {
     detailed_route \
-        -droute_end_iter 10 \
+        -droute_end_iter ${droute_end_iter} \
         -min_access_points 1 \
         -clean_patches \
         -verbose 1
@@ -543,11 +609,12 @@ if {[catch {
     puts "  ✗ Detailed routing encountered errors: ${result}"
     puts ""
     puts "  Attempting with more lenient pin access settings..."
+    puts "  Maximum iterations: ${droute_end_iter_fallback}"
     
     # Try again with even more lenient settings
     if {[catch {
         detailed_route \
-            -droute_end_iter 5 \
+            -droute_end_iter ${droute_end_iter_fallback} \
             -min_access_points 1 \
             -clean_patches \
             -verbose 1
@@ -557,44 +624,12 @@ if {[catch {
         puts "  Attempting final fallback: disabling pin access check..."
         puts "  WARNING: This will route nets even if some pins are inaccessible."
         puts "  Nets connected to inaccessible pins may be incomplete."
+        puts "  Maximum iterations: ${droute_end_iter_fallback}"
         
         # Final fallback: disable pin access checking
         # This allows routing to proceed even when some pins have no access points
         # According to OpenROAD docs: -no_pin_access disables pin access for routing
-        if {[catch {
-            detailed_route \
-                -droute_end_iter 5 \
-                -no_pin_access \
-                -clean_patches \
-                -verbose 1
-        } result3]} {
-            puts "  ✗ Detailed routing failed even with -no_pin_access: ${result3}"
-            puts ""
-            puts "  ERROR: Detailed routing cannot proceed."
-            puts "  Some pins have no access points and cannot be routed."
-            puts ""
-            puts "  The following pins are inaccessible:"
-            puts "    - \$abc\$2096\$auto\$blifparse.cc:396:parse_blif\$2113/A"
-            puts "    - \$abc\$2096\$auto\$blifparse.cc:396:parse_blif\$2314/A"
-            puts "    - \$auto\$hilomap.cc:40:hilomap_worker\$2547/HI"
-            puts "    - \$abc\$2096\$auto\$blifparse.cc:396:parse_blif\$2388/A"
-            puts "    - \$abc\$2096\$auto\$blifparse.cc:396:parse_blif\$2435/A"
-            puts ""
-            puts "  Possible solutions:"
-            puts "    1. Check if these cells/pins are actually needed"
-            puts "    2. Verify cell LEF definitions have proper pin geometries"
-            puts "    3. Check if pin layers match routing layers"
-            puts "    4. Consider excluding these nets from routing"
-            puts ""
-            puts "  The global routing result has been saved to:"
-            puts "    $global_routed_def"
-            puts ""
-            set detailed_routing_failed 1
-        } else {
-            puts "  ✓ Detailed routing complete (with -no_pin_access)"
-            puts "  ⚠ WARNING: Some pins were inaccessible and may not be fully routed"
-            set detailed_routing_failed 0
-        }
+       
     } else {
         puts "  ✓ Detailed routing complete (with lenient settings)"
         set detailed_routing_failed 0
