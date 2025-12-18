@@ -22,6 +22,7 @@ project_dd2
 # OS
 .DS_Store
 Thumbs.db
+documentation/
 
 # Project specific
 # Keep build/ directory structure but ignore large generated files if needed

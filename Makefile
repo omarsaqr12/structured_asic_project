@@ -1,152 +1,165 @@
-# Makefile for Structured ASIC Project - Phase 3
-# Supports placement, CTS, ECO generation, visualization, and testing
+# Makefile for Structured ASIC Project - Full Flow
+#
+# Steps:
+# 1. Greedy Placement
+# 2. Simulated Annealing (SA) - Medium parameters
+# 3. Clock Tree Synthesis (CTS) & ECO
+# 4. Instance Renaming
+# 5. Iterative Routing (until complete)
+# 6. Static Timing Analysis (STA)
 
-# Default design
-DESIGN ?= 6502
+# Design selection (default: arith)
+DESIGN ?= arith
+
+# Tools and Parameters
+PYTHON = python
+OPENROAD = openroad
+
+# SA Medium Parameters (from SA_OPTIMIZATION_GUIDE.md)
+SA_ALPHA = 0.97
+SA_MOVES = 700
+SA_T_FINAL = 0.001
 
 # Directories
 BUILD_DIR = build
 DESIGN_DIR = $(BUILD_DIR)/$(DESIGN)
 DESIGNS_DIR = designs
 FABRIC_DIR = fabric
+TECH_DIR = tech
 
-# File paths
+# Input Files
 DESIGN_JSON = $(DESIGNS_DIR)/$(DESIGN)_mapped.json
-PLACEMENT_MAP = $(DESIGN_DIR)/$(DESIGN).map
-PLACEMENT_JSON = $(DESIGN_DIR)/$(DESIGN)_placement.json
-FINAL_VERILOG = test_eco_$(DESIGN).v
-FINAL_JSON = test_eco_$(DESIGN).json
+FABRIC_CELLS = $(FABRIC_DIR)/fabric_cells.yaml
+PINS_YAML = $(FABRIC_DIR)/pins.yaml
+LIBERTY_FILE = $(TECH_DIR)/sky130_fd_sc_hd__tt_025C_1v80.lib
+LEF_FILE = $(TECH_DIR)/sky130_fd_sc_hd_merged.lef
+
+# Intermediate/Output Files
+GREEDY_JSON = $(DESIGN_DIR)/$(DESIGN)_placement.json
+GREEDY_MAP = $(DESIGN_DIR)/$(DESIGN).map
+
+SA_JSON = $(DESIGN_DIR)/$(DESIGN)_sa_placement.json
+SA_MAP = $(DESIGN_DIR)/$(DESIGN)_sa.map
+
+ECO_VERILOG = $(DESIGN_DIR)/$(DESIGN)_eco.v
+ECO_JSON = $(DESIGN_DIR)/$(DESIGN)_eco.json
+ECO_MAP = $(DESIGN_DIR)/$(DESIGN)_eco.map
+
 RENAMED_VERILOG = $(DESIGN_DIR)/$(DESIGN)_renamed.v
 
-# CTS paths
-CTS_TREE_HTREE = $(DESIGN_DIR)/cts_with_manager/best_htree/$(DESIGN)_cts_tree.json
-CTS_TREE_XTREE = $(DESIGN_DIR)/cts_with_manager/best_xtree/$(DESIGN)_cts_tree.json
-CTS_COMPARISON_JSON = $(DESIGN_DIR)/cts_comparison.json
-CTS_COMPARISON_TXT = $(DESIGN_DIR)/cts_comparison.txt
-CTS_COMPARISON_PNG = $(DESIGN_DIR)/cts_tree_comparison.png
-CTS_VISUALIZATION = $(DESIGN_DIR)/$(DESIGN)_cts_tree.png
+ROUTED_DEF = $(DESIGN_DIR)/$(DESIGN)_routed.def
 
-# Python command
-PYTHON = python
+.PHONY: all greedy sa cts_eco rename route sta clean help
 
-.PHONY: all place eco cts_viz cts_sim cts_report test_eco test_unit test_acceptance clean help
+# Default target runs the full flow
+all: sta
 
-# Default target
-all: eco
-
-# Help target
 help:
-	@echo "Available targets:"
-	@echo "  make place DESIGN=6502     - Run placement (Phase 2)"
-	@echo "  make eco DESIGN=6502      - Generate ECO netlist (requires placement)"
-	@echo "  make cts_viz DESIGN=6502  - Generate CTS tree visualization"
-	@echo "  make cts_sim DESIGN=6502  - Run CTS simulation (H-Tree vs X-Tree)"
-	@echo "  make cts_report DESIGN=6502 - Generate CTS comparison report"
-	@echo "  make test_eco              - Run all tests (unit + acceptance)"
-	@echo "  make test_unit             - Run unit tests only"
-	@echo "  make test_acceptance       - Run acceptance tests only"
-	@echo "  make clean                 - Clean generated files"
+	@echo "Structured ASIC Full Flow Makefile"
+	@echo "Usage: make [target] DESIGN=[6502|aes_128|arith|z80]"
+	@echo ""
+	@echo "Targets:"
+	@echo "  greedy    - Step 1: Greedy placement"
+	@echo "  sa        - Step 2: SA placement (medium params)"
+	@echo "  cts_eco   - Step 3: CTS and ECO generation"
+	@echo "  rename    - Step 4: Rename instances to match slots"
+	@echo "  route     - Step 5: Iterative routing until successful"
+	@echo "  sta       - Step 6: Static Timing Analysis"
+	@echo "  all       - Run the entire flow (greedy -> sta)"
+	@echo "  clean     - Remove build artifacts for the current design"
 
-# Placement target (Phase 2 - depends on placer.py)
-place: $(PLACEMENT_MAP) $(PLACEMENT_JSON)
-	@echo "✓ Placement complete: $(PLACEMENT_MAP)"
+# --- Step 1: Greedy Placement ---
+greedy: $(GREEDY_MAP)
 
-$(PLACEMENT_MAP) $(PLACEMENT_JSON): $(DESIGN_JSON)
-	@echo "Running placement for $(DESIGN)..."
+$(GREEDY_MAP) $(GREEDY_JSON): $(DESIGN_JSON) $(FABRIC_CELLS) $(PINS_YAML)
+	@echo ">>> Step 1: Running Greedy Placement for $(DESIGN)..."
+	@mkdir -p $(DESIGN_DIR)
 	$(PYTHON) placer.py --design $(DESIGN_JSON) \
-		--fabric-cells $(FABRIC_DIR)/fabric_cells.yaml \
-		--pins $(FABRIC_DIR)/pins.yaml
-	@echo "✓ Placement files generated"
+		--fabric-cells $(FABRIC_CELLS) \
+		--pins $(PINS_YAML) \
+		--no-sa \
+		--output $(DESIGN_DIR)
+	@echo "✓ Greedy placement complete"
 
-# ECO generation target (Phase 3)
-eco: $(RENAMED_VERILOG)
-	@echo "✓ ECO generation complete: $(RENAMED_VERILOG)"
+# --- Step 2: SA Placement (Medium Parameters) ---
+sa: $(SA_MAP)
 
-$(FINAL_VERILOG): $(PLACEMENT_MAP) $(PLACEMENT_JSON) $(DESIGN_JSON)
-	@echo "Generating ECO for $(DESIGN)..."
+$(SA_MAP) $(SA_JSON): $(GREEDY_JSON)
+	@echo ">>> Step 2: Running SA Placement (Medium) for $(DESIGN)..."
+	$(PYTHON) placer.py --design $(DESIGN_JSON) \
+		--fabric-cells $(FABRIC_CELLS) \
+		--pins $(PINS_YAML) \
+		--initial-placement $(GREEDY_JSON) \
+		--sa-alpha $(SA_ALPHA) \
+		--sa-moves $(SA_MOVES) \
+		--sa-T-final $(SA_T_FINAL) \
+		--output $(DESIGN_DIR)
+	@echo "✓ SA placement complete"
+
+# --- Step 3: CTS & ECO ---
+cts_eco: $(ECO_VERILOG)
+
+$(ECO_VERILOG) $(ECO_JSON) $(ECO_MAP): $(SA_JSON) $(SA_MAP)
+	@echo ">>> Step 3: Running CTS and ECO for $(DESIGN)..."
 	$(PYTHON) eco_generator.py \
-		--placement $(PLACEMENT_JSON) \
+		--placement $(SA_JSON) \
 		--design $(DESIGN_JSON) \
-		--fabric-cells $(FABRIC_DIR)/fabric_cells.yaml \
-		--placement-map $(PLACEMENT_MAP) \
+		--fabric-cells $(FABRIC_CELLS) \
+		--placement-map $(SA_MAP) \
 		--enable-cts \
 		--cts-tree-type h \
-		--output-json $(FINAL_JSON) \
-		--output-verilog $(FINAL_VERILOG)
-	@echo "✓ ECO Verilog generated: $(FINAL_VERILOG)"
+		--output-json $(ECO_JSON) \
+		--output-verilog $(ECO_VERILOG)
+	@echo "✓ CTS and ECO complete"
 
-$(RENAMED_VERILOG): $(FINAL_VERILOG) $(PLACEMENT_MAP)
-	@echo "Renaming instances in Verilog for $(DESIGN)..."
-	$(PYTHON) rename_helper.py \
+# --- Step 4: Rename ---
+.PHONY: rename
+rename:
+	@echo ">>> Step 4: Renaming instances for $(DESIGN)..."
+	@if [ ! -f $(ECO_MAP) ]; then \
+		echo "ERROR: ECO map file not found: $(ECO_MAP)"; \
+		echo "Please run 'make cts_eco DESIGN=$(DESIGN)' first."; \
+		exit 1; \
+	fi
+	@if [ -f $(ECO_VERILOG) ]; then \
+		ECO_FILE=$(ECO_VERILOG); \
+	elif [ -f $(DESIGN_DIR)/$(DESIGN)_final.v ]; then \
+		ECO_FILE=$(DESIGN_DIR)/$(DESIGN)_final.v; \
+	else \
+		echo "ERROR: ECO Verilog file not found. Expected $(ECO_VERILOG) or $(DESIGN_DIR)/$(DESIGN)_final.v"; \
+		echo "Please run 'make cts_eco DESIGN=$(DESIGN)' first."; \
+		exit 1; \
+	fi; \
+	$(PYTHON) rename.py \
 		--design $(DESIGN) \
-		--verilog $(FINAL_VERILOG) \
-		--map $(PLACEMENT_MAP) \
+		--final-v $$ECO_FILE \
+		--map $(ECO_MAP) \
 		--output $(RENAMED_VERILOG)
-	@echo "✓ Renamed Verilog generated: $(RENAMED_VERILOG)"
+	@echo "✓ Renaming complete"
 
-# CTS visualization target
-cts_viz: $(CTS_VISUALIZATION)
-	@echo "✓ CTS visualization generated: $(CTS_VISUALIZATION)"
+# --- Step 5: Routing ---
+route: $(ROUTED_DEF)
 
-$(CTS_VISUALIZATION): $(CTS_TREE_HTREE)
-	@echo "Generating CTS tree visualization for $(DESIGN)..."
-	$(PYTHON) visualize.py cts \
-		--design $(DESIGN) \
-		--cts-tree $(CTS_TREE_HTREE) \
-		--output $(CTS_VISUALIZATION)
-	@echo "✓ CTS visualization saved"
+$(ROUTED_DEF): $(RENAMED_VERILOG) $(ECO_MAP)
+	@echo ">>> Step 5: Routing for $(DESIGN)..."
+	$(PYTHON) make_def.py --design $(DESIGN) --map $(ECO_MAP)
+	DESIGN_NAME=$(DESIGN) \
+	BUILD_DIR=$(BUILD_DIR) \
+	LIBERTY_FILE=$(LIBERTY_FILE) \
+	LEF_FILE=$(LEF_FILE) \
+	$(OPENROAD) -exit route.tcl
+	@echo "✓ Routing complete"
 
-# CTS simulation target
-cts_sim: $(CTS_COMPARISON_JSON)
-	@echo "✓ CTS simulation complete: $(CTS_COMPARISON_JSON)"
+# --- Step 6: STA ---
+sta: $(ROUTED_DEF)
+	@echo ">>> Step 6: Running Static Timing Analysis for $(DESIGN)..."
+	DESIGN_NAME=$(DESIGN) \
+	BUILD_DIR=$(BUILD_DIR) \
+	LIBERTY_FILE=$(LIBERTY_FILE) \
+	LEF_FILE=$(LEF_FILE) \
+	$(OPENROAD) -exit sta.tcl
+	@echo "✓ STA complete"
 
-$(CTS_COMPARISON_JSON): $(CTS_TREE_HTREE) $(CTS_TREE_XTREE)
-	@echo "Running CTS simulation for $(DESIGN)..."
-	$(PYTHON) cts_simulator.py \
-		--htree $(CTS_TREE_HTREE) \
-		--xtree $(CTS_TREE_XTREE) \
-		--design $(DESIGN) \
-		--output $(CTS_COMPARISON_JSON)
-	@echo "✓ CTS comparison data saved"
-
-# CTS comparison report target
-cts_report: $(CTS_COMPARISON_TXT) $(CTS_COMPARISON_PNG)
-	@echo "✓ CTS comparison report generated"
-
-$(CTS_COMPARISON_TXT) $(CTS_COMPARISON_PNG): $(CTS_COMPARISON_JSON)
-	@echo "Generating CTS comparison report for $(DESIGN)..."
-	$(PYTHON) comparison_report.py \
-		--design $(DESIGN) \
-		--input $(CTS_COMPARISON_JSON) \
-		--output-txt $(CTS_COMPARISON_TXT) \
-		--output-png $(CTS_COMPARISON_PNG)
-	@echo "✓ Comparison report generated"
-
-# Test targets
-test_eco: test_unit test_acceptance
-	@echo "✓ All tests passed"
-
-test_unit:
-	@echo "Running unit tests..."
-	$(PYTHON) -m pytest test_eco_generator.py -v
-	@echo "✓ Unit tests passed"
-
-test_acceptance:
-	@echo "Running acceptance tests..."
-	$(PYTHON) -m pytest test_acceptance.py -v
-	@echo "✓ Acceptance tests passed"
-
-# Clean target
 clean:
-	@echo "Cleaning generated files..."
-	rm -f $(FINAL_VERILOG) $(FINAL_JSON) $(RENAMED_VERILOG)
-	rm -f $(CTS_COMPARISON_JSON) $(CTS_COMPARISON_TXT) $(CTS_COMPARISON_PNG)
-	rm -f $(CTS_VISUALIZATION)
-	@echo "✓ Clean complete"
-
-# Clean all (including placement)
-clean_all: clean
-	@echo "Cleaning all build artifacts..."
-	rm -rf $(BUILD_DIR)
-	@echo "✓ All build artifacts removed"
-
+	rm -rf $(DESIGN_DIR)
+	rm -f route.log
