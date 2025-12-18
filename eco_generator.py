@@ -12,6 +12,7 @@ import json
 import argparse
 import sys
 import os
+import glob
 from typing import Dict, List, Set, Any, Optional, Tuple
 from collections import defaultdict
 from parse_fabric import parse_fabric_cells
@@ -21,6 +22,7 @@ from buffer_manager import parse_placement_map
 
 
 # Logic cell types that need to be tied low if unused
+# Maps cell type to list of input pin names
 LOGIC_CELL_TYPES = {
     'sky130_fd_sc_hd__nand2_2': ['A', 'B'],      # NAND2: inputs A, B
     'sky130_fd_sc_hd__or2_2': ['A', 'B'],        # OR2: inputs A, B
@@ -29,46 +31,115 @@ LOGIC_CELL_TYPES = {
     'sky130_fd_sc_hd__clkbuf_4': ['A'],          # Buffer: input A
 }
 
+# Non-logic cell types that should NOT be tied (infrastructure cells)
+NON_LOGIC_CELL_TYPES = {
+    'sky130_fd_sc_hd__conb_1',           # Tie-high/tie-low cell
+    'sky130_fd_sc_hd__tapvpwrvgnd_1',    # Tap cell
+    'sky130_fd_sc_hd__decap_3',          # Decap cell
+    'sky130_fd_sc_hd__decap_4',          # Decap cell
+    'sky130_fd_sc_hd__dfbbp_1',          # DFF cell (sequential, not combinational logic)
+    'sky130_fd_sc_hd__fill_1',           # Fill cell
+}
+
 CONB_CELL_TYPE = 'sky130_fd_sc_hd__conb_1'
 CONB_LO_PIN = 'LO'
 
 
 def get_used_slots(placement_path: str, 
                    placement_map_path: Optional[str] = None,
-                   cts_placement_map: Optional[Dict[str, str]] = None) -> Set[str]:
+                   cts_placement_map: Optional[Dict[str, str]] = None,
+                   design_path: Optional[str] = None) -> Set[str]:
     """
     Get all used fabric slots from placement JSON and placement map.
+    Only includes slots whose logical cell names are actually in the design netlist.
     
     Args:
         placement_path: Path to placement JSON file
         placement_map_path: Optional path to placement.map file (for CTS buffers)
         cts_placement_map: Optional CTS-generated placement map dict (includes CTS buffers)
+        design_path: Optional path to design JSON file to verify cells exist in netlist
     
     Returns:
-        Set of used fabric slot names
+        Set of used fabric slot names (only for cells that exist in design netlist)
     """
     used_slots = set()
+    
+    # Get set of logical cell names that actually exist in the design netlist
+    # This ensures we only mark slots as "used" if the cell is really in the design
+    design_cell_names = None  # Start as None - will be set to a set() if we successfully load design
+    if design_path and os.path.exists(design_path):
+        try:
+            with open(design_path, 'r') as f:
+                design_data = json.load(f)
+            
+            # Find top module
+            modules = design_data.get('modules', {})
+            top_module = None
+            for mod_name, mod_data in modules.items():
+                if mod_data.get('attributes', {}).get('top') == '00000000000000000000000000000001':
+                    top_module = mod_data
+                    break
+            
+            if not top_module:
+                # Fallback: use first module with cells
+                for mod_name, mod_data in modules.items():
+                    if 'cells' in mod_data and len(mod_data['cells']) > 0:
+                        top_module = mod_data
+                        break
+            
+            if top_module:
+                cells = top_module.get('cells', {})
+                design_cell_names = set(cells.keys())
+                print(f"  Loaded design netlist: {len(design_cell_names)} cells")
+            else:
+                print(f"  WARNING: Could not find top module in design")
+                design_cell_names = None  # If we can't find top module, don't filter
+        except Exception as e:
+            print(f"  WARNING: Could not load design to verify cells: {e}")
+            design_cell_names = None  # If we can't load, don't filter
     
     # Load placement JSON
     with open(placement_path, 'r') as f:
         placement = json.load(f)
     
     # Extract used slots from placement JSON
+    # Only include if the cell is in the design netlist (if we loaded it)
+    filtered_from_placement_json = 0
     for cell_name, pos_data in placement.items():
         if 'fabric_slot_name' in pos_data:
-            used_slots.add(pos_data['fabric_slot_name'])
+            slot_name = pos_data['fabric_slot_name']
+            # If we have design cell names, only include if cell is in design
+            if design_cell_names is None:
+                # Can't verify - include all (conservative approach)
+                used_slots.add(slot_name)
+            elif cell_name in design_cell_names:
+                # Cell exists in design - mark slot as used
+                used_slots.add(slot_name)
+            else:
+                # Cell is in placement JSON but NOT in design netlist - don't mark as used
+                filtered_from_placement_json += 1
+    
+    if filtered_from_placement_json > 0:
+        print(f"  Filtered out {filtered_from_placement_json} slots from placement JSON because their logical cells are not in the design netlist")
     
     # Use CTS placement map if provided (includes CTS buffers)
     if cts_placement_map:
         # Add all slots from CTS placement map
+        # Only include if the logical cell name is in the design netlist
         for logical_name, slot_name in cts_placement_map.items():
-            used_slots.add(slot_name)
+            # CTS buffers and special cells should always be included
+            # Only filter out eco_unused_ cells that aren't in the design
+            if design_cell_names is None or logical_name in design_cell_names or logical_name.startswith('cts_buffer_'):
+                used_slots.add(slot_name)
     elif placement_map_path:
         # Fallback: parse placement map file
         try:
             placement_map = parse_placement_map(placement_map_path)
             for logical_name, slot_name in placement_map.items():
-                used_slots.add(slot_name)
+                # Only include if the logical cell name is in the design netlist
+                # Special cells (cts_buffer_, tie_low_cell) should always be included
+                if design_cell_names is None or logical_name in design_cell_names or logical_name.startswith('cts_buffer_') or logical_name.startswith('tie_low_cell'):
+                    used_slots.add(slot_name)
         except FileNotFoundError:
             pass  # Placement map might not exist
     
@@ -80,6 +151,9 @@ def find_unused_logic_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
     """
     Find all unused logic cells in the fabric.
     
+    This function iterates through ALL cell types in the fabric database and identifies
+    unused logic cells (excluding non-logic cells like CONB, TAP, DECAP, DFBBP, FILL).
+    
     Args:
         fabric_db: Fabric database from parse_fabric_cells
         used_slots: Set of used fabric slot names
@@ -89,17 +163,22 @@ def find_unused_logic_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
     """
     unused_cells = []
     
-    for cell_type in LOGIC_CELL_TYPES.keys():
-        if cell_type in fabric_db:
-            for slot in fabric_db[cell_type]:
-                if slot['name'] not in used_slots:
-                    unused_cells.append({
-                        'name': slot['name'],
-                        'type': cell_type,
-                        'x': slot['x'],
-                        'y': slot['y'],
-                        'orient': slot.get('orient', 'N')
-                    })
+    # Iterate through ALL cell types in the fabric database
+    for cell_type, slots in fabric_db.items():
+        # Skip non-logic cell types (infrastructure cells)
+        if cell_type in NON_LOGIC_CELL_TYPES:
+            continue
+        
+        # Check all slots of this cell type
+        for slot in slots:
+            if slot['name'] not in used_slots:
+                unused_cells.append({
+                    'name': slot['name'],
+                    'type': cell_type,
+                    'x': slot['x'],
+                    'y': slot['y'],
+                    'orient': slot.get('orient', 'N')
+                })
     
     return unused_cells
 
@@ -118,11 +197,16 @@ def count_used_logic_cells(fabric_db: Dict[str, List[Dict[str, Any]]],
     """
     used_count = 0
     
-    for cell_type in LOGIC_CELL_TYPES.keys():
-        if cell_type in fabric_db:
-            for slot in fabric_db[cell_type]:
-                if slot['name'] in used_slots:
-                    used_count += 1
+    # Iterate through ALL cell types in the fabric database
+    for cell_type, slots in fabric_db.items():
+        # Skip non-logic cell types (infrastructure cells)
+        if cell_type in NON_LOGIC_CELL_TYPES:
+            continue
+        
+        # Count used slots of this cell type
+        for slot in slots:
+            if slot['name'] in used_slots:
+                used_count += 1
     
     return used_count
 
@@ -248,6 +332,65 @@ def find_top_module(design_data: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+def extract_design_name(design_path: str) -> str:
+    """
+    Extract design name from design file path.
+    
+    Examples:
+        designs/6502_mapped.json -> 6502
+        designs/aes_128_mapped.json -> aes_128
+        designs/arith_mapped.json -> arith
+    
+    Args:
+        design_path: Path to design mapped JSON file
+    
+    Returns:
+        Design name (without _mapped.json suffix)
+    """
+    basename = os.path.basename(design_path)
+    # Remove _mapped.json or .json suffix
+    if basename.endswith('_mapped.json'):
+        return basename[:-12]  # Remove '_mapped.json'
+    elif basename.endswith('.json'):
+        return basename[:-5]  # Remove '.json'
+    else:
+        return basename
+
+
+def find_best_directory(build_dir: str, design_name: str) -> Optional[str]:
+    """
+    Find the Best* directory in build/{design_name}/.
+    Matches any directory that starts with "Best" regardless of what comes after.
+    
+    Examples:
+        build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/ -> found
+        build/arith/Best_greedy/ -> found
+        build/aes_128/Best_any_name_here/ -> found
+    
+    Args:
+        build_dir: Build directory (e.g., 'build')
+        design_name: Design name (e.g., '6502')
+    
+    Returns:
+        Path to Best* directory if found, None otherwise.
+        If multiple Best* directories exist, returns the first one found.
+    """
+    design_build_dir = os.path.join(build_dir, design_name)
+    if not os.path.exists(design_build_dir):
+        return None
+    
+    # Find all directories starting with "Best" (Best* matches any suffix)
+    best_dirs = [d for d in glob.glob(os.path.join(design_build_dir, "Best*")) 
+                 if os.path.isdir(d)]
+    
+    if not best_dirs:
+        return None
+    
+    # If multiple Best* directories exist, return the first one
+    # (You could sort by modification time to get the most recent)
+    return best_dirs[0]
+
+
 def generate_eco(placement_path: str,
                 design_path: str,
                 fabric_cells_path: str,
@@ -321,9 +464,24 @@ def generate_eco(placement_path: str,
     fabric_db = parse_fabric_cells(fabric_cells_path)
     
     # Get used slots (including CTS buffers if CTS was generated)
+    # Pass design_path to verify cells exist in netlist
     print("\nIdentifying used fabric slots...")
-    used_slots = get_used_slots(placement_path, placement_map_path, cts_placement_map)
-    print(f"Found {len(used_slots)} used fabric slots")
+    print("  (Only marking slots as used if cells exist in design netlist)")
+    used_slots = get_used_slots(placement_path, placement_map_path, cts_placement_map, design_path)
+    
+    # Count how many slots were in placement map but not in design
+    if placement_map_path and os.path.exists(placement_map_path):
+        try:
+            placement_map = parse_placement_map(placement_map_path)
+            map_slots = set(placement_map.values())
+            slots_not_in_design = map_slots - used_slots
+            if slots_not_in_design:
+                print(f"  Found {len(slots_not_in_design)} slots in placement map but not in design netlist")
+                print(f"  These will be identified as unused and tied to conb_1 LO")
+        except:
+            pass
+    
+    print(f"Found {len(used_slots)} used fabric slots (verified against design netlist)")
     
     # Calculate statistics
     total_fabric_cells = count_total_fabric_cells(fabric_db)
@@ -413,25 +571,36 @@ def generate_eco(placement_path: str,
     
     # Add unused logic cells to netlist and tie inputs to conb_1 LO
     tied_cells = []
-    cell_counter = 0
     for unused_cell in unused_logic_cells:
         cell_type = unused_cell['type']
-        # Generate safe logical name (remove special chars, ensure uniqueness)
-        safe_name = unused_cell['name'].replace('__', '_').replace('-', '_').replace('.', '_')
-        logical_name = f"eco_unused_{cell_counter}_{safe_name}"
-        cell_counter += 1
+        # Use physical slot name directly as logical name (no prefix)
+        # The slot name is already unique and will be renamed to itself in rename.py
+        logical_name = unused_cell['name']  # e.g., "T0Y0__R0_NAND_0"
         
-        # Ensure uniqueness
+        # Ensure uniqueness (shouldn't happen, but safety check)
+        original_logical_name = logical_name
+        counter = 0
         while logical_name in cells:
-            logical_name = f"eco_unused_{cell_counter}_{safe_name}"
-            cell_counter += 1
+            logical_name = f"{original_logical_name}_{counter}"
+            counter += 1
         
         # Get input pins for this cell type
         input_pins = LOGIC_CELL_TYPES.get(cell_type, [])
         
         if not input_pins:
-            print(f"WARNING: Unknown cell type {cell_type}, skipping")
-            continue
+            # Try to infer input pins for common logic cell patterns
+            # This handles logic cells that might exist in fabric but aren't in LOGIC_CELL_TYPES
+            if 'nand' in cell_type.lower() or 'and' in cell_type.lower():
+                input_pins = ['A', 'B']  # Most 2-input gates have A, B
+            elif 'or' in cell_type.lower() or 'nor' in cell_type.lower():
+                input_pins = ['A', 'B']  # Most 2-input gates have A, B
+            elif 'inv' in cell_type.lower() or 'buf' in cell_type.lower():
+                input_pins = ['A']  # Inverters and buffers typically have A input
+            elif 'xor' in cell_type.lower() or 'xnor' in cell_type.lower():
+                input_pins = ['A', 'B']  # XOR gates have A, B
+            else:
+                print(f"WARNING: Unknown logic cell type {cell_type}, cannot determine input pins. Skipping.")
+                continue
         
         # Create connections: all inputs tied to conb_1 LO net
         connections = {}
@@ -479,7 +648,7 @@ def generate_eco(placement_path: str,
         }
     
     # Save updated placement JSON
-    placement_output_path = placement_path.replace('.json', '_with_eco.json')
+    placement_output_path = placement_path.replace('.json', '_eco.json')
     print(f"Saving updated placement JSON to: {placement_output_path}")
     with open(placement_output_path, 'w') as f:
         json.dump(placement, f, indent=2)
@@ -487,20 +656,25 @@ def generate_eco(placement_path: str,
     
     # Save updated placement map (including CTS buffers if CTS was generated)
     if cts_placement_map:
-        placement_map_output_path = placement_map_path.replace('.map', '_with_eco.map') if placement_map_path else None
-        if placement_map_output_path:
-            print(f"\nSaving updated placement map to: {placement_map_output_path}")
-            with open(placement_map_output_path, 'w') as f:
-                # Write original placement + CTS buffers + ECO cells
-                for logical_name in sorted(cts_placement_map.keys()):
-                    f.write(f"{logical_name} {cts_placement_map[logical_name]}\n")
-                
-                # Add ECO cells
-                f.write(f"{conb_logical_name} {conb_cell['name']}\n")
-                for tied_cell in tied_cells:
-                    f.write(f"{tied_cell['logical_name']} {tied_cell['fabric_slot']}\n")
+        # Extract design name and construct output path: build/{Design_Name}/{Design_Name}_eco.map
+        design_name = extract_design_name(design_path)
+        build_dir = 'build'
+        design_build_dir = os.path.join(build_dir, design_name)
+        os.makedirs(design_build_dir, exist_ok=True)
+        placement_map_output_path = os.path.join(design_build_dir, f"{design_name}_eco.map")
+        
+        print(f"\nSaving updated placement map to: {placement_map_output_path}")
+        with open(placement_map_output_path, 'w') as f:
+            # Write original placement + CTS buffers + ECO cells
+            for logical_name in sorted(cts_placement_map.keys()):
+                f.write(f"{logical_name} {cts_placement_map[logical_name]}\n")
             
-            print("✓ Placement map updated")
+            # Add ECO cells
+            f.write(f"{conb_logical_name} {conb_cell['name']}\n")
+            for tied_cell in tied_cells:
+                f.write(f"{tied_cell['logical_name']} {tied_cell['fabric_slot']}\n")
+        
+        print("✓ Placement map updated")
     
     # Build ECO data structure
     eco_data = {
@@ -661,43 +835,81 @@ def main():
         description='ECO Generator: Tie unused logic cells to conb_1 LO output'
     )
     parser.add_argument('--placement', 
-                        default='build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/6502_placement.json',
+                        default=None,
                         help='Path to placement JSON file (after placement, before ECO) '
-                             '(default: build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/6502_placement.json)')
+                            #  '(default: build/{Design_Name}/Best*/{Design_Name}_placement.json)')
+                            '(default: build/{Design_Name}/{Design_Name}_placement.json)')
+
     parser.add_argument('--design', 
-                        default='designs/6502_mapped.json',
-                        help='Path to design JSON file (default: designs/6502_mapped.json)')
+                        default='6502',
+                        help='Design name (e.g., "6502", "arith"). Path will be auto-constructed as designs/{design}_mapped.json (default: 6502)')
     parser.add_argument('--fabric-cells', default='fabric/fabric_cells.yaml',
                         help='Path to fabric_cells.yaml (default: fabric/fabric_cells.yaml)')
     parser.add_argument('--placement-map', 
-                        default='build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/6502.map',
+                        default=None,
                         help='Path to placement.map file (required for CTS) '
-                             '(default: build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/6502.map)')
-    parser.add_argument('--enable-cts', action='store_true',
-                        help='Generate CTS tree using CTS API before ECO')
+                            #  '(default: build/{Design_Name}/Best*/{Design_Name}.map)')
+                            '(default: build/{Design_Name}/{Design_Name}_placement.map)')
+
+    parser.add_argument('--enable-cts', action='store_true', default=True,
+                        help='Generate CTS tree using CTS API before ECO (default: True). Use --disable-cts to disable.')
+    parser.add_argument('--disable-cts', dest='enable_cts', action='store_false',
+                        help='Disable CTS tree generation (overrides --enable-cts)')
     parser.add_argument('--cts-tree-type', choices=['h', 'x'], default='h',
                         help='CTS tree type: h for H-Tree, x for X-Tree (default: h)')
     parser.add_argument('--cts-threshold', type=int, default=4,
                         help='CTS threshold: max sinks per leaf node (default: 4)')
-    parser.add_argument('--output-json', default= "test_eco_6502.json",
-                        help='Path to save updated design JSON (default: design_path with _final.json)')
-    parser.add_argument('--output-verilog', default="test_eco_6502.v",
-                        help='Path to save final Verilog (default: design_path with _final.v)')
+    parser.add_argument('--output-json', default=None,
+                        help='Path to save updated design JSON (default: build/{Design_Name}/{Design_Name}_eco.json)')
+    parser.add_argument('--output-verilog', default=None,
+                        help='Path to save final Verilog (default: build/{Design_Name}/{Design_Name}_final.v)')
     
     args = parser.parse_args()
     
+    # Construct design path from design name if it's just a name (not a full path)
+    if not args.design.endswith('.json') and not os.path.sep in args.design:
+        # It's just a design name, construct the full path
+        args.design = os.path.join('designs', f"{args.design}_mapped.json")
+    
+    # Extract design name from design path
+    design_name = extract_design_name(args.design)
+    
+    # Set default placement path if not provided
+    if args.placement is None:
+        build_dir = 'build'
+        best_dir = find_best_directory(build_dir, design_name)
+        if best_dir:
+            args.placement = os.path.join(best_dir, f"{design_name}_placement.json")
+        else:
+            # Fallback to old default if Best* directory not found
+            args.placement = f'build/{design_name}/Best_sa_alpha0.99_moves1000_Tfinal0.001/{design_name}_placement.json'
+            print(f"Warning: Best* directory not found, using fallback path: {args.placement}")
+    
+    # Set default placement map path if not provided
+    if args.placement_map is None:
+        build_dir = 'build'
+        best_dir = find_best_directory(build_dir, design_name)
+        if best_dir:
+            args.placement_map = os.path.join(best_dir, f"{design_name}.map")
+        else:
+            # Fallback to old default if Best* directory not found
+            args.placement_map = f'build/{design_name}/Best_sa_alpha0.99_moves1000_Tfinal0.001/{design_name}.map'
+            print(f"Warning: Best* directory not found, using fallback path: {args.placement_map}")
+    
     # Set default output paths
     if args.output_json is None:
-        if args.design.endswith('.json'):
-            args.output_json = args.design.replace('.json', '_final.json')
-        else:
-            args.output_json = args.design + '_final.json'
+        # Create build directory if it doesn't exist
+        build_dir = 'build'
+        design_build_dir = os.path.join(build_dir, design_name)
+        os.makedirs(design_build_dir, exist_ok=True)
+        args.output_json = os.path.join(design_build_dir, f"{design_name}_eco.json")
     
     if args.output_verilog is None:
-        if args.design.endswith('.json'):
-            args.output_verilog = args.design.replace('.json', '_final.v')
-        else:
-            args.output_verilog = args.design + '_final.v'
+        # Create build directory if it doesn't exist
+        build_dir = 'build'
+        design_build_dir = os.path.join(build_dir, design_name)
+        os.makedirs(design_build_dir, exist_ok=True)
+        args.output_verilog = os.path.join(design_build_dir, f"{design_name}_final.v")
     
     try:
         eco_data = generate_eco(
