@@ -1,0 +1,13 @@
+Congestion Report
+=================
+Generated from: build/6502/6502_routed.def
+Date: Wed Dec 10 08:25:18 EET 2025
+
+NOTE: The detailed congestion report output is sent to stdout.
+To capture the full report, redirect the script output:
+  openroad -exit extract_report.tcl 2>&1 | tee build/6502/6502_congestion_detailed.rpt
+
+--- Congestion Report Output ---
+
+ERROR: Congestion report generation failed
+Error message: invalid command name "report_congestion"
