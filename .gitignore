@@ -47,6 +47,11 @@ BUFFER_MANAGER_USAGE.md
 how c38db0fcts_api.py --stat
 cleanup_and_push.bat
 push_to_github.bat
+Helper & Temp scripts/run_route - Copy.tcl
+
+# Large binaries kept out of the repo (regenerate locally if needed)
+Animations/sa_animation.mp4
+Presentation_DD2_Checjpoint1.pdf
 
 # Archive files
 *.zip

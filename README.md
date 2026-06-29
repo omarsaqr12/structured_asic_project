@@ -1,17 +1,60 @@
-# Structured ASIC Physical Design Flow
+# Structured-ASIC Physical-Design Flow
 
-Implementation of a complete physical design flow (Placement, CTS, Routing, and STA) for a structured ASIC platform, as part of the **[CSCE330401 - Digital Design II]** project.
+> A complete VLSI back-end flow — **floorplanning, placement, clock-tree synthesis, routing, and static timing analysis** — for a structured-ASIC fabric on the SkyWater **Sky130** open PDK.
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Routing & STA: OpenROAD](https://img.shields.io/badge/Routing%20%26%20STA-OpenROAD-orange.svg)](https://github.com/The-OpenROAD-Project/OpenROAD)
+[![PDK: Sky130](https://img.shields.io/badge/PDK-SkyWater%20Sky130-green.svg)](https://github.com/google/skywater-pdk)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Built for **CSCE 3304 – Digital Design II** at the American University in Cairo. The flow takes a synthesized gate-level netlist, maps it onto fixed physical fabric slots, then optimizes, clocks, routes, and times the design end-to-end — the same backbone used in a commercial ASIC implementation flow.
+
+## Highlights
+
+- **−38.7 % total wirelength (HPWL)** on the 6502 CPU (431,210 µm → 264,256 µm) by layering simulated annealing on a greedy barycenter placer — while meeting timing.
+- **Full back-end, RTL-to-signoff:** greedy + SA placement → CTS (H-tree / X-tree) → ECO → routing (OpenROAD) → parasitic (SPEF) extraction → static timing analysis.
+- **Incremental HPWL evaluation** makes simulated annealing **10–100× faster** by re-costing only the nets a move actually touches, plus KD-tree spatial indexing for nearest-slot lookups.
+- **Four real designs** carried through the full flow: `6502`, `z80`, `aes_128`, and `arith`.
+
+| Greedy placement | After simulated annealing |
+| :---: | :---: |
+| ![Greedy heatmap](build/6502/greedy/greedy_heatmap.png) | ![SA heatmap](build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/sa_alpha0.99_moves1000_Tfinal0.001_heatmap.png) |
+
+*6502 cell-density heatmaps — simulated annealing redistributes cells off the I/O edges and reduces hotspots.*
+
+## Tech Stack
+
+**Languages:** Python, Tcl &nbsp;·&nbsp; **EDA tools:** OpenROAD, OpenSTA, Yosys (synthesis input) &nbsp;·&nbsp; **PDK:** SkyWater Sky130 &nbsp;·&nbsp; **Python libs:** NumPy, SciPy, Matplotlib
+
+## Quick Start
+
+```bash
+# 1. Install Python dependencies
+pip install -r requirements.txt
+
+# 2. Run placement (greedy + SA) for the 6502 design
+python placer.py --design designs/6502_mapped.json \
+                 --fabric-cells fabric/fabric_cells.yaml \
+                 --pins fabric/pins.yaml \
+                 --output build/6502
+
+# 3. Run the complete back-end flow: placement -> CTS -> route -> STA
+#    (routing and STA require the OpenROAD binary on your PATH)
+make all DESIGN=6502
+```
+
+Designs available: `DESIGN=6502 | z80 | aes_128 | arith`. See the [full flow walkthrough](#full-flow-walkthrough-inputs-and-outputs) below for every step, input, and output.
 
 ---
 
 ## Project Overview
 
-This project implements an optimized placement engine for mapping logical cells from synthesized designs onto physical fabric slots in a structured ASIC architecture. The placement flow consists of two main phases:
+This project implements an optimized placement engine that maps logical cells from synthesized designs onto physical fabric slots in a structured-ASIC architecture, then drives the result through clocking, routing, and timing signoff. The placement core has two phases:
 
-1. **Greedy Barycenter Placement** - Fast initial placement using connectivity-driven heuristics
-2. **Simulated Annealing Optimization** - Iterative refinement to minimize wirelength
+1. **Greedy Barycenter Placement** — fast initial placement using connectivity-driven heuristics
+2. **Simulated Annealing Optimization** — iterative refinement to minimize wirelength
 
-The primary optimization objective is to minimize **Half-Perimeter Wirelength (HPWL)**, which directly impacts routing congestion, timing, and power consumption.
+The primary optimization objective is to minimize **Half-Perimeter Wirelength (HPWL)**, which directly impacts routing congestion, timing, and power.
 
 ---
 
@@ -225,40 +268,24 @@ arith_setup.rpt
 arith_hold.rpt
 arith_clock_skew.rpt
 arith_timing_summary.rpt
-
-
-## 🆕 New Features (v2.0)
-
-### 🎬 Animation System
-Visualize physical design algorithms in real-time with MP4 video generation:
-- **SA Placement Animation** - Watch simulated annealing optimize cell placement
-- **CTS Tree Animation** - Visualize H-Tree and X-Tree clock distribution networks
-- **Congestion Heatmaps** - Animated routing congestion visualization
-
-```bash
-python animate_sa_placement.py --design 6502 --fps 10
-python create_cts_animations.py  # Creates both H-Tree and X-Tree videos
 ```
 
-### 🌳 Clock Tree Synthesis (CTS)
-Complete CTS implementation with buffer management:
-- **H-Tree**: Balanced horizontal/vertical partitioning
-- **X-Tree**: Diagonal NW/SE and NE/SW partitioning
-- **Buffer Manager**: Automatic buffer allocation from fabric slots
+---
 
-### 🛣️ Automated Routing
-OpenROAD-based routing with automatic error recovery:
-```bash
-python auto_route.py 6502  # Iteratively routes design, excluding problematic cells
-```
+## Key Features
 
-### ⏱️ SDC Generation
-Automatic timing constraint generation for STA:
-```bash
-python generate_sdc.py --design all  # Generates SDC for all designs
-```
+### Clock Tree Synthesis (CTS)
+Complete CTS implementation with automatic buffer management ([`eco_generator.py --enable-cts`](eco_generator.py)):
+- **H-Tree** (`--cts-tree-type h`): balanced horizontal/vertical partitioning
+- **X-Tree** (`--cts-tree-type x`): diagonal NW/SE and NE/SW partitioning
+- **Buffer Manager** ([`buffer_manager.py`](buffer_manager.py)): allocates clock buffers from available fabric slots
 
-📖 See [CHANGELOG.md](CHANGELOG.md) for full details on new features.
+### OpenROAD Routing & STA
+- Global + detailed routing with SPEF parasitic extraction ([`route.tcl`](route.tcl))
+- Setup/hold, clock-skew, and summary timing reports ([`sta.tcl`](sta.tcl))
+
+### Visualizations & Animations
+The flow renders placement heatmaps, net-length histograms, critical-path views, and slack histograms. Rendered MP4 walkthroughs of SA placement and the H-tree / X-tree clock networks are checked in under [`Animations/`](Animations/).
 
 ---
 
@@ -596,24 +623,24 @@ If timing violations are found, the design may need:
 
 ## Visualization and Analysis Tools
 
-### **Heatmap Generation** (`plot_fabric_with_placement.py`)
+### **Placement & Fabric Visualization** ([`visualize.py`](visualize.py))
 
-Generates placement quality heatmaps showing:
+Generates fabric layouts and placement-quality heatmaps showing:
 
 - Cell density distribution across the fabric
 - Hotspot identification (over-utilized regions)
-- Placement uniformity metrics
+- Net-length distributions and design-analysis plots
 - Comparison between greedy and SA placements
 
-### **Net Length Histograms** (`plot_net_length_histogram.py`)
+### **Timing Visualization** ([`visualize_timing.py`](visualize_timing.py), [`visualize_critical_path.py`](visualize_critical_path.py), [`visualize_slack_histogram.py`](visualize_slack_histogram.py))
 
-Produces distribution plots of:
+Renders post-STA timing views:
 
-- HPWL per net (identifies critical nets)
-- Net length statistics (mean, median, max)
-- Comparison across different SA parameter configurations
+- Worst-case critical paths over the placed layout
+- Slack histograms across all timing endpoints
+- Per-stage delay breakdowns
 
-### **Automated Parameter Sweep**
+### **Automated Parameter Sweep** ([`sa_knob_exploration.py`](sa_knob_exploration.py))
 
 Runs multiple SA configurations with varying:
 
@@ -722,7 +749,7 @@ python placer.py --design designs/6502_mapped.json \
 ### **Parameter Sweep**
 
 ```bash
-python run_parameter_sweep.py --design designs/6502_mapped.json
+python sa_knob_exploration.py --design designs/6502_mapped.json
 ```
 
 ---
@@ -821,67 +848,53 @@ Greedy algorithms make locally optimal choices but can't backtrack:
 
 ```
 structured_asic_project/
-├── placer.py                          # Main placement engine
-├── parse_design.py                     # Netlist parser
-├── parse_fabric.py                     # Fabric definition parser
-├── validator.py                        # Design feasibility checker
-├── visualize.py                        # Visualization utilities
-├── plot_fabric_with_placement.py      # Heatmap generator
-├── plot_net_length_histogram.py       # Net distribution plots
-├── run_parameter_sweep.py             # Automated SA tuning
+├── Makefile                            # Drives the full flow (make all DESIGN=...)
 │
-├── # NEW: Animation System
-├── animate_sa_placement.py            # SA optimization animation
-├── animate_cts_tree.py                # CTS tree animation
-├── animate_congestion.py              # Congestion heatmap animation
-├── animate_net_hpwl.py                # Net wirelength animation
-├── create_cts_animations.py           # Wrapper for CTS animations
+├── placer.py                           # Placement engine (greedy + simulated annealing)
+├── parse_design.py                     # Netlist (mapped JSON) parser
+├── parse_fabric.py                     # Fabric / pin definition parser
+├── validator.py                        # Pre-placement feasibility checker
+├── sa_knob_exploration.py              # Automated SA parameter sweep
 │
-├── # NEW: Clock Tree Synthesis
-├── cts_api.py                         # CTS API
-├── cts_htree.py                       # H-Tree implementation
-├── cts_xtree.py                       # X-Tree implementation
-├── buffer_manager.py                  # Buffer allocation manager
-├── cts_simulator.py                   # CTS timing simulation
+├── eco_generator.py                    # CTS + ECO insertion, netlist update
+├── cts_api.py                          # CTS API
+├── cts_htree.py                        # H-Tree implementation
+├── cts_xtree.py                        # X-Tree implementation
+├── cts_simulator.py                    # CTS timing simulation
+├── cts_with_buffer_manager.py          # CTS driver using the buffer manager
+├── buffer_manager.py                   # Clock-buffer allocation from fabric slots
 │
-├── # NEW: Routing Support
-├── auto_route.py                      # Automated routing loop
-├── make_def.py                        # DEF file generator (modified)
-├── route.tcl                          # OpenROAD routing script
-├── extract_drt_errors.py              # Error log parser
+├── rename.py                           # Logical -> physical instance renaming
+├── make_def.py                         # DEF generator (components, pins, nets)
+├── route.tcl / run_route.tcl           # OpenROAD global + detailed routing
+├── sta.tcl                             # OpenROAD/OpenSTA timing analysis
+├── synthesis.tcl                       # Yosys synthesis script
+├── view_routed.tcl                     # OpenROAD GUI viewer for routed DEF
 │
-├── # NEW: SDC Generation
-├── generate_sdc.py                    # SDC constraint generator
+├── visualize.py                        # Fabric layout & placement heatmaps
+├── visualize_timing.py                 # Timing visualizations
+├── visualize_critical_path.py          # Critical-path rendering
+├── visualize_slack_histogram.py        # Slack histogram
 │
-├── fabric/
-│   ├── fabric_cells.yaml              # Physical slot definitions
-│   └── pins.yaml                       # I/O pin locations
-├── designs/
-│   └── 6502_mapped.json               # Example: 6502 microprocessor
-├── tech/
-│   ├── sky130_fd_sc_hd.lef            # Cell LEF (modified)
-│   ├── sky130_fd_sc_hd.tlef           # Technology LEF (modified)
-│   └── sky130_fd_sc_hd_merged.lef     # Merged LEF for routing
-├── sdc/
-│   └── *.sdc                          # Generated SDC files
-└── build/
+├── Helper & Temp scripts/              # Auxiliary helper scripts (auto_route, etc.)
+│
+├── designs/                            # Mapped netlists: 6502, z80, aes_128, arith
+├── fabric/                             # fabric_cells.yaml, pins.yaml
+├── tech/                               # Sky130 LEF + Liberty timing library
+├── sdc/                                # Timing constraints (.sdc)
+├── Animations/                         # Rendered MP4 walkthroughs (SA, H-tree, X-tree)
+├── Results & Graphs/                   # Exported figures and tables
+└── build/                              # Per-design flow artifacts
     └── 6502/
-        ├── greedy/
-        │   ├── greedy_heatmap.png
-        │   └── greedyHisto.jpeg
-        ├── runtime_vs_hpwl_6502.png
-        ├── logs/
-        ├── sa_animation.mp4               # NEW: SA animation
-        ├── 6502_cts_htree_animation.mp4   # NEW: H-Tree animation
-        ├── 6502_cts_xtree_animation.mp4   # NEW: X-Tree animation
+        ├── greedy/                     # Greedy baseline (heatmap, histogram)
+        ├── runtime_vs_hpwl_6502.png    # Quality-vs-runtime sweep frontier
+        ├── logs/                       # Per-run SA logs
         └── Best_sa_alpha0.99_moves1000_Tfinal0.001/
-            ├── sa_alpha0.99_moves1000_Tfinal0.001_heatmap.png
-            ├── histogram_final.png
-            ├── 6502.map
-            └── 6502_placement.json
+            ├── ..._heatmap.png         # Best-quality SA heatmap
+            ├── histogram_final.png     # Net-length distribution
+            ├── 6502.map                # Logical -> physical map
+            └── 6502_placement.json     # Full placement data
 ```
-
-_Note: Run the analysis script to generate the plot and see actual results for your design._
 
 ## Design-Specific Highlights
 
@@ -908,7 +921,7 @@ Both designs rely on the auto-calculated initial temperature T_initial = 10,000 
 
 - *Why SA beats greedy:* Greedy prefers hugging IO pins, producing dense pockets and elongated cross-chip nets once clusters connect to distant logic. SA starts with randomized moves accepted under the high T_initial, then gradually cools (α=0.99) while still trying 1000 moves per temperature step. The random exploration plus uphill acceptance in early stages loosens greedy clusters, redistributes congestion, and lowers overall HPWL even though a handful of long nets get longer.
 
-![6502 Runtime vs HPWL](docs/assets/runtime_vs_hpwl_6502.png)
+![6502 Runtime vs HPWL](build/6502/runtime_vs_hpwl_6502.png)
 
 ### arith (moderate exploration mode)
 
@@ -919,4 +932,17 @@ Both designs rely on the auto-calculated initial temperature T_initial = 10,000 
 - *Measured impact (log):* build/arith/logs/arith_sa_a0.99_m500_T0.001.log captures the greedy HPWL at *165,616 µm* and the SA finish at *50,216.99 µm* – a reduction of *115,399 µm (−69.6 %)*.
 
 - *Behavioral notes:* Arith starts from a much cleaner greedy solution, so extreme SA settings primarily polish local structure. The moderate α/moves combos already converge well, and higher initial temperature still helps escape small pockets without the drastic congestion-shifting seen in 6502.
-```
+
+---
+
+## Authors
+
+This project was developed by a three-person team for CSCE 3304 (Digital Design II) at the American University in Cairo:
+
+- **Omar Saqr** ([@omarsaqr12](https://github.com/omarsaqr12)) — placement engine (greedy barycenter + simulated annealing, HPWL optimization), clock-tree synthesis, and routing integration
+- **Mostafa Gaafar** ([@mostafa21314](https://github.com/mostafa21314))
+- **Aabed** ([@AabedCodes](https://github.com/AabedCodes))
+
+## License
+
+Released under the [MIT License](LICENSE).
