@@ -11,8 +11,8 @@ Built for **CSCE 3304 – Digital Design II** at the American University in Cair
 
 ## Highlights
 
-- **−38.7 % total wirelength (HPWL)** on the 6502 CPU (431,210 µm → 264,256 µm) by layering simulated annealing on a greedy barycenter placer — while meeting timing.
-- **Full back-end, RTL-to-signoff:** greedy + SA placement → CTS (H-tree / X-tree) → ECO → routing (OpenROAD) → parasitic (SPEF) extraction → static timing analysis.
+- **−76.3 % total wirelength (HPWL)** on the 6502 CPU (426,853 µm → 101,347 µm) from an aggressively-tuned simulated-annealing schedule (6000 moves/temp, α=0.996) layered on a greedy barycenter placer.
+- **Full back-end, RTL-to-signoff:** greedy + SA placement → CTS (H-tree / X-tree) → ECO → routing (OpenROAD) → parasitic (SPEF) extraction → static timing analysis; the routed design closes timing with positive setup & hold slack.
 - **Incremental HPWL evaluation** makes simulated annealing **10–100× faster** by re-costing only the nets a move actually touches, plus KD-tree spatial indexing for nearest-slot lookups.
 - **Four real designs** carried through the full flow: `6502`, `z80`, `aes_128`, and `arith`.
 
@@ -21,6 +21,8 @@ Built for **CSCE 3304 – Digital Design II** at the American University in Cair
 | ![Greedy heatmap](build/6502/greedy/greedy_heatmap.png) | ![SA heatmap](build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/sa_alpha0.99_moves1000_Tfinal0.001_heatmap.png) |
 
 *6502 cell-density heatmaps — simulated annealing redistributes cells off the I/O edges and reduces hotspots.*
+
+> ⚠️ **Note on figures:** the heatmaps and histograms throughout this README are from an earlier, lighter run (α=0.99 / 1000 moves, −38.7% HPWL). The current best result is the **−76.3%** config below (α=0.996 / 6000 moves); those figures have **not** been regenerated yet, so the images do not visually reflect the −76.3% numbers.
 
 ## Tech Stack
 
@@ -662,19 +664,34 @@ Best run stored separately in: `build/<design_name>/Best_<config>/`
 
 ## Results: 6502 Microprocessor Design
 
+### **Best Result: −76.3% HPWL**
+
+The strongest fully-completed SA run reduces total wirelength by **76.26%** on the 6502 CPU. HPWL falls monotonically as the cooling schedule is made more aggressive (more moves/temp, slower cooling):
+
+| Config (moves / α) | Final HPWL | Reduction | Log |
+| ------------------ | ---------- | --------- | --- |
+| 2500 / 0.975       | 261,635 µm | 38.71%    | `build/6502/logs/config_04_m2500_T0.0007_a0.975.log` |
+| 4000 / 0.99        | 161,472 µm | 62.17%    | `build/6502/logs/config_07_m4000_T0.0004_a0.99.log` |
+| 5000 / 0.994       | 119,243 µm | 72.06%    | `build/6502/logs/config_09_m5000_T0.0002_a0.994.log` |
+| 5500 / 0.995       | 108,668 µm | 74.54%    | `build/6502/logs/config_10_m5500_T0.00015_a0.995.log` |
+| **6000 / 0.996**   | **101,347 µm** | **76.26%** | `build/6502/logs/config_11_m6000_T0.00012_a0.996.log` |
+
+Greedy baseline (SA initial): **426,853 µm** → best SA: **101,347 µm** (−325,506 µm). The trade-off is runtime: the best config runs millions of moves and takes substantially longer than the lighter schedules.
+
 ### **Performance vs Quality Trade-off**
 
 ![Runtime vs HPWL](build/6502/runtime_vs_hpwl_6502.png)
 
 **Key Observations**:
 
-- Diminishing returns with longer SA runs
-- Sweet spot around α=0.99, moves=1000, T_final=0.001
-- **38.72% HPWL improvement** over greedy-only placement (431,210.20 μm → 264,256.14 μm)
-- Demonstrates effectiveness of SA in escaping local minima
-- Detailed net length distribution analysis shown in histogram comparison below
+- HPWL keeps improving with longer SA runs (more moves/temp + slower cooling), at the cost of runtime
+- **Best completed run: 76.26% HPWL improvement** over greedy-only placement (426,853 µm → 101,347 µm)
+- Demonstrates the effectiveness of SA in escaping local minima
+- Detailed net-length distribution analysis shown in the histogram comparison below
 
-### **Best Configuration Results**
+### **Figure Set (earlier −38.7% run)**
+
+> The heatmaps and histograms in this subsection are from the earlier `alpha=0.99, moves_per_temp=1000, T_final=0.001` run (−38.7% HPWL). They illustrate the *qualitative* greedy-vs-SA effect but predate the −76.3% best config above; updated figures have not been regenerated.
 
 **Parameters**: `alpha=0.99, moves_per_temp=1000, T_final=0.001`
 
@@ -900,26 +917,22 @@ structured_asic_project/
 
 | Design | Best SA configuration (α / moves / T_final) | Output directory                                      |
 | ------ | ------------------------------------------- | ----------------------------------------------------- |
-| 6502   | 0.99 / 1000 / 0.001                         | build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/ |
+| 6502   | 0.996 / 6000 / 0.00012                      | build/6502/logs/config_11_m6000_T0.00012_a0.996.log |
 | arith  | 0.99 / 500 / 0.001                          | build/arith/Best_sa_alpha0.99_moves500_Tfinal0.001/ |
 
 Both designs rely on the auto-calculated initial temperature T_initial = 10,000 × HPWL_greedy. For 6502, the greedy seed HPWL of 403,784.5 µm produces T_initial ≈ 4.0 × 10^9, which guarantees near-100 % acceptance at the start and lets SA explore aggressively before cooling. We noted from the logs that this initial temperature might be too high and we intend to reduce the 10000 factor to 10 to 100.
 
 ### 6502 (heavy exploration mode)
 
-- *What we ran:* Exhaustive sweep across α∈[0.90,0.99], moves∈[300,1000], T_final∈{0.001,0.01,0.1}. Logs for every run live in build/6502/logs/.
+- *What we ran:* A ladder of increasingly aggressive schedules, scaling moves/temp from 1000 up to 8000 while slowing the cooling rate from α=0.95 toward α=0.999. Logs for every run live in `build/6502/logs/` (mirrored in `newResults/logs/`). HPWL drops monotonically along the ladder until runtime, not quality, becomes the limiter.
 
-- *Best-quality knob set:* α=0.99, moves=1000, T_final=0.001. Artifacts (heatmaps + histograms) are under build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/. Comparative figures:
+- *Best-quality knob set:* **α=0.996, moves=6000, T_final=0.00012** — the strongest run with a clean completion summary. (Heavier configs 13–20 were aborted before cooling finished and are not valid results.)
 
-  - Greedy: build/6502/greedy/greedy_heatmap.png, build/6502/greedy/greedyHisto.jpeg
+- *Measured impact (log):* `build/6502/logs/config_11_m6000_T0.00012_a0.996.log` shows the greedy baseline at **426,853 µm** and the SA result at **101,347 µm** — a drop of **325,506 µm (−76.26 %)**. The earlier, lighter α=0.99 / 1000-move run only reached 264,256 µm (−38.7 %).
 
-  - SA vs. Greedy runtime/HPWL frontier: build/6502/runtime_vs_hpwl_6502.png
+- *Distribution insight (earlier-run histogram):* `build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/histogram_final.png` (from the −38.7% run) shows the shrink in median HPWL (88.8 → 31.5 µm) and mean (155.5 → 95.6 µm), even though a few long global nets stretch to ~1.95 mm. A histogram for the −76.3% config has not been regenerated.
 
-- *Measured impact (log):* build/6502/logs/6502_sa_a0.99_m1000_T0.001.log shows the greedy baseline at *431,210 µm* and the SA result at *264,256 µm, a drop of **166,954 µm (−38.7 %)*.
-
-- *Distribution insight (histogram):* build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/histogram_final.png still highlights the dramatic shrink in median HPWL (88.8 → 31.5 µm) and mean (155.5 → 95.6 µm), even though a few long global nets stretch to ~1.95 mm.
-
-- *Why SA beats greedy:* Greedy prefers hugging IO pins, producing dense pockets and elongated cross-chip nets once clusters connect to distant logic. SA starts with randomized moves accepted under the high T_initial, then gradually cools (α=0.99) while still trying 1000 moves per temperature step. The random exploration plus uphill acceptance in early stages loosens greedy clusters, redistributes congestion, and lowers overall HPWL even though a handful of long nets get longer.
+- *Why SA beats greedy:* Greedy prefers hugging IO pins, producing dense pockets and elongated cross-chip nets once clusters connect to distant logic. SA starts with randomized moves accepted under the high T_initial, then cools slowly while running thousands of moves per temperature step. The random exploration plus uphill acceptance in early stages loosens greedy clusters, redistributes congestion, and lowers overall HPWL even though a handful of long nets get longer.
 
 ![6502 Runtime vs HPWL](build/6502/runtime_vs_hpwl_6502.png)
 
