@@ -1,0 +1,14 @@
+name: Build graph and syntax checks
+on:
+  pull_request:
+  push:
+    branches: [review/flow-evidence-and-readme-20260916]
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Makefile dependency graph and ECO output contract
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Check source Python syntax without running EDA
+        run: python3 -m compileall -q placer.py parse_design.py parse_fabric.py validator.py eco_generator.py rename.py make_def.py cts_api.py cts_htree.py cts_xtree.py buffer_manager.py
