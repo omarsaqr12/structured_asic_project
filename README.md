@@ -1,45 +1,66 @@
-# Structured-ASIC placement and back-end flow
+# Structured-ASIC placement & physical-design flow
 
-A Python- and Tcl-based **course project** for mapping four synthesized designs onto a fixed Sky130 cell fabric, optimizing placement with a greedy barycenter heuristic and simulated annealing, and exploring clock-tree construction, ECO insertion, OpenROAD routing, and static timing analysis. The main contribution is the placement/flow integration and its inspectable experiments. **This is a research/educational back-end prototype, not a tapeout-ready or independently signed-off ASIC.**
+**Python · Tcl · SkyWater Sky130 · OpenROAD · Digital Design II course project**  
+[![Build graph and syntax checks](https://github.com/omarsaqr12/structured_asic_project/actions/workflows/build-graph.yml/badge.svg?branch=main)](https://github.com/omarsaqr12/structured_asic_project/actions/workflows/build-graph.yml)
 
-## At a glance
+An educational back-end prototype that maps synthesized logic onto **fixed, type-compatible fabric slots**, improves placement with a connectivity-driven greedy heuristic and simulated annealing, and connects that placement to clock-tree/ECO generation, DEF/netlist creation, OpenROAD routing, and static timing analysis scripts. Four mapped design inputs are included: **6502, Z80, AES-128, and arithmetic**.
 
-| Inspect | Starting point | Evidence / caveat |
+**Recorded placement result:** the completed [6502 optimization log](build/6502/logs/config_11_m6000_T0.00012_a0.996.log) reports **426,853.12 → 101,346.87 µm HPWL (−76.26%)** for one greedy-to-annealed run. HPWL is an *estimated placement objective*; this is not a measured improvement in routed wire length, delay, area, or power, and the result has not been independently recomputed or reproduced in this review.
+
+## Architecture
+
+```text
+Mapped design JSON + fixed fabric / I/O pins
+                   │
+          Greedy barycenter placement
+                   │
+       Simulated annealing (HPWL)
+                   │
+        Clock-tree generation + ECO
+                   │
+       Netlist / slot-name alignment
+                   │
+            DEF + OpenROAD route
+                   │
+          Parasitics + timing scripts
+```
+
+| Explore | Key implementation | What to look for |
 | --- | --- | --- |
-| Placement engine | [`placer.py`](placer.py), [`parse_design.py`](parse_design.py), [`parse_fabric.py`](parse_fabric.py), [`validator.py`](validator.py) | Greedy placement, same-type swaps and SA search against HPWL |
-| Clocking and ECO | [`eco_generator.py`](eco_generator.py), [`cts_api.py`](cts_api.py), [`cts_htree.py`](cts_htree.py), [`cts_xtree.py`](cts_xtree.py), [`buffer_manager.py`](buffer_manager.py) | H-tree/X-tree alternatives and fabric-slot allocation; clock-tree quality not independently characterized here |
-| Physical outputs | [`make_def.py`](make_def.py), [`rename.py`](rename.py), [`route.tcl`](route.tcl), [`sta.tcl`](sta.tcl) | DEF/netlist generation, OpenROAD routing and timing scripts; not a replacement for complete signoff |
-| Demonstrations | [`Animations/`](Animations/), [`Results & Graphs/`](Results%20%26%20Graphs/), [`Final_Presentation.pdf`](Final_Presentation.pdf) | Historical visuals and course presentation, **not necessarily from the best SA experiment** |
-| Inputs and commands | [`designs/`](designs/), [`fabric/`](fabric/), [`tech/`](tech/), [`Makefile`](Makefile) | Four pre-mapped netlist inputs; requires compatible Python libraries, PDK files and OpenROAD to execute end to end |
+| **Placement** | [`placer.py`](placer.py) · [`parse_design.py`](parse_design.py) · [`parse_fabric.py`](parse_fabric.py) | Connectivity-driven seed/greedy placement, same-type moves, incremental HPWL evaluation |
+| **Clocking & ECO** | [`cts_htree.py`](cts_htree.py) · [`cts_xtree.py`](cts_xtree.py) · [`buffer_manager.py`](buffer_manager.py) · [`eco_generator.py`](eco_generator.py) | Alternative tree-generation code, buffer-slot allocation, mapped-netlist/placement updates |
+| **Physical flow** | [`make_def.py`](make_def.py) · [`rename.py`](rename.py) · [`route.tcl`](route.tcl) · [`sta.tcl`](sta.tcl) | Instance/slot alignment, DEF generation, routing and timing scripts |
+| **Inputs & orchestration** | [`designs/`](designs/) · [`fabric/`](fabric/) · [`Makefile`](Makefile) | Four mapped inputs, fabric geometry, and a staged build graph |
 
-## What the reported optimization means
+### Placement visualizations
 
-The repository contains a completed experiment log at [`build/6502/logs/config_11_m6000_T0.00012_a0.996.log`](build/6502/logs/config_11_m6000_T0.00012_a0.996.log) for a 6502 simulated-annealing run. Its completion summary records **426,853.12 µm greedy HPWL → 101,346.87 µm final SA HPWL (76.26% reduction)** at 6000 moves per temperature, cooling factor 0.996. These figures are **recorded, single-run placement-objective values**, not a claimed reduction in routed wire length, final delay, power, chip area, or manufacturing cost. This review inspected the named log's header and completion summary but did **not** independently recompute the final metric from the placement, reproduce the optimization, or validate the full physical flow. The prominently displayed heatmaps in the historical [original README](docs/README_original_2026-06-30.md) belong to an earlier, lighter run, **not** this best recorded configuration.
+| Greedy placement | After an **earlier** simulated-annealing run |
+| :---: | :---: |
+| ![Historical 6502 greedy placement heatmap](build/6502/greedy/greedy_heatmap.png) | ![Historical 6502 annealed placement heatmap](build/6502/Best_sa_alpha0.99_moves1000_Tfinal0.001/sa_alpha0.99_moves1000_Tfinal0.001_heatmap.png) |
 
-## Quickstart: inspect before running expensive steps
+These historical heatmaps illustrate placement changes from an **earlier, lighter configuration**, **not** the 76.26% run quoted above. More historical artifacts are in [`Results & Graphs/`](Results%20%26%20Graphs/), [`Animations/`](Animations/), and the [course presentation](Final_Presentation.pdf); they have not been independently revalidated here.
+
+## Reproduce the build *steps*
+
+Run commands from the repository root in a suitable Python environment:
 
 ```bash
-# Python dependencies (prefer a fresh virtual environment)
 python -m pip install -r requirements.txt
 
-# Show the full build command graph WITHOUT running any EDA or optimization work.
-make -n all DESIGN=arith
+# Inspect the build dependency graph without running optimization or EDA.
+make -B -n all DESIGN=arith
 
-# Optional: run greedy placement alone on the smaller arith mapped design.
-# Check available CPU, RAM, dependency versions and existing build outputs first.
+# Optional: run only the greedy placement on the arith input.
 make greedy DESIGN=arith
 
-# Full experimental back-end flow: requires OpenROAD, the Sky130 technology
-# artifacts, time and adequate local resources. NOT executed in this review.
+# Full experimental flow (OpenROAD + matching Sky130 collateral required):
 # make all DESIGN=arith
 ```
 
-Input designs are `arith`, `6502`, `z80`, and `aes_128`. They are **synthesized/mapped JSON inputs**; there is no verified source-RTL-to-tapeout pipeline here. The build graph generates greedy placement, SA placement, CTS/ECO placement and netlist, a renamed netlist, routed DEF, and timing reports. See [`docs/BUILD_AND_EVIDENCE.md`](docs/BUILD_AND_EVIDENCE.md) for the exact artifact mapping, known constraints, and the distinction between a command dry-run and a physically validated result.
+The Makefile describes greedy → annealing → CTS/ECO → instance renaming → routing → STA. The review repaired a missing renamed-netlist dependency and separated the ECO generator's **updated placement JSON** from its **updated mapped-netlist JSON**. See [build and evidence notes](docs/BUILD_AND_EVIDENCE.md) for exact file contracts, prerequisites, and known verification gaps.
 
-## Repository organization and provenance
+## Validation & scope
 
-`designs/` holds mapped design inputs; `fabric/` fixes the candidate slots/pins; `tech/` holds Sky130 technology collateral; root Python/Tcl files implement stages; `build/`, `newResults/`, `Results & Graphs/` and `Animations/` contain historical experiment artifacts/visuals. This review does **not** delete, reclassify, or regenerate those artifacts. The long-form course write-up is preserved verbatim at [`docs/README_original_2026-06-30.md`](docs/README_original_2026-06-30.md); treat its performance and signoff statements as historical claims until independently reproduced. No personal ownership breakdown is inferred from commit history.
+[CI](.github/workflows/build-graph.yml) checks the Makefile's dry-run dependency graph, ECO output naming contract, and selected Python modules' syntax. **CI does not execute optimization, OpenROAD, routing, STA, or physical verification.** The 6502 figures above are traceable to a completed project log, but no independent HPWL recomputation, four-design end-to-end reproduction, timing closure, DRC, LVS, or signoff was performed in this review. This is **not** an RTL-to-tapeout or tapeout-ready implementation.
 
-## Verification status
-
-A Makefile dependency and output-path mismatch was corrected in this review. Static Makefile checks are in [`tests/test_makefile_contract.py`](tests/test_makefile_contract.py); the CI checks its command graph and Python syntax without launching an EDA flow. **No OpenROAD route, STA run, timing closure, DRC, LVS, fabricated-chip test, or independent HPWL benchmarking was performed during this review.** For a hardware hiring discussion, distinguish implemented flow scripts and recorded exploratory results from verified engineering signoff.
+For deeper technical detail, see the preserved [original project write-up](docs/README_original_2026-06-30.md) and [annealing optimization notes](SA_OPTIMIZATION_GUIDE.md). The original README contains historical performance and signoff claims that should be treated as project reports rather than newly validated results. Historical source, experiment outputs, visualizations, and technology collateral have been preserved.
