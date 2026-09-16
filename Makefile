@@ -1,165 +1,70 @@
-# Makefile for Structured ASIC Project - Full Flow
-#
-# Steps:
-# 1. Greedy Placement
-# 2. Simulated Annealing (SA) - Medium parameters
-# 3. Clock Tree Synthesis (CTS) & ECO
-# 4. Instance Renaming
-# 5. Iterative Routing (until complete)
-# 6. Static Timing Analysis (STA)
-
-# Design selection (default: arith)
+# Educational structured-ASIC physical-design flow.
+# Run `make -n all DESIGN=arith` to examine the commands without execution.
+# A successful dry run is NOT an OpenROAD, timing, DRC or signoff test.
 DESIGN ?= arith
-
-# Tools and Parameters
-PYTHON = python
-OPENROAD = openroad
-
-# SA Medium Parameters (from SA_OPTIMIZATION_GUIDE.md)
-SA_ALPHA = 0.97
-SA_MOVES = 700
-SA_T_FINAL = 0.001
-
-# Directories
-BUILD_DIR = build
+PYTHON ?= python3
+OPENROAD ?= openroad
+SA_ALPHA ?= 0.97
+SA_MOVES ?= 700
+SA_T_FINAL ?= 0.001
+BUILD_DIR ?= build
 DESIGN_DIR = $(BUILD_DIR)/$(DESIGN)
-DESIGNS_DIR = designs
-FABRIC_DIR = fabric
-TECH_DIR = tech
-
-# Input Files
-DESIGN_JSON = $(DESIGNS_DIR)/$(DESIGN)_mapped.json
-FABRIC_CELLS = $(FABRIC_DIR)/fabric_cells.yaml
-PINS_YAML = $(FABRIC_DIR)/pins.yaml
-LIBERTY_FILE = $(TECH_DIR)/sky130_fd_sc_hd__tt_025C_1v80.lib
-LEF_FILE = $(TECH_DIR)/sky130_fd_sc_hd_merged.lef
-
-# Intermediate/Output Files
+DESIGN_JSON = designs/$(DESIGN)_mapped.json
+FABRIC_CELLS = fabric/fabric_cells.yaml
+PINS_YAML = fabric/pins.yaml
+LIBERTY_FILE = tech/sky130_fd_sc_hd__tt_025C_1v80.lib
+LEF_FILE = tech/sky130_fd_sc_hd_merged.lef
 GREEDY_JSON = $(DESIGN_DIR)/$(DESIGN)_placement.json
 GREEDY_MAP = $(DESIGN_DIR)/$(DESIGN).map
-
 SA_JSON = $(DESIGN_DIR)/$(DESIGN)_sa_placement.json
 SA_MAP = $(DESIGN_DIR)/$(DESIGN)_sa.map
-
+# ECO generator derives placement output from its --placement argument.
+ECO_PLACEMENT_JSON = $(DESIGN_DIR)/$(DESIGN)_sa_placement_eco.json
+# --output-json is the modified mapped design, NOT the placement.
+ECO_NETLIST_JSON = $(DESIGN_DIR)/$(DESIGN)_eco_netlist.json
 ECO_VERILOG = $(DESIGN_DIR)/$(DESIGN)_eco.v
-ECO_JSON = $(DESIGN_DIR)/$(DESIGN)_eco.json
 ECO_MAP = $(DESIGN_DIR)/$(DESIGN)_eco.map
-
 RENAMED_VERILOG = $(DESIGN_DIR)/$(DESIGN)_renamed.v
-
 ROUTED_DEF = $(DESIGN_DIR)/$(DESIGN)_routed.def
 
-.PHONY: all greedy sa cts_eco rename route sta clean help
-
-# Default target runs the full flow
+.PHONY: all help greedy sa cts_eco rename route sta clean
 all: sta
-
 help:
-	@echo "Structured ASIC Full Flow Makefile"
-	@echo "Usage: make [target] DESIGN=[6502|aes_128|arith|z80]"
-	@echo ""
-	@echo "Targets:"
-	@echo "  greedy    - Step 1: Greedy placement"
-	@echo "  sa        - Step 2: SA placement (medium params)"
-	@echo "  cts_eco   - Step 3: CTS and ECO generation"
-	@echo "  rename    - Step 4: Rename instances to match slots"
-	@echo "  route     - Step 5: Iterative routing until successful"
-	@echo "  sta       - Step 6: Static Timing Analysis"
-	@echo "  all       - Run the entire flow (greedy -> sta)"
-	@echo "  clean     - Remove build artifacts for the current design"
+	@echo 'Usage: make [greedy|sa|cts_eco|rename|route|sta|all|clean] DESIGN=[arith|6502|z80|aes_128]'
+	@echo 'Preview without running: make -n all DESIGN=arith'
 
-# --- Step 1: Greedy Placement ---
-greedy: $(GREEDY_MAP)
-
-$(GREEDY_MAP) $(GREEDY_JSON): $(DESIGN_JSON) $(FABRIC_CELLS) $(PINS_YAML)
-	@echo ">>> Step 1: Running Greedy Placement for $(DESIGN)..."
+greedy: $(GREEDY_JSON) $(GREEDY_MAP)
+$(GREEDY_JSON) $(GREEDY_MAP): $(DESIGN_JSON) $(FABRIC_CELLS) $(PINS_YAML) placer.py
 	@mkdir -p $(DESIGN_DIR)
-	$(PYTHON) placer.py --design $(DESIGN_JSON) \
-		--fabric-cells $(FABRIC_CELLS) \
-		--pins $(PINS_YAML) \
-		--no-sa \
-		--output $(DESIGN_DIR)
-	@echo "✓ Greedy placement complete"
+	$(PYTHON) placer.py --design $(DESIGN_JSON) --fabric-cells $(FABRIC_CELLS) --pins $(PINS_YAML) --no-sa --output $(DESIGN_DIR)
+	@test -f $(GREEDY_JSON) && test -f $(GREEDY_MAP)
 
-# --- Step 2: SA Placement (Medium Parameters) ---
-sa: $(SA_MAP)
+sa: $(SA_JSON) $(SA_MAP)
+$(SA_JSON) $(SA_MAP): $(GREEDY_JSON) $(GREEDY_MAP) placer.py
+	$(PYTHON) placer.py --design $(DESIGN_JSON) --fabric-cells $(FABRIC_CELLS) --pins $(PINS_YAML) --initial-placement $(GREEDY_JSON) --sa-alpha $(SA_ALPHA) --sa-moves $(SA_MOVES) --sa-T-final $(SA_T_FINAL) --output $(DESIGN_DIR)
+	@test -f $(SA_JSON) && test -f $(SA_MAP)
 
-$(SA_MAP) $(SA_JSON): $(GREEDY_JSON)
-	@echo ">>> Step 2: Running SA Placement (Medium) for $(DESIGN)..."
-	$(PYTHON) placer.py --design $(DESIGN_JSON) \
-		--fabric-cells $(FABRIC_CELLS) \
-		--pins $(PINS_YAML) \
-		--initial-placement $(GREEDY_JSON) \
-		--sa-alpha $(SA_ALPHA) \
-		--sa-moves $(SA_MOVES) \
-		--sa-T-final $(SA_T_FINAL) \
-		--output $(DESIGN_DIR)
-	@echo "✓ SA placement complete"
+cts_eco: $(ECO_VERILOG) $(ECO_MAP) $(ECO_PLACEMENT_JSON) $(ECO_NETLIST_JSON)
+$(ECO_VERILOG) $(ECO_MAP) $(ECO_PLACEMENT_JSON) $(ECO_NETLIST_JSON): $(SA_JSON) $(SA_MAP) eco_generator.py
+	$(PYTHON) eco_generator.py --placement $(SA_JSON) --design $(DESIGN_JSON) --fabric-cells $(FABRIC_CELLS) --placement-map $(SA_MAP) --enable-cts --cts-tree-type h --output-json $(ECO_NETLIST_JSON) --output-verilog $(ECO_VERILOG)
+	@test -f $(ECO_VERILOG) && test -f $(ECO_MAP) && test -f $(ECO_PLACEMENT_JSON) && test -f $(ECO_NETLIST_JSON)
 
-# --- Step 3: CTS & ECO ---
-cts_eco: $(ECO_VERILOG)
+# A file-generating rule, unlike the original phony-only rename target.
+rename: $(RENAMED_VERILOG)
+$(RENAMED_VERILOG): $(ECO_VERILOG) $(ECO_MAP) rename.py
+	$(PYTHON) rename.py --design $(DESIGN) --final-v $(ECO_VERILOG) --map $(ECO_MAP) --output $(RENAMED_VERILOG)
+	@test -f $(RENAMED_VERILOG)
 
-$(ECO_VERILOG) $(ECO_JSON) $(ECO_MAP): $(SA_JSON) $(SA_MAP)
-	@echo ">>> Step 3: Running CTS and ECO for $(DESIGN)..."
-	$(PYTHON) eco_generator.py \
-		--placement $(SA_JSON) \
-		--design $(DESIGN_JSON) \
-		--fabric-cells $(FABRIC_CELLS) \
-		--placement-map $(SA_MAP) \
-		--enable-cts \
-		--cts-tree-type h \
-		--output-json $(ECO_JSON) \
-		--output-verilog $(ECO_VERILOG)
-	@echo "✓ CTS and ECO complete"
-
-# --- Step 4: Rename ---
-.PHONY: rename
-rename:
-	@echo ">>> Step 4: Renaming instances for $(DESIGN)..."
-	@if [ ! -f $(ECO_MAP) ]; then \
-		echo "ERROR: ECO map file not found: $(ECO_MAP)"; \
-		echo "Please run 'make cts_eco DESIGN=$(DESIGN)' first."; \
-		exit 1; \
-	fi
-	@if [ -f $(ECO_VERILOG) ]; then \
-		ECO_FILE=$(ECO_VERILOG); \
-	elif [ -f $(DESIGN_DIR)/$(DESIGN)_final.v ]; then \
-		ECO_FILE=$(DESIGN_DIR)/$(DESIGN)_final.v; \
-	else \
-		echo "ERROR: ECO Verilog file not found. Expected $(ECO_VERILOG) or $(DESIGN_DIR)/$(DESIGN)_final.v"; \
-		echo "Please run 'make cts_eco DESIGN=$(DESIGN)' first."; \
-		exit 1; \
-	fi; \
-	$(PYTHON) rename.py \
-		--design $(DESIGN) \
-		--final-v $$ECO_FILE \
-		--map $(ECO_MAP) \
-		--output $(RENAMED_VERILOG)
-	@echo "✓ Renaming complete"
-
-# --- Step 5: Routing ---
 route: $(ROUTED_DEF)
-
-$(ROUTED_DEF): $(RENAMED_VERILOG) $(ECO_MAP)
-	@echo ">>> Step 5: Routing for $(DESIGN)..."
+$(ROUTED_DEF): $(RENAMED_VERILOG) $(ECO_MAP) make_def.py route.tcl
 	$(PYTHON) make_def.py --design $(DESIGN) --map $(ECO_MAP)
-	DESIGN_NAME=$(DESIGN) \
-	BUILD_DIR=$(BUILD_DIR) \
-	LIBERTY_FILE=$(LIBERTY_FILE) \
-	LEF_FILE=$(LEF_FILE) \
-	$(OPENROAD) -exit route.tcl
-	@echo "✓ Routing complete"
+	DESIGN_NAME=$(DESIGN) BUILD_DIR=$(BUILD_DIR) LIBERTY_FILE=$(LIBERTY_FILE) LEF_FILE=$(LEF_FILE) $(OPENROAD) -exit route.tcl
+	@test -f $(ROUTED_DEF)
 
-# --- Step 6: STA ---
-sta: $(ROUTED_DEF)
-	@echo ">>> Step 6: Running Static Timing Analysis for $(DESIGN)..."
-	DESIGN_NAME=$(DESIGN) \
-	BUILD_DIR=$(BUILD_DIR) \
-	LIBERTY_FILE=$(LIBERTY_FILE) \
-	LEF_FILE=$(LEF_FILE) \
-	$(OPENROAD) -exit sta.tcl
-	@echo "✓ STA complete"
+sta: $(ROUTED_DEF) sta.tcl
+	DESIGN_NAME=$(DESIGN) BUILD_DIR=$(BUILD_DIR) LIBERTY_FILE=$(LIBERTY_FILE) LEF_FILE=$(LEF_FILE) $(OPENROAD) -exit sta.tcl
 
+# Destructive removal affects only the selected design's output directory.
 clean:
-	rm -rf $(DESIGN_DIR)
-	rm -f route.log
+	rm -rf -- $(DESIGN_DIR)
+	rm -f -- route.log
